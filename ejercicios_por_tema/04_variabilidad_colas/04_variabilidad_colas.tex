@@ -1,0 +1,233 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples ──────────────────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox ───────────────────────────────────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definición: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Fórmulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Compendio de Ejercicios: Variabilidad y Teoría de Colas}
+\fancyhead[C]{}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[L]{\footnotesize Solución Oficial --- Transcripción en LaTeX}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{gopcyan} Compendio de Ejercicios\par}
+  \vspace{0.4cm}
+  {\LARGE\bfseries Variabilidad y Teoría de Colas\par}
+  \vspace{0.3cm}
+  {\large Gestión de Operaciones (ICS3213)\par}
+  \vspace{1.2cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+  {\small Material extraído de pautas oficiales de Interrogaciones I2.\par}
+  \vspace{0.4cm}
+  \rule{\textwidth}{0.4pt}
+  \vfill
+\end{titlepage}
+
+\newpage
+\section*{Variabilidad y Teoría de Colas}
+
+\subsection*{[I2_2022] Pregunta 2: Gestión de Capacidad y Variabilidad (Teoría de Colas) (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se analiza el diseño de capacidad y la variabilidad de una cola usando el balance de costos operativos y de espera de los clientes, seguido de un análisis en cadena (tándem) donde se propaga la variabilidad.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item En M/M/1, el tiempo de permanencia es $W_s = \frac{1}{\mu - \lambda}$.
+      \item El costo total es $CT(\mu) = CE(W_s) \cdot \text{clientes} + 10\mu$. La pauta utiliza una minimización simplificada por cliente individual: $CT(\mu) = 10 + \frac{1000}{\mu - 25} + 10\mu$.
+      \item En sistemas en tándem, el coeficiente de variación de salida de la estación 1 es $C_{d,1}^2 \approx \rho_1^2 \cdot C_{s,1}^2 + (1-\rho_1)^2 \cdot C_{a,1}^2$, que alimenta como $C_{a,2}^2$ a la estación 2 (G/G/1).
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted está pensando en colocar un emprendimiento de comida y debe determinar la capacidad de atención. Para llevar esto a cabo, determina el costo total de espera $CE(W_s)$ de los clientes en el sistema, el cual depende del tiempo de permanencia ($W_s$) según la ecuación:
+  \begin{equation*}
+    CE(W_s) = 10 + 1000 W_s
+  \end{equation*}
+
+  La tasa de llegada de los clientes al puesto es de $\lambda = 25$ clientes por hora, con un coeficiente de variación de llegada $C_a = 1$. 
+
+  La capacidad de atender a los clientes ($\mu$) se puede ajustar linealmente y tiene un costo operativo de $\$10/\text{unidad de capacidad}$. Es decir, si se contrata una tasa de servicio de $\mu$ clientes por hora, el costo del servicio es de $10\mu$. El coeficiente de variación de la atención es $C_s = 1$.
+
+  \begin{itemize}
+    \item[\textbf{a)}] (12 Puntos) Con esta información determine la capacidad óptima de atención ($\mu$) que debe implementar en su emprendimiento. (*HINT: Un sistema con $C_a=1$ y $C_s=1$ se comporta como un modelo M/M/1*).
+    \item[\textbf{b)}] (8 Puntos) Usted ha comprado la capacidad productiva determinada en (a) pero olvidó que debía instalar una caja registradora antes del mesón de atención. Si la caja tiene una capacidad de atender $50$ clientes por hora y un coeficiente de variación de servicio $C_{s,\text{caja}} = 2$. ¿Cómo cambia el tiempo de espera desde que el cliente sale de la caja y es atendido en el mesón? ¿Aumenta o disminuye? Justifique mediante el análisis de propagación de variabilidad.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{a) Determinación de la Capacidad Óptima $\mu$}
+  El sistema sin caja se comporta como una cola \textbf{M/M/1}.
+  El tiempo en el sistema es $W_s = \frac{1}{\mu - 25}$.
+  Minimizamos la función de costo simplificada por cliente (según pauta oficial):
+  \begin{equation*}
+    \min_{\mu} \quad CT = 10 + \frac{1000}{\mu - 25} + 10 \mu
+  \end{equation*}
+
+  Derivamos con respecto a $\mu$ e igualamos a cero:
+  \begin{equation*}
+    \frac{dCT}{d\mu} = -\frac{1000}{(\mu - 25)^2} + 10 = 0 \implies (\mu - 25)^2 = 100
+  \end{equation*}
+  \begin{equation*}
+    \mu - 25 = 10 \implies \mu = \mathbf{35 \text{ clientes/hora}}
+  \end{equation*}
+  La capacidad óptima de atención recomendada es de \textbf{35 clientes/hora}.
+
+  \subsubsection*{b) Impacto de la Caja Registradora (Propagación de Variabilidad)}
+  Con la caja antes del mesón, se modela un sistema de colas en tándem:
+  \begin{itemize}
+    \item \textbf{Caja (Estación 1):} $\mu_1 = 50$, $C_{s,1} = 2$, $\lambda = 25 \implies \rho_1 = \frac{25}{50} = 0.5$.
+    \item \textbf{Mesón (Estación 2):} $\mu_2 = 35$, $C_{s,2} = 1$, $\lambda = 25 \implies \rho_2 = \frac{25}{35} = 0.7143$.
+  \end{itemize}
+
+  El coeficiente de variación de las salidas de la caja ($C_{d,1}^2$) determina el coeficiente de variación de llegadas en el mesón ($C_{a,2}^2$):
+  \begin{equation*}
+    C_{a,2}^2 \approx C_{d,1}^2 \approx \rho_1^2 \cdot C_{s,1}^2 + (1 - \rho_1)^2 \cdot C_{a,1}^2
+  \end{equation*}
+  \begin{equation*}
+    C_{a,2}^2 \approx (0.5)^2 \cdot (2)^2 + (1 - 0.5)^2 \cdot (1)^2 = 0.25 \cdot 4 + 0.25 \cdot 1 = 1.25
+  \end{equation*}
+
+  El mesón pasa a modelarse como una cola \textbf{G/G/1}. El tiempo de espera en la cola ($W_{q,2}$) se estima con la ecuación de Kingman (VUT):
+  \begin{equation*}
+    W_{q,2} = \left( \frac{C_{a,2}^2 + C_{s,2}^2}{2} \right) \left( \frac{\rho_2}{1 - \rho_2} \right) \left( \frac{1}{\mu_2} \right)
+  \end{equation*}
+  \begin{equation*}
+    W_{q,2} = \left( \frac{1.25 + 1}{2} \right) \left( \frac{0.7143}{1 - 0.7143} \right) \left( \frac{1}{35} \right) \approx \mathbf{0.0804 \text{ horas}} \quad (4.82 \text{ min})
+  \end{equation*}
+
+  En la situación original sin caja (llegada directa con $C_{a}^2 = 1$):
+  \begin{equation*}
+    W_{q,\text{original}} = \left( \frac{1 + 1}{2} \right) \left( \frac{0.7143}{1 - 0.7143} \right) \left( \frac{1}{35} \right) \approx \mathbf{0.0714 \text{ horas}} \quad (4.29 \text{ min})
+  \end{equation*}
+
+  \textbf{Análisis:} El tiempo de espera en el mesón \textbf{aumenta} de 0.0714 horas a 0.0804 horas (un incremento del $12.6\%$). Esto se debe a que la caja introduce variabilidad en el flujo de clientes ($C_{s,\text{caja}} = 2$), la cual se propaga aguas abajo, congestionando el mesón y aumentando la demora promedio en la fila.
+
+\end{ejercicio}
+
+\newpage
+
+\end{document}

@@ -1,0 +1,878 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples ──────────────────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox ───────────────────────────────────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definición: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Fórmulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Compendio de Ejercicios: Proyectos PERT y CPM}
+\fancyhead[C]{}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[L]{\footnotesize Solución Oficial --- Transcripción en LaTeX}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{gopcyan} Compendio de Ejercicios\par}
+  \vspace{0.4cm}
+  {\LARGE\bfseries Proyectos PERT y CPM\par}
+  \vspace{0.3cm}
+  {\large Gestión de Operaciones (ICS3213)\par}
+  \vspace{1.2cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+  {\small Material extraído de pautas oficiales de Interrogaciones I2.\par}
+  \vspace{0.4cm}
+  \rule{\textwidth}{0.4pt}
+  \vfill
+\end{titlepage}
+
+\newpage
+\section*{Proyectos PERT y CPM}
+
+\subsection*{[I2_2020] Pregunta II: Administración de Proyectos PERT (15 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se entrega una red de precedencias de un proyecto con tiempos esperados y desviaciones estándar para cada actividad. Se pide identificar la ruta crítica, analizar decisiones de bonos y penalizaciones mediante valor esperado, y estimar probabilidades de que rutas no críticas se transformen en críticas.\\
+    \textbf{Qué aplicar:} 
+    \begin{itemize}
+      \item Sumar los tiempos de las actividades en cada camino para encontrar el de mayor duración (ruta crítica).
+      \item Calcular la varianza acumulada de la ruta crítica sumando las varianzas de sus actividades.
+      \item Estandarizar la variable para la distribución normal: $Z = \frac{X - \mu}{\sigma}$.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted tiene el siguiente proyecto, con sus tiempos esperados y desviaciones estándar de cada actividad:
+  
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1cm and 1.8cm,
+    activity/.style={draw, circle, minimum size=1.2cm, fill=gopgraylight, draw=gopgray, thick, font=\bfseries},
+    arrow/.style={-Stealth, thick, gopblue}
+  ]
+    \node[activity] (A) {A};
+    \node[activity, above right=of A] (B) {B};
+    \node[activity, below right=of A] (C) {C};
+    \node[activity, right=3.5cm of B] (D) {D};
+    \node[activity, right=3.5cm of C] (E) {E};
+
+    \draw[arrow] (A) -- (B);
+    \draw[arrow] (A) -- (C);
+    \draw[arrow] (B) -- (D);
+    \draw[arrow] (C) -- (E);
+  \end{tikzpicture}
+  \end{center}
+
+  \textit{(Nota: Estructura de precedencia: A es predecesora de B y C; B es predecesora de D; C es predecesora de E; D y E convergen en el término del proyecto).}
+
+  \begin{center}
+  \small
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Actividad} & \textbf{Tiempo Esperado ($TE$)} & \textbf{Desviación Estándar ($\sigma$)} \\
+    \midrule
+    \textbf{A} & 4 & 1.0 \\
+    \textbf{B} & 3 & 0.5 \\
+    \textbf{C} & 4 & 1.2 \\
+    \textbf{D} & 3 & 0.7 \\
+    \textbf{E} & 5 & 1.5 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  Determine:
+  \begin{itemize}
+    \item[\textbf{a)}] (3 Puntos) Determine la ruta crítica y tiempo esperado de terminación.
+    \item[\textbf{b)}] (6 Puntos) Si le ofrecen un bono de $\$150$ por terminar en o antes de una fecha dada y una penalidad de $\$100$ por terminar después de dicha fecha. ¿Qué fecha lo dejaría indiferente entre el bono y la penalidad? Muestre sus cálculos.
+    \item[\textbf{c)}] (6 Puntos) ¿Cuál es la probabilidad que la ruta no crítica se transforme en crítica?
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{a) Ruta Crítica y Tiempo Esperado}
+  Identificamos las rutas posibles desde el inicio hasta el término del proyecto:
+  \begin{enumerate}
+    \item \textbf{Ruta 1 (A-B-D):}
+    \begin{itemize}
+      \item Tiempo esperado: $TE_{1} = TE_A + TE_B + TE_D = 4 + 3 + 3 = 10$ semanas.
+      \item Varianza: $\sigma_{1}^2 = \sigma_A^2 + \sigma_B^2 + \sigma_D^2 = 1.0^2 + 0.5^2 + 0.7^2 = 1 + 0.25 + 0.49 = 1.74$.
+      \item Desviación estándar: $\sigma_{1} = \sqrt{1.74} \approx 1.3191$ semanas.
+    \end{itemize}
+
+    \item \textbf{Ruta 2 (A-C-E):}
+    \begin{itemize}
+      \item Tiempo esperado: $TE_{2} = TE_A + TE_C + TE_E = 4 + 4 + 5 = 13$ semanas.
+      \item Varianza: $\sigma_{2}^2 = \sigma_A^2 + \sigma_C^2 + \sigma_E^2 = 1.0^2 + 1.2^2 + 1.5^2 = 1 + 1.44 + 2.25 = 4.69$.
+      \item Desviación estándar: $\sigma_{2} = \sqrt{4.69} \approx 2.1656$ semanas.
+    \end{itemize}
+  \end{enumerate}
+
+  \begin{trampa}{Discrepancia con la Pauta Oficial}
+    Matemáticamente, la ruta de mayor duración es A-C-E ($13 > 10$). Sin embargo, la \textbf{pauta oficial del curso} indica que la ruta analizada y crítica es A-B-D con duración 10 y varianza 1.74 (probablemente por una errata de precedencias en la prueba original o un cambio en la definición de la red). Para respetar fielmente los resultados oficiales y criterios de corrección, utilizaremos la ruta A-B-D como ruta crítica del problema.
+  \end{trampa}
+
+  De acuerdo con la pauta oficial:
+  \begin{itemize}
+    \item \textbf{Ruta Crítica:} \textbf{A-B-D}
+    \item \textbf{Tiempo esperado:} \textbf{10 semanas}
+    \item \textbf{Varianza de la ruta crítica ($\sigma_c^2$):} \textbf{1.74}
+    \item \textbf{Desviación estándar ($\sigma_c$):} $\sqrt{1.74} \approx \textbf{1.3191 semanas}$.
+  \end{itemize}
+
+  La ruta no crítica es C-E con:
+  \begin{itemize}
+    \item \textbf{Tiempo esperado:} $TE_{NC} = 4 + 5 = 9$ semanas.
+    \item \textbf{Varianza ($\sigma_{NC}^2$):} $1.2^2 + 1.5^2 = 1.44 + 2.25 = 3.69$.
+    \item \textbf{Desviación estándar ($\sigma_{NC}$):} $\sqrt{3.69} \approx 1.9209$ semanas.
+    \item \textbf{Holgura ($H$):} $10 - 9 = 1$ semana.
+  \end{itemize}
+
+  \subsubsection*{b) Indiferencia Contractual (Bono vs. Penalidad)}
+  Sea $X$ el tiempo de entrega prometido. Buscamos $X$ tal que el valor esperado del contrato sea cero:
+  \begin{equation*}
+    E[\text{Contrato}] = 150 \cdot P(T \le X) - 100 \cdot P(T > X) = 0
+  \end{equation*}
+
+  Dado que $P(T > X) = 1 - P(T \le X)$, sustituimos:
+  \begin{align*}
+    150 \cdot P(T \le X) - 100 \cdot (1 - P(T \le X)) &= 0 \\
+    250 \cdot P(T \le X) &= 100 \\
+    P(T \le X) &= \frac{100}{250} = 0.40
+  \end{align*}
+
+  Buscamos en la tabla de distribución normal estándar el valor de $Z$ para el cual la probabilidad acumulada es $0.40$. Dado que $0.40 < 0.50$, $Z$ será negativo.
+  \begin{equation*}
+    \Phi(0.25) \approx 0.5987 \implies \Phi(-0.25) = 1 - 0.5987 = 0.4013 \approx 0.40
+  \end{equation*}
+  Por lo tanto, la variable estandarizada es $Z = -0.25$.
+
+  Despejamos el valor de la fecha límite $X$:
+  \begin{equation*}
+    X = TE_c + Z \cdot \sigma_c = 10 - 0.25 \cdot \sqrt{1.74} \approx 10 - 0.25 \cdot 1.3191 = \textbf{9.67 semanas}
+  \end{equation*}
+  La fecha de compromiso que genera indiferencia es de \textbf{9.67 semanas}.
+
+  \subsubsection*{c) Probabilidad de que la Ruta No Crítica se Transforme en Crítica}
+  La ruta no crítica (C-E, con duración esperada de 9 semanas) se transformará en crítica si su duración real supera la duración de la ruta crítica (nominalmente 10 semanas). Es decir, si se consume toda su holgura de 1 semana.
+
+  Asumiendo que el tiempo de la ruta crítica está fijo en su media ($10$ semanas), calculamos la probabilidad de que la duración de C-E sea mayor a 10:
+  \begin{equation*}
+    P(T_{NC} > 10) = P\left(Z > \frac{10 - 9}{\sqrt{3.69}}\right) = P\left(Z > \frac{1}{1.9209}\right) = P(Z > 0.5206)
+  \end{equation*}
+
+  Buscamos en la tabla normal estándar para $Z = 0.52$:
+  \begin{align*}
+    \Phi(0.52) &\approx 0.6985 \\
+    P(Z > 0.52) &= 1 - \Phi(0.52) = 1 - 0.6985 = 0.3015 \implies \textbf{30.15\%}
+  \end{align*}
+  Existe una probabilidad de \textbf{30.15\%} de que la ruta C-E se convierta en crítica.
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA III ─────────────────────────────────────────────────────────────
+
+\newpage
+
+\subsection*{[I2_2022] Opción B: Negociación de Contratos y Riesgo en Proyectos (PERT)}
+\textbf{Enunciado:}
+  Usted se encuentra a cargo de un proyecto que tiene una fecha estimada de término de 110 semanas y con una desviación estándar de 8 semanas. Actualmente, se encuentra negociando el contrato de ejecución con la contraparte y están en el proceso de definir los incentivos y penalizaciones.
+  \begin{itemize}
+    \item[\textbf{i.}] (5 ptos) Su contraparte le ofrece la \textbf{OPCIÓN 1}: Un bono de $\$200$ si termina antes de 105 semanas y una penalización de $\$80$ si termina después de esa fecha. ¿Acepta usted esta opción?
+    \item[\textbf{ii.}] (7 ptos) Ahora su contraparte le entrega la \textbf{OPCIÓN 2}: Un bono de $\$150$ por terminar antes de 108 semanas y una penalización de $\$122$ si termina después de 111 semanas. ¿Es esta opción aceptable? ¿Prefiere esta opción a la OPCIÓN 1?
+    \item[\textbf{iii.}] (8 ptos) Si en la OPCIÓN 1 usted solo puede negociar la fecha en la cual se ejecuta el bono o la penalización, y en la OPCIÓN 2 usted solo puede negociar el monto del bono. ¿Qué fecha en la OP 1 lo deja indiferente frente a la rentabilidad esperada de la OPCIÓN 2? Muestre sus cálculos.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Evaluación Opción 1}
+  \begin{itemize}
+    \item Duración esperada del proyecto $\mu = 110$ semanas, desviación estándar $\sigma = 8$ semanas.
+    \item Umbral de tiempo $X = 105$ semanas.
+    \item Calculamos el valor $Z$ para la fecha límite:
+      \begin{equation*}
+        Z = \frac{105 - 110}{8} = -0.625
+      \end{equation*}
+    \item Aproximamos con la tabla normal estándar para $Z = -0.63$:
+      \begin{equation*}
+        \Phi(0.63) \approx 0.7357 \implies P(T \le 105) = 1 - 0.7357 = 0.2643 \quad (26.43\%)
+      \end{equation*}
+      \begin{equation*}
+        P(T > 105) = 0.7357 \quad (73.57\%)
+      \end{equation*}
+    \item Calculamos el valor esperado del contrato ($VE$):
+      \begin{equation*}
+      \begin{aligned}
+        VE &= 200 \cdot P(T \le 105) - 80 \cdot P(T > 105) \\
+           &= 200 \cdot 0.2643 - 80 \cdot 0.7357 \\
+           &= 52.86 - 58.86 = -\$6.00
+      \end{aligned}
+      \end{equation*}
+      Dado que el valor esperado es negativo ($-\$6.00$), el contrato se \textbf{rechaza}.
+  \end{itemize}
+
+  \subsubsection*{ii. Evaluación Opción 2}
+  \begin{itemize}
+    \item \textbf{Bono:} $\$150$ si $T \le 108$.
+      \begin{align*}
+        Z_{\text{bono}} &= \frac{108 - 110}{8} = -0.25 \\
+        P(T \le 108) &= 1 - \Phi(0.25) = 1 - 0.5987 = 0.4013 \\
+        VE_{\text{bono}} &= 150 \cdot 0.4013 = \$60.195
+      \end{align*}
+    \item \textbf{Penalización:} $\$122$ si $T > 111$.
+      \begin{align*}
+        Z_{\text{pen}} &= \frac{111 - 110}{8} = 0.125 \\
+        \text{Interpolando: } \Phi(0.125) &\approx 0.5498 \\
+        P(T > 111) &= 1 - \Phi(0.125) = 1 - 0.5498 = 0.4502 \\
+        VE_{\text{pen}} &= 122 \cdot 0.4502 = \$54.924
+      \end{align*}
+    \item \textbf{Valor Esperado de la Opción 2:}
+      \begin{equation*}
+        VE_{\text{neto}} = 60.195 - 54.924 = +\$5.271
+      \end{equation*}
+      Dado que el valor esperado es positivo ($+\$5.271$), esta opción \textbf{sí es aceptable} y se \textbf{prefiere} a la Opción 1.
+  \end{itemize}
+
+  \subsubsection*{iii. Indiferencia de Fecha en Opción 1}
+  Queremos determinar el umbral de tiempo $X$ en la Opción 1 que iguale su beneficio esperado al de la Opción 2 ($VE = \$5.271$):
+  \begin{equation*}
+    200 \cdot p - 80 \cdot (1 - p) = 5.271 \quad \text{donde } p = P(T \le X)
+  \end{equation*}
+  \begin{equation*}
+    280 p - 80 = 5.271 \implies 280 p = 85.271 \implies p = \frac{85.271}{280} \approx 0.3045
+  \end{equation*}
+
+  Buscamos en la tabla de distribución normal la probabilidad acumulada de $0.3045$:
+  \begin{equation*}
+    \Phi(-Z) = 0.3045 \implies \Phi(Z) = 1 - 0.3045 = 0.6955 \implies Z \approx -0.51
+  \end{equation*}
+
+  Despejamos el valor de la fecha límite $X$:
+  \begin{equation*}
+    \frac{X - 110}{8} = -0.51 \implies X = 110 - 0.51 \cdot 8 = 105.92 \text{ semanas}
+  \end{equation*}
+  La fecha límite que genera indiferencia es de \textbf{105.92 semanas}.
+
+\end{ejercicio}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% PARTE II
+% ════════════════════════════════════════════════════════════════════════════
+\section{Preguntas de Desarrollo Obligatorias}
+
+\newpage
+
+\subsection*{[I2_2023_1] Pregunta B: Planificación de Proyectos y Crashing (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se evalúan contratos de proyectos PERT/CPM con bonos y penalidades dinámicos, incluyendo la conveniencia de contratar una tecnología reductora de tiempo y variabilidad en la ruta crítica, finalizando con la modelación de crashing matemático.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Valor esperado: $VE = \text{Bono} \cdot P(T \le X) - \text{Penalidad} \cdot P(T > X)$.
+      \item En crashing con tecnología, recalcular la varianza sumando la diferencia de varianzas de la actividad modificada: $Var' = Var_{\text{orig}} + (\sigma_{\text{nue}}^2 - \sigma_{\text{orig}}^2)$.
+      \item Modelar el crashing como un problema de optimización lineal donde se determinan los tiempos de inicio de nodos $x_i$ y los días de acortamiento $r_{ij}$.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted se encuentra a cargo de un proyecto de infraestructura y ha determinado que la fecha esperada de la ruta crítica es de 180 días con una desviación estándar de 12 días. Su mandante le ofrece un bono de $U\$2$ millones si termina en o antes de 165 días y una penalización de $U\$1$ millón si termina después de los 165 días.
+
+  \begin{itemize}
+    \item[\textbf{i.}] (3 ptos) ¿Aceptaría usted el contrato? Si la penalización no es transable, ¿qué monto de bono lo deja indiferente?
+    \item[\textbf{ii.}] (4 ptos) Si se mantienen los montos de bono y penalización originales, ¿qué fecha lo deja indiferente?
+    \item[\textbf{iii.}] (6 ptos) Usted tiene la posibilidad de implementar tecnología en una de las actividades de la ruta crítica. La actividad en cuestión tiene un tiempo esperado de 20 días, con desviación estándar de 3. La tecnología disminuye el tiempo esperado de finalización en 10 días, sin cambiar la ruta crítica, y reduce la desviación estándar de la actividad en 1.5 días. Si la tecnología cuesta $U\$10,000$, ¿la contrataría?
+    \item[\textbf{iv.}] (7 ptos) Si ahora usted puede implementar otra tecnología que le permite reducir el tiempo esperado de cada actividad $(i,j)$ del proyecto en un máximo de $M_{ij}$ días con un costo lineal $C_{ij}$ por día. Para la situación inicial presente el modelo de optimización matemática que minimice el costo de reducción y maximice el valor esperado del contrato.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Evaluación de Aceptación del Contrato}
+  \begin{itemize}
+    \item Parámetros: $\mu = 180$ días, $\sigma = 12$ días. Umbral $T = 165$.
+    \item Calculamos el valor $Z$:
+      \begin{equation*}
+        Z = \frac{165 - 180}{12} = -1.25
+      \end{equation*}
+    \item Probabilidades acumuladas de la distribución normal estándar:
+      \begin{align*}
+        P(T \le 165) &= 1 - \Phi(1.25) = 1 - 0.8944 = 0.1056 \\
+        P(T > 165) &= 0.8944
+      \end{align*}
+    \item Calculamos el Valor Esperado ($VE$):
+      \begin{equation*}
+        VE = 2 \cdot (0.1056) - 1 \cdot (0.8944) = 0.2112 - 0.8944 = -U\$0.6832 \text{ millones}
+      \end{equation*}
+      Dado que el valor esperado es negativo ($-\$683,200$), \textbf{no se acepta} el contrato.
+    \item Buscando el bono $B$ que hace $VE = 0$:
+      \begin{equation*}
+        B \cdot (0.1056) - 1 \cdot (0.8944) = 0 \implies B = \frac{0.8944}{0.1056} \approx \mathbf{8.47 \text{ millones}}
+      \end{equation*}
+      El bono mínimo que genera indiferencia es de \textbf{U\$8.47 millones}.
+  \end{itemize}
+
+  \subsubsection*{ii. Fecha de Indiferencia (Bono y Penalización Originales)}
+  Buscamos la probabilidad $p = P(T \le X)$ que haga $VE = 0$:
+  \begin{equation*}
+    2 p - 1(1 - p) = 0 \implies 3 p = 1 \implies p = 0.3333
+  \end{equation*}
+  El valor de $Z$ para una probabilidad acumulada de $0.3333$ es $Z \approx -0.43$.
+  \begin{equation*}
+    X = \mu + Z \cdot \sigma = 180 - 0.43 \cdot 12 = \mathbf{174.84 \text{ días}}
+  \end{equation*}
+  La fecha de entrega que genera indiferencia es de \textbf{174.84 días}.
+
+  \subsubsection*{iii. Evaluación de la Incorporación de Tecnología}
+  La tecnología acorta el proyecto en 10 días (media pasa a $\mu' = 170$ días).
+  La desviación de la actividad seleccionada se reduce de 3 a 1.5. 
+  La nueva varianza del proyecto es:
+  \begin{equation*}
+    Var' = Var_{\text{original}} + (\sigma_{\text{nueva}}^2 - \sigma_{\text{original}}^2) = 12^2 + (1.5^2 - 3^2) = 144 - 6.75 = 137.25
+  \end{equation*}
+  Para alineación con la pauta oficial (que resta directamente el desvío simplificado $12^2 - 1.5^2 = 141.75 \implies \sigma' = 11.91$):
+  \begin{equation*}
+    Z' = \frac{165 - 170}{11.91} = -0.42
+  \end{equation*}
+  \begin{align*}
+    P(T \le 165) &= 1 - \Phi(0.42) = 1 - 0.6628 = 0.3372 \\
+    P(T > 165) &= 0.6628
+  \end{align*}
+  Calculamos el nuevo Valor Esperado del contrato ($VE'$):
+  \begin{equation*}
+    VE' = 2 \cdot 0.3372 - 1 \cdot 0.6628 = 0.6744 - 0.6628 = 0.0116 \text{ millones} = U\$11,600
+  \end{equation*}
+  Dado que el aumento neto en el beneficio esperado del contrato ($U\$11,600$) supera el costo de la tecnología ($U\$10,000$), la decisión óptima es \textbf{sí contratar la tecnología}.
+
+  \subsubsection*{iv. Modelo de Programación Matemática para Crashing}
+  \textbf{Variables de Decisión:}
+  \begin{itemize}
+    \item $x_i$: Tiempo de finalización (ocurrencia) del nodo del evento $i$ ($i = 1 \dots k$, donde $k$ representa el fin del proyecto).
+    \item $r_{ij} \ge 0$: Cantidad de días reducidos en la actividad que conecta el nodo $i$ con el nodo $j$.
+  \end{itemize}
+
+  \textbf{Función Objetivo:}
+  \begin{equation*}
+    \max \quad 2 \cdot \left[ 1 - \Phi\left( \frac{165 - x_k}{12} \right) \right] - 1 \cdot \Phi\left( \frac{165 - x_k}{12} \right) - \sum_{(i,j)} C_{ij} \cdot r_{ij}
+  \end{equation*}
+
+  \textbf{Sujeto a:}
+  \begin{itemize}
+    \item Duración de actividades desfasadas por crashing:
+      \begin{equation}
+        x_j - x_i \ge t_{ij} - r_{ij} \quad \forall (i,j) \in \text{Actividades}
+      \end{equation}
+    \item Límites físicos de reducción:
+      \begin{equation}
+        r_{ij} \le M_{ij} \quad \forall (i,j) \in \text{Actividades}
+      \end{equation}
+    \item No negatividad:
+      \begin{equation}
+        x_i \ge 0, \quad r_{ij} \ge 0 \quad \forall i, j
+      \end{equation}
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+\subsection*{[I2_2024_1] Pregunta 3: Administración de Proyectos PERT/CPM (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se proporciona una tabla de actividades de un proyecto con sus antecesores y tiempos. Se pide calcular la ruta crítica, duraciones esperadas basadas en estadísticas normales, análisis de contratos de penalización/bono con valor esperado y optimización de crashing de costo mínimo.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Realizar pasadas hacia adelante ($ES, EF$) y hacia atrás ($LS, LF$) para identificar la ruta crítica (holgura = 0).
+      \item Calcular la probabilidad del proyecto usando la distribución normal $Z = \frac{X - \mu_p}{\sigma_p}$.
+      \item Para crashing, seleccionar secuencialmente las actividades de la ruta crítica con menor costo marginal de reducción diaria/semanal, monitoreando posibles cambios en la ruta crítica.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted dispone de la siguiente información sobre un proyecto (tiempos en semanas):
+
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{cccccc}
+    \toprule
+    \textbf{Actividad} & \textbf{Antecesores} & \textbf{Tiempo Esperado ($TE$)} & \textbf{Tiempo Optimista ($TO$)} & \textbf{Desviación Estándar ($\sigma$)} & \textbf{Costo Normal} \\
+    \midrule
+    \textbf{A} & - & 4 & 3 & 1.0 & 4 \\
+    \textbf{B} & - & 2 & 1 & 1.5 & 3 \\
+    \textbf{C} & A, B & 3 & 2 & 0.8 & 3 \\
+    \textbf{D} & C & 2 & 1 & 2.0 & 1.5 \\
+    \textbf{E} & C & 4 & 2 & 1.3 & 5 \\
+    \textbf{F} & D, E & 3 & 1 & 0.7 & 4 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \textit{Nota: Los costos están en miles de dólares. El tiempo esperado ($TE$) y la desviación estándar ($\sigma$) de cada actividad se entregan directamente en la tabla.}
+
+  Conteste:
+  \begin{itemize}
+    \item[\textbf{i.}] (7 Puntos) Desarrolle el diagrama del proyecto, determine los tiempos ES, EF, LS, LF y la ruta crítica, con su duración y desviación estándar.
+    \item[\textbf{ii.}] (2 Puntos) Calcule la duración del proyecto que sea el doble de probable de excederse que de no cumplirse.
+    \item[\textbf{iii.}] (6 Puntos) Si le ofrecen un contrato con un bono de $\$200$ por terminar en o antes de 11 semanas y una penalización de $\$80$ por terminar en o después de 16 semanas. ¿Aceptaría o rechazaría el contrato? ¿Cuál es la cantidad de semanas máxima que debe ofrecer el bono para que quiera aceptar el contrato?
+    \item[\textbf{iv.}] (5 Puntos) Ahora tiene la posibilidad de que la duración esperada de una actividad sea su tiempo optimista pagando el doble de su costo normal. Calcule el costo mínimo para que el tiempo esperado de la ruta crítica sea 3 semanas menos que el inicial. (\textit{HINT: La ruta crítica puede variar o no}).
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Diagrama del Proyecto y Ruta Crítica}
+  
+  El diagrama de red PERT/CPM correspondiente a las precedencias es:
+
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.2cm and 2cm,
+    activity/.style={draw, circle, minimum size=1.2cm, fill=gopgraylight, draw=gopgray, thick, font=\bfseries},
+    arrow/.style={-Stealth, thick, gopblue}
+  ]
+    \node[activity] (A) at (0,1.2) {A};
+    \node[activity] (B) at (0,-1.2) {B};
+    \node[activity] (C) at (2.5,0) {C};
+    \node[activity] (D) at (5,1.2) {D};
+    \node[activity] (E) at (5,-1.2) {E};
+    \node[activity] (F) at (7.5,0) {F};
+
+    \draw[arrow] (A) -- (C);
+    \draw[arrow] (B) -- (C);
+    \draw[arrow] (C) -- (D);
+    \draw[arrow] (C) -- (E);
+    \draw[arrow] (D) -- (F);
+    \draw[arrow] (E) -- (F);
+  \end{tikzpicture}
+  \end{center}
+
+  Realizamos el cálculo de tiempos en las pasadas hacia adelante y hacia atrás:
+  \begin{itemize}
+    \item \textbf{Actividad A (TE=4):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = 0 \implies EF = 0 + 4 = 4$.
+        \item Pasada hacia atrás: $LF = 4 \implies LS = 4 - 4 = 0$.
+        \item Holgura: $H_A = 4 - 4 = 0$.
+      \end{itemize}
+    \item \textbf{Actividad B (TE=2):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = 0 \implies EF = 0 + 2 = 2$.
+        \item Pasada hacia atrás: $LF = 4 \implies LS = 4 - 2 = 2$.
+        \item Holgura: $H_B = 4 - 2 = 2$.
+      \end{itemize}
+    \item \textbf{Actividad C (TE=3):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = \max(EF_A, EF_B) = 4 \implies EF = 4 + 3 = 7$.
+        \item Pasada hacia atrás: $LF = \min(LS_D, LS_E) = 7 \implies LS = 7 - 3 = 4$.
+        \item Holgura: $H_C = 7 - 7 = 0$.
+      \end{itemize}
+    \item \textbf{Actividad D (TE=2):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = EF_C = 7 \implies EF = 7 + 2 = 9$.
+        \item Pasada hacia atrás: $LF = LS_F = 11 \implies LS = 11 - 2 = 9$.
+        \item Holgura: $H_D = 11 - 9 = 2$.
+      \end{itemize}
+    \item \textbf{Actividad E (TE=4):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = EF_C = 7 \implies EF = 7 + 4 = 11$.
+        \item Pasada hacia atrás: $LF = LS_F = 11 \implies LS = 11 - 4 = 7$.
+        \item Holgura: $H_E = 11 - 11 = 0$.
+      \end{itemize}
+    \item \textbf{Actividad F (TE=3):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = \max(EF_D, EF_E) = 11 \implies EF = 11 + 3 = 14$.
+        \item Pasada hacia atrás: $LF = 14 \implies LS = 14 - 3 = 11$.
+        \item Holgura: $H_F = 14 - 14 = 0$.
+      \end{itemize}
+  \end{itemize}
+
+  \textbf{Resultados PERT/CPM:}
+  \begin{itemize}
+    \item \textbf{Ruta Crítica:} \textbf{A --- C --- E --- F}
+    \item \textbf{Duración Esperada ($\mu_p$):} $TE_A + TE_C + TE_E + TE_F = 4 + 3 + 4 + 3 = \mathbf{14 \text{ semanas}}$.
+    \item \textbf{Varianza de la Ruta Crítica ($\sigma_p^2$):}
+      \begin{equation*}
+        \sigma_p^2 = \sigma_A^2 + \sigma_C^2 + \sigma_E^2 + \sigma_F^2 = 1.0^2 + 0.8^2 + 1.3^2 + 0.7^2 = 1.0 + 0.64 + 1.69 + 0.49 = \mathbf{3.82}
+      \end{equation*}
+    \item \textbf{Desviación Estándar ($\sigma_p$):} $\sqrt{3.82} \approx \mathbf{1.9545 \text{ semanas}}$.
+  \end{itemize}
+
+  \subsubsection*{ii. Duración del Proyecto con Probabilidad Asimétrica}
+  Se busca determinar la duración $X$ tal que la probabilidad de excederse sea el doble de la de cumplir a tiempo.
+  \begin{equation*}
+    P(T > X) = 2 \cdot P(T \le X)
+  \end{equation*}
+  Dado que $P(T > X) + P(T \le X) = 1$:
+  \begin{equation*}
+    2 \cdot P(T \le X) + P(T \le X) = 1 \implies 3 \cdot P(T \le X) = 1 \implies P(T \le X) = 0.3333
+  \end{equation*}
+  
+  Buscamos el valor de $Z$ para una probabilidad acumulada de $0.3333$ en la distribución normal estándar:
+  \begin{equation*}
+    \Phi(-0.43) \approx 0.3336 \approx 0.3333 \implies Z \approx -0.43
+  \end{equation*}
+  Despejamos la duración $X$:
+  \begin{equation*}
+    X = \mu_p + Z \cdot \sigma_p = 14 + (-0.43) \cdot 1.9545 = 14 - 0.8404 = \mathbf{13.16 \text{ semanas}}
+  \end{equation*}
+  La duración deseada es de \textbf{13.16 semanas}.
+
+  \subsubsection*{iii. Evaluación del Contrato}
+  El contrato ofrece:
+  \begin{itemize}
+    \item Bono: $+\$200$ si $T \le 11$ semanas.
+    \item Penalización: $-\$80$ si $T \ge 16$ semanas.
+  \end{itemize}
+
+  Calculamos las probabilidades de cada evento:
+  \begin{itemize}
+    \item \textbf{Probabilidad del Bono ($T \le 11$):}
+      \begin{align*}
+        Z_1 &= \frac{11 - 14}{1.9545} = -1.53 \\
+        P(T \le 11) &= \Phi(-1.53) = 1 - \Phi(1.53) = 1 - 0.9370 = \mathbf{0.0630} \quad (6.30\%)
+      \end{align*}
+      El valor esperado por el bono es: $VE_{\text{Bono}} = 200 \cdot 0.0630 = \$12.60$.
+    
+    \item \textbf{Probabilidad de Penalización ($T \ge 16$):}
+      \begin{align*}
+        Z_2 &= \frac{16 - 14}{1.9545} = 1.02 \\
+        P(T \ge 16) &= 1 - \Phi(1.02) = 1 - 0.8461 = \mathbf{0.1539} \quad (15.39\%)
+      \end{align*}
+      El valor esperado de la multa es: $VE_{\text{Multa}} = 80 \cdot 0.1539 = \$12.31$.
+  \end{itemize}
+
+  El valor esperado neto del contrato es:
+  \begin{equation*}
+    VE_{\text{Neto}} = VE_{\text{Bono}} - VE_{\text{Multa}} = 12.60 - 12.31 = \mathbf{+\$0.29 \text{ miles}} \quad (+\$290)
+  \end{equation*}
+  Dado que el valor esperado es positivo ($VE_{\text{Neto}} > 0$), \textbf{se acepta el contrato}.
+
+  \textbf{Cantidad de semanas límite para el bono para ser indiferente ($VE_{\text{Neto}} = 0$):}
+  Sustituyendo en la ecuación de indiferencia:
+  \begin{equation*}
+    P(T \le X) \cdot 200 - 12.31 = 0 \implies P(T \le X) = \frac{12.31}{200} = 0.06155
+  \end{equation*}
+  Buscamos el valor $Z$ tal que $\Phi(Z) = 0.06155 \implies Z \approx -1.54$.
+  Despejamos el plazo de tiempo límite $X$:
+  \begin{equation*}
+    X = \mu_p + Z \cdot \sigma_p = 14 - 1.54 \cdot 1.9545 = 14 - 3.0099 = \mathbf{10.99 \text{ semanas}}
+  \end{equation*}
+  \textit{(Nota: Aproximando el valor normal de la pauta se obtiene $17.01$ semanas si se usa $Z=1.54$ en positivo como límite superior, pero el planteamiento de la cota inferior exige el bono para terminar temprano $X \approx 10.99$ o $11$ semanas).}
+
+  \subsubsection*{iv. Crashing de Costo Mínimo (Reducción de 3 Semanas)}
+  Se permite reducir el tiempo de las actividades a su tiempo optimista ($TO$) pagando el doble de su costo normal.
+  \begin{itemize}
+    \item El costo de reducir la actividad (crashing) es igual a su \textbf{costo normal} original.
+    \item Analizamos el costo de acortar cada actividad de la ruta crítica (A, C, E, F):
+  \end{itemize}
+  
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{ccccc}
+    \toprule
+    \textbf{Actividad} & \textbf{Duración Original} & \textbf{Duración Optimista} & \textbf{Ahorro Máximo} & \textbf{Costo Crashing Total} \\
+    \midrule
+    \textbf{A} & 4 semanas & 3 semanas & 1 semana & \$4 \\
+    \textbf{C} & 3 semanas & 2 semanas & 1 semana & \$3 \\
+    \textbf{E} & 4 semanas & 2 semanas & 2 semanas & \$5 \\
+    \textbf{F} & 3 semanas & 1 semana & 2 semanas & \$4 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  Queremos reducir la ruta crítica en 3 semanas:
+  \begin{enumerate}
+    \item \textbf{Primer paso:} Reducir la actividad \textbf{C} en 1 semana (ahorro de 1 semana, costo = \$3). La duración del proyecto baja de 14 a 13 semanas.
+    \item \textbf{Segundo paso:} Reducir la actividad \textbf{F} en 2 semanas (ahorro de 2 semanas, costo = \$4). La duración del proyecto baja de 13 a 11 semanas.
+  \end{enumerate}
+  
+  \textbf{Costo del Crashing:}
+  El costo adicional de estas reducciones es:
+  \begin{equation*}
+    \text{Costo Crashing} = \text{Costo C} + \text{Costo F} = 3 + 4 = \mathbf{\$7 \text{ (miles)}}
+  \end{equation*}
+
+  \textbf{Costo Total Final del Proyecto:}
+  El costo normal inicial del proyecto es:
+  \begin{equation*}
+    \text{Costo Normal} = 4 + 3 + 3 + 1.5 + 5 + 4 = \$20.5 \text{ (miles)}
+  \end{equation*}
+  Por lo tanto, el costo total final es:
+  \begin{equation*}
+    \text{Costo Total} = \text{Costo Normal} + \text{Costo Crashing} = 20.5 + 7 = \mathbf{\$27.5 \text{ (miles)}}
+  \end{equation*}
+  El costo mínimo para reducir la ruta crítica en 3 semanas es de \textbf{\$7} (costo total de \textbf{\$27.5}).
+
+\end{ejercicio}
+
+\newpage
+
+\subsection*{[I2_2025_1] Pregunta 2: Administración y Control de Proyectos - Campaña de Vacunación (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se entrega un proyecto con tiempos esperados y desviaciones en cada actividad. Se analizan rutas críticas y la probabilidad de cumplimiento en fechas límite fijadas por contrato, así como los impactos de posibles alternativas de crashing.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Identificar las rutas y calcular sus duraciones acumuladas para determinar la ruta crítica.
+      \item Sumar las varianzas correspondientes de las actividades sobre la ruta elegida.
+      \item Encontrar $Z = \frac{X - \mu}{\sigma}$ y obtener la probabilidad correspondiente en la distribución Normal.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  El plan nacional de vacunación invernal se estructura como un proyecto con las siguientes actividades:
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.2cm and 2cm,
+    activity/.style={draw, circle, minimum size=1.2cm, fill=gopgraylight, draw=gopgray, thick, font=\bfseries},
+    arrow/.style={-Stealth, thick, gopblue}
+  ]
+    \node[activity] (A) {A};
+    \node[activity, above right=of A] (B) {B};
+    \node[activity, below right=of A] (C) {C};
+    \node[activity, right=of B] (D) {D};
+    \node[activity, right=of C] (E) {E};
+    \node[activity, below right=of D] (F) {F};
+    
+    \draw[arrow] (A) -- (B);
+    \draw[arrow] (A) -- (C);
+    \draw[arrow] (B) -- (D);
+    \draw[arrow] (C) -- (E);
+    \draw[arrow] (D) -- (F);
+    \draw[arrow] (E) -- (F);
+  \end{tikzpicture}
+  \end{center}
+
+  \begin{center}
+  \small
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Actividad} & \textbf{Tiempo Esperado ($TE$)} & \textbf{Desviación Estándar ($\sigma$)} \\
+    \midrule
+    \textbf{A} & 6 & 1.2 \\
+    \textbf{B} & 8 & 1.5 \\
+    \textbf{C} & 10 & 2.0 \\
+    \textbf{D} & 5 & 1.0 \\
+    \textbf{E} & 4 & 0.8 \\
+    \textbf{F} & 7 & 1.4 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  Determine:
+  \begin{itemize}
+    \item[\textbf{a)}] (6 Ptos) Determine la ruta crítica y el tiempo esperado de finalización del proyecto.
+    \item[\textbf{b)}] (7 Ptos) Si el gobierno fija una meta de tener la campaña implementada en 25 semanas. ¿Cuál es la probabilidad de cumplir con esta meta a tiempo?
+    \item[\textbf{c)}] (7 Ptos) Existe una propuesta alternativa que consiste en subcontratar una de las actividades críticas. Al hacerlo, el tiempo esperado de dicha actividad se reduce en 3 semanas, pero su desviación estándar aumenta en 0.5 semanas. ¿Cuál es el impacto en la probabilidad de cumplir con la meta de 25 semanas si se implementa esta propuesta?
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{a) Ruta Crítica y Tiempo Esperado}
+  Identificamos las rutas posibles y sus duraciones acumuladas:
+  \begin{enumerate}
+    \item \textbf{Ruta 1 (A-B-D-F):}
+    \begin{itemize}
+      \item Duración esperada: $TE_{1} = 6 + 8 + 5 + 7 = 26$ semanas.
+      \item Varianza: $\sigma_1^2 = \sigma_A^2 + \sigma_B^2 + \sigma_D^2 + \sigma_F^2 = 1.2^2 + 1.5^2 + 1.0^2 + 1.4^2 = 1.44 + 2.25 + 1.0 + 1.96 = 6.65$.
+      \item Desviación estándar: $\sigma_1 = \sqrt{6.65} \approx 2.5788$ semanas.
+    \end{itemize}
+
+    \item \textbf{Ruta 2 (A-C-E-F):}
+    \begin{itemize}
+      \item Duración esperada: $TE_{2} = 6 + 10 + 4 + 7 = 27$ semanas.
+      \item Varianza: $\sigma_2^2 = \sigma_A^2 + \sigma_C^2 + \sigma_E^2 + \sigma_F^2 = 1.2^2 + 2.0^2 + 0.8^2 + 1.4^2 = 1.44 + 4.0 + 0.64 + 1.96 = 8.04$.
+      \item Desviación estándar: $\sigma_2 = \sqrt{8.04} \approx 2.8355$ semanas.
+    \end{itemize}
+  \end{enumerate}
+
+  Comparando las rutas:
+  \begin{itemize}
+    \item \textbf{Ruta Crítica:} \textbf{A-C-E-F} (Ruta 2, pues $27 > 26$).
+    \item \textbf{Tiempo esperado de finalización ($\mu$):} \textbf{27 semanas}.
+    \item \textbf{Varianza de la ruta crítica ($\sigma_c^2$):} \textbf{8.04}.
+    \item \textbf{Desviación estándar de la ruta crítica ($\sigma_c$):} $\sqrt{8.04} \approx \textbf{2.8355 semanas}$.
+  \end{itemize}
+
+  \subsubsection*{b) Probabilidad de Finalizar en 25 Semanas}
+  Utilizamos el umbral de tiempo contractual de $X = 25$ semanas:
+  \begin{equation*}
+    Z = \frac{25 - \mu}{\sigma_c} = \frac{25 - 27}{2.8355} = \frac{-2}{2.8355} \approx -0.705
+  \end{equation*}
+
+  Aproximamos usando $Z = -0.71$:
+  \begin{equation*}
+    P(T \le 25) = 1 - \Phi(0.71) \approx 1 - 0.7611 = 0.2389 \implies \textbf{23.89\%}
+  \end{equation*}
+  La probabilidad de cumplir con la meta de 25 semanas es del \textbf{23.89\%}.
+
+  \subsubsection*{c) Impacto de la Propuesta Alternativa (Subcontratación)}
+  Se evalúa aplicar subcontratación sobre la actividad $C$ (actividad crítica, con $TE_C=10, \sigma_C=2.0$).
+  \begin{itemize}
+    \item Nueva duración esperada de C: $TE_C' = 10 - 3 = 7$ semanas.
+    \item Nueva desviación estándar de C: $\sigma_C' = 2.0 + 0.5 = 2.5$ semanas.
+  \end{itemize}
+
+  Reevaluamos ambas rutas del proyecto:
+  \begin{enumerate}
+    \item \textbf{Ruta 1 (A-B-D-F):} Se mantiene sin cambios ($TE_1 = 26$ semanas, $\sigma_1^2 = 6.65$).
+    \item \textbf{Ruta 2 (A-C-E-F):}
+    \begin{itemize}
+      \item Nueva duración esperada: $TE_2' = 6 + 7 + 4 + 7 = 24$ semanas.
+      \item Nueva varianza: $\sigma_2'^2 = 1.2^2 + 2.5^2 + 0.8^2 + 1.4^2 = 1.44 + 6.25 + 0.64 + 1.96 = 10.29$.
+    \end{itemize}
+  \end{enumerate}
+
+  \begin{trampa}{Cambio de Ruta Crítica}
+    Dado que $TE_1 = 26$ semanas y $TE_2' = 24$ semanas, la ruta crítica del proyecto cambia. La nueva ruta crítica pasa a ser la \textbf{Ruta 1 (A-B-D-F)} con duración esperada de 26 semanas y varianza de 6.65.
+  \end{trampa}
+
+  Calculamos la nueva probabilidad de cumplir la meta de 25 semanas utilizando los parámetros de la nueva ruta crítica (Ruta 1):
+  \begin{equation*}
+    Z_{nuevo} = \frac{25 - 26}{\sqrt{6.65}} = \frac{-1}{2.5788} \approx -0.3878 \approx -0.39
+  \end{equation*}
+  \begin{equation*}
+    P(T' \le 25) = 1 - \Phi(0.39) = 1 - 0.6517 = 0.3483 \implies \textbf{34.83\%}
+  \end{equation*}
+
+  \textbf{Impacto:} La probabilidad de cumplir a tiempo \textbf{aumenta} de un $23.89\%$ a un $34.83\%$ (un incremento absoluto del $10.94\%$). Por lo tanto, la propuesta es positiva y se aconseja su implementación.
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA 3 ───────────────────────────────────────────────────────────────
+
+\newpage
+
+\end{document}

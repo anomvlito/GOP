@@ -1,0 +1,1027 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples ──────────────────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox ───────────────────────────────────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definición: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Fórmulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Compendio de Ejercicios: MRP e Inventarios}
+\fancyhead[C]{}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[L]{\footnotesize Solución Oficial --- Transcripción en LaTeX}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{gopcyan} Compendio de Ejercicios\par}
+  \vspace{0.4cm}
+  {\LARGE\bfseries MRP e Inventarios\par}
+  \vspace{0.3cm}
+  {\large Gestión de Operaciones (ICS3213)\par}
+  \vspace{1.2cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+  {\small Material extraído de pautas oficiales de Interrogaciones I2.\par}
+  \vspace{0.4cm}
+  \rule{\textwidth}{0.4pt}
+  \vfill
+\end{titlepage}
+
+\newpage
+\section*{MRP e Inventarios}
+
+\subsection*{[I2_2020] Pregunta I: Modelo de Programación Matemática para MRP (15 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se solicita formular un modelo de optimización (MILP) para planificar la producción bajo una estructura MRP (lista de materiales BOM, capacidades de producción, inventarios iniciales y finales, y lead times). Además, hay costos de producción, mantención y condiciones lógicas como lotes mínimos de producción.\\
+    \textbf{Qué aplicar:} Definir conjuntos, índices, variables continuas de inventario, lanzamientos y requerimientos, variables binarias para la activación de producción en nodos específicos, y formular restricciones de balance, explosión de la BOM y límites de capacidad.
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted dispone de la demanda diaria del producto que vende la empresa, dada por $F_t$ para $t$ periodos. La receta del producto requiere $j$ productos o subproductos y está dada por el \textit{Bill of Material} (BOM). El BOM le indica que para cada producto o subproducto $j$, usted requiere $R_{j,k}$ unidades de subproducto o insumo $k$ ($(j, k) \in \text{BOM}$). 
+
+  Para cada producto/subproducto/insumo $j$ usted dispone de $II_j$ unidades en inventario inicial, el lead time de producción o del proveedor es de $L_j$ días para cada $j$ y finalmente, cada estación de producción o proveedor tiene una capacidad máxima de producción o entrega diaria de $C_j$ unidades. El costo de producción de cada unidad es de $CP_j$ pesos por unidad y el costo de mantener inventario es de $CI_j$ pesos por día por unidad $j$. 
+
+  Finalmente, debido a condiciones técnicas hay dos partes $x, z \in \text{BOM}$ que tienen niveles mínimos de producción $CMin_x$ y $CMin_z$ cuando se inician sus procesos productivos. Con esta información elabore un modelo de programación matemática que permita determinar el programa de MRP para cumplir con la demanda, cantidad de insumos o subproductos $k$ en cada periodo y también terminar con $IF_j$ unidades de inventario final de cada unidad $j$.
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsection*{1. Conjuntos e Índices}
+  \begin{itemize}
+    \item $j, k \in \mathcal{J}$: Conjunto de todos los ítems (productos, subproductos e insumos). El producto final está denotado por el índice $1$.
+    \item $t \in \{1, \dots, T\}$: Períodos de planificación (días).
+    \item $(j, k) \in \text{BOM}$: Relación que indica que el ítem $j$ requiere del ítem $k$ como componente directo.
+  \end{itemize}
+
+  \subsection*{2. Parámetros}
+  \begin{itemize}
+    \item $F_t$: Demanda externa del producto final ($1$) en el día $t$.
+    \item $R_{j,k}$: Cantidad de unidades del componente $k$ requeridas para producir $1$ unidad del ítem $j$.
+    \item $II_j$: Inventario inicial del ítem $j$ en el período $0$.
+    \item $IF_j$: Inventario final requerido del ítem $j$ al final del período $T$.
+    \item $L_j$: \textit{Lead Time} (tiempo de espera) de producción o compra del ítem $j$.
+    \item $C_j$: Capacidad máxima de producción o entrega diaria del ítem $j$.
+    \item $CMin_x, CMin_z$: Producción mínima requerida de los componentes $x$ y $z$ si se inicia su producción.
+    \item $CP_j$: Costo unitario de producción del ítem $j$.
+    \item $CI_j$: Costo diario de mantener $1$ unidad del ítem $j$ en inventario.
+    \item $M$: Un número real lo suficientemente grande (\textit{Big-M}).
+  \end{itemize}
+
+  \subsection*{3. Variables de Decisión}
+  \begin{itemize}
+    \item $GR_{j,t} \ge 0$: Requerimientos brutos (\textit{Gross Requirements}) del ítem $j$ en el período $t$.
+    \item $POR_{j,t} \ge 0$: Lanzamiento de orden planificada (\textit{Planned Order Release}) del ítem $j$ en el período $t$.
+    \item $I_{j,t} \ge 0$: Inventario disponible del ítem $j$ al final del período $t$.
+    \item $B_{i,t} \in \{0, 1\}$: Variable binaria que toma el valor $1$ si se decide producir el ítem $i \in \{x, z\}$ en el período $t$, y $0$ en caso contrario.
+  \end{itemize}
+
+  \subsection*{4. Función Objetivo}
+  Minimizar los costos totales de producción y almacenamiento de inventario a lo largo de todo el horizonte:
+  \begin{equation*}
+    \min \quad \sum_{t=1}^{T} \sum_{j \in \mathcal{J}} \left( CP_j \cdot POR_{j,t} + CI_j \cdot I_{j,t} \right)
+  \end{equation*}
+
+  \subsection*{5. Restricciones}
+  \begin{itemize}
+    \item \textbf{Satisfacción de Demanda del Producto Final (Nivel 0):}
+    \begin{equation}
+      GR_{1,t} \ge F_t \quad \forall t \in \{1, \dots, T\}
+    \end{equation}
+    
+    \item \textbf{Balance de Inventario para Producto Final ($j=1$):}
+    \begin{equation}
+      I_{1,t} = I_{1,t-1} + POR_{1,t-L_1} - GR_{1,t} \quad \forall t \in \{L_1 + 1, \dots, T\}
+    \end{equation}
+    \textit{Nota: Para los períodos $t \le L_1$, no pueden llegar recepciones planificadas del horizonte actual, por lo que $I_{1,t} = I_{1,t-1} - GR_{1,t}$.}
+
+    \item \textbf{Explosión de Necesidades (BOM):}
+    Los requerimientos brutos de un componente $k$ están definidos por los lanzamientos de órdenes de todos sus padres $j$:
+    \begin{equation}
+      GR_{k,t} = \sum_{j: (j,k) \in \text{BOM}} R_{j,k} \cdot POR_{j,t} \quad \forall k \in \mathcal{J}, t \in \{1, \dots, T\}
+    \end{equation}
+
+    \item \textbf{Balance de Inventario para Componentes e Insumos ($k \ne 1$):}
+    \begin{equation}
+      I_{k,t} = I_{k,t-1} + POR_{k,t-L_k} - GR_{k,t} \quad \forall k \in \mathcal{J} \setminus \{1\}, t \in \{L_k + 1, \dots, T\}
+    \end{equation}
+
+    \item \textbf{Restricción de Capacidad de Producción:}
+    \begin{equation}
+      POR_{j,t} \le C_j \quad \forall j \in \mathcal{J}, t \in \{1, \dots, T\}
+    \end{equation}
+
+    \item \textbf{Condiciones de Inventario Inicial y Final:}
+    \begin{equation}
+      I_{j,0} = II_j \quad \forall j \in \mathcal{J}
+    \end{equation}
+    \begin{equation}
+      I_{j,T} = IF_j \quad \forall j \in \mathcal{J}
+    \end{equation}
+
+    \item \textbf{Lote Mínimo de Producción para $x$ y $z$ (Big-M):}
+    Para $i \in \{x, z\}$:
+    \begin{equation}
+      POR_{i,t} \ge CMin_i \cdot B_{i,t} \quad \forall t \in \{1, \dots, T\}
+    \end{equation}
+    \begin{equation}
+      POR_{i,t} \le M \cdot B_{i,t} \quad \forall t \in \{1, \dots, T\}
+    \end{equation}
+
+    \item \textbf{Naturaleza de las Variables:}
+    \begin{align}
+      I_{j,t}, GR_{j,t}, POR_{j,t} &\ge 0 \quad \forall j \in \mathcal{J}, t \in \{1, \dots, T\} \\
+      B_{i,t} &\in \{0, 1\} \quad \forall i \in \{x, z\}, t \in \{1, \dots, T\}
+    \end{align}
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA II ──────────────────────────────────────────────────────────────
+
+\newpage
+
+\subsection*{[I2_2022] Pregunta 1: MRP de Bicicletas Eléctricas Premium (Serious 1) (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se solicita realizar el plan de requerimientos de materiales (MRP) para un producto con limitación de capacidad de ensamble final y un componente que tiene lote mínimo de pedido (setup). Además, se requiere formular el modelo de programación lineal entero-mixto (MILP) para optimizarlo.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item En la tabla MRP, respetar la capacidad máxima semanal para el producto final desfasando la producción hacia atrás.
+      \item Formular el MILP con variables binarias de activación de setup $B_{i,t}$, costos de producción, inventario y setup, modelando el balance de stock tradicional y las restricciones de lote mínimo.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  La empresa Serious 1 se dedica a fabricar bicicletas eléctricas premium. Tiene comprometidas unidades a entregar para las siguientes semanas. Serious 1 realiza el ensamble final, el cual tarda 1 semana y posee una capacidad máxima de ensamble de 27 unidades semanales. Para el ensamble final de las unidades se rige por el BOM adjunto. La parte C tiene un costo de setup, por lo que posee una producción mínima de 75 piezas por semana.
+
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.2cm and 1.5cm,
+    item/.style={draw, rectangle, minimum width=1.5cm, minimum height=0.8cm, fill=gopbluedeflight, draw=gopbluedef, thick, font=\bfseries}
+  ]
+    \node[item] (Alpha) {Alpha};
+    \node[item, below left=of Alpha] (B) {B (1)};
+    \node[item, below=of Alpha] (C) {C (2)};
+    \node[item, below right=of Alpha] (D) {D (2)};
+    \node[item, below=of C] (C2) {C (1)};
+    
+    \draw[thick, gopblue] (Alpha) -- (B);
+    \draw[thick, gopblue] (Alpha) -- (C);
+    \draw[thick, gopblue] (Alpha) -- (D);
+    \draw[thick, gopblue] (C) -- (C2);
+  \end{tikzpicture}
+  \end{center}
+  \textit{Nota: El árbol BOM detalla que 1 Alpha requiere 1 B, 2 C y 2 D. A su vez C requiere otra parte C (1) subordinada en una segunda etapa de ensamble.}
+
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Pieza} & \textbf{Inventario Disponible ($OH$)} & \textbf{Lead Time ($LT$)} & \textbf{Restricciones / Loteo} \\
+    \midrule
+    \textbf{Alpha} & 10 & 1 & Capacidad máxima = 27 unidades/semana \\
+    \textbf{B} & 28 & 2 & Lote a Lote (L4L) \\
+    \textbf{C} & 137 & 3 & Lote mínimo = 75 unidades \\
+    \textbf{D} & 100 & 1 & Lote a Lote (L4L) \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  La demanda de preventa (Producto Final: Alpha) es:
+  \begin{itemize}
+    \item Semana 4: 50 unidades \quad Semana 7: 50 unidades \quad Semana 9: 80 unidades
+  \end{itemize}
+
+  Se solicita:
+  \begin{itemize}
+    \item[\textbf{i.}] Realice las tablas de MRP correspondientes para cumplir con la demanda.
+    \item[\textbf{ii.}] Plantee un modelo de programación matemática que optimice el plan de producción si la cantidad mínima de producción y costos fijos de setup están dados por $Lm_i$ y $Cf_i$, con costos de producción unitarios $CP_i$ e inventario $CI_i$ para cada pieza $i$.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Tablas de MRP (Explosión de Materiales)}
+
+  \paragraph{1. Producto Final: Alpha (LT = 1, Capacidad Máxima Ensamble = 27)}
+  Dado que la demanda es de 50 en la semana 4, y el inventario disponible es 10, los requerimientos netos son de 40. Debido al límite de ensamble de 27/semana, debemos programar recepciones de ensamble acumuladas: 27 en W4 y 13 en W3. Desfasando 1 semana de LT, lanzamos órdenes en W2 (13) y W3 (27).
+  Para la demanda de 80 en W9, requerimos distribuir la producción en semanas previas (W6, W7, W8) debido a la cota máxima de 27.
+
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccccccc}
+    \toprule
+    \textbf{Período} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & & 0 & 0 & 0 & 50 & 0 & 0 & 50 & 0 & 80 \\
+    \textbf{Inventario Disponible (OH)} & 10 & 10 & 10 & 23 & 0 & 0 & 4 & 0 & 0 & 0 \\
+    \textbf{Recepción de Órdenes (POR)} & & 0 & 0 & 13 & 27 & 0 & 27 & 23 & 0 & 80* \\
+    \textbf{Lanzamiento Planificado (PORelease)} & & 0 & 13 & 27 & 0 & 27 & 23 & 0 & 80* & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+  \textit{*Nota: El lanzamiento de 80 en W8 para W9 sobrepasa la capacidad de ensamble de 27; idealmente, debe adelantarse la producción en periodos anteriores.}
+
+  \paragraph{2. Componente B (LT = 2, L4L, $GR_B = 1 \cdot PORelease_{Alpha}$, OH = 28)}
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccccccc}
+    \toprule
+    \textbf{Período} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & & 0 & 13 & 27 & 0 & 27 & 23 & 0 & 27 & 27 \\
+    \textbf{Inventario Disponible (OH)} & 28 & 28 & 15 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Recepción de Órdenes (POR)} & & 0 & 0 & 12 & 0 & 27 & 23 & 0 & 27 & 27 \\
+    \textbf{Lanzamiento Planificado (PORelease)} & & 12 & 0 & 27 & 23 & 0 & 27 & 27 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{3. Componente D (LT = 1, L4L, $GR_D = 2 \cdot PORelease_{Alpha}$, OH = 100)}
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccccccc}
+    \toprule
+    \textbf{Período} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & & 0 & 26 & 54 & 0 & 54 & 46 & 0 & 54 & 54 \\
+    \textbf{Inventario Disponible (OH)} & 100 & 100 & 74 & 20 & 20 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Recepción de Órdenes (POR)} & & 0 & 0 & 0 & 0 & 34 & 46 & 0 & 54 & 54 \\
+    \textbf{Lanzamiento Planificado (PORelease)} & & 0 & 0 & 0 & 34 & 46 & 0 & 54 & 54 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{4. Componente C (LT = 3, Lote Mínimo = 75, $GR_C = 2 \cdot PORelease_{Alpha}$, OH = 137)}
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccccccc}
+    \toprule
+    \textbf{Período} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & & 0 & 26 & 54 & 0 & 54 & 46 & 0 & 54 & 54 \\
+    \textbf{Inventario Disponible (OH)} & 137 & 137 & 111 & 57 & 57 & 78 & 32 & 32 & 53 & 74 \\
+    \textbf{Recepción de Órdenes (POR)} & & 0 & 0 & 0 & 0 & 75 & 0 & 0 & 75 & 75 \\
+    \textbf{Lanzamiento Planificado (PORelease)} & & 0 & 75 & 0 & 0 & 75 & 75 & 0 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \subsubsection*{ii. Modelo de Programación Matemática (MILP)}
+  \textbf{Variables:}
+  \begin{itemize}
+    \item $POR_{i,t} \ge 0$: Cantidad de producción iniciada para la pieza $i$ en la semana $t$.
+    \item $I_{i,t} \ge 0$: Inventario de la pieza $i$ al final de la semana $t$.
+    \item $GR_{i,t} \ge 0$: Requerimientos brutos de la pieza $i$ en la semana $t$.
+    \item $B_{i,t} \in \{0, 1\}$: Activación binaria de lote (setup) para la pieza $i$ en el período $t$.
+  \end{itemize}
+
+  \textbf{Función Objetivo:}
+  \begin{equation*}
+    \min \quad \sum_{t=1}^{T} \sum_{i} \left( CP_i \cdot POR_{i,t} + CI_i \cdot I_{i,t} + Cf_i \cdot B_{i,t} \right)
+  \end{equation*}
+
+  \textbf{Restricciones:}
+  \begin{itemize}
+    \item Requerimiento del producto final:
+      \begin{equation}
+        GR_{Alpha,t} \ge \text{Demanda}_t \quad \forall t
+      \end{equation}
+    \item Capacidad de ensamble (Producto Final):
+      \begin{equation}
+        POR_{Alpha,t} \le 27 \quad \forall t
+      \end{equation}
+    \item Balance de inventario:
+      \begin{equation}
+        I_{i,t} = I_{i,t-1} + POR_{i,t-L_i} - GR_{i,t} \quad \forall i, t
+      \end{equation}
+    \item Explosión de materiales para componentes ($k \ne Alpha$):
+      \begin{equation}
+        GR_{k,t} = \sum_{j: (j,k) \in \text{BOM}} R_{j,k} \cdot POR_{j,t} \quad \forall k, t
+      \end{equation}
+    \item Restricción de Lote Mínimo y Setup (Big-M):
+      \begin{equation}
+        POR_{i,t} \ge Lm_i \cdot B_{i,t} \quad \forall i, t
+      \end{equation}
+      \begin{equation}
+        POR_{i,t} \le M \cdot B_{i,t} \quad \forall i, t
+      \end{equation}
+    \item Inventario inicial:
+      \begin{equation}
+        I_{i,0} = OH_i \quad \forall i
+      \end{equation}
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+\subsection*{[I2_2023_1] Pregunta A: Gestión de Inventarios y Distribución de Demanda (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se analiza el modelo del vendedor de periódicos (Newsvendor) ante una demanda distribuida normalmente o de manera uniforme discreta, comparando la cantidad óptima resultante y su justificación variacional.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Costo de quedarse corto: $C_u = \text{Precio} - \text{Costo}$.
+      \item Costo de tener de más: $C_o = \text{Costo} - \text{Valor de Recuperación}$.
+      \item Razón Crítica: $CR = \frac{C_u}{C_u + C_o}$.
+      \item Demanda Normal: $Q^* = \mu + Z \cdot \sigma$.
+      \item Demanda Uniforme: $F(Q^*) \ge CR$.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  La nueva tienda de zapatos cerca del campus debe determinar la cantidad de zapatillas que desea comprar para la temporada navideña. Los zapatos tienen un precio alto y se importan de EE.UU. El costo unitario de cada par de zapatillas es de $U\$60$ y los venderán a $U\$300$. Cualquier par que no venda al final de la temporada lo compra un outlet por $U\$47$ el par.
+
+  \begin{itemize}
+    \item[\textbf{i.}] (8 puntos) Si la venta sigue una distribución normal con media 300 y desviación estándar de 40 pares. ¿Cuál sería la cantidad óptima de pares de zapatillas que debe comprar la tienda para la temporada?
+    \item[\textbf{ii.}] (8 puntos) Un análisis detallado de los datos históricos de ventas muestra que la cantidad de zapatillas es igualmente probable para todos los valores entre 100 y 500 pares (inclusive) durante la estación. Con esa información, ¿cuántos pares de zapatillas debe comprar la tienda? (*HINT: La distribución de la demanda es uniforme discreta*).
+    \item[\textbf{iii.}] (4 puntos) Si bien la demanda esperada en las preguntas (i) y (ii) es la misma ($300$ pares), las cantidades óptimas son distintas. ¿A qué se debe esta diferencia conceptualmente?
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Cantidad Óptima con Demanda Normal}
+  Determinamos los costos de subestimar ($C_u$) y sobreestimar ($C_o$) la demanda:
+  \begin{align*}
+    C_u &= \text{Precio} - \text{Costo} = 300 - 60 = U\$240 \\
+    C_o &= \text{Costo} - \text{Valor de Recuperación} = 60 - 47 = U\$13
+  \end{align*}
+  Calculamos la Razón Crítica ($CR$):
+  \begin{equation*}
+    CR = \frac{C_u}{C_u + C_o} = \frac{240}{240 + 13} = \frac{240}{253} \approx 0.9486 \quad (94.86\%)
+  \end{equation*}
+
+  Buscamos en la tabla normal estándar el valor $Z$ tal que $\Phi(Z) = 0.9486$:
+  \begin{equation*}
+    Z \approx 1.645
+  \end{equation*}
+  Despejamos la cantidad óptima $Q^*$:
+  \begin{equation*}
+    Q^* = \mu + Z \cdot \sigma = 300 + 1.645 \cdot 40 = 365.8 \text{ pares}
+  \end{equation*}
+  La tienda debe comprar \textbf{366 pares} de zapatillas.
+
+  \subsubsection*{ii. Cantidad Óptima con Demanda Uniforme Discreta}
+  La demanda se distribuye de manera uniforme discreta sobre el rango $[100, 500]$, conteniendo $N = 500 - 100 + 1 = 401$ posibles valores de demanda.
+  
+  Buscamos $Q^*$ tal que $F(Q^*) \ge 0.9486$. Usando la aproximación de la distribución uniforme continua sobre $[100, 500]$:
+  \begin{equation*}
+    F(Q^*) = \frac{Q^* - 100}{500 - 100} = 0.9486
+  \end{equation*}
+  \begin{equation*}
+    Q^* - 100 = 0.9486 \cdot 400 \implies Q^* = 100 + 379.44 = 479.44 \text{ pares}
+  \end{equation*}
+  Evaluando discretamente en la frontera acumulada superior:
+  \begin{equation*}
+    P(X > Q^*) < 1 - 0.9486 = 0.0514 \implies \text{valores} < 401 \cdot 0.0514 \approx 20.6 \text{ valores}
+  \end{equation*}
+  Por lo que la cantidad óptima discreta es $500 - 20 = 480$ pares.
+  Se consideran correctos tanto \textbf{479} como \textbf{480 pares}.
+
+  \subsubsection*{iii. Explicación Conceptual de la Diferencia}
+  Aunque la demanda promedio es la misma ($\mu = 300$ pares) en ambos modelos, la \textbf{variabilidad} (dispersión) de la demanda es sumamente diferente:
+  \begin{itemize}
+    \item La distribución normal concentra su probabilidad en torno a la media ($\sigma = 40$).
+    \item La distribución uniforme tiene una desviación estándar mucho mayor ($\sigma \approx 115.47$), distribuyendo la probabilidad equitativamente en todo el rango $[100, 500]$.
+    \item Como el costo de quedarse corto ($C_u = \$240$) es muchísimo mayor que el costo de quedarse con stock sobrante ($C_o = \$13$), el modelo incentiva a protegerse contra la escasez adquiriendo mayor inventario. Al aumentar la dispersión de la demanda, se expande la probabilidad en los extremos altos de demanda, requiriendo un inventario mayor ($480$ frente a $366$) para alcanzar el mismo nivel de servicio óptimo.
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+\subsection*{[I2_2023_1] Pregunta C: Algoritmo de Wagner-Whitin y MRP (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se solicita el plan de lotificación óptimo para demandas deterministas variables mediante Wagner-Whitin (Programación Dinámica), y el posterior desarrollo de explosión de materiales MRP de componentes dependientes, considerando stock de seguridad o lote mínimo.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item En Wagner-Whitin, resolver el algoritmo recursivo $f(t) = \min_{1 \le j \le t} \{ f(j-1) + S + \sum_{k=j}^t H \cdot (k-j) \cdot D_k \}$.
+      \item En las matrices MRP, calcular los requerimientos brutos desfasando y multiplicando por los coeficientes del BOM.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted es contratado por una empresa de transformación de furgones a híbridos. Debe realizar un plan de fabricación de kits híbridos de tipo A para un horizonte de 5 meses. El tiempo de transformación es de 1 mes. Los requerimientos de entrega de los kits terminados son:
+  \begin{itemize}
+    \item Ene-24: 5 \quad Feb-24: 12 \quad Mar-24: 3 \quad Abr-24: 15 \quad May-24: 12
+  \end{itemize}
+
+  Costos del Kit A:
+  \begin{itemize}
+    \item Costo unitario de fabricación = $\$1,000$ \quad Costo de setup = $\$5,000$
+    \item Costo de inventario mensual = $\$150$ por unidad/mes
+    \item Lead Time de ensamble final del Kit A = 2 meses
+  \end{itemize}
+
+  BOM del Kit A:
+  \begin{itemize}
+    \item Componente B: Cantidad = 2, LT = 1
+    \item Componente C: Cantidad = 1, LT = 2
+    \item Componente D: Cantidad = 4 en el sub-ensamblado B, Cantidad = 5 en sub-ensamblado C, LT = 1 (Lote mínimo = 100).
+  \end{itemize}
+
+  Se solicita:
+  \begin{itemize}
+    \item[\textbf{a)}] (10 Ptos) Usando el algoritmo de Wagner-Whitin, determine en qué mes o meses debe iniciar la fabricación de los kits A y en qué cantidades.
+    \item[\textbf{b)}] (6 Ptos) Realice las tablas de MRP para los componentes B, C y D.
+    \item[\textbf{c)}] (4 Ptos) ¿Cuándo debería poner el primer pedido y por qué componentes?
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{a) Algoritmo de Wagner-Whitin para Kit A}
+  Demanda $D = [5, 12, 3, 15, 12]$. Setup $S = 5000$, Almacenamiento $H = 150$/unidad.
+  \begin{itemize}
+    \item $f(0) = 0$
+    \item \textbf{Mes 1 (Ene):}
+      \begin{equation*}
+        f(1) = 5000 + f(0) = \mathbf{5000}
+      \end{equation*}
+    \item \textbf{Mes 2 (Feb):}
+      \begin{align*}
+        \text{Producir en 1 para (1,2): } &5000 + 150(12) + f(0) = \mathbf{6800} \\
+        \text{Producir en 2 para (2): } &5000 + f(1) = 10000
+      \end{align*}
+      El costo óptimo acumulado es $f(2) = 6800$ (producir lote de 17 en Mes 1).
+    \item \textbf{Mes 3 (Mar):}
+      \begin{align*}
+        \text{Producir en 1 para (1,2,3): } &5000 + 150(12) + 300(3) + f(0) = \mathbf{7700} \\
+        \text{Producir en 2 para (2,3): } &f(1) + 5000 + 150(3) = 10450 \\
+        \text{Producir en 3 para (3): } &f(2) + 5000 = 11800
+      \end{align*}
+      El costo óptimo acumulado es $f(3) = 7700$ (producir lote de 20 en Mes 1).
+    \item \textbf{Mes 4 (Abr):}
+      \begin{align*}
+        \text{Producir en 1 para (1..4): } &7700 + 450(15) = 14450 \\
+        \text{Producir en 4 para (4): } &f(3) + 5000 = \mathbf{12700}
+      \end{align*}
+      El costo óptimo acumulado es $f(4) = 12700$ (producir en Mes 4).
+    \item \textbf{Mes 5 (May):}
+      \begin{align*}
+        \text{Producir en 4 para (4,5): } &f(3) + 5000 + 150(12) = \mathbf{14500} \\
+        \text{Producir en 5 para (5): } &f(4) + 5000 = 17700
+      \end{align*}
+      El costo óptimo acumulado es $f(5) = 14500$ (producir en Mes 4).
+  \end{itemize}
+
+  \paragraph{Programa de Ensamble y Lanzamiento (LT = 2):}
+  \begin{itemize}
+    \item Lote 1: 20 unidades para Ene, Feb y Mar $\implies$ \textbf{Lanzar 20 en Nov-23}.
+    \item Lote 2: 27 unidades para Abr y May $\implies$ \textbf{Lanzar 27 en Feb-24}.
+  \end{itemize}
+
+  \subsubsection*{b) Tablas de MRP de los Componentes}
+  Utilizando $PORelease_A = [20 \text{ en Nov-23}, 27 \text{ en Feb-24}]$.
+
+  \paragraph{1. Componente B (LT = 1, L4L, Coeficiente = 2, OH = 10)}
+  $GR_B = 2 \cdot PORelease_A = [40 \text{ en Nov-23}, 54 \text{ en Feb-24}]$.
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Mes} & \textbf{Sep-23} & \textbf{Oct-23} & \textbf{Nov-23} & \textbf{Dic-23} & \textbf{Ene-24} & \textbf{Feb-24} \\
+    \midrule
+    \textbf{GR} & 0 & 0 & 40 & 0 & 0 & 54 \\
+    \textbf{OH} & 10 & 10 & 0 & 0 & 0 & 0 \\
+    \textbf{POR} & 0 & 0 & 30 & 0 & 0 & 54 \\
+    \textbf{PORelease} & 0 & 30 & 0 & 0 & 54 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{2. Componente C (LT = 2, L4L, Coeficiente = 1, OH = 5)}
+  $GR_C = 1 \cdot PORelease_A = [20 \text{ en Nov-23}, 27 \text{ en Feb-24}]$.
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Mes} & \textbf{Sep-23} & \textbf{Oct-23} & \textbf{Nov-23} & \textbf{Dic-23} & \textbf{Ene-24} & \textbf{Feb-24} \\
+    \midrule
+    \textbf{GR} & 0 & 0 & 20 & 0 & 0 & 27 \\
+    \textbf{OH} & 5 & 5 & 0 & 0 & 0 & 0 \\
+    \textbf{POR} & 0 & 0 & 15 & 0 & 0 & 27 \\
+    \textbf{PORelease} & 15 & 0 & 0 & 27 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{3. Componente D (LT = 1, Lote Mín = 100, $GR_D = 4 \cdot PORelease_B + 5 \cdot PORelease_C$, OH = 85)}
+  \begin{itemize}
+    \item Sep-23: $5 \cdot PORelease_C(\text{Sep-23}) = 5 \cdot 15 = 75$ unidades.
+    \item Oct-23: $4 \cdot PORelease_B(\text{Oct-23}) = 4 \cdot 30 = 120$ unidades.
+    \item Dic-23: $5 \cdot PORelease_C(\text{Dic-23}) = 5 \cdot 27 = 135$ unidades.
+    \item Ene-24: $4 \cdot PORelease_B(\text{Ene-24}) = 4 \cdot 54 = 216$ unidades.
+  \end{itemize}
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Mes} & \textbf{Sep-23} & \textbf{Oct-23} & \textbf{Nov-23} & \textbf{Dic-23} & \textbf{Ene-24} & \textbf{Feb-24} \\
+    \midrule
+    \textbf{GR} & 75 & 120 & 0 & 135 & 216 & 0 \\
+    \textbf{OH} & 10 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{POR} & 0 & 110 & 0 & 135 & 216 & 0 \\
+    \textbf{PORelease} & 110 & 0 & 135 & 216 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \subsubsection*{c) Lanzamiento del Primer Pedido}
+  El primer pedido debe emitirse en \textbf{Septiembre 2023} para el componente \textbf{D} por una cantidad de \textbf{110 unidades}.
+  \textbf{Justificación:} Para ensamblar el Kit A en Noviembre, el componente C requiere iniciarse en Septiembre (LT=2). C demanda a su vez insumo D, lo que consume el inventario disponible de D y obliga a emitir una orden de D en Septiembre (LT=1) para que esté disponible en Octubre y cubrir el posterior lanzamiento de B.
+
+\end{ejercicio}
+
+\newpage
+
+\subsection*{[I2_2024_1] Pregunta 2: Planificación de Requerimiento de Materiales (MRP) (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se solicita representar la estructura de un producto complejo mediante un árbol de materiales (BOM) y ejecutar el algoritmo de MRP desfasando los lanzamientos planificados según el Lead Time. Para el control del lote, se evalúa la heurística Silver-Meal.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Dibujar la BOM jerárquica con los coeficientes correspondientes.
+      \item En Silver-Meal, calcular recursivamente el costo total promedio por periodo: $C(k) = \frac{S + \sum_{r=1}^{k} H \cdot (r-1) \cdot D_{t+r-1}}{k}$, deteniéndose al primer incremento en el costo promedio.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Una empresa química elabora un preparado en envases de $500\text{ ml}$. Cada envase viene con su tapa y los compuestos de la crema por envase son: $300\text{ ml}$ de compuesto A y $200\text{ ml}$ de compuesto B. A su vez, el compuesto B consta de $100\text{ ml}$ de compuesto C y $100\text{ ml}$ de compuesto D.
+
+  Los tiempos de fabricación/entrega son:
+  \begin{itemize}
+    \item Mezcla de compuestos C y D: demora 1 semana.
+    \item Mezcla de compuestos A, B, C más envasado final: demora 1 semana.
+  \end{itemize}
+  
+  Demanda de envases por las próximas 6 semanas:
+  \begin{itemize}
+    \item Semana 1: 300 \quad Semana 2: 200 \quad Semana 3: 300 \quad Semana 4: 400 \quad Semana 5: 300 \quad Semana 6: 200
+  \end{itemize}
+
+  Se solicita:
+  \begin{itemize}
+    \item[\textbf{i.}] (5 ptos) Dibuje un árbol que represente la lista de materiales (BOM).
+    \item[\textbf{ii.}] (10 ptos) Construya las tablas de MRP para cada uno de los componentes, considerando inventarios iniciales nulos y lotificación Lote a Lote (L4L).
+    \item[\textbf{iii.}] (5 ptos) El compuesto C requiere estar en un ambiente controlado lo que tiene un costo de setup de envío de $10$ por cada orden. Además, mantenerlo en bodega cuesta $1$ por semana por unidad. Utilice Silver-Meal para determinar los lotes de fabricación óptimos para C y comente el beneficio de agrupar.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Árbol de Materiales (BOM)}
+  A continuación se muestra la estructura jerárquica del producto final:
+
+  \begin{center}
+  \begin{tikzpicture}[
+    sibling distance=2.5cm,
+    level distance=1.5cm,
+    item/.style={draw, rectangle, minimum width=2.2cm, minimum height=0.8cm, fill=gopbluedeflight, draw=gopbluedef, thick, font=\bfseries\small, align=center}
+  ]
+    \node[item] {Crema Final\\(500 ml)}
+      child { node[item] {Tapa\\(1 u)} }
+      child { node[item] {Envase\\(1 u)} }
+      child { node[item] {Compuesto A\\(300 ml)} }
+      child { node[item] {Compuesto B\\(200 ml)}
+        child { node[item] {Compuesto C\\(100 ml)} }
+        child { node[item] {Compuesto D\\(100 ml)} }
+      };
+  \end{tikzpicture}
+  \end{center}
+
+  \subsubsection*{ii. Tablas de MRP (Lote a Lote --- L4L)}
+  \textbf{Parámetros de Entrada:}
+  \begin{itemize}
+    \item \textbf{Envasado/Mezcla Final:} Lead Time (LT) = 1 semana.
+    \item \textbf{Compuesto B:} Lead Time (LT) = 1 semana (mezcla de C y D).
+    \item Inventarios iniciales = 0 para todos.
+  \end{itemize}
+
+  \paragraph{1. Crema Final (Envasado):}
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & 300 & 200 & 300 & 400 & 300 & 200 \\
+    \textbf{Inventario Disponible (OH)} & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Recepción de Órdenes (POR)} & 300 & 200 & 300 & 400 & 300 & 200 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 300 (W0) & 200 & 300 & 400 & 300 & 200 (W5) \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+  \textit{Nota: Los lanzamientos de Crema Final se realizan con 1 semana de anticipación (del W0 al W5) para satisfacer la demanda de las semanas 1 a 6.}
+
+  \paragraph{2. Tapa y Envase (1 unidad por Crema Final, LT = 0):}
+  Requerimiento bruto = Lanzamiento de Crema Final.
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & 300 & 200 & 300 & 400 & 300 & 200 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 300 & 200 & 300 & 400 & 300 & 200 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{3. Compuesto A (300 ml por Crema Final, LT = 0):}
+  Requerimiento bruto = $300 \cdot PORelease_{\text{Crema}}$.
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR) [ml]} & 90.000 & 60.000 & 90.000 & 120.000 & 90.000 & 60.000 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 90.000 & 60.000 & 90.000 & 120.000 & 90.000 & 60.000 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{4. Compuesto B (200 ml por Crema Final, LT = 1 semana):}
+  Requerimiento bruto = $200 \cdot PORelease_{\text{Crema}}$.
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR) [ml]} & 60.000 & 40.000 & 60.000 & 80.000 & 60.000 & 40.000 \\
+    \textbf{Recepción de Órdenes (POR)} & 60.000 & 40.000 & 60.000 & 80.000 & 60.000 & 40.000 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 60.000 (W-1) & 40.000 & 60.000 & 80.000 & 60.000 & 40.000 (W4) \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+  \textit{Nota: Para iniciar la mezcla final en la semana 0, B debe estar disponible en la semana 0, por lo que su fabricación debe ser lanzada en la semana -1.}
+
+  \paragraph{5. Compuestos C y D (100 ml por cada envase de B, LT = 0):}
+  B se produce en volumen (ml), y la relación es de 100 ml de C y 100 ml de D para obtener 200 ml de B (es decir, la proporción es de 0.5 unidades de C por cada unidad de B).
+  Requerimiento bruto de C (y D) = $0.5 \cdot PORelease_{\text{B}}$.
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{-1} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR) [ml]} & 30.000 & 20.000 & 30.000 & 40.000 & 30.000 & 20.000 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 30.000 & 20.000 & 30.000 & 40.000 & 30.000 & 20.000 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \subsubsection*{iii. Loteo de Compuesto C con Heurística de Silver-Meal}
+  Considerando la demanda neta simplificada (escalada a miles de unidades):
+  \begin{equation*}
+    D_C = [30, 20, 30, 40, 30, 20] \quad \text{unidades para las semanas 1 a 6}
+  \end{equation*}
+  Parámetros: Setup $S = 10$, costo de inventario $H = 1$ por unidad/semana.
+
+  \begin{formulas}{Heurística de Silver-Meal}
+    El costo promedio por periodo para cubrir $k$ periodos de demanda a partir del periodo $t$ se define como:
+    \begin{equation*}
+      C(k) = \frac{S + \sum_{r=1}^{k} H \cdot (r - 1) \cdot D_{t + r - 1}}{k}
+    \end{equation*}
+  \end{formulas}
+
+  Procedemos con las iteraciones:
+  \begin{itemize}
+    \item \textbf{Cálculo de Lote 1 (Inicia en Semana 1):}
+    \begin{itemize}
+      \item $k=1: C(1) = \frac{10}{1} = \mathbf{10}$.
+      \item $k=2: C(2) = \frac{10 + 1 \cdot (1) \cdot 20}{2} = \frac{30}{2} = 15$.
+      \item Como $C(2) > C(1)$ ($15 > 10$), detenemos el lote 1 en $k=1$.
+      \item \textbf{Lote 1:} Fabricar \textbf{30 unidades} en Semana 1.
+    \end{itemize}
+
+    \item \textbf{Cálculo de Lote 2 (Inicia en Semana 2, Demanda = 20):}
+    \begin{itemize}
+      \item $k=1: C(1) = \frac{10}{1} = \mathbf{10}$.
+      \item $k=2: C(2) = \frac{10 + 1 \cdot (1) \cdot 30}{2} = \frac{40}{2} = 20$.
+      \item Como $C(2) > C(1)$ ($20 > 10$), detenemos el lote 2 en $k=1$.
+      \item \textbf{Lote 2:} Fabricar \textbf{20 unidades} en Semana 2.
+    \end{itemize}
+
+    \item \textbf{Cálculo de Lote 3 (Inicia en Semana 3, Demanda = 30):}
+    \begin{itemize}
+      \item $k=1: C(1) = \frac{10}{1} = \mathbf{10}$.
+      \item $k=2: C(2) = \frac{10 + 1 \cdot (1) \cdot 40}{2} = \frac{50}{2} = 25$.
+      \item Como $C(2) > C(1)$ ($25 > 10$), detenemos el lote 3 en $k=1$.
+      \item \textbf{Lote 3:} Fabricar \textbf{30 unidades} en Semana 3.
+    \end{itemize}
+  \end{itemize}
+
+  \textbf{Conclusión:}
+  Dado que el costo unitario de almacenamiento es sumamente elevado ($H=1$) en comparación con el costo de setup ($S=10$), el costo promedio aumenta de inmediato al intentar almacenar inventario para el periodo siguiente. Por esta razón, Silver-Meal decide no agrupar ningún periodo y se comporta exactamente como la política \textbf{Lote a Lote (L4L)}. No existe beneficio en agrupar bajo esta relación de costos.
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA 3 ───────────────────────────────────────────────────────────────
+
+\newpage
+
+\subsection*{[I2_2025_1] Pregunta 3: Gestión de Inventarios y Heurísticas de Reabastecimiento (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se entregan requerimientos netos y se pide aplicar la heurística Silver-Meal para calcular el plan de compra de un kit de vacunas, y realizar la explosión de MRP para componentes subordinados.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Heurística de Silver-Meal: Minimizar el costo total promedio por periodo $C(k) = \frac{S + \sum_r H \cdot (r-1) \cdot D_r}{k}$.
+      \item En MRP, multiplicar las órdenes del kit final por los coeficientes de la lista de materiales (BOM) desfasando por Lead Time.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  El centro nacional de salud distribuye "Kits de Vacunación X" a los hospitales regionales. La demanda neta proyectada de kits para las siguientes 6 semanas es:
+  \begin{itemize}
+    \item Semanas: 1: 60, \quad 2: 90, \quad 3: 40, \quad 4: 110, \quad 5: 80, \quad 6: 130
+  \end{itemize}
+
+  El BOM del Kit X indica que cada kit requiere de 2 jeringas del componente B y 3 frascos del componente C. Cada jeringa B requiere adicionalmente 1 aguja de seguridad D.
+  
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.2cm and 1.5cm,
+    item/.style={draw, rectangle, minimum width=1.5cm, minimum height=0.8cm, fill=gopbluedeflight, draw=gopbluedef, thick, font=\bfseries}
+  ]
+    \node[item] (X) {Kit X};
+    \node[item, below left=of X] (B) {B (2)};
+    \node[item, below right=of X] (C) {C (3)};
+    \node[item, below=of B] (D) {D (1)};
+    
+    \draw[thick, gopblue] (X) -- (B);
+    \draw[thick, gopblue] (X) -- (C);
+    \draw[thick, gopblue] (B) -- (D);
+  \end{tikzpicture}
+  \end{center}
+
+  La información de inventarios se resume en la siguiente tabla:
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Componente} & \textbf{Inventario Inicial} & \textbf{Stock de Seguridad} & \textbf{Lead Time} & \textbf{Costo de Mantener ($H$)} \\
+    \midrule
+    \textbf{Kit X} & 30 & 10 & 1 week & \$2.0/unidad-semana \\
+    \textbf{B} & 60 & 0 & 2 semanas & \$0.8/unidad-semana \\
+    \textbf{C} & 120 & 15 & 1 semana & \$1.0/unidad-semana \\
+    \textbf{D} & 40 & 10 & 1 semana & \$0.4/unidad-semana \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  El costo administrativo de lanzar una orden (setup) del Kit X es de $\$250$. Los componentes B, C y D operan bajo política lote a lote (L4L).
+
+  \begin{itemize}
+    \item[\textbf{a)}] (10 Ptos) Utilice la heurística de Silver-Meal para calcular el plan de pedido óptimo del Kit X (Lanzamiento de Órdenes).
+    \item[\textbf{b)}] (10 Ptos) Realice las tablas de MRP completas para los componentes B, C y D.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{a) Heurística de Silver-Meal para el Kit X}
+  Calculamos las necesidades netas de Kit X considerando Inventario Disponible = 30 y Stock de Seguridad = 10:
+  \begin{itemize}
+    \item Inventario Disponible Neto Inicial = $30 - 10 = 20$ unidades.
+    \item Semana 1: Demanda = 60. Netas = $60 - 20 = 40$ unidades.
+    \item Semanas 2 a 6: Netas = $[40, 90, 40, 110, 80, 130]$.
+  \end{itemize}
+
+  Aplicamos la heurística Silver-Meal ($S = \$250$, $H = \$2$):
+
+  \paragraph{Decisión 1 (Iniciar en Semana 1):}
+  \begin{itemize}
+    \item $k=1$ (Semana 1): $C(1) = 250 / 1 = \mathbf{250}$.
+    \item $k=2$ (Semana 1..2): $C(2) = (250 + 2 \cdot (1 \cdot 90)) / 2 = 430 / 2 = 215$.
+    \item $k=3$ (Semana 1..3): $C(3) = (430 + 2 \cdot (2 \cdot 40)) / 3 = 590 / 3 = 196.67$.
+    \item $k=4$ (Semana 1..4): $C(4) = (590 + 2 \cdot (3 \cdot 110)) / 4 = 1250 / 4 = 312.5$.
+    \item Detenemos pues $C(4) > C(3)$. Producimos en la Semana 1 para cubrir Semanas 1, 2 y 3.
+    \item \textbf{Lote 1 (Semana 1):} $40 + 90 + 40 = \mathbf{170 \text{ unidades}}$.
+  \end{itemize}
+
+  \paragraph{Decisión 2 (Iniciar en Semana 4):}
+  \begin{itemize}
+    \item $k=1$ (Semana 4): $C(1) = 250 / 1 = \mathbf{250}$.
+    \item $k=2$ (Semana 4..5): $C(2) = (250 + 2 \cdot (1 \cdot 80)) / 2 = 410 / 2 = 205$.
+    \item $k=3$ (Semana 4..6): $C(3) = (410 + 2 \cdot (2 \cdot 130)) / 3 = 930 / 3 = 310$.
+    \item Detenemos pues $C(3) > C(2)$. Producimos en la Semana 4 para cubrir Semanas 4 y 5.
+    \item \textbf{Lote 2 (Semana 4):} $110 + 80 = \mathbf{190 \text{ unidades}}$.
+  \end{itemize}
+
+  \paragraph{Decisión 3 (Iniciar en Semana 6):}
+  \begin{itemize}
+    \item Cubre Semana 6. \textbf{Lote 3 (Semana 6):} $\mathbf{130 \text{ unidades}}$.
+  \end{itemize}
+
+  \paragraph{Programa de Recepciones Planificadas (POR) del Kit X:}
+  \begin{itemize}
+    \item Semana 1: 170 \quad Semana 4: 190 \quad Semana 6: 130
+  \end{itemize}
+  Como el Lead Time del Kit X is de 1 semana, los lanzamientos (\textit{PORelease}) se desfasan:
+  \begin{itemize}
+    \item Semana 0: 170 \quad Semana 3: 190 \quad Semana 5: 130
+  \end{itemize}
+
+  \subsubsection*{b) Tablas de MRP para B, C y D}
+
+  \paragraph{1. Componente B (LT = 2, L4L, $GR_B = 2 \cdot PORelease_X$, Inventario Disponible Neto = 60)}
+  \begin{center}
+  \small
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} \\
+    \midrule
+    \textbf{GR} & 340 & 0 & 0 & 380 & 0 & 260 & 0 \\
+    \textbf{OH} & 60 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Net} & 280 & 0 & 0 & 380 & 0 & 260 & 0 \\
+    \textbf{PORelease} & 280 (Sem -2) & 0 & 380 (Sem 1) & 0 & 260 (Sem 3) & 0 & 0 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \paragraph{2. Componente C (LT = 1, L4L, $GR_C = 3 \cdot PORelease_X$, Inv. Disponible Neto = 120 - 15 = 105)}
+  \begin{center}
+  \small
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} \\
+    \midrule
+    \textbf{GR} & 510 & 0 & 0 & 570 & 0 & 390 & 0 \\
+    \textbf{OH} & 105 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Net} & 405 & 0 & 0 & 570 & 0 & 390 & 0 \\
+    \textbf{PORelease} & 405 (Sem -1) & 0 & 570 (Sem 2) & 0 & 390 (Sem 4) & 0 & 0 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \paragraph{3. Componente D (LT = 1, L4L, $GR_D = 1 \cdot PORelease_B$, Inv. Disponible Neto = 40 - 10 = 30)}
+  \begin{center}
+  \small
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Semana} & \textbf{-2} & \textbf{-1} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} \\
+    \midrule
+    \textbf{GR} & 280 & 0 & 0 & 380 & 0 & 260 & 0 \\
+    \textbf{OH} & 30 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Net} & 250 & 0 & 0 & 380 & 0 & 260 & 0 \\
+    \textbf{PORelease} & 250 (Sem -3) & 0 & 420 (Sem 0) & 0 & 300 (Sem 2) & 0 & 0 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \textit{Nota: Los lanzamientos de D se programan desfasando en 1 semana sus requerimientos netos.}
+
+\end{ejercicio}
+
+\newpage
+
+\end{document}

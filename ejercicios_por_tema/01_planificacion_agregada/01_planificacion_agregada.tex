@@ -1,0 +1,442 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples ──────────────────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox ───────────────────────────────────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definición: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Fórmulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Compendio de Ejercicios: Planificación Agregada}
+\fancyhead[C]{}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[L]{\footnotesize Solución Oficial --- Transcripción en LaTeX}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{gopcyan} Compendio de Ejercicios\par}
+  \vspace{0.4cm}
+  {\LARGE\bfseries Planificación Agregada\par}
+  \vspace{0.3cm}
+  {\large Gestión de Operaciones (ICS3213)\par}
+  \vspace{1.2cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+  {\small Material extraído de pautas oficiales de Interrogaciones I2.\par}
+  \vspace{0.4cm}
+  \rule{\textwidth}{0.4pt}
+  \vfill
+\end{titlepage}
+
+\newpage
+\section*{Planificación Agregada}
+
+\subsection*{[I2_2024_1] Pregunta 1: Planificación Agregada y Cadena de Suministro (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se requiere modelar una red de planificación agregada de producción en múltiples periodos y plantas, con fuerza laboral dinámica (contratación, despido, horas extra), integración de inventarios y flujo de materias primas. Además, incluye la localización de instalaciones usando distancias Manhattan lineales.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Definir variables de inventario, producción, flujos de envío, mano de obra normal y extra, y estados de activación binarios.
+      \item Linealizar las distancias Manhattan $|X_1 - X_2|$ mediante restricciones lógicas de cota superior/inferior en variables de desviación, usando Big-M en caso de asignaciones binarias.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted es el Gerente de Operaciones para una gran empresa que produce un producto y debe elaborar el plan de producción para las siguientes 52 semanas. Marketing le ha entregado la demanda de cada cliente $i$ para cada semana $t$, la cual es $D_{it}$.
+  
+  La producción puede ser hecha en cualquiera de las $N$ plantas de la empresa, pero para ello debe activar la planta, lo cual tiene un costo fijo de $A_n$. El costo de producción unitario es $CP_n$ por unidad en la planta $n$ y la producción debe ser despachada a cada cliente $i$ a un costo $C_{in}$ por cada unidad despachada al cliente $i$ de la planta $n$. La productividad de cada trabajador en la planta es de $PR_n$ unidades por hora de producción por trabajador y se trabajan turnos de 8 horas diarias en 5 días a la semana. El costo semanal de cada trabajador es $\$CT$, el costo de contratación es $\$CC$ y el de despido es $\$CDS$. Es posible trabajar un máximo de 2 horas extra por día a un costo de $CE$ pesos por hora extra trabajada. Actualmente (tiempo 0) usted dispone de $T_n$ trabajadores y mantiene $INVI_n$ unidades en inventario en cada planta. Al final del año debe dejar $TF_n$ trabajadores y $INVF_n$ unidades en inventario en cada planta $n$. El costo de mantener unidades en inventario es $H_n$ pesos por unidad por semana para cada planta $n$.
+
+  \begin{itemize}
+    \item[\textbf{i.}] (10 ptos) Con esta información construya un modelo de programación matemática que permita determinar la planificación de producción. Indique las variables de decisión, la función objetivo y las restricciones.
+    \item[\textbf{ii.}] (5 ptos) Ahora usted debe planificar el aprovisionamiento de la planta de la materia prima para producir el producto. Usted sabe que para producir una unidad de producto final se requiere $R$ unidades de materia prima a un costo de $IN_t$ por unidad de materia prima en el tiempo $t$. Actualmente (tiempo 0) mantiene $MPI_n$ unidades en inventario de materia prima en cada planta, al final del año debe dejar $MPF_n$ unidades en inventario y el costo de mantener unidades en inventario es $MC_n$ para cada planta. Este insumo es provisto por $j$ proveedores distintos que tienen un \textit{Lead-Time} de $L$ semanas, cada uno puede entregar como máximo $MAX_j$ unidades del insumo por semana y el costo de despacho entre cada proveedor y planta es de $CTP_{nj}$. Indique cómo cambia el modelo (nuevas variables, cambios en la función objetivo y nuevas restricciones).
+    \item[\textbf{iii.}] (5 ptos) Usted determina que el flujo entre cada proveedor y planta es $F_{nj}$ unidades de cada proveedor $j$ a la planta $n$. Con esta información usted quiere determinar la ubicación de dos bodegas que permitan recibir los insumos de parte de los proveedores. Para ello usted georreferencia cada proveedor con una coordenada en X e Y, siendo $CPRX_j$ y $CPRY_j$ respectivamente para cada proveedor $j$, y lo mismo para cada planta, siendo $CPLX_n$ y $CPLY_n$ para cada planta $n$. Si usted quiere determinar la cota de peor caso y asume la distancia Manhattan, construya el modelo de programación matemática que permita determinar la ubicación de cada bodega y la asignación de las plantas y proveedores a cada bodega.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Modelo Base de Planificación Agregada (MILP)}
+
+  \paragraph{1. Conjuntos e Índices:}
+  \begin{itemize}
+    \item $n \in \{1, \dots, N\}$: Plantas de producción.
+    \item $i \in \{1, \dots, I\}$: Clientes.
+    \item $t \in \{1, \dots, 52\}$: Semanas del año.
+  \end{itemize}
+
+  \paragraph{2. Variables de Decisión:}
+  \begin{itemize}
+    \item $P_{n,t} \ge 0$: Cantidad de producto final fabricado en la planta $n$ en la semana $t$.
+    \item $I_{n,t} \ge 0$: Inventario de producto final en la planta $n$ al final de la semana $t$.
+    \item $DE_{n,i,t} \ge 0$: Despacho de producto final de la planta $n$ al cliente $i$ en la semana $t$.
+    \item $TA_{n,t} \ge 0$: Trabajadores disponibles en la planta $n$ en la semana $t$.
+    \item $TCA_{n,t} \ge 0$: Trabajadores contratados en la planta $n$ al inicio de la semana $t$.
+    \item $TDA_{n,t} \ge 0$: Trabajadores despedidos en la planta $n$ al inicio de la semana $t$.
+    \item $HE_{n,t} \ge 0$: Horas extra totales trabajadas en la planta $n$ en la semana $t$.
+    \item $B_{n,t} \in \{0, 1\}$: Variable binaria que toma el valor $1$ si la planta $n$ opera en la semana $t$, y $0$ en caso contrario.
+  \end{itemize}
+
+  \paragraph{3. Función Objetivo:}
+  Minimizar los costos totales del año:
+  \begin{align*}
+    \min \quad \sum_{t=1}^{52} \sum_{n=1}^{N} \Big( &CP_n \cdot P_{n,t} + H_n \cdot I_{n,t} + CT \cdot TA_{n,t} + CC \cdot TCA_{n,t} + CDS \cdot TDA_{n,t} \\
+    &+ CE \cdot HE_{n,t} + A_n \cdot B_{n,t} + \sum_{i} C_{in} \cdot DE_{n,i,t} \Big)
+  \end{align*}
+
+  \paragraph{4. Restricciones:}
+  \begin{itemize}
+    \item \textbf{Satisfacción de Demanda de Clientes:}
+    \begin{equation}
+      \sum_{n=1}^{N} DE_{n,i,t} \ge D_{it} \quad \forall i, t
+    \end{equation}
+    \item \textbf{Balance de Inventario de Producto Final:}
+    \begin{equation}
+      I_{n,t} = I_{n,t-1} + P_{n,t} - \sum_{i} DE_{n,i,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Dinámica del Personal:}
+    \begin{equation}
+      TA_{n,t} = TA_{n,t-1} + TCA_{n,t} - TDA_{n,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Restricción de Capacidad de Producción (basado en mano de obra):}
+    Cada trabajador labora $8 \text{ horas/día} \times 5 \text{ días/semana} = 40 \text{ horas/semana}$ normales.
+    \begin{equation}
+      P_{n,t} \le PR_n \cdot \left( 40 \cdot TA_{n,t} + HE_{n,t} \right) \quad \forall n, t
+    \end{equation}
+    \item \textbf{Límite de Horas Extra (máximo 2 horas/día por trabajador):}
+    $2 \text{ horas/día} \times 5 \text{ días/semana} = 10 \text{ horas/semana}$ por trabajador.
+    \begin{equation}
+      HE_{n,t} \le 10 \cdot TA_{n,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Activación de Planta (Relación con producción, con $M$ número grande):}
+    \begin{equation}
+      P_{n,t} \le M \cdot B_{n,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Condiciones de Borde e Inventarios Iniciales/Finales:}
+    \begin{align}
+      I_{n,0} &= INVI_n, \quad I_{n,52} = INVF_n \quad \forall n \\
+      TA_{n,0} &= T_n, \quad TA_{n,52} = TF_n \quad \forall n
+    \end{align}
+  \end{itemize}
+
+  \subsubsection*{ii. Extensión para Aprovisionamiento de Materia Prima}
+
+  \paragraph{1. Nuevas Variables de Decisión:}
+  \begin{itemize}
+    \item $QSI_{n,j,t} \ge 0$: Cantidad de materia prima solicitada al proveedor $j$ para ser entregada en la planta $n$ en la semana $t$.
+    \item $QUI_{n,t} \ge 0$: Cantidad de materia prima consumida en la planta $n$ en la semana $t$ para producir.
+    \item $IIN_{n,t} \ge 0$: Inventario de materia prima en la planta $n$ al final de la semana $t$.
+  \end{itemize}
+
+  \paragraph{2. Modificaciones en la Función Objetivo (Costos de Materia Prima):}
+  Se agregan los costos de adquisición de la materia prima, transporte desde proveedores y almacenamiento:
+  \begin{equation*}
+    \text{Costo MP} = \sum_{t=1}^{52} \sum_{n=1}^{N} \left( \sum_{j} IN_t \cdot QSI_{n,j,t} + \sum_{j} CTP_{nj} \cdot QSI_{n,j,t} + MC_n \cdot IIN_{n,t} \right)
+  \end{equation*}
+  Este término se añade sumándolo a la función objetivo de minimización.
+
+  \paragraph{3. Nuevas Restricciones:}
+  \begin{itemize}
+    \item \textbf{Consumo de Materia Prima:}
+    \begin{equation}
+      QUI_{n,t} \ge R \cdot P_{n,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Balance de Inventario de Materia Prima (con desfase por Lead-Time $L$):}
+    \begin{equation}
+      IIN_{n,t} = IIN_{n,t-1} + \sum_{j} QSI_{n,j,t-L} - QUI_{n,t} \quad \forall n, t \quad (\text{donde } QSI_{n,j,\tau} = 0 \text{ si } \tau \le 0)
+    \end{equation}
+    \item \textbf{Capacidad Máxima del Proveedor:}
+    \begin{equation}
+      \sum_{n=1}^{N} QSI_{n,j,t} \le MAX_j \quad \forall j, t
+    \end{equation}
+    \item \textbf{Condiciones de Borde para Materia Prima:}
+    \begin{equation}
+      IIN_{n,0} = MPI_n, \quad IIN_{n,52} = MPF_n \quad \forall n
+    \end{equation}
+  \end{itemize}
+
+  \subsubsection*{iii. Modelo de Ubicación de dos Bodegas (Centro de Gravedad y Distancia Manhattan)}
+  Se desea ubicar dos bodegas intermedias ($b \in \{1, 2\}$) que consoliden la materia prima de los proveedores y la despachen a las plantas.
+
+  \paragraph{1. Parámetros Derivados:}
+  \begin{itemize}
+    \item $F_j = \sum_{n} F_{nj}$: Flujo total enviado por el proveedor $j$.
+    \item $F_n = \sum_{j} F_{nj}$: Flujo total recibido por la planta $n$.
+  \end{itemize}
+
+  \paragraph{2. Variables de Decisión:}
+  \begin{itemize}
+    \item $CX_b, CY_b$: Coordenadas X e Y de la bodega $b \in \{1, 2\}$.
+    \item $Y_{j,b} \in \{0, 1\}$: $1$ si el proveedor $j$ se asigna a la bodega $b$, $0$ si no.
+    \item $Z_{n,b} \in \{0, 1\}$: $1$ si la planta $n$ se asigna a la bodega $b$, $0$ si no.
+    \item $DX_{j,b}, DY_{j,b} \ge 0$: Desviaciones absolutas en coordenadas entre el proveedor $j$ y la bodega $b$.
+    \item $DX'_{n,b}, DY'_{n,b} \ge 0$: Desviaciones absolutas en coordenadas entre la planta $n$ y la bodega $b$.
+  \end{itemize}
+
+  \paragraph{3. Función Objetivo:}
+  Minimizar la distancia Manhattan total ponderada por los flujos de carga:
+  \begin{equation*}
+    \min \quad \sum_{j} \sum_{b=1}^{2} F_{j} \left( DX_{j,b} + DY_{j,b} \right) + \sum_{n} \sum_{b=1}^{2} F_{n} \left( DX'_{n,b} + DY'_{n,b} \right)
+  \end{equation*}
+
+  \paragraph{4. Restricciones:}
+  \begin{itemize}
+    \item \textbf{Asignación Única:}
+    \begin{equation}
+      \sum_{b=1}^{2} Y_{j,b} = 1 \quad \forall j, \quad \sum_{b=1}^{2} Z_{n,b} = 1 \quad \forall n
+    \end{equation}
+    \item \textbf{Linealización de Distancia Manhattan para Proveedores (mediante Big-M):}
+    \begin{align}
+      DX_{j,b} &\ge CPRX_j - CX_b - M(1 - Y_{j,b}) \quad \forall j, b \\
+      DX_{j,b} &\ge CX_b - CPRX_j - M(1 - Y_{j,b}) \quad \forall j, b \\
+      DY_{j,b} &\ge CPRY_j - CY_b - M(1 - Y_{j,b}) \quad \forall j, b \\
+      DY_{j,b} &\ge CY_b - CPRY_j - M(1 - Y_{j,b}) \quad \forall j, b
+    \end{align}
+    \item \textbf{Linealización de Distancia Manhattan para Plantas (mediante Big-M):}
+    \begin{align}
+      DX'_{n,b} &\ge CPLX_n - CX_b - M(1 - Z_{n,b}) \quad \forall n, b \\
+      DX'_{n,b} &\ge CX_b - CPLX_n - M(1 - Z_{n,b}) \quad \forall n, b \\
+      DY'_{n,b} &\ge CPLY_n - CY_b - M(1 - Z_{n,b}) \quad \forall n, b \\
+      DY'_{n,b} &\ge CY_b - CPLY_n - M(1 - Z_{n,b}) \quad \forall n, b
+    \end{align}
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA 2 ───────────────────────────────────────────────────────────────
+
+\newpage
+
+\subsection*{[I2_2025_1] Pregunta 1: Planificación de la Producción de Vacunas (20 Puntos)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se solicita formular un modelo de optimización lineal entero-mixto (MILP) para planificar la producción de vacunas en dos laboratorios que abastecen a tres centros médicos bajo escenarios de incertidumbre en la demanda. Incorpora costos de producción, inventario, distribución, capacidad y multas lógicas.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Indexar la demanda por escenario $s \in \mathcal{S}$ y mes $t$: $D_{z,t,s}$.
+      \item Definir variables de producción, envío e inventario dependientes del escenario $s$ para capturar el comportamiento estocástico de la demanda.
+      \item Escribir la función objetivo minimizando el costo esperado (ponderando cada escenario por su probabilidad $P_s$).
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  El Ministerio de Salud debe planificar la producción y distribución de vacunas para el invierno durante los próximos $T$ meses. Dispone de dos laboratorios asociados ($i \in \{1, 2\}$) que fabrican las vacunas y de tres centros de distribución regionales ($z \in \{1, 2, 3\}$). 
+
+  Debido a la incertidumbre climática, la demanda mensual de dosis en cada región $z$ en el mes $t$ es incierta. Se definen $S$ escenarios meteorológicos posibles. Cada escenario $s \in \{1, \dots, S\}$ ocurre con una probabilidad conocida $P_s$ ($\sum_s P_s = 1$). La demanda en el escenario $s$, para la región $z$ en el mes $t$ es $D_{z,t,s}$ dosis.
+
+  El laboratorio $i$ tiene una capacidad de producción en el mes $t$ de $CAP_{i,t}$ dosis, con un costo unitario de producción de $CP_i$ pesos. El transporte desde el laboratorio $i$ al centro $z$ tiene un costo de $CT_{i,z}$ pesos por dosis. 
+  
+  Adicionalmente:
+  \begin{itemize}
+    \item Se puede almacenar stock en los laboratorios y en los centros. Almacenar una dosis durante un mes cuesta $HL_i$ pesos en el laboratorio $i$, y $HC_z$ en el centro $z$.
+    \item No existe inventario inicial al comienzo del mes $1$.
+    \item Si en algún escenario la demanda no puede ser cubierta a tiempo, se cobra una penalización por dosis no entregada de $PEN_z$ pesos en la región $z$. El faltante no se acumula para el mes siguiente.
+    \item Por motivos contractuales, el laboratorio 1 debe operar al menos al $40\%$ de su capacidad mensual instalada en cada período $t$, independientemente del escenario que ocurra.
+  \end{itemize}
+
+  Formule un modelo de programación lineal estocástica entera mixta (MILP) para minimizar el costo esperado total del plan de vacunación.
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{1. Conjuntos e Índices}
+  \begin{itemize}
+    \item $i \in \mathcal{L} = \{1, 2\}$: Laboratorios productores.
+    \item $z \in \mathcal{C} = \{1, 2, 3\}$: Centros de distribución regionales (zonas de demanda).
+    \item $t \in \mathcal{T} = \{1, \dots, T\}$: Meses del horizonte de planificación.
+    \item $s \in \mathcal{S} = \{1, \dots, S\}$: Escenarios de demanda invernal.
+  \end{itemize}
+
+  \subsubsection*{2. Parámetros}
+  \begin{itemize}
+    \item $D_{z,t,s}$: Demanda de vacunas en la región $z$, período $t$ bajo escenario $s$ (dosis).
+    \item $P_s$: Probabilidad de ocurrencia del escenario $s$ (donde $\sum_{s \in \mathcal{S}} P_s = 1$).
+    \item $CAP_{i,t}$: Capacidad máxima de producción del laboratorio $i$ en el mes $t$ (dosis).
+    \item $CP_i$: Costo unitario de producción en el laboratorio $i$ (pesos/dosis).
+    \item $CT_{i,z}$: Costo unitario de transporte del laboratorio $i$ al centro $z$ (pesos/dosis).
+    \item $HL_i$: Costo de almacenamiento mensual en el laboratorio $i$ (pesos/dosis-mes).
+    \item $HC_z$: Costo de almacenamiento mensual en el centro $z$ (pesos/dosis-mes).
+    \item $PEN_z$: Penalización unitaria por demanda no satisfecha en la región $z$ (pesos/dosis).
+  \end{itemize}
+
+  \subsubsection*{3. Variables de Decisión}
+  \begin{itemize}
+    \item $X_{i,t,s} \ge 0$: Cantidad producida en el laboratorio $i$ en el mes $t$ bajo el escenario $s$ (dosis).
+    \item $Y_{i,z,t,s} \ge 0$: Envío de vacunas del laboratorio $i$ al centro $z$ en el mes $t$ bajo el escenario $s$ (dosis).
+    \item $IL_{i,t,s} \ge 0$: Inventario en el laboratorio $i$ al final del mes $t$ bajo el escenario $s$ (dosis).
+    \item $IC_{z,t,s} \ge 0$: Inventario en el centro $z$ al final del mes $t$ bajo el escenario $s$ (dosis).
+    \item $F_{z,t,s} \ge 0$: Demanda no satisfecha (faltante) en la región $z$, mes $t$ bajo el escenario $s$ (dosis).
+  \end{itemize}
+
+  \subsubsection*{4. Función Objetivo}
+  Minimizar el costo total esperado (ponderado por la probabilidad $P_s$ de cada escenario $s$):
+  \begin{equation*}
+    \begin{aligned}
+      \min \quad \sum_{s \in \mathcal{S}} P_s \bigg[ &\sum_{t \in \mathcal{T}} \sum_{i \in \mathcal{L}} \left( CP_i \cdot X_{i,t,s} + HL_i \cdot IL_{i,t,s} \right) + \sum_{t \in \mathcal{T}} \sum_{i \in \mathcal{L}} \sum_{z \in \mathcal{C}} CT_{i,z} \cdot Y_{i,z,t,s} \\
+      &+ \sum_{t \in \mathcal{T}} \sum_{z \in \mathcal{C}} \left( HC_z \cdot IC_{z,t,s} + PEN_z \cdot F_{z,t,s} \right) \bigg]
+    \end{aligned}
+  \end{equation*}
+
+  \subsubsection*{5. Restricciones}
+  \begin{itemize}
+    \item \textbf{Límites de Capacidad Máxima en Laboratorios:}
+    \begin{equation}
+      X_{i,t,s} \le CAP_{i,t} \quad \forall i \in \mathcal{L}, t \in \mathcal{T}, s \in \mathcal{S}
+    \end{equation}
+
+    \item \textbf{Restricción Contractual de Producción Mínima (Laboratorio 1):}
+    \begin{equation}
+      X_{1,t,s} \ge 0.40 \cdot CAP_{1,t} \quad \forall t \in \mathcal{T}, s \in \mathcal{S}
+    \end{equation}
+
+    \item \textbf{Balance de Inventario en Laboratorios:}
+    \begin{equation}
+      IL_{i,t,s} = IL_{i,t-1,s} + X_{i,t,s} - \sum_{z \in \mathcal{C}} Y_{i,z,t,s} \quad \forall i \in \mathcal{L}, t \in \mathcal{T}, s \in \mathcal{S} \quad (IL_{i,0,s} = 0)
+    \end{equation}
+
+    \item \textbf{Balance de Inventario e Inventario Faltante en Centros de Demanda:}
+    \begin{equation}
+      IC_{z,t,s} = IC_{z,t-1,s} + \sum_{i \in \mathcal{L}} Y_{i,z,t,s} - (D_{z,t,s} - F_{z,t,s}) \quad \forall z \in \mathcal{C}, t \in \mathcal{T}, s \in \mathcal{S} \quad (IC_{z,0,s} = 0)
+    \end{equation}
+
+    \item \textbf{Límite de Faltante:}
+    La demanda no satisfecha no puede exceder el valor de la demanda real:
+    \begin{equation}
+      F_{z,t,s} \le D_{z,t,s} \quad \forall z \in \mathcal{C}, t \in \mathcal{T}, s \in \mathcal{S}
+    \end{equation}
+
+    \item \textbf{Naturaleza de las Variables:}
+    \begin{equation}
+      X_{i,t,s}, Y_{i,z,t,s}, IL_{i,t,s}, IC_{z,t,s}, F_{z,t,s} \ge 0 \quad \forall i, z, t, s
+    \end{equation}
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA 2 ───────────────────────────────────────────────────────────────
+
+\newpage
+
+\end{document}
