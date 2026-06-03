@@ -1,0 +1,502 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples ──────────────────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox ───────────────────────────────────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definición: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Fórmulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Pauta Interrogación 2 (1er Semestre 2023)}
+\fancyhead[C]{}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[L]{\footnotesize Solución Oficial --- Transcripción en LaTeX}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{gopcyan} Solución Interrogación 2\par}
+  \vspace{0.4cm}
+  {\LARGE\bfseries Gestión de Operaciones\par}
+  \vspace{0.3cm}
+  {\large ICS3213 --- PUC Chile --- 1er Semestre 2023\par}
+  \vspace{1.2cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+
+  {\small Profesores:\par}
+  {\large\bfseries Martin Garcia \quad Alejandro Mac Cawley\par}
+  \vspace{0.3cm}
+  {\small Autores de Referencia de la Pauta:\par}
+  {\small\textbf{César Meneses \quad Fabián Ortega}\par}
+  \vspace{0.4cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{1cm}
+
+  \vfill
+\end{titlepage}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% EJERCICIOS
+% ════════════════════════════════════════════════════════════════════════════
+\section{Parte Desarrollo}
+
+\subsection*{Pregunta A: Gestión de Inventarios y Distribución de Demanda (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se analiza el modelo del vendedor de periódicos (Newsvendor) ante una demanda distribuida normalmente o de manera uniforme discreta, comparando la cantidad óptima resultante y su justificación variacional.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Costo de quedarse corto: $C_u = \text{Precio} - \text{Costo}$.
+      \item Costo de tener de más: $C_o = \text{Costo} - \text{Valor de Recuperación}$.
+      \item Razón Crítica: $CR = \frac{C_u}{C_u + C_o}$.
+      \item Demanda Normal: $Q^* = \mu + Z \cdot \sigma$.
+      \item Demanda Uniforme: $F(Q^*) \ge CR$.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  La nueva tienda de zapatos cerca del campus debe determinar la cantidad de zapatillas que desea comprar para la temporada navideña. Los zapatos tienen un precio alto y se importan de EE.UU. El costo unitario de cada par de zapatillas es de $U\$60$ y los venderán a $U\$300$. Cualquier par que no venda al final de la temporada lo compra un outlet por $U\$47$ el par.
+
+  \begin{itemize}
+    \item[\textbf{i.}] (8 puntos) Si la venta sigue una distribución normal con media 300 y desviación estándar de 40 pares. ¿Cuál sería la cantidad óptima de pares de zapatillas que debe comprar la tienda para la temporada?
+    \item[\textbf{ii.}] (8 puntos) Un análisis detallado de los datos históricos de ventas muestra que la cantidad de zapatillas es igualmente probable para todos los valores entre 100 y 500 pares (inclusive) durante la estación. Con esa información, ¿cuántos pares de zapatillas debe comprar la tienda? (*HINT: La distribución de la demanda es uniforme discreta*).
+    \item[\textbf{iii.}] (4 puntos) Si bien la demanda esperada en las preguntas (i) y (ii) es la misma ($300$ pares), las cantidades óptimas son distintas. ¿A qué se debe esta diferencia conceptualmente?
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Cantidad Óptima con Demanda Normal}
+  Determinamos los costos de subestimar ($C_u$) y sobreestimar ($C_o$) la demanda:
+  \begin{align*}
+    C_u &= \text{Precio} - \text{Costo} = 300 - 60 = U\$240 \\
+    C_o &= \text{Costo} - \text{Valor de Recuperación} = 60 - 47 = U\$13
+  \end{align*}
+  Calculamos la Razón Crítica ($CR$):
+  \begin{equation*}
+    CR = \frac{C_u}{C_u + C_o} = \frac{240}{240 + 13} = \frac{240}{253} \approx 0.9486 \quad (94.86\%)
+  \end{equation*}
+
+  Buscamos en la tabla normal estándar el valor $Z$ tal que $\Phi(Z) = 0.9486$:
+  \begin{equation*}
+    Z \approx 1.645
+  \end{equation*}
+  Despejamos la cantidad óptima $Q^*$:
+  \begin{equation*}
+    Q^* = \mu + Z \cdot \sigma = 300 + 1.645 \cdot 40 = 365.8 \text{ pares}
+  \end{equation*}
+  La tienda debe comprar \textbf{366 pares} de zapatillas.
+
+  \subsubsection*{ii. Cantidad Óptima con Demanda Uniforme Discreta}
+  La demanda se distribuye de manera uniforme discreta sobre el rango $[100, 500]$, conteniendo $N = 500 - 100 + 1 = 401$ posibles valores de demanda.
+  
+  Buscamos $Q^*$ tal que $F(Q^*) \ge 0.9486$. Usando la aproximación de la distribución uniforme continua sobre $[100, 500]$:
+  \begin{equation*}
+    F(Q^*) = \frac{Q^* - 100}{500 - 100} = 0.9486
+  \end{equation*}
+  \begin{equation*}
+    Q^* - 100 = 0.9486 \cdot 400 \implies Q^* = 100 + 379.44 = 479.44 \text{ pares}
+  \end{equation*}
+  Evaluando discretamente en la frontera acumulada superior:
+  \begin{equation*}
+    P(X > Q^*) < 1 - 0.9486 = 0.0514 \implies \text{valores} < 401 \cdot 0.0514 \approx 20.6 \text{ valores}
+  \end{equation*}
+  Por lo que la cantidad óptima discreta es $500 - 20 = 480$ pares.
+  Se consideran correctos tanto \textbf{479} como \textbf{480 pares}.
+
+  \subsubsection*{iii. Explicación Conceptual de la Diferencia}
+  Aunque la demanda promedio es la misma ($\mu = 300$ pares) en ambos modelos, la \textbf{variabilidad} (dispersión) de la demanda es sumamente diferente:
+  \begin{itemize}
+    \item La distribución normal concentra su probabilidad en torno a la media ($\sigma = 40$).
+    \item La distribución uniforme tiene una desviación estándar mucho mayor ($\sigma \approx 115.47$), distribuyendo la probabilidad equitativamente en todo el rango $[100, 500]$.
+    \item Como el costo de quedarse corto ($C_u = \$240$) es muchísimo mayor que el costo de quedarse con stock sobrante ($C_o = \$13$), el modelo incentiva a protegerse contra la escasez adquiriendo mayor inventario. Al aumentar la dispersión de la demanda, se expande la probabilidad en los extremos altos de demanda, requiriendo un inventario mayor ($480$ frente a $366$) para alcanzar el mismo nivel de servicio óptimo.
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+\subsection*{Pregunta B: Planificación de Proyectos y Crashing (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se evalúan contratos de proyectos PERT/CPM con bonos y penalidades dinámicos, incluyendo la conveniencia de contratar una tecnología reductora de tiempo y variabilidad en la ruta crítica, finalizando con la modelación de crashing matemático.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Valor esperado: $VE = \text{Bono} \cdot P(T \le X) - \text{Penalidad} \cdot P(T > X)$.
+      \item En crashing con tecnología, recalcular la varianza sumando la diferencia de varianzas de la actividad modificada: $Var' = Var_{\text{orig}} + (\sigma_{\text{nue}}^2 - \sigma_{\text{orig}}^2)$.
+      \item Modelar el crashing como un problema de optimización lineal donde se determinan los tiempos de inicio de nodos $x_i$ y los días de acortamiento $r_{ij}$.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted se encuentra a cargo de un proyecto de infraestructura y ha determinado que la fecha esperada de la ruta crítica es de 180 días con una desviación estándar de 12 días. Su mandante le ofrece un bono de $U\$2$ millones si termina en o antes de 165 días y una penalización de $U\$1$ millón si termina después de los 165 días.
+
+  \begin{itemize}
+    \item[\textbf{i.}] (3 ptos) ¿Aceptaría usted el contrato? Si la penalización no es transable, ¿qué monto de bono lo deja indiferente?
+    \item[\textbf{ii.}] (4 ptos) Si se mantienen los montos de bono y penalización originales, ¿qué fecha lo deja indiferente?
+    \item[\textbf{iii.}] (6 ptos) Usted tiene la posibilidad de implementar tecnología en una de las actividades de la ruta crítica. La actividad en cuestión tiene un tiempo esperado de 20 días, con desviación estándar de 3. La tecnología disminuye el tiempo esperado de finalización en 10 días, sin cambiar la ruta crítica, y reduce la desviación estándar de la actividad en 1.5 días. Si la tecnología cuesta $U\$10,000$, ¿la contrataría?
+    \item[\textbf{iv.}] (7 ptos) Si ahora usted puede implementar otra tecnología que le permite reducir el tiempo esperado de cada actividad $(i,j)$ del proyecto en un máximo de $M_{ij}$ días con un costo lineal $C_{ij}$ por día. Para la situación inicial presente el modelo de optimización matemática que minimice el costo de reducción y maximice el valor esperado del contrato.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Evaluación de Aceptación del Contrato}
+  \begin{itemize}
+    \item Parámetros: $\mu = 180$ días, $\sigma = 12$ días. Umbral $T = 165$.
+    \item Calculamos el valor $Z$:
+      \begin{equation*}
+        Z = \frac{165 - 180}{12} = -1.25
+      \end{equation*}
+    \item Probabilidades acumuladas de la distribución normal estándar:
+      \begin{align*}
+        P(T \le 165) &= 1 - \Phi(1.25) = 1 - 0.8944 = 0.1056 \\
+        P(T > 165) &= 0.8944
+      \end{align*}
+    \item Calculamos el Valor Esperado ($VE$):
+      \begin{equation*}
+        VE = 2 \cdot (0.1056) - 1 \cdot (0.8944) = 0.2112 - 0.8944 = -U\$0.6832 \text{ millones}
+      \end{equation*}
+      Dado que el valor esperado es negativo ($-\$683,200$), \textbf{no se acepta} el contrato.
+    \item Buscando el bono $B$ que hace $VE = 0$:
+      \begin{equation*}
+        B \cdot (0.1056) - 1 \cdot (0.8944) = 0 \implies B = \frac{0.8944}{0.1056} \approx \mathbf{8.47 \text{ millones}}
+      \end{equation*}
+      El bono mínimo que genera indiferencia es de \textbf{U\$8.47 millones}.
+  \end{itemize}
+
+  \subsubsection*{ii. Fecha de Indiferencia (Bono y Penalización Originales)}
+  Buscamos la probabilidad $p = P(T \le X)$ que haga $VE = 0$:
+  \begin{equation*}
+    2 p - 1(1 - p) = 0 \implies 3 p = 1 \implies p = 0.3333
+  \end{equation*}
+  El valor de $Z$ para una probabilidad acumulada de $0.3333$ es $Z \approx -0.43$.
+  \begin{equation*}
+    X = \mu + Z \cdot \sigma = 180 - 0.43 \cdot 12 = \mathbf{174.84 \text{ días}}
+  \end{equation*}
+  La fecha de entrega que genera indiferencia es de \textbf{174.84 días}.
+
+  \subsubsection*{iii. Evaluación de la Incorporación de Tecnología}
+  La tecnología acorta el proyecto en 10 días (media pasa a $\mu' = 170$ días).
+  La desviación de la actividad seleccionada se reduce de 3 a 1.5. 
+  La nueva varianza del proyecto es:
+  \begin{equation*}
+    Var' = Var_{\text{original}} + (\sigma_{\text{nueva}}^2 - \sigma_{\text{original}}^2) = 12^2 + (1.5^2 - 3^2) = 144 - 6.75 = 137.25
+  \end{equation*}
+  Para alineación con la pauta oficial (que resta directamente el desvío simplificado $12^2 - 1.5^2 = 141.75 \implies \sigma' = 11.91$):
+  \begin{equation*}
+    Z' = \frac{165 - 170}{11.91} = -0.42
+  \end{equation*}
+  \begin{align*}
+    P(T \le 165) &= 1 - \Phi(0.42) = 1 - 0.6628 = 0.3372 \\
+    P(T > 165) &= 0.6628
+  \end{align*}
+  Calculamos el nuevo Valor Esperado del contrato ($VE'$):
+  \begin{equation*}
+    VE' = 2 \cdot 0.3372 - 1 \cdot 0.6628 = 0.6744 - 0.6628 = 0.0116 \text{ millones} = U\$11,600
+  \end{equation*}
+  Dado que el aumento neto en el beneficio esperado del contrato ($U\$11,600$) supera el costo de la tecnología ($U\$10,000$), la decisión óptima es \textbf{sí contratar la tecnología}.
+
+  \subsubsection*{iv. Modelo de Programación Matemática para Crashing}
+  \textbf{Variables de Decisión:}
+  \begin{itemize}
+    \item $x_i$: Tiempo de finalización (ocurrencia) del nodo del evento $i$ ($i = 1 \dots k$, donde $k$ representa el fin del proyecto).
+    \item $r_{ij} \ge 0$: Cantidad de días reducidos en la actividad que conecta el nodo $i$ con el nodo $j$.
+  \end{itemize}
+
+  \textbf{Función Objetivo:}
+  \begin{equation*}
+    \max \quad 2 \cdot \left[ 1 - \Phi\left( \frac{165 - x_k}{12} \right) \right] - 1 \cdot \Phi\left( \frac{165 - x_k}{12} \right) - \sum_{(i,j)} C_{ij} \cdot r_{ij}
+  \end{equation*}
+
+  \textbf{Sujeto a:}
+  \begin{itemize}
+    \item Duración de actividades desfasadas por crashing:
+      \begin{equation}
+        x_j - x_i \ge t_{ij} - r_{ij} \quad \forall (i,j) \in \text{Actividades}
+      \end{equation}
+    \item Límites físicos de reducción:
+      \begin{equation}
+        r_{ij} \le M_{ij} \quad \forall (i,j) \in \text{Actividades}
+      \end{equation}
+    \item No negatividad:
+      \begin{equation}
+        x_i \ge 0, \quad r_{ij} \ge 0 \quad \forall i, j
+      \end{equation}
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+\subsection*{Pregunta C: Algoritmo de Wagner-Whitin y MRP (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se solicita el plan de lotificación óptimo para demandas deterministas variables mediante Wagner-Whitin (Programación Dinámica), y el posterior desarrollo de explosión de materiales MRP de componentes dependientes, considerando stock de seguridad o lote mínimo.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item En Wagner-Whitin, resolver el algoritmo recursivo $f(t) = \min_{1 \le j \le t} \{ f(j-1) + S + \sum_{k=j}^t H \cdot (k-j) \cdot D_k \}$.
+      \item En las matrices MRP, calcular los requerimientos brutos desfasando y multiplicando por los coeficientes del BOM.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted es contratado por una empresa de transformación de furgones a híbridos. Debe realizar un plan de fabricación de kits híbridos de tipo A para un horizonte de 5 meses. El tiempo de transformación es de 1 mes. Los requerimientos de entrega de los kits terminados son:
+  \begin{itemize}
+    \item Ene-24: 5 \quad Feb-24: 12 \quad Mar-24: 3 \quad Abr-24: 15 \quad May-24: 12
+  \end{itemize}
+
+  Costos del Kit A:
+  \begin{itemize}
+    \item Costo unitario de fabricación = $\$1,000$ \quad Costo de setup = $\$5,000$
+    \item Costo de inventario mensual = $\$150$ por unidad/mes
+    \item Lead Time de ensamble final del Kit A = 2 meses
+  \end{itemize}
+
+  BOM del Kit A:
+  \begin{itemize}
+    \item Componente B: Cantidad = 2, LT = 1
+    \item Componente C: Cantidad = 1, LT = 2
+    \item Componente D: Cantidad = 4 en el sub-ensamblado B, Cantidad = 5 en sub-ensamblado C, LT = 1 (Lote mínimo = 100).
+  \end{itemize}
+
+  Se solicita:
+  \begin{itemize}
+    \item[\textbf{a)}] (10 Ptos) Usando el algoritmo de Wagner-Whitin, determine en qué mes o meses debe iniciar la fabricación de los kits A y en qué cantidades.
+    \item[\textbf{b)}] (6 Ptos) Realice las tablas de MRP para los componentes B, C y D.
+    \item[\textbf{c)}] (4 Ptos) ¿Cuándo debería poner el primer pedido y por qué componentes?
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{a) Algoritmo de Wagner-Whitin para Kit A}
+  Demanda $D = [5, 12, 3, 15, 12]$. Setup $S = 5000$, Almacenamiento $H = 150$/unidad.
+  \begin{itemize}
+    \item $f(0) = 0$
+    \item \textbf{Mes 1 (Ene):}
+      \begin{equation*}
+        f(1) = 5000 + f(0) = \mathbf{5000}
+      \end{equation*}
+    \item \textbf{Mes 2 (Feb):}
+      \begin{align*}
+        \text{Producir en 1 para (1,2): } &5000 + 150(12) + f(0) = \mathbf{6800} \\
+        \text{Producir en 2 para (2): } &5000 + f(1) = 10000
+      \end{align*}
+      El costo óptimo acumulado es $f(2) = 6800$ (producir lote de 17 en Mes 1).
+    \item \textbf{Mes 3 (Mar):}
+      \begin{align*}
+        \text{Producir en 1 para (1,2,3): } &5000 + 150(12) + 300(3) + f(0) = \mathbf{7700} \\
+        \text{Producir en 2 para (2,3): } &f(1) + 5000 + 150(3) = 10450 \\
+        \text{Producir en 3 para (3): } &f(2) + 5000 = 11800
+      \end{align*}
+      El costo óptimo acumulado es $f(3) = 7700$ (producir lote de 20 en Mes 1).
+    \item \textbf{Mes 4 (Abr):}
+      \begin{align*}
+        \text{Producir en 1 para (1..4): } &7700 + 450(15) = 14450 \\
+        \text{Producir en 4 para (4): } &f(3) + 5000 = \mathbf{12700}
+      \end{align*}
+      El costo óptimo acumulado es $f(4) = 12700$ (producir en Mes 4).
+    \item \textbf{Mes 5 (May):}
+      \begin{align*}
+        \text{Producir en 4 para (4,5): } &f(3) + 5000 + 150(12) = \mathbf{14500} \\
+        \text{Producir en 5 para (5): } &f(4) + 5000 = 17700
+      \end{align*}
+      El costo óptimo acumulado es $f(5) = 14500$ (producir en Mes 4).
+  \end{itemize}
+
+  \paragraph{Programa de Ensamble y Lanzamiento (LT = 2):}
+  \begin{itemize}
+    \item Lote 1: 20 unidades para Ene, Feb y Mar $\implies$ \textbf{Lanzar 20 en Nov-23}.
+    \item Lote 2: 27 unidades para Abr y May $\implies$ \textbf{Lanzar 27 en Feb-24}.
+  \end{itemize}
+
+  \subsubsection*{b) Tablas de MRP de los Componentes}
+  Utilizando $PORelease_A = [20 \text{ en Nov-23}, 27 \text{ en Feb-24}]$.
+
+  \paragraph{1. Componente B (LT = 1, L4L, Coeficiente = 2, OH = 10)}
+  $GR_B = 2 \cdot PORelease_A = [40 \text{ en Nov-23}, 54 \text{ en Feb-24}]$.
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Mes} & \textbf{Sep-23} & \textbf{Oct-23} & \textbf{Nov-23} & \textbf{Dic-23} & \textbf{Ene-24} & \textbf{Feb-24} \\
+    \midrule
+    \textbf{GR} & 0 & 0 & 40 & 0 & 0 & 54 \\
+    \textbf{OH} & 10 & 10 & 0 & 0 & 0 & 0 \\
+    \textbf{POR} & 0 & 0 & 30 & 0 & 0 & 54 \\
+    \textbf{PORelease} & 0 & 30 & 0 & 0 & 54 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{2. Componente C (LT = 2, L4L, Coeficiente = 1, OH = 5)}
+  $GR_C = 1 \cdot PORelease_A = [20 \text{ en Nov-23}, 27 \text{ en Feb-24}]$.
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Mes} & \textbf{Sep-23} & \textbf{Oct-23} & \textbf{Nov-23} & \textbf{Dic-23} & \textbf{Ene-24} & \textbf{Feb-24} \\
+    \midrule
+    \textbf{GR} & 0 & 0 & 20 & 0 & 0 & 27 \\
+    \textbf{OH} & 5 & 5 & 0 & 0 & 0 & 0 \\
+    \textbf{POR} & 0 & 0 & 15 & 0 & 0 & 27 \\
+    \textbf{PORelease} & 15 & 0 & 0 & 27 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{3. Componente D (LT = 1, Lote Mín = 100, $GR_D = 4 \cdot PORelease_B + 5 \cdot PORelease_C$, OH = 85)}
+  \begin{itemize}
+    \item Sep-23: $5 \cdot PORelease_C(\text{Sep-23}) = 5 \cdot 15 = 75$ unidades.
+    \item Oct-23: $4 \cdot PORelease_B(\text{Oct-23}) = 4 \cdot 30 = 120$ unidades.
+    \item Dic-23: $5 \cdot PORelease_C(\text{Dic-23}) = 5 \cdot 27 = 135$ unidades.
+    \item Ene-24: $4 \cdot PORelease_B(\text{Ene-24}) = 4 \cdot 54 = 216$ unidades.
+  \end{itemize}
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Mes} & \textbf{Sep-23} & \textbf{Oct-23} & \textbf{Nov-23} & \textbf{Dic-23} & \textbf{Ene-24} & \textbf{Feb-24} \\
+    \midrule
+    \textbf{GR} & 75 & 120 & 0 & 135 & 216 & 0 \\
+    \textbf{OH} & 10 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{POR} & 0 & 110 & 0 & 135 & 216 & 0 \\
+    \textbf{PORelease} & 110 & 0 & 135 & 216 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \subsubsection*{c) Lanzamiento del Primer Pedido}
+  El primer pedido debe emitirse en \textbf{Septiembre 2023} para el componente \textbf{D} por una cantidad de \textbf{110 unidades}.
+  \textbf{Justificación:} Para ensamblar el Kit A en Noviembre, el componente C requiere iniciarse en Septiembre (LT=2). C demanda a su vez insumo D, lo que consume el inventario disponible de D y obliga a emitir una orden de D en Septiembre (LT=1) para que esté disponible en Octubre y cubrir el posterior lanzamiento de B.
+
+\end{ejercicio}
+
+\end{document}

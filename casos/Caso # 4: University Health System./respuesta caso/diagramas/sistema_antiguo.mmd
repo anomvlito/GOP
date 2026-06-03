@@ -1,0 +1,16 @@
+flowchart TD
+    A([Llegada del paciente]) --> B[Sign-in: hoja numerada<br/>en recepcion - 2 min]
+    B --> C[Solicitud de ficha a<br/>Registros Medicos]
+    C --> D[Traslado fisico de la ficha<br/>8 a 9 min]
+    D --> E[Oficinista revisa ficha:<br/>labs, datos - 5 min]
+    E --> F[/Pila por orden de llegada/]
+    F --> G{{Cola: 1a espera<br/>promedio 23 min}}
+    G --> H[Enfermera: diagnostico<br/>10 min - VE A TODOS]
+    H -->|40% resuelto| Z([Alta])
+    H -->|60% derivado| I{{Cola: 2a espera<br/>+10 min}}
+    I --> J[Medico: tratamiento<br/>19.4 min - 3.1 pac/hr]
+    J --> Z
+    P([Pide medico especifico<br/>19% de los pacientes]) -.->|salta enfermeria<br/>espera 40 min| I
+    style H fill:#ffd6d6,stroke:#a00000,stroke-width:2px
+    style G fill:#fff5d2,stroke:#c86400
+    style I fill:#fff5d2,stroke:#c86400

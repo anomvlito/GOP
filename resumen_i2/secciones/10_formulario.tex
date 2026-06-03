@@ -1,0 +1,93 @@
+\section{Formulario de Referencia}
+
+\begin{multicols}{2}
+\small
+
+\textbf{\color{gopblue} PLANIFICACIÓN AGREGADA}
+\begin{align*}
+  \min &\textstyle\sum_t (c x_t + h I_t + f y_t)\\
+  I_{jt} &= I_{j,t-1} + x_{jt} - d_{jt}\\
+  \textstyle\sum_j a_{ij}x_{jt} &\le b_{it} + y_{it}
+\end{align*}
+Binaria activación: $x_{nt}\le M z_{nt}$\\
+Encendido: $a_{nt}\ge z_{nt}-z_{n,t-1}$
+
+\textbf{\color{gopblue} MRP}
+\begin{align*}
+  OH_t &= OH_{t-1} + \text{recep}_t - GR_t\\
+  NR_t &= GR_t - OH_{t-1} - \text{tránsito}_t\\
+  POR &\text{ desfasada } L \text{ períodos}
+\end{align*}
+Silver-Meal:
+\[
+  CT(k) = \frac{S + \sum_{t=1}^{k} h(t-1)D_t}{k}
+\]
+Parar cuando $CT(k)>CT(k-1)$.
+
+\textbf{\color{gopblue} PROYECTOS (CPM/PERT)}
+\begin{align*}
+  EF &= ES + t,\quad LS = LF - t\\
+  ES_j &= \max\{EF_{ij}\},\ LF_k = \min\{LS_{kj}\}\\
+  H &= LF - EF = LS - ES\\
+  t_e &= \tfrac{a+4m+b}{6},\quad \sigma = \tfrac{b-a}{6}\\
+  \sigma_T^2 &= \textstyle\sum_{i\in RC}\sigma_i^2,\quad z = \tfrac{t_0 - T}{\sigma_T}\\
+  \text{Slope} &= \tfrac{CC - NC}{NT - CT}
+\end{align*}
+$T \sim \mathcal{N}(\sum t_e,\ \sum\sigma^2)$ sobre RC.\\
+$IC = T \pm z_{\alpha/2}\,\sigma_T$\\
+$VE_{\text{bono}} = P(T\le t_1)\cdot X$
+
+\columnbreak
+
+\textbf{\color{gopblue} VARIABILIDAD --- COLAS}
+\begin{align*}
+  L &= \lambda W,\quad WIP = TH\cdot CT\\
+  c &= \sigma/t \quad (\text{BV} < 0{,}75 < \text{MV} < 1{,}33 < \text{AV})
+\end{align*}
+\textbf{M/M/1:}
+\begin{align*}
+  \rho &= \tfrac{\lambda}{\mu},\quad L = \tfrac{\rho}{1-\rho},\quad W = \tfrac{1}{\mu(1-\rho)}\\
+  L_q &= \tfrac{\rho^2}{1-\rho},\quad W_q = \tfrac{\rho}{\mu(1-\rho)}
+\end{align*}
+\textbf{G/G/1 (Kingman, VUT):}
+\[
+  CT_q = \left(\tfrac{c_a^2 + c_e^2}{2}\right)\left(\tfrac{\rho}{1-\rho}\right)t_e
+\]
+\textbf{M/M/c:} $\rho = \tfrac{\lambda}{c\mu}$,\ $L_q = \tfrac{\rho}{1-\rho}P(N > c)$\\
+\textbf{Fallas:} $A = \tfrac{m_f}{m_f+m_r}$,\ $t_e = \tfrac{t_0}{A}$\\
+$c_e^2 = c_0^2 + (1+c_r^2)A(1-A)\tfrac{m_r}{t_0}$\\
+\textbf{Setup:} $t_e = t_0 + \tfrac{t_s}{N_s}$\\
+\textbf{Propagación:} $c_s^2 = \rho^2 c_e^2 + (1-\rho^2)c_a^2$
+
+\textbf{\color{gopblue} BODEGAS / CD}
+\begin{align*}
+  Q &= A\cdot v \quad (\text{flujo})\\
+  d &= 111\sqrt{(x{-}a)^2 + (y{-}b)^2}\ \text{km}
+\end{align*}
+
+\textbf{\color{gopblue} OEE}
+\[
+  \text{OEE} = \text{Disp}\times\text{Rend}\times\text{Calidad}
+\]
+
+\textbf{\color{gopred} VALORES TABLA NORMAL}\\
+\begin{tabular}{@{}ll@{}}
+$z=0{,}64$ & $\Phi=0{,}739$\\
+$z=1{,}28$ & $\Phi=0{,}900$\\
+$z=1{,}645$ & $\Phi=0{,}950$\\
+$z=1{,}96$ & $\Phi=0{,}975$\\
+$z=2{,}326$ & $\Phi=0{,}990$\\
+\end{tabular}
+
+\end{multicols}
+
+\textbf{\color{goporange} TRAMPAS FRECUENTES}
+\begin{itemize}[leftmargin=1.4em, itemsep=0pt]
+  \item MRP: la orden (POR) se desfasa $L$ hacia atrás; el GR del hijo nace cuando el padre \textbf{libera}.
+  \item PERT: $\sigma_T^2$ suma SOLO sobre la ruta crítica.
+  \item Crashing: acortar la actividad crítica de \textbf{menor slope}; la RC puede cambiar.
+  \item Colas: cerca de $\rho=1$ la cola explota; nunca planificar al 100\%.
+  \item Buffer finito reduce TH; pooling reduce variabilidad.
+\end{itemize}
+
+% ════════════════════════════════════════════════════════════════════════════

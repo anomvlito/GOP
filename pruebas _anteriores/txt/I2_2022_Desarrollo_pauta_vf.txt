@@ -1,0 +1,951 @@
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+Pontificia Universidad Católica de Chile
+Escuela de Ingeniería
+Departamento de Ingeniería Industrial y de Sistemas
+
+Interrogación 2
+Enunciados
+ICS 3213 Gestión de Operaciones
+Sección 1 y Sección 2 – 1er semestre 2022
+Prof. Patricio Gahona
+Prof. Alejandro Mac Cawley
+Instrucciones:
+•
+
+Responder en letra legible, en lápiz pasta o bolígrafo y poner nombre a todas las hojas.
+
+•
+
+No debe des corchetear la prueba y responda en el espacio asignado.
+
+•
+
+Esta sección de la prueba tiene 60 puntos, dura 70 minutos y consta de 2 secciones.
+
+•
+
+Se leerá la prueba al comienzo de clases y después se permitirán preguntas en voz alta. Posteriormente
+en la mitad de la prueba se volverá a permitir preguntas en voz alta. No se permitirán preguntas fuera de
+estos intervalos. Si su duda persiste indique el supuesto y continúe.
+
+•
+
+Al final de la prueba los alumnos deberán subir su prueba a CANVAS. Dispondrán de 15 minutos para
+escanear pruebas hoja por hoja y subirlas. Al final de subir la prueba deberán dejarla en el mismo
+puesto. Si por alguna razón hay un problema al subir la prueba, avisen al profesor/ayudante y dejen su
+prueba.
+
+•
+
+Este curso adscribe el Código de Honor establecido por la Escuela de Ingeniería el que es vinculante.
+Todo trabajo evaluado en este curso debe ser propio. En caso de que exista colaboración permitida con
+otros estudiantes, el trabajo deberá referenciar y atribuir correctamente dicha contribución a quien
+corresponda. Como estudiante es su deber conocer la versión en línea del Código de Honor
+(http://ing.puc.cl/codigodehonor).
+
+¡Muy Buena Suerte!
+
+Página 1 de 9
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+PARTE I (20 Puntos): Responda UNA de las siguientes DOS preguntas de ejercicio.
+a) Usted debe decidir en qué lugar localizar su fábrica productiva y después de un análisis exhaustivo ha llegado a la
+conclusión de que sólo 2 lugares se ajustan a sus necesidades. Los dos lugares difieren en sus costos fijos y sus costos
+variables anuales, asociados a el trasporte por unidad. A continuación, se detallan los costos fijos y variables de cada
+ubicación:
+LUGAR 1: Costo Fijo: $10.000 Costo Variable: $100
+LUGAR 2: Costo Fijo: $23.000 Costo Variable: $60
+i. (5 ptos) Elabore un gráfico de punto de equilibrio y señale entre qué niveles productivos de hace conveniente cada
+lugar.
+ii. (7 ptos) Si en el año 1 la demanda es de 100 unidades y se espera que en 10 años llegue hasta 800 unidades, de forma
+lineal. ¿Cuál debería ser su decisión de ubicación? Muestre todos sus cálculos.
+iii. (8 ptos) Usted ha encargado un estudio de mercado, el cual le entrega un pronóstico de ventas. El estudio entrega un
+pronóstico de ventas para los primero 5 años de Q(T)=100T para T=1…5 y de Q(T)=350 + 30T para T=5…10. Con
+esta información ¿cambia su decisión anterior? Muestre todos sus cálculos.
+b) Usted se encuentra a cargo de un proyecto que tiene una fecha estimada de término de 110 semanas y con una
+desviación standard de 8 semanas. Actualmente, se encuentra negociando el contrato de ejecución con la contraparte y
+están actualmente en el proceso de definir los incentivos y penalizaciones.
+i. (5 ptos) Su contraparte le ofrece una primera OPCIÓN 1: Un bono de $200 si terminas antes de 105 semanas y una
+penalización de $80 si terminas después de esa fecha. ¿Acepta usted esta opción?
+ii. (7 ptos) Ahora su contraparte de entrega la OPCIÓN 2: Un bono de $150 por terminar antes de 108 y una penalización
+de $122 si terminas después de 111 semanas. ¿Es esta opción aceptable? ¿Prefiere esta opción a la OPCIÖN 1?
+iii. (8 ptos) Si en la OPCIÓN 1 usted solo puede negociar la fecha en la cual se ejecuta el bono o la penalización y en la
+OPCIÖN 2 usted solo puede negociar el monto del bono. Pero sólo puede cambiar uno (fecha en OP 1 o Bono en OP2)
+¿Qué fecha o monto de bono lo deja indiferente entre la OPCIÓN 1 y la OPCIÓN 2?
+Pregunta a)
+i.
+Se obtiene el punto de equilibrio, el cual corresponde a 325 unidades y se grafica.
+ii.
+Se obtiene las diferencias entre las áreas
+Lugar 1 vs Lugar 2 ((29.000-20.000)*(325-100)/2) = 1.012.500
+Lugar 2 vs Lugar 1 ((90.000-71.000)*(800-325)/2)= 4.512.500
+El lugar 2 es preferido.
+iii.
+
+Debemos determinarlas cantidades para cada tiempo T=1 es 100 y T=5 es 500. Ese tramo es lineal por ende se
+calcula el costo para cada lugar transformando las cantidades en costos.
+Tramo1
+Q = 100 L1 Costo = 20.000 L2 costo = 29.000
+Q= 500 L1 Costo = 60.000 L2 costo = 53.000
+Costo L1 tramo 1 ((60.000-20.000)*(5-1))/2+20.000*4=160.000
+Costo L2 Tramo 1 ((53.000-29.000)*(5-1))/2+29.000*4=164.000
+Tramo 2 Tiempo T=5 Q=500 y para T=10 Q = 650
+Q= 500 L1 Costo = 60.000 L2 costo = 53.000
+Q= 650 L1 Costo = 75.000 L2 Costo = 62.000
+Costo L1 tramo 2 ((75.000-60.000)*(10-5))/2+60.000*5=337500
+Costo L2 Tramo 1 ((62.000 - 53.000)*(10-5))/2+53.000*5=287.500
+Costo en tiempo L1 160.000+337.500=497.500
+Costo en tiempo L2 = 164.000 + 287.500 = 451.500
+A pesar del cambio el Lugar 2 sigue siendo preferido.
+
+Página 2 de 9
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+Pregunta b
+i.
+Determinamos la probabilidad de terminar en o antes de 105 semanas (105-110)/8=-0.65 En la tabla de z corresponde a
+73.4% por ende la probabilidad de terminar antes es de (1-0.734)=26.6%.
+El valor esperado del bono es de 200*(1-0.734) = $53.2
+El valor esperado de la penalización es 80*0.734 = $58.72
+La penalización es mayor al bono… no es un buen contrato.
+ii.
+Se calcula la probabilidad de terminar antes (108-110)/8=-0.25 en tabla z corresponde a 59.87% por ende el valor
+esperado del bono es de 150*(1-0.5987)=60.195
+La penalización la probabilidad es: (111-110)/8=0.125 en tabla z corresponde a 54.98% por ende el valor de la
+penalización es 122*(1-0.5498)=54.92
+Por ende este contrato genera un beneficio esperado de 5.275 y por ende se acepta.
+iii
+Debo cambiar el beneficio generado por ende el z debe ser 200*x– 80(1-x)=5,275 x=0.305 en tabla z corresponde a -0.51
+por ende -0.51=(x-110)/8 esto es igual a 105.92
+
+Página 3 de 9
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+PARTE II. Responda las siguientes dos preguntas.
+P1 (20 puntos) La empresa Serious 1 es una empresa que se dedicada a fabricar bicicletas eléctricas premium. Ha
+lanzado un nuevo modelo el cual se ha vendido del modo de preventa, por lo cual tiene comprometidas unidades a
+entregar para las siguientes semanas como se muestra en la tabla adjunta. Serious 1 se enfoca principalmente en el
+diseño de las bicicletas y en el ensamble final de las unidades, por ello la capacidad máxima de ensamble es de 27
+unidades y tarda una semana. Para el ensamble final de las unidades se rige por el BOM adjunto, donde todas las partes
+deben ser solicitadas a proveedores externos quienes le fabrican las partes de forma exclusiva. La parte C tiene un
+setup por lo que la empresa ha estimado una producción mínima de 75 piezas por semana.
+Pieza
+Alpha
+B
+C
+D
+
+Alpha
+(1)
+
+B
+(1)
+
+C
+(2)
+
+C
+(1)
+
+Inventario (OH)
+10
+28
+137
+100
+
+Lead Time
+1
+2
+3
+1
+
+D
+(2)
+
+Si la demanda del producto es de 50 unidades en la semana 4, 50 unidades en la semana 7 y 80 unidades en la semana 9.
+i.
+Realice las tablas de MRP correspondientes para cumplir con la demanda determinada.
+ii.
+Si usted sabe que la cantidad mínima de producción y costos fijos de setup o pedido están dado por 𝐿𝑚𝑖 y 𝐶𝑓𝑖
+siendo i el producto final o pieza i respectivamente. Considere 𝐶𝑃𝑖 e 𝐶𝐼𝑖 como los costos de producción unitario y
+costo de inventario por semana respectivamente, siendo i cada una de las partes. Plantee un modelo de
+programación matemática que optimice el plan de producción.
+
+Parte
+
+Alpha
+
+Semana
+GR
+OH
+POR
+
+0
+
+1
+
+2
+
+3
+
+10
+
+10
+
+10
+13
+
+Parte
+
+B
+
+Semana
+GR
+OH
+POR
+
+0
+
+1
+
+28
+
+28
+12
+
+Parte
+
+D
+
+Semana
+GR
+OH
+POR
+
+0
+100
+
+Parte
+
+C
+
+Semana
+GR
+OH
+POR
+
+0
+137
+75
+
+1
+24
+76
+
+1
+24
+113
+75
+
+5
+
+6
+
+23
+27
+
+4
+50
+0
+22
+
+22
+27
+
+49
+27
+
+2
+13
+15
+22
+
+3
+27
+0
+27
+
+4
+22
+0
+27
+
+5
+27
+0
+27
+
+2
+44
+32
+22
+
+3
+54
+
+4
+54
+
+5
+54
+
+54
+
+54
+
+54
+
+2
+57
+56
+75
+
+3
+81
+
+4
+76
+
+5
+81
+
+92
+
+Página 4 de 9
+
+7
+50
+26
+27
+
+8
+
+9
+80
+0
+
+53
+27
+
+6
+27
+0
+27
+
+7
+27
+0
+
+8
+27
+0
+
+9
+
+6
+54
+
+7
+
+8
+
+9
+
+6
+81
+
+7
+27
+
+8
+27
+
+9
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+Modelo
+
+𝑀𝑖𝑛 ∑ 𝐶𝑃𝑖 ∗ 𝑃𝑂𝑅𝑖,𝑡 + ∑ 𝐶𝐼𝑖 ∗ 𝐼𝑖,𝑡 + ∑ 𝐶𝑓𝑖 ∗ 𝐵𝑖,𝑡
+
+Sujeto a:
+𝐺𝑅𝐴𝑙𝑝ℎ𝑎,𝑡 ≥ 𝐴𝑙𝑝ℎ𝑎𝑡 ∀𝑡
+27 ≥ 𝑃𝑂𝑅𝐴𝑙𝑝ℎ𝑎,𝑡 ∀𝑡
+𝐼𝐴𝑙𝑝ℎ𝑎,𝑡+1 = 𝐼𝐴𝑙𝑝ℎ𝑎,𝑡 + 𝑃𝑂𝑅𝐴𝑙𝑝ℎ𝑎,𝑡−1 − 𝐺𝑅𝐴𝑙𝑝ℎ𝑎,𝑡 ∀𝑡{1. . 𝑇}
+𝑃𝑂𝑅𝑗,𝑡 ∗ 𝑅𝑗,𝑘 = 𝐺𝑅𝑘,𝑡 ∀𝑗, 𝑘 ∈ 𝐵𝑂𝑀, 𝑡
+𝐼𝑘,𝑡+1 = 𝐼𝑘,𝑡 + 𝑃𝑂𝑅𝑘,𝑡−𝐿𝑘 − 𝐺𝑅𝑘,𝑡 ∀𝑘 ∈ 𝐵𝑂𝑀, 𝑡{𝐿𝑘 . . 𝑇}
+𝐼𝑗,0 = 𝑂𝐻𝑖 ∀𝑖
+𝑀 ∗ 𝐵𝑖,𝑡 ≥ 𝑃𝑂𝑅𝑖,𝑡 ≥ 𝐿𝑚𝑖 ∗ 𝐵𝑖,𝑡 ∀𝑖, 𝑡
+𝐼𝑗,𝑡 , 𝐺𝑅𝑗,𝑡 , 𝑃𝑂𝑅𝑗,𝑡 ≥ 0; 𝐵𝑖 ∈ {0,1}
+
+Página 5 de 9
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+P2 (20 puntos) Usted está actualmente pensando en colocar un emprendimiento de comida y debe determinar la
+capacidad de atención que desea implementar. Para llevar esto a cabo, usted determinar el costo total de espera CE(Ws)
+de los clientes en el sistema, el cual depende del tiempo total (Ws) que éstos esperan en el sistema, la ecuación que
+describe este costo es CE(Ws) = 10+1000Ws. Si la tasa de llegada de los clientes al puesto es de 25 clientes por hora con
+un coeficiente de variación de 1.
+La capacidad de atender a los clientes puede ser ajustada linealmente y tiene un valor de 10 $ por cliente atendido por
+hora. Es decir, si deseo atender 10 clientes por hora, el servicio tiene un costo de $100. El coeficiente de variación de la
+atención es de 1.
+a) (12 puntos) Con esta información determine la capacidad óptima de atención que debe implementar en su
+emprendimiento. Muestre todos sus cálculos. HINT: un sistema con coeficiente de variación de arribo y servicio
+de 1 se comporta como un M/M/1
+b) (8 puntos) Usted ya ha comprado la capacidad productiva que determinó en a) y se olvidó que debía colocar una
+caja antes que los clientes fueran atendidos. Si la caja tiene una capacidad de atender 50 cliente por hora y un
+coeficiente de variación de 2. ¿Cómo cambia el tiempo de espera desde que el cliente sale de la caja y es atendido
+en el mesón? ¿Aumenta o disminuye y por qué sucede esto?
+a)
+Se utiliza la ecuación de MM1 dado que CV es igual a 1
+𝑀𝑎𝑥 10 + 1000𝑊𝑠 + 10𝜇
+S/A
+1
+𝑊𝑠 =
+𝜇−𝜆
+Por ende, conocemos λ=25 y podemos sustituir 𝑊𝑞 en la función objetivo, quedando:
+𝑀𝑎𝑥 10 +
+
+1000
++ 10𝜇
+(𝜇 − 25)
+
+Derivamos esta función con respecto a µ
+−
+
+1000
++ 10 = 0
+(𝜇 − 25)2
+
+Por ende despejamos y 𝜇 = 35
+b)
+Acá debemos determinar cómo se propaga la variabilidad y ahora utilizamos VUT.
+𝐶𝑠 2 ≈ 𝜌2 𝐶𝑒 2 + (1 − 𝜌)2 𝐶𝑎 2
+𝜌=
+
+25
+= 0.5
+50
+
+𝐶𝑠 2 ≈ 0.52 22 + (1 − 0.5)2 12 = 1.25
+𝜌=
+
+25
+= 0.714
+35
+
+1 + 1.25
+0.714
+1
+𝐶𝑇𝑞1 = (
+)(
+)
+= 0.08
+⏟
+⏟ 2
+⏟1 − 0.714 35
+𝑉
+
+𝑈
+
+Aumenta, ya que la variabilidad aumenta. De 0.713 hrs pasa a .08 hrs.
+
+Página 6 de 9
+
+𝑇
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+Página 7 de 9
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+Formulario
+
+Qw =
+
+2C 0 D
+Ch
+
+D
+Q
+S+ H
+Q
+2
+
+R = d  L + z  L
+
+Q* = d  (T + L) + z  (T + L) − I existente
+
+R = d *L
+
+Cx =
+
+CT = DC +
+
+d V
+V
+ix
+
+i
+
+i
+
+Cy =
+
+d V
+V
+iy
+
+i
+
+i
+
+Página 8 de 9
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+Tabla de distribución normal estándar
+z
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+1.7
+1.8
+1.9
+2.0
+2.1
+2.2
+2.3
+2.4
+2.5
+2.6
+2.7
+2.8
+2.9
+3.0
+3.1
+3.2
+3.3
+3.4
+
+0.00
+.5000
+.5398
+.5793
+.6179
+.6554
+.6915
+.7257
+.7580
+.7881
+.8159
+.8413
+.8643
+.8849
+.9032
+.9192
+.9332
+.9452
+.9554
+.9641
+.9713
+.9772
+.9821
+.9861
+.9893
+.9918
+.9938
+.9953
+.9965
+.9974
+.9981
+.9987
+.9990
+.9993
+.9995
+.9997
+
+.01
+.5040
+.5438
+.5832
+.6217
+.6591
+.6950
+.7291
+.7611
+.7910
+.8186
+.8438
+.8665
+.8869
+.9049
+.9207
+.9345
+.9463
+.9564
+.9649
+.9719
+.9778
+.9826
+.9864
+.9896
+.9920
+.9940
+.9955
+.9966
+.9975
+.9982
+.9987
+.9991
+.9993
+.9995
+.9997
+
+.02
+.5080
+.5478
+.5871
+.6255
+.6628
+.6985
+.7324
+.7642
+.7939
+.8212
+.8461
+.8686
+.8888
+.9066
+.9222
+.9357
+.9474
+.9573
+.9656
+.9726
+.9783
+.9830
+.9868
+.9898
+.9922
+.9941
+.9956
+.9967
+.9976
+.9982
+.9987
+.9991
+.9994
+.9995
+.9997
+
+.03
+.5120
+.5517
+.5910
+.6293
+.6664
+.7019
+.7357
+.7673
+.7967
+.8238
+.8485
+.8708
+.8907
+.9082
+.9236
+.9370
+.9484
+.9582
+.9664
+.9732
+.9788
+.9834
+.9871
+.9901
+.9925
+.9943
+.9957
+.9968
+.9977
+.9983
+.9988
+.9991
+.9994
+.9996
+.9997
+
+.04
+.5160
+.5557
+.5948
+.6331
+.6700
+.7054
+.7389
+.7704
+.7995
+.8264
+.8508
+.8729
+.8925
+.9099
+.9251
+.9382
+.9495
+.9591
+.9671
+.9738
+.9793
+.9838
+.9875
+.9904
+.9927
+.9945
+.9959
+.9969
+.9977
+.9984
+.9988
+.9992
+.9994
+.9996
+.9997
+
+.05
+.5199
+.5596
+.5987
+.6368
+.6736
+.7088
+.7422
+.7734
+.8023
+.8289
+.8531
+.8749
+.8944
+.9115
+.9265
+.9394
+.9505
+.9599
+.9678
+.9744
+.9798
+.9842
+.4878
+.9906
+.9929
+.9946
+.9960
+.9970
+.9978
+.9984
+.9989
+.9992
+.9994
+.9996
+.9997
+
+.06
+.5239
+.5636
+.6026
+.6406
+.6772
+.7123
+.7454
+.7764
+.8051
+.8315
+.8554
+.8770
+.8962
+.9131
+.9279
+.9406
+.9515
+.9608
+.9686
+.9750
+.9803
+.9846
+.9881
+.9909
+.9931
+.9948
+.9961
+.9971
+.9979
+.9985
+.9989
+.9992
+.9994
+.9996
+.9997
+
+Página 9 de 9
+
+.07
+.5279
+.5675
+.6064
+.6443
+.6808
+.7157
+.7486
+.7794
+.8078
+.8340
+.8577
+.8790
+.8980
+.9147
+.9292
+.9418
+.9525
+.9616
+.9693
+.9756
+.9808
+.9850
+.9884
+.9911
+.9932
+.9949
+.9962
+.9972
+.9979
+.9985
+.9989
+.9992
+.9995
+.9996
+.9997
+
+.08
+.5319
+.5714
+.6103
+.6480
+.6844
+.7190
+.7517
+.7823
+.8106
+.8365
+.8599
+.8810
+.8997
+.9162
+.9306
+.9429
+.9535
+.9625
+.9699
+.9761
+.9812
+.9854
+.9887
+.9913
+.9934
+.9951
+.9963
+.9973
+.9980
+.9986
+.9990
+.9993
+.9995
+.9996
+.9997
+
+.09
+.5359
+.5753
+.6141
+.6517
+.6879
+.7224
+.7549
+.7852
+.8133
+.8389
+.8621
+.8830
+.9015
+.9177
+.9319
+.9441
+.9545
+.9633
+.9706
+.9767
+.9817
+.9857
+.9890
+.9916
+.9936
+.9952
+.9964
+.9974
+.9981
+.9986
+.9990
+.9993
+.9995
+.9997
+.9998
+
+

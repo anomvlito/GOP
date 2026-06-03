@@ -1,0 +1,722 @@
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+Pontificia Universidad Católica de Chile
+Escuela de Ingeniería
+Departamento de Ingeniería Industrial y de Sistemas
+
+Interrogación 2
+Enunciados
+ICS 3213 Gestión de Operaciones
+Sección 1 y Sección 2 – 1er semestre 2020
+Prof. Martin Garcia
+Prof. Alejandro Mac Cawley
+Instrucciones:
+•
+
+Responder en letra legible, en lápiz pasta o bolígrafo y poner nombre a todas las hojas.
+
+•
+
+Responder las preguntas en orden e indicar claramente la pregunta (I, II o III).
+
+•
+
+Esta sección de la prueba tiene 50 puntos, dura 50 minutos y consta de 3 preguntas.
+
+•
+
+Se leerá la prueba al comienzo de clases y después se permitirán preguntas en voz alta. Posteriormente en
+la mitad de la prueba se volverá a permitir preguntas en voz alta. No se permitirán preguntas fuera de estos
+intervalos. Si su duda persiste indique el supuesto y continúe.
+
+•
+
+Al final de la prueba los alumnos deberán mantener online y se dividirán los alumnos en distintos break
+rooms numeradas, cada una de las cuales tiene un ayudante o profesor a cargo. Dispondrán de 15 minutos
+para escanear pruebas hoja por hoja y subirlas. Para subir las pruebas, los alumnos deberán subir su prueba
+I2 en la web de CANVAS en la Tarea con el número de su breakup-room. Es decir, si fui asignado al
+breakup-room 1, debo subir mi I2 en la tarea que dice I2 Breakup-Room 1. Al final de los 15 minutos el
+ayudante o profesor revisara las pruebas en el sistema e indicara si están OK y se podrán desconectar. Si
+por alguna razón hay un problema al subir la prueba, podrán mandarla por mail al profesor.
+
+•
+
+Este curso adscribe el Código de Honor establecido por la Escuela de Ingeniería el que es vinculante. Todo
+trabajo evaluado en este curso debe ser propio. En caso de que exista colaboración permitida con otros
+estudiantes, el trabajo deberá referenciar y atribuir correctamente dicha contribución a quien corresponda.
+Como estudiante es su deber conocer la versión en línea del Código de Honor
+(http://ing.puc.cl/codigodehonor).
+
+¡Muy Buena Suerte!
+
+Página 1 de 4
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+PARTE I (30 Puntos): Responda todas las siguientes preguntas cortas de ejercicio.
+I. (15 puntos) Usted dispone de la demanda diaria del producto que vende la empresa, dada por 𝐹𝑡 para t periodos. La
+receta del producto requiere j productos o subproductos y está dada por el Bill of Material (BOM). El BOM le indica
+que para cada producto o subproducto j, usted requiere 𝑅𝑗𝑘 unidades de subproducto o insumo k (𝑗, 𝑘) ∈ 𝐵𝑂𝑀. Para
+cada producto/subproducto/insumo j usted dispone de 𝐼𝐼𝑗 unidades en inventario, el lead time de producción o del
+proveedor es de 𝐿𝑗 días para cada j y finalmente, cada estación de producción o proveedor tiene una capacidad máxima
+de producción o entrega diaria de 𝐶𝑗 unidades. El costo de producción de cada unidad es de 𝐶𝑃𝑗 pesos por unidad y el
+costo de mantener inventario es de 𝐶𝐼𝑗 pesos por día por unidad j. Finalmente, debido a condiciones técnicas hay dos
+partes x,z ∈ 𝐵𝑂𝑀 que tienen niveles mínimos de producción 𝐶𝑀𝑖𝑛𝑥 y 𝐶𝑀𝑖𝑛𝑧 cuando se inician sus procesos
+productivos. Con esta información elabore un modelo de programación matemática que permita determinar el programa
+de MRP para cumplir con la demanda, cantidad de insumos o subproductos k en cada periodo y también terminar con
+𝐼𝐹𝑗 unidades de inventario final de cada unidad j.
+Sea GRjt la asignación de la producción de cada parte j en t. 1 corresponde al producto final.
+Sea PORjt la orden de producción de j en t.
+Sea Bi una binaria de activación de la producción de i que pertenece a x,z.
+Sea M un numero grande.
+𝑀𝑖𝑛 ∑ 𝐶𝑃𝑗 ∗ 𝑃𝑗,𝑡 + ∑ 𝐶𝐼𝑗 ∗ 𝐼𝑗,𝑡
+
+Sujeto a:
+𝐺𝑅1,𝑡 ≥ 𝐹𝑡 ∀𝑡
+𝐼1,𝑡+1 = 𝐼1,𝑡 + 𝑃𝑂𝑅1,𝑡−𝐿1 − 𝐺𝑅1,𝑡 ∀𝑡{𝐿1. . 𝑇}
+𝑃𝑂𝑅𝑗,𝑡 ∗ 𝑅𝑗,𝑘 = 𝐺𝑅𝑘,𝑡 ∀𝑗, 𝑘 ∈ 𝐵𝑂𝑀, 𝑡
+𝐼𝑘,𝑡+1 = 𝐼𝑘,𝑡 + 𝑃𝑂𝑅𝑘,𝑡−𝐿𝑘 − 𝐺𝑅𝑘,𝑡 ∀𝑘 ∈ 𝐵𝑂𝑀, 𝑡{𝐿𝑘 . . 𝑇}
+𝑃𝑂𝑅𝑗 ≤ 𝐶𝑃𝑗 ∀𝑗
+𝐼𝑗,0 = 𝐼𝐼𝑗 ∀𝑗
+𝐼𝑗,𝑇 = 𝐼𝐹𝑗 ∀𝑗
+𝑀 ∗ 𝐵𝑥 ≥ 𝑃𝑂𝑅𝑥,𝑡 ≥ 𝐶𝑀𝑖𝑛𝑥 ∗ 𝐵𝑥 ∀𝑡
+𝑀 ∗ 𝐵𝑦 ≥ 𝑃𝑂𝑅𝑦,𝑡 ≥ 𝐶𝑀𝑖𝑛𝑦 ∗ 𝐵𝑦 ∀𝑡
+𝐼𝑗,𝑡 , 𝐺𝑅𝑗,𝑡 , 𝑃𝑂𝑅𝑗,𝑡 ≥ 0; 𝐵𝑥 , 𝐵𝑦 ∈ {0,1}
+
+II.
+
+Usted tiene el siguiente proyecto, con su tiempos esperados y desviaciones standard de cada actividad:
+
+B
+
+A
+
+D
+
+C
+
+E
+
+Actividad
+A
+B
+C
+D
+E
+
+Tiempo Esperado
+4
+3
+4
+3
+5
+
+Desv. Standard
+1
+0,5
+1,2
+0,7
+1,5
+
+Con esta información determine:
+a) (3 puntos) Determine la ruta crítica y tiempo esperado de terminación.
+b) (6 puntos) Si le ofrecen un bono de $150 por terminar en o antes de una fecha dada y una penalidad de $100 por
+terminar después de dicha fecha. ¿Qué fecha lo dejaría indiferente entre el bono y la penalidad? Muestre sus
+cálculos.
+c) (6 puntos) ¿Cuál es la probabilidad que la ruta no critica se transforme en critica?
+a) La ruta crítica está dada por A-B-D y su tiempo esperado es 10.
+b) La varianza de la ruta crítica es= (1)^2+(0,5)^2+(0,7)^2=1,74
+La relación entre el bono y la penalización es = 100/(100+150) =0,4 En tabla de Z corresponde a -0,25
+Por ende la fecha seria: 10 – 0,25*raíz(1,74)= 9,67 seria a lo que me debería comprometer.
+
+Página 2 de 4
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+c) Debemos calcular la probabilidad de que la ruta no critica se consuma toda la holgura. La holgura de la ruta no
+critica es: 1 La varianza de la ruta no critica es : (1,2)^2+(1,5)^2=3,69
+(9-10)/raiz(3,69)= -0,52 en la tabla de normalidad = (1-0,6985) = 30,15% de probabilidad.
+III. Usted es dueño de una empresa que produce cemento. La empresa tiene dos fábricas (A y B) y distribuye a dos
+mercados (I y II). Actualmente debe decidir la ubicación de su centro de distribución y para ello ha recuperado la
+información de la producción de cada fabrica y consumo (en Tons. de cemento) de cada mercado, para hoy y en 10
+años más. Usted supone un crecimiento lineal en las ventas.
+Fabrica/Mercado
+Fabrica A
+Fabrica B
+Mercado I
+Mercado II
+
+Prod/Cons HOY Prod/Cons. en 10 años Coordenada X Coordenada Y
+20
+260
+10
+10
+70
+140
+40
+20
+40
+240
+60
+20
+50
+160
+70
+80
+
+Le han ofrecido a usted cuatro posibles ubicaciones para su centro de distribución, con sus respectivas coordenadas X e Y.
+Cada ubicación tiene un costo fijo de arriendo y un costo variable de transporte, que depende de solo las cantidades (tons
+de cemento) que se muevan desde cada planta al centro de distribución y desde este mismo hacia cada mercado.
+Ubicación
+Lugar 1
+Lugar 2
+Lugar 3
+Lugar 4
+
+Coordenada X
+10
+42
+49
+58
+
+Coordenada Y
+60
+29
+35
+20
+
+Costo Fijo ($)
+4000
+6000
+2000
+1900
+
+Costo Variable ($/Ton)
+10
+6
+16
+19
+
+Con esta informacion usted debe:
+a) (6 puntos) Determine la localización óptima de cada bodega para hoy y para 10 años.
+b) (6 puntos) De las opciones de lugares propuestos determine el más adecuado para hoy y dentro de 10 años.
+c) (8 puntos) Si debe elegir sólo una ubicación para los proximos 10 años. ¿Cuál elegiria? Muestre todos sus
+calculos.
+Proveedor/Al
+macén
+Fabrica A
+Fabrica B
+Mercado I
+Mercado II
+Suma
+
+Prod/Cons HOY
+20
+70
+40
+50
+180
+
+Prod/Cons. en 10
+anos
+260
+140
+240
+160
+800
+
+Coordenada X
+
+Coordenada Y
+
+10
+40
+60
+70
+
+10
+20
+20
+80
+Suma
+CG
+
+X Hoy * V
+
+Y Hoy*V
+
+200
+2800
+2400
+3500
+8900
+49,44
+
+200
+1400
+800
+4000
+6400
+35,56
+
+X 10 *V
+
+Y 10 * V
+
+2600
+5600
+14400
+11200
+33800
+42,25
+
+2600
+2800
+4800
+12800
+23000
+28,75
+
+Por ende el luhar optimo hoy es x= 49,44 e Y = 35,56 en 10 anos es X= 42,25 e Y = 28,75.
+b) Si tomamos los ligares el Lugar 3 es el que mejor se asocia a la coordenada hoy. Su costo es = 2000 +
+16*180 = 4880
+Si vemos en 10 anos el mejor lugar es 2 el costo total es = 6000 + 6*800 = 10800
+c) Si analizamos los puntos de esuilibrio, este se logra en el lugar 3 y 2 en 400 unidades.=> 8400
+Si obtenemos los beneficios de cada lugar por la areas se obtiene lugar 3 = (400-180)*(7080-4880)/2=242000
+Si obtenemos los beneficios de cada lugar por la areas se obtiene lugar 2 = (800-400)*(14800-10800)/2=800000
+Por ende nos debemos colocar en el lugar 2. Ya que el beneficio es mayor (800 K) con respecto al otro (242 K)
+
+Página 3 de 4
+
+Nombre: _______________________________
+
+email UC: ______________________ Sección:_____
+
+Tabla de distribución normal estándar
+
+z
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+1.7
+1.8
+1.9
+2.0
+2.1
+2.2
+2.3
+2.4
+2.5
+2.6
+2.7
+2.8
+2.9
+3.0
+3.1
+3.2
+
+0.00
+.5000
+.5398
+.5793
+.6179
+.6554
+.6915
+.7257
+.7580
+.7881
+.8159
+.8413
+.8643
+.8849
+.9032
+.9192
+.9332
+.9452
+.9554
+.9641
+.9713
+.9772
+.9821
+.9861
+.9893
+.9918
+.9938
+.9953
+.9965
+.9974
+.9981
+.9987
+.9990
+.9993
+
+.01
+.5040
+.5438
+.5832
+.6217
+.6591
+.6950
+.7291
+.7611
+.7910
+.8186
+.8438
+.8665
+.8869
+.9049
+.9207
+.9345
+.9463
+.9564
+.9649
+.9719
+.9778
+.9826
+.9864
+.9896
+.9920
+.9940
+.9955
+.9966
+.9975
+.9982
+.9987
+.9991
+.9993
+
+.02
+.5080
+.5478
+.5871
+.6255
+.6628
+.6985
+.7324
+.7642
+.7939
+.8212
+.8461
+.8686
+.8888
+.9066
+.9222
+.9357
+.9474
+.9573
+.9656
+.9726
+.9783
+.9830
+.9868
+.9898
+.9922
+.9941
+.9956
+.9967
+.9976
+.9982
+.9987
+.9991
+.9994
+
+.03
+.5120
+.5517
+.5910
+.6293
+.6664
+.7019
+.7357
+.7673
+.7967
+.8238
+.8485
+.8708
+.8907
+.9082
+.9236
+.9370
+.9484
+.9582
+.9664
+.9732
+.9788
+.9834
+.9871
+.9901
+.9925
+.9943
+.9957
+.9968
+.9977
+.9983
+.9988
+.9991
+.9994
+
+.04
+.5160
+.5557
+.5948
+.6331
+.6700
+.7054
+.7389
+.7704
+.7995
+.8264
+.8508
+.8729
+.8925
+.9099
+.9251
+.9382
+.9495
+.9591
+.9671
+.9738
+.9793
+.9838
+.9875
+.9904
+.9927
+.9945
+.9959
+.9969
+.9977
+.9984
+.9988
+.9992
+.9994
+
+.05
+.5199
+.5596
+.5987
+.6368
+.6736
+.7088
+.7422
+.7734
+.8023
+.8289
+.8531
+.8749
+.8944
+.9115
+.9265
+.9394
+.9505
+.9599
+.9678
+.9744
+.9798
+.9842
+.4878
+.9906
+.9929
+.9946
+.9960
+.9970
+.9978
+.9984
+.9989
+.9992
+.9994
+
+.06
+.5239
+.5636
+.6026
+.6406
+.6772
+.7123
+.7454
+.7764
+.8051
+.8315
+.8554
+.8770
+.8962
+.9131
+.9279
+.9406
+.9515
+.9608
+.9686
+.9750
+.9803
+.9846
+.9881
+.9909
+.9931
+.9948
+.9961
+.9971
+.9979
+.9985
+.9989
+.9992
+.9994
+
+Cx =
+
+d V
+V
+
+.07
+.5279
+.5675
+.6064
+.6443
+.6808
+.7157
+.7486
+.7794
+.8078
+.8340
+.8577
+.8790
+.8980
+.9147
+.9292
+.9418
+.9525
+.9616
+.9693
+.9756
+.9808
+.9850
+.9884
+.9911
+.9932
+.9949
+.9962
+.9972
+.9979
+.9985
+.9989
+.9992
+.9995
+
+.08
+.5319
+.5714
+.6103
+.6480
+.6844
+.7190
+.7517
+.7823
+.8106
+.8365
+.8599
+.8810
+.8997
+.9162
+.9306
+.9429
+.9535
+.9625
+.9699
+.9761
+.9812
+.9854
+.9887
+.9913
+.9934
+.9951
+.9963
+.9973
+.9980
+.9986
+.9990
+.9993
+.9995
+
+.09
+.5359
+.5753
+.6141
+.6517
+.6879
+.7224
+.7549
+.7852
+.8133
+.8389
+.8621
+.8830
+.9015
+.9177
+.9319
+.9441
+.9545
+.9633
+.9706
+.9767
+.9817
+.9857
+.9890
+.9916
+.9936
+.9952
+.9964
+.9974
+.9981
+.9986
+.9990
+.9993
+.9995
+
+Cy =
+
+d V
+V
+
+Formulario
+
+ix i
+i
+
+Z=
+
+D - TE
+
+
+
+2
+i
+
+Qw =
+
+2C 0 D
+Ch
+
+Página 4 de 4
+
+iy i
+i
+
+

@@ -1,0 +1,185 @@
+\section{Módulo 1: Planificación Agregada de la Producción}
+
+\subsection{Conceptos fundamentales}
+
+\begin{definicion}{¿Qué es la Planificación Agregada?}
+Es el proceso de traducir la estrategia de la empresa en \textbf{acciones concretas}; actúa como puente entre la estrategia competitiva (largo plazo) y la programación diaria (corto plazo). Es una decisión de \textbf{nivel táctico / mediano plazo} (típicamente 3--18 meses), que planifica por \textbf{familias de productos}, no por SKU individual.
+\end{definicion}
+
+\begin{definicion}{El concepto de ``Agregación''}
+Los pronósticos por SKU individual son difíciles y de alto error. Al \textbf{agregar} la demanda de productos similares en ``unidades equivalentes'', los errores individuales tienden a compensarse (ley de los grandes números), ganando precisión. El \textbf{dato principal de entrada es el pronóstico}.
+\end{definicion}
+
+\subsection{Las estrategias para abordar la demanda}
+
+\begin{definicion}{Estrategias de planificación}
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+  \item \textbf{Persecución (Chase):} ajusta la capacidad para seguir la demanda período a período (contratar/despedir, horas extra, subcontratación). \textit{Ventaja:} inventario mínimo. \textit{Desventaja:} altos costos de rotación y daño a la moral.
+  \item \textbf{Nivelación (Level):} mantiene una tasa de producción constante; el desajuste se absorbe con \textbf{inventario} (exceso) o \textbf{faltantes} (escasez). \textit{Ventaja:} fuerza laboral estable. \textit{Desventaja:} costos de inventario o pérdida de ventas.
+  \item \textbf{Mixta:} en la práctica casi nadie usa una estrategia pura; se combinan según temporada, costo y restricciones laborales.
+\end{itemize}
+\end{definicion}
+
+
+\subsection[PA: La Miga Dorada]{Ejercicio de Aplicación: La Miga Dorada (Ayudantía 8)}
+
+\begin{ejercicio}{Planificación agregada --- Miga Dorada (Ayudantía 8)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+\textbf{Identificación:} te dan demandas mensuales, costos de mano de obra normal, extra, contratación, despido, inventario y faltantes. Te piden evaluar y comparar tres planes de planificación agregada (Chase, Nivel con Inventario/Faltante, Nivel con Horas Extra) y determinar el de menor costo.
+\textbf{Qué aplicar:} realizar los cálculos numéricos en una planilla/tabla mes a mes para cada una de las políticas, acumulando los costos correspondientes.
+\end{tipprueba}
+
+\begin{trampa}{Plan Chase: el supuesto de redondeo que las pautas no declaran}
+Al calcular ``trabajadores necesarios $= D_t / \text{cap.\ por trabajador}$'', el resultado suele ser fraccionario ($1200/160 = 7{,}5$). Las pautas oficiales redondean al entero más cercano, pero eso hace que el Chase \textbf{no sea estrictamente puro}: redondeando arriba se produce más de lo demandado; abajo, menos. En la prueba: si el enunciado dice ``producir exactamente la demanda'', usa el número exacto aunque sea fraccionario. Si pide trabajadores enteros, redondea y señala el supuesto. La pauta te da el beneficio de la duda si el cálculo es coherente con lo que declaras.
+\end{trampa}
+
+\textbf{Enunciado:}
+La panadería ``La Miga Dorada'' elabora panes artesanales. Cada pan requiere 1 hora-hombre (HH) de producción. Se proyecta la siguiente demanda mensual para el primer trimestre:
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+  \toprule
+  \textbf{Mes} & Enero & Febrero & Marzo \\
+  \midrule
+  \textbf{Demanda (unidades)} & 1.200 & 2.000 & 1.000 \\
+  \bottomrule
+\end{tabular}
+\end{center}
+La panadería cuenta inicialmente con 10 panaderos. Cada mes tiene 20 días hábiles de 8 horas (160 HH/mes por trabajador). Las HH se pagan a tarifa normal de \$50/hora; las horas extra cuestan \$80/hora. El costo de mantener inventario es \$10/pan al mes; el costo de faltante es \$15/pan. Contratar cuesta \$1.500 por panadero y despedir \$2.500 por panadero. Compare tres planes:
+\begin{enumerate}
+  \item \textbf{Plan Chase:} ajustar la cantidad de panaderos cada mes para producir exactamente la demanda (sin inventario ni faltantes).
+  \item \textbf{Plan Nivel con Inventario y Faltante:} mantener los 10 panaderos todo el trimestre; producir al máximo en horas normales, permitiendo inventario o faltantes.
+  \item \textbf{Plan Nivel con Horas Extra:} mantener 10 panaderos; producir a tarifa normal hasta capacidad y cubrir cualquier exceso de demanda con horas extra (no se permiten faltantes ni inventario).
+\end{enumerate}
+
+\textbf{Solución:}
+
+\textbf{1) Plan Chase:}
+La capacidad de 1 panadero es $20 \times 8 = 160$ HH. Para producir la demanda exacta:
+\begin{itemize}
+  \item \textbf{Enero (1.200 unidades):} Panaderos requeridos = $1200 / 160 = 7,5$. Despedimos a $10 - 7,5 = 2,5$ panaderos. Costo despido = $2,5 \times \$2.500 = \$6.250$. Costo mano de obra normal = $1.200 \times \$50 = \$60.000$.
+  \item \textbf{Febrero (2.000 unidades):} Panaderos requeridos = $2000 / 160 = 12,5$. Contratamos a $12,5 - 7,5 = 5$ panaderos. Costo contratación = $5 \times \$1.500 = \$7.500$. Costo mano de obra normal = $2.000 \times \$50 = \$100.000$.
+  \item \textbf{Marzo (1.000 unidades):} Panaderos requeridos = $1000 / 160 = 6,25$. Despedimos a $12,5 - 6,25 = 6,25$ panaderos. Costo despido = $6,25 \times \$2.500 = \$15.625$. Costo mano de obra normal = $1.000 \times \$50 = \$50.000$.
+\end{itemize}
+\begin{itemize}
+  \item Costos de rotación: \$7.500 (contratar) + \$21.875 (despedir) = \$29.375.  
+  \item Costo mano de obra normal: 4.200 HH $\times$ \$50 = \$210.000.  
+  \item Costos de inventario y faltantes: \$0.  
+  \item \textbf{Costo Total Chase = \$239.375.}
+\end{itemize}
+
+\textbf{2) Plan Nivel con Inventario y Faltante:}
+Mantenemos 10 panaderos permanentes. Producción mensual fija = $10 \times 160 = 1.600$ unidades.
+\begin{itemize}
+  \item \textbf{Enero:} Demanda = 1.200, Producción = 1.600. Inventario final = $400$ unidades. Costo de inventario = $400 \times \$10 = \$4.000$.
+  \item \textbf{Febrero:} Demanda = 2.000, Producción = 1.600. Usamos las 400 unidades de inventario. Inventario final = 0, Faltante = 0. Costo = \$0.
+  \item \textbf{Marzo:} Demanda = 1.000, Producción = 1.600. Inventario final = $600$ unidades. Costo de inventario = $600 \times \$10 = \$6.000$.
+\end{itemize}
+\begin{itemize}
+  \item Costo de mano de obra normal: $10 \text{ panaderos} \times 3 \text{ meses} \times 160\text{ HH} \times \$50 = \$240.000$.  
+  \item Costo de inventario: \$4.000 + \$6.000 = \$10.000.  
+  \item Costo de contratación/despido/faltante: \$0.  
+  \item \textbf{Costo Total Nivel con Inventario = \$250.000.}
+\end{itemize}
+
+\textbf{3) Plan Nivel con Horas Extra:}
+Mantenemos 10 panaderos (capacidad normal 1.600 unidades/mes). Se produce exactamente la demanda sin guardar inventario:
+\begin{itemize}
+  \item \textbf{Enero:} Se fabrican 1.200 en horas normales. Costo mano de obra normal = 1.600 HH $\times$ \$50 = \$80.000. Horas extra = 0.
+  \item \textbf{Febrero:} Se fabrican 1.600 en horas normales y 400 en horas extra. Costo mano de obra normal = \$80.000. Costo horas extra = 400 $\times$ \$80 = \$32.000.
+  \item \textbf{Marzo:} Se fabrican 1.000 en horas normales. Costo mano de obra normal = \$80.000. Horas extra = 0.
+\end{itemize}
+\begin{itemize}
+  \item Costo de mano de obra normal: \$80.000 $\times$ 3 = \$240.000.  
+  \item Costo de horas extra: \$32.000 (en Febrero).  
+  \item Costo de contratación/despido/inventario/faltantes: \$0.  
+  \item \textbf{Costo Total Nivel con Horas Extra = \$272.000.}
+\end{itemize}
+
+\textbf{Conclusión:} El plan más conveniente económicamente es el \textbf{Plan Chase} con un costo total de \textbf{\$239.375}.
+\end{ejercicio}
+
+\subsection{El modelo básico de programación matemática}
+
+\begin{tipprueba}{Receta: 5 preguntas para plantear cualquier MILP desde cero}
+La pregunta de certamen siempre tiene la misma estructura: (i)~variables + función objetivo (FO) + restricciones; (ii)~agregar condiciones con binarias. Si te bloqueas, hazte estas 5 preguntas en orden:
+\begin{enumerate}[leftmargin=1.5em, itemsep=3pt]
+  \item \textbf{¿Qué DECIDO cada período?} $\to$ Variables de decisión.
+    Continuas ($\ge 0$): cuánto produzco, cuánto guardo, cuánto despacho, cuántas horas extra, cuántos trabajadores.
+    Binarias ($\in\{0,1\}$): ¿opera la planta? ($X_{nt}$), ¿arranca esta semana? ($Y_{nt}$).
+    \textit{Regla:} si el enunciado dice ``decide si'' $\to$ binaria; ``decide cuánto'' $\to$ continua.
+  \item \textbf{¿Qué CUESTA?} $\to$ Función objetivo $= \min \sum (\text{costo unitario} \times \text{variable})$.
+    Recorre el enunciado buscando: producción, inventario, despacho/envío, horas extra (HE), salarios, contratación/despido, activación de planta, ventas perdidas.
+  \item \textbf{¿Qué DEBO satisfacer?} $\to$ Restricción de demanda (una por cliente $i$ y período $t$).
+    Con ventas perdidas: $\sum_n S_{nit} + NS_{it} = D_{it}$. Sin: $\sum_n S_{nit} \ge D_{it}$.
+  \item \textbf{¿Qué PUEDO hacer?} $\to$ Restricciones de capacidad.
+    Si hay binaria $X_{nt}$, la capacidad se ``enciende'' con ella: $P_{nt} \le \text{cap}_n \cdot X_{nt}$.
+  \item \textbf{¿Cómo EVOLUCIONA el inventario?} $\to$ Balance (una por planta $n$ y período $t$):
+    $I_{nt} = I_{n,t-1} + P_{nt} - \sum_i S_{nit}$. No olvides las condiciones de borde ($I_0$, $I_T$).
+\end{enumerate}
+\textbf{Parte (ii) --- condiciones complejas:} leer en lenguaje natural e identificar el patrón binario.
+``Si opera, al menos $L$ unidades'' $\to P_{nt} \ge L \cdot X_{nt}$.
+``Solo produce si opera'' $\to P_{nt} \le M \cdot X_{nt}$ (Big-M).
+``Arranca si estuvo inactiva'' $\to Y_{nt} \ge X_{nt} - X_{n,t-1}$.
+``A lo más el $\alpha\%$ insatisfecho'' $\to \sum_t NS_{it} \le \alpha \sum_t D_{it}$.
+\end{tipprueba}
+
+\begin{formulas}{Glosario de variables (modelo de planificación)}
+\textbf{Parámetros:}
+\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
+  \item $d_{jt}$: demanda del producto $j$ en período $t$.
+  \item $c_{jt}$: costo unitario de fabricar el producto $j$ en $t$.
+  \item $h_j$: costo de mantener inventario del producto $j$ por período.
+  \item $f_i$: costo de hora de sobretiempo en el centro de trabajo $i$.
+  \item $b_{it}$: horas disponibles a tiempo normal en el centro $i$, período $t$.
+  \item $a_{ij}$: horas del centro $i$ requeridas para fabricar 1 unidad de $j$.
+\end{itemize}
+\textbf{Variables de decisión:}
+\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
+  \item $x_{jt}$: producción del producto $j$ en $t$.
+  \item $I_{jt}$: inventario de $j$ al final del período $t$.
+  \item $y_{it}$: horas de sobretiempo contratadas en el centro $i$ en $t$.
+\end{itemize}
+\end{formulas}
+
+\begin{formulas}{Modelo base de Planificación Agregada}
+\[
+  \min \sum_{t=1}^{T}\left( \sum_{j=1}^{n} c_{jt}x_{jt} + \sum_{j=1}^{n} h_j I_{jt} + \sum_{i=1}^{m} f_i y_{it} \right)
+\]
+\textbf{sujeto a:}
+\begin{align*}
+  \sum_{j=1}^{n} a_{ij}x_{jt} &\le b_{it} + y_{it} && \forall i,\ t && \text{(capacidad: normal + extra)}\\
+  I_{jt} &= I_{j,t-1} + x_{jt} - d_{jt} && \forall j,\ t && \text{(balance de inventario)}\\
+  x_{jt},\, I_{jt},\, y_{it} &\ge 0 && \forall i,j,t
+\end{align*}
+con $I_{j0}$ conocido (inventario inicial ``en mano'').
+\end{formulas}
+
+\begin{definicion}{Extensiones típicas del modelo (¡las preguntan!)}
+\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
+  \item \textbf{Demanda insatisfecha / backlog:} variable $L_{jt}^-$ con costo de penalización; el balance pasa a $I_{jt} - L_{jt}^- = I_{j,t-1} + x_{jt} - d_{jt} + \ldots$
+  \item \textbf{Contratación y despido:} variables $W_t$ (trabajadores), $H_t$ (contratar), $F_t$ (despedir), con $W_t = W_{t-1} + H_t - F_t$ y costos $c_c H_t + c_d F_t$.
+  \item \textbf{Costo fijo de ``activar'' planta:} variable binaria $z_{nt}\in\{0,1\}$ con costo $G\,z_{nt}$ y restricción $x_{nt} \le M z_{nt}$.
+  \item \textbf{Trabajadores novatos vs.\ expertos:} factor de productividad $\alpha$ ($0\le\alpha\le1$) para quienes fueron contratados en el mismo período.
+  \item \textbf{Capacidad de bodega:} $\sum_j I_{jt} \le \text{Cap}$.
+  \item \textbf{Múltiples escenarios:} usar el intervalo de confianza (IC) de demanda (pesimista / esperado / optimista).
+\end{itemize}
+\end{definicion}
+
+\begin{trampa}{Restricciones lógicas con binarias (las más cobradas)}
+Tres condiciones que aparecen una y otra vez y se modelan SIEMPRE igual:
+\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
+  \item \textbf{``Si se activa, al menos 1 turno (40h)'':} $\;40\,z_{nt} \le \text{horas}_{nt} \le M z_{nt}$.
+  \item \textbf{``Producir 0 o al menos un mínimo $Q_{\min}$'':} $\;Q_{\min} z_{nt} \le x_{nt} \le M z_{nt}$ (semicontinua).
+  \item \textbf{``No dejar insatisfecho más del $p\%$ de la demanda del cliente $i$'':} $\;\sum_t L_{it}^- \le p \sum_t d_{it}$.
+\end{itemize}
+El truco es: toda condición ``si decido hacer algo, entonces hay un mínimo'' $\Rightarrow$ binaria + cota $M$ grande.
+\end{trampa}
+
+\begin{tipprueba}{Manejo del intervalo de confianza (caso de escenarios)}
+Cuando dan un IC al 90\% de la demanda $[\underline{d}_{it}, \overline{d}_{it}]$ y preguntan cómo incorporarlo (¡sin desarrollar el modelo!): se resuelve el modelo \textbf{tres veces} cambiando solo el parámetro de demanda:
+\textbf{(1) Caso pesimista} con $\overline{d}_{it}$ (máxima demanda $\Rightarrow$ más recursos), \textbf{(2) Caso esperado} con $d_{it}$, \textbf{(3) Caso optimista} con $\underline{d}_{it}$. Se comparan los costos/decisiones y se elige el plan robusto. La decisión puede cambiar (p.ej.\ contratar más en el pesimista).
+\end{tipprueba}
+
+% ════════════════════════════════════════════════════════════════════════════
+
+

@@ -1,0 +1,183 @@
+\section{Módulo 4: Variabilidad en las Operaciones}
+
+\subsection{Por qué importa la variabilidad}
+
+\begin{definicion}{El problema central}
+La causa de las colas es que, en el corto plazo y en períodos impredecibles, la \textbf{capacidad no logra satisfacer la demanda}. Hay que distinguir \textbf{variabilidad} (predecible, regular) de \textbf{incertidumbre}. El trade-off de las colas: el costo de mejor servicio sube, mientras el costo de espera del cliente baja; el óptimo cruza ambas curvas.
+\end{definicion}
+
+\begin{formulas}{Ley de Little y su extrapolación productiva}
+\[
+  L = \lambda \times W \qquad\Longrightarrow\qquad \text{WIP} = \text{TH} \times \text{CT}
+\]
+$L$ = inventario en el sistema, $\lambda$ = tasa de llegada, $W$ = tiempo en el sistema. En la fábrica: WIP = trabajo en proceso, TH = throughput, CT = tiempo de ciclo. Vale en \textbf{cualquier} disciplina de cola en \textbf{estado estacionario} (J.D.\ Little, MIT, 1961). Para reducir CT: bajar WIP o subir TH.
+\end{formulas}
+
+\subsection{Medir la variabilidad}
+
+\begin{formulas}{Coeficiente de variación}
+\[
+  c = \frac{\sigma}{t} = \frac{\sqrt{\text{Var}(T)}}{E(T)}
+\]
+Clasificación: \textbf{Baja} ($c<0{,}75$), \textbf{Moderada} ($0{,}75 \le c \le 1{,}33$), \textbf{Alta} ($c>1{,}33$). Es la \textbf{mejor forma} de medir variabilidad (adimensional).
+\end{formulas}
+
+\begin{formulas}{Variabilidad por fallas}
+\begin{align*}
+  A &= \frac{m_f}{m_f + m_r} && \text{(disponibilidad)}\\
+  r_e &= A\,r_0, \qquad t_e = \frac{t_0}{A} && \text{(tasa y tiempo efectivo)}\\
+  c_e^2 &= c_0^2 + (1 + c_r^2)\,A(1-A)\,\frac{m_r}{t_0} && \text{(CV efectivo)}
+\end{align*}
+$m_f$ = tiempo medio entre fallas, $m_r$ = tiempo medio de reparación, $c_r$ = CV de la reparación. \textbf{Conclusión:} paradas \textbf{largas e infrecuentes} aumentan mucho más $c_e^2$ que paradas cortas y frecuentes.
+\end{formulas}
+
+\begin{formulas}{Variabilidad por setups}
+\[
+  t_e = t_0 + \frac{t_s}{N_s}, \qquad
+  \sigma_e^2 = \sigma_0^2 + \frac{\sigma_s^2}{N_s} + \frac{N_s - 1}{N_s^2}\,t_s^2, \qquad
+  c_e^2 = \frac{\sigma_e^2}{t_e^2}
+\]
+$t_s$ = tiempo de setup, $N_s$ = unidades entre setups. El setup se prorratea sobre el lote.
+\end{formulas}
+
+\begin{formulas}{Propagación de la variabilidad (látigo)}
+\[
+  (c_s)^2 \approx \rho^2 (c_e)^2 + (1 - \rho^2)(c_a)^2
+\]
+La variabilidad de \textbf{salida} ($c_s$) depende de la variabilidad de servicio ($c_e$), la de llegadas ($c_a$) y la saturación ($\rho$). ``La variabilidad se propaga (efecto látigo)''.
+\end{formulas}
+
+\subsection{Modelos de colas}
+
+\begin{formulas}{Sistema M/M/1}
+Llegadas Poisson, servicio exponencial, 1 servidor. Estable solo si $\rho<1$.
+\begin{align*}
+  \rho &= \frac{\lambda}{\mu} && \text{(utilización)}\\
+  L &= \frac{\rho}{1-\rho}, \qquad W = \frac{1}{\mu(1-\rho)} && \text{(en el sistema)}\\
+  L_q &= \frac{\rho^2}{1-\rho}, \qquad W_q = \frac{\rho}{\mu(1-\rho)} && \text{(en la cola)}
+\end{align*}
+\end{formulas}
+
+\begin{formulas}{Sistema G/G/1 --- Ecuación de Kingman (VUT)}
+Para distribuciones generales, el tiempo en cola es:
+\[
+  CT_q = \underbrace{\left(\frac{c_a^2 + c_e^2}{2}\right)}_{V\ (\text{Variabilidad})}
+         \underbrace{\left(\frac{\rho}{1-\rho}\right)}_{U\ (\text{Utilización})}
+         \underbrace{\vphantom{\frac{\rho}{1-\rho}}\ t_e\ }_{T\ (\text{Tiempo})}
+\]
+\textbf{Kingman: CT $= V\cdot U\cdot T$}. Es exacta para M/M/1 (cuando $c_a=c_e=1$). La espera es el producto de \textbf{Variabilidad, Utilización y Tiempo}.
+\end{formulas}
+
+\begin{formulas}{Sistemas restringidos: M/M/1/b y M/M/c}
+\textbf{Capacidad finita (M/M/1/b)}, cola con tope $b$, hay bloqueo:
+\[
+  L = \frac{\rho}{1-\rho} - \frac{(b+1)\rho^{b+1}}{1-\rho^{b+1}}, \qquad
+  \lambda' = \lambda\left(\frac{1-\rho^b}{1-\rho^{b+1}}\right)
+\]
+\textbf{Múltiples servidores (M/M/c)}, $\rho = \dfrac{\lambda}{c\mu}$:
+\[
+  L_q = \frac{\rho}{1-\rho}\times \text{Prob}(N>c), \qquad
+  W_q = \frac{\rho}{\lambda(1-\rho)}\times \text{Prob}(N>c)
+\]
+\end{formulas}
+
+\begin{trampa}{La utilización explota la cola cerca de $\rho=1$}
+A medida que $\rho \to 1$, el tiempo en cola \textbf{explota exponencialmente}. Un pequeño cambio en la utilización (de 0,90 a 0,95) genera una diferencia drástica. Por eso, con alta utilización se requieren \textbf{grandes} reducciones de variabilidad (motivación del 6-Sigma). Nunca planifiques operar al 100\%.
+\end{trampa}
+
+
+\subsection[Variabilidad: Optimización G/G/1]{Ejercicio de Aplicación: Optimización de Variabilidad y Tasa de Llegada G/G/1 (Ayudantía 8)}
+
+\begin{ejercicio}{Modelo de cola G/G/1 con elasticidad de demanda y capacidad (Ayudantía 8)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+\textbf{Identificación:} te dan una cola G/G/1 con tasa de llegada elástica respecto a un descuento $\Delta$ ($\lambda = \lambda_0 e^{-\Delta}$), costos de espera lineales y tiempos de servicio generales. Piden plantear el modelo matemático de optimización y sus condiciones de primer orden (CPO) para hallar el descuento óptimo.
+\textbf{Qué aplicar:} ecuación de Kingman para el tiempo de espera, modelar la función de costo total (descuento acumulado + costo de espera del cliente), y derivar con respecto a la variable de decisión.
+\end{tipprueba}
+
+\textbf{Enunciado:}
+Los clientes de una imprenta llegan a una tasa $\lambda$ [clientes/hr] (distribución general) y la capacidad de atención es $\mu$ [clientes/hr]. El tiempo efectivo de procesamiento es $t_e$, el coeficiente de variabilidad de llegadas es $c_a$ y el de servicio es $c_e$. Para evitar colapsos y setups costosos, se evalúa realizar descuentos ($\Delta$) en el precio de venta para alterar la tasa de llegada, de modo que:
+$$\lambda = \lambda_0 e^{-\Delta}$$
+Los clientes tienen una función de costo de espera total $CE(W) = 100 + W$, donde $W$ es el tiempo total en el sistema (espera en cola más servicio).
+1. Plantee el modelo de programación matemática que permita optimizar el proceso productivo. Deje expresadas las condiciones de primer orden (CPO) que permitan obtener el óptimo, sin resolverlas.
+2. Si se abre la posibilidad de adquirir nueva capacidad productiva y aumentar su tasa de atención a un costo de \$K por cada unidad de aumento, ¿cómo cambia el modelo?
+
+\textbf{Solución:}
+
+\textbf{1) Formulación del Modelo de Optimización:}
+\begin{itemize}
+  \item \textbf{Variable de decisión:} Descuento otorgado por cliente, $\Delta$.
+  \item \textbf{Tasa de llegada elástica:} $\lambda(\Delta) = \lambda_0 e^{-\Delta}$.
+  \item \textbf{Tiempo total en el sistema ($W$):}
+\end{itemize}
+    Por la ecuación de Kingman para colas $G/G/1$:
+    $$W = CT_q + t_e = \left( \frac{c_a^2 + c_e^2}{2} \right) \left( \frac{\rho}{1 - \rho} \right) \frac{1}{\mu} + \frac{1}{\mu}$$
+    Sustituyendo $\rho = \lambda(\Delta) / \mu$ y $t_e = 1/\mu$:
+    $$W(\Delta) = \left( \frac{c_a^2 + c_e^2}{2} \right) \left( \frac{\lambda_0 e^{-\Delta}}{\mu(\mu - \lambda_0 e^{-\Delta})} \right) + \frac{1}{\mu}$$
+\begin{itemize}
+  \item \textbf{Función de costo total a minimizar ($f(\Delta)$):}
+\end{itemize}
+    $$\min_{\Delta} \quad f(\Delta) = \lambda(\Delta) \cdot \Delta + \lambda(\Delta) \cdot CE(W(\Delta))$$
+    $$\min_{\Delta} \quad f(\Delta) = \lambda_0 e^{-\Delta} \left[ \Delta + 100 + \left( \frac{c_a^2 + c_e^2}{2} \right) \left( \frac{\lambda_0 e^{-\Delta}}{\mu(\mu - \lambda_0 e^{-\Delta})} \right) + \frac{1}{\mu} \right]$$
+\begin{itemize}
+  \item \textbf{Restricciones:}
+  \item \textit{Estabilidad del sistema:} $\rho < 1 \implies \lambda_0 e^{-\Delta} < \mu \implies \Delta > \ln\left( \frac{\lambda_0}{\mu} \right)$
+  \item \textit{No negatividad:} $\Delta \ge 0$
+\end{itemize}
+
+\begin{itemize}
+  \item \textbf{Condiciones de Primer Orden (CPO):}
+\end{itemize}
+    Derivando la función objetivo $f(\Delta)$ con respecto a $\Delta$ e igualando a cero:
+    $$\frac{df}{d\Delta} = 0 \implies -\lambda(\Delta) \left[ \Delta + 100 + W(\Delta) \right] + \lambda(\Delta) \left[ 1 + \frac{dW}{d\Delta} \right] = 0$$
+    Simplificando por $\lambda(\Delta)$ (dado que $\lambda(\Delta) > 0$):
+    $$W(\Delta) + 100 + \Delta - 1 - \frac{dW}{d\Delta} = 0$$
+    Donde la derivada del tiempo de espera es:
+    $$\frac{dW}{d\Delta} = \left( \frac{c_a^2 + c_e^2}{2} \right) \left( \frac{-\lambda_0 e^{-\Delta}}{\mu - \lambda_0 e^{-\Delta}} - \frac{\lambda_0^2 e^{-2\Delta}}{(\mu - \lambda_0 e^{-\Delta})^2} \right) \frac{1}{\mu}$$
+
+\textbf{2) Modelo con Ampliación de Capacidad:}
+\begin{itemize}
+  \item \textbf{Nuevas variables de decisión:} Descuento $\Delta \ge 0$ y ampliación de capacidad $u \ge 0$.
+  \item La nueva tasa de servicio es $\mu = \mu_0 + u$.
+  \item La función objetivo ahora incluye el costo de expansión de capacidad $K \cdot u$:
+\end{itemize}
+    $$\min_{\Delta, u} \quad f(\Delta, u) = \lambda_0 e^{-\Delta} \left[ \Delta + 100 + W(\Delta, u) \right] + K \cdot u$$
+    Donde:
+    $$W(\Delta, u) = \left( \frac{c_a^2 + c_e^2}{2} \right) \left( \frac{\lambda_0 e^{-\Delta}}{(\mu_0 + u)(\mu_0 + u - \lambda_0 e^{-\Delta})} \right) + \frac{1}{\mu_0 + u}$$
+\begin{itemize}
+  \item \textbf{Restricciones de estabilidad:}
+\end{itemize}
+    $$\lambda_0 e^{-\Delta} < \mu_0 + u$$
+    $$\Delta \ge 0, \quad u \ge 0$$
+\end{ejercicio}
+
+\subsection{Estrategias y psicología}
+
+\begin{definicion}{Pooling, buffers y psicología de la espera}
+\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
+  \item \textbf{Pooling (agrupación):} consolidar recursos (unifila, inventario centralizado) promedia y \textbf{disminuye} la variabilidad global.
+  \item \textbf{Buffer finito:} amortigua la propagación de variabilidad, pero \textbf{reduce el throughput} máximo. Limitar el buffer reduce CT (Little).
+  \item \textbf{Psicología:} el tiempo ocioso se percibe más largo; las esperas inciertas, inexplicadas e injustas parecen más largas; las esperas individuales más largas que las grupales. Recomendaciones: distraer al cliente, informar la espera, ocultar empleados inactivos, segmentar.
+\end{itemize}
+\end{definicion}
+
+\subsection{V/F frecuentes de Variabilidad}
+
+\begin{center}
+\small
+\begin{tabular}{@{}clp{10.5cm}@{}}
+  \toprule
+  $\#$ & R & Afirmación y corrección \\
+  \midrule
+  1 & \textbf{V} & ``La ecuación de Kingman muestra que la espera es el producto de Variabilidad, Utilización y Tiempo.'' \\
+  2 & \textbf{F} & ``Un buffer de capacidad finita aumenta el throughput del sistema.'' --- Falso: lo \textbf{reduce}, aunque mejore el servicio a quienes ingresan. \\
+  3 & \textbf{F} & ``Paradas cortas y frecuentes aumentan más la variabilidad que paradas largas e infrecuentes.'' --- Falso: es al revés. \\
+  4 & \textbf{V} & ``La Ley de Little es válida para cualquier disciplina de cola en estado estacionario.'' \\
+  5 & \textbf{F} & ``Aumentar la utilización siempre mejora el desempeño.'' --- Falso: cerca de $\rho=1$ la cola explota exponencialmente. \\
+  6 & \textbf{V} & ``El pooling de recursos reduce la variabilidad global del sistema.'' \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ════════════════════════════════════════════════════════════════════════════
+
+

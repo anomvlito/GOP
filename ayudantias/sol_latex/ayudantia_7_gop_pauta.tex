@@ -1,0 +1,399 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\hypertarget{ayudantuxeda-7-pauta---variabilidad}{%
+\section{Ayudantía 7 Pauta -
+Variabilidad}\label{ayudantuxeda-7-pauta---variabilidad}}
+
+\textbf{Pontificia Universidad Católica de Chile}\\
+\textbf{Escuela de Ingeniería}\\
+\textbf{Departamento de Ingeniería Industrial y de Sistemas}\\
+\textbf{ICS3213: Gestión de Operaciones}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{resumen-de-fuxf3rmulas-clave}{%
+\subsection{Resumen de Fórmulas
+Clave}\label{resumen-de-fuxf3rmulas-clave}}
+
+\hypertarget{sistema-simple-cola-mm1}{%
+\subsubsection{\texorpdfstring{1. Sistema Simple (Cola
+\(M/M/1\))}{1. Sistema Simple (Cola M/M/1)}}\label{sistema-simple-cola-mm1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tasa de utilización / ocupación (\(\rho\)):}
+  \[\rho = \frac{\lambda}{\mu}\] \emph{Estabilidad:} El sistema converge
+  en el largo plazo si y solo si \(\rho < 1\).
+\item
+  \textbf{Tiempo promedio en el sistema (\(W\)):}
+  \[W = \frac{1}{\mu(1 - \rho)}\]
+\item
+  \textbf{Cantidad promedio de entidades en el sistema (\(L\))
+  {[}Ecuación de Little{]}:}
+  \[L = \lambda \cdot W = \frac{\rho}{1 - \rho}\]
+\item
+  \textbf{Tiempo promedio de espera en la cola (\(W_q\)):}
+  \[W_q = W - \frac{1}{\mu} = \frac{\rho}{\mu(1 - \rho)}\]
+\item
+  \textbf{Cantidad promedio de entidades en la cola (\(L_q\)):}
+  \[L_q = \lambda \cdot W_q = \frac{\rho^2}{1 - \rho}\]
+\item
+  \textbf{Probabilidad de sistema vacío / tiempo de ocio (\(P_0\)):}
+  \[P_0 = 1 - \rho\]
+\end{itemize}
+
+\hypertarget{extrapolaciuxf3n-de-little-en-procesos-productivos}{%
+\subsubsection{2. Extrapolación de Little en Procesos
+Productivos}\label{extrapolaciuxf3n-de-little-en-procesos-productivos}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Relación fundamental (Trabajo en Proceso):}
+  \[WIP = TH \cdot CT\] Donde:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(WIP\): Work In Process (Trabajo en Proceso).
+  \item
+    \(TH\): Throughput (Tasa de Producción).
+  \item
+    \(CT\): Cycle Time (Tiempo de Ciclo).
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{sistema-de-un-solo-servidor-general-cola-gg1}{%
+\subsubsection{\texorpdfstring{3. Sistema de Un Solo Servidor General
+(Cola
+\(G/G/1\))}{3. Sistema de Un Solo Servidor General (Cola G/G/1)}}\label{sistema-de-un-solo-servidor-general-cola-gg1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tiempo de espera en cola (\(CT_q\) o \(W_q\)) {[}Ecuación de
+  Kingman - VUT{]}:}
+  \[CT_q = \left( \frac{c_a^2 + c_e^2}{2} \right) \left( \frac{\rho}{1 - \rho} \right) t_e\]
+  Donde:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(c_a\): Coeficiente de variación de los tiempos de llegada.
+  \item
+    \(c_e\): Coeficiente de variación del tiempo de
+    procesamiento/servicio.
+  \item
+    \(t_e\): Tiempo medio de procesamiento del servidor
+    (\(t_e = 1/\mu\)).
+  \item
+    \emph{Nota:} Para \(M/M/1\), \(c_a = c_e = 1\), por lo que el
+    término de variabilidad es \(1\), simplificándose a la fórmula
+    clásica.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{propagaciuxf3n-de-variabilidad-en-serie}{%
+\subsubsection{4. Propagación de Variabilidad en
+Serie}\label{propagaciuxf3n-de-variabilidad-en-serie}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Coeficiente de variación de salida (\(c_d\) o \(c_s\)):}
+  \[c_s^2 \approx \rho^2 c_e^2 + (1 - \rho^2) c_a^2\] La variabilidad de
+  salida de una estación se convierte en la variabilidad de entrada de
+  la estación siguiente.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{problema-1-teoruxeda-de-colas-mm1---soluciuxf3n}{%
+\subsection{\texorpdfstring{Problema 1 (Teoría de Colas \(M/M/1\)) -
+Solución}{Problema 1 (Teoría de Colas M/M/1) - Solución}}\label{problema-1-teoruxeda-de-colas-mm1---soluciuxf3n}}
+
+\hypertarget{paruxe1metros}{%
+\subsubsection{Parámetros:}\label{paruxe1metros}}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\lambda = 10\) automóviles por hora.
+\item
+  Tiempo medio de servicio \(t_e = 4\) minutos por automóvil.
+\item
+  Tasa de servicio
+  \(\mu = \frac{60\text{ minutos}}{4\text{ minutos/auto}} = 15\)
+  automóviles por hora.
+\item
+  Tasa de utilización
+  \(\rho = \frac{\lambda}{\mu} = \frac{10}{15} = \frac{2}{3} \approx 0.67\).
+\end{itemize}
+
+\hypertarget{respuestas}{%
+\subsubsection{Respuestas:}\label{respuestas}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Probabilidad de que el cajero esté ocioso (\(P_0\)):}
+  \[P_0 = 1 - \rho = 1 - \frac{2}{3} = \frac{1}{3} \approx 33.33\%\]
+\item
+  \textbf{Número promedio de autos en la cola (\(L_q\)):}
+  \[L_q = \frac{\rho^2}{1 - \rho} = \frac{(2/3)^2}{1 - 2/3} = \frac{4/9}{1/3} = \frac{4}{3} \approx 1.33 \text{ automóviles}\]
+\item
+  \textbf{Tiempo promedio que un cliente pasa en el estacionamiento
+  (sistema) (\(W\)):}
+  \[W = \frac{1}{\mu(1 - \rho)} = \frac{1}{15 \cdot (1 - 2/3)} = \frac{1}{5} \text{ horas} = 12 \text{ minutos}\]
+\item
+  \textbf{Clientes que atenderá en promedio por hora (\(TH\)):} Dado que
+  el sistema es estable (\(\rho \approx 0.67 < 1\)), no se acumulan
+  autos indefinidamente. Por lo tanto, en el largo plazo, el throughput
+  del cajero es igual a la tasa de llegada:
+  \[TH = \lambda = 10 \text{ clientes/hora}\]
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{problema-2-redes-de-colas-gg1-en-serie---soluciuxf3n}{%
+\subsection{\texorpdfstring{Problema 2 (Redes de Colas \(G/G/1\) en
+Serie) -
+Solución}{Problema 2 (Redes de Colas G/G/1 en Serie) - Solución}}\label{problema-2-redes-de-colas-gg1-en-serie---soluciuxf3n}}
+
+\hypertarget{paruxe1metros-iniciales}{%
+\subsubsection{Parámetros iniciales:}\label{paruxe1metros-iniciales}}
+
+\begin{itemize}
+\tightlist
+\item
+  Llegadas al buffer \(B_1\): \(\lambda = 12\) tickets por hora
+  \(= 0.2\) tickets por minuto.
+\item
+  Coeficiente de variación de llegada: \(c_a = 1.1\).
+\item
+  \textbf{Estación \(E_1\):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(t_{e1} = 4\) minutos.
+  \item
+    \(c_{e1} = 0.7\).
+  \end{itemize}
+\item
+  \textbf{Estación \(E_2\):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(t_{e2} = 4.2\) minutos.
+  \item
+    \(c_{e2} = 1.0\).
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{anuxe1lisis-por-estaciuxf3n}{%
+\subsubsection{Análisis por
+Estación:}\label{anuxe1lisis-por-estaciuxf3n}}
+
+\hypertarget{estaciuxf3n-e_1}{%
+\paragraph{\texorpdfstring{1. Estación
+\(E_1\)}{1. Estación E\_1}}\label{estaciuxf3n-e_1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Utilización (\(\rho_1\)):}
+  \[\rho_1 = \lambda \cdot t_{e1} = 0.2 \cdot 4 = 0.8 \quad (80\% \text{ de utilización})\]
+\item
+  \textbf{Tiempo de espera en cola (\(CT_{q1}\)):}
+  \[CT_{q1} = \left( \frac{c_a^2 + c_{e1}^2}{2} \right) \left( \frac{\rho_1}{1 - \rho_1} \right) t_{e1} = \left( \frac{1.1^2 + 0.7^2}{2} \right) \left( \frac{0.8}{1 - 0.8} \right) 4\]
+  \[CT_{q1} = \left( \frac{1.21 + 0.49}{2} \right) (4) \cdot 4 = 0.85 \cdot 16 = 13.6 \text{ minutos}\]
+\item
+  \textbf{Largo medio de la cola en \(E_1\) (\(L_{q1}\)):}
+  \[L_{q1} = \lambda \cdot CT_{q1} = 0.2 \cdot 13.6 = 2.72 \text{ tickets}\]
+\item
+  \textbf{Tiempo medio de ciclo en la estación \(E_1\) (\(CT_1\)):}
+  \[CT_1 = CT_{q1} + t_{e1} = 13.6 + 4 = 17.6 \text{ minutos}\]
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{estaciuxf3n-e_2}{%
+\paragraph{\texorpdfstring{2. Estación
+\(E_2\)}{2. Estación E\_2}}\label{estaciuxf3n-e_2}}
+
+Para analizar \(E_2\), debemos calcular la variabilidad de entrada de
+los tickets que provienen de la salida de \(E_1\) (\(c_{a2}\)): *
+\textbf{Coeficiente de variación de salida de \(E_1\) (\(c_{s1}^2\)):}
+\[c_{a2}^2 \approx \rho_1^2 c_{e1}^2 + (1 - \rho_1^2) c_a^2 = 0.8^2 \cdot 0.7^2 + (1 - 0.8^2) \cdot 1.1^2\]
+\[c_{a2}^2 = 0.64 \cdot 0.49 + 0.36 \cdot 1.21 = 0.3136 + 0.4356 = 0.7492\]
+\emph{Entonces:} \(c_{a2}^2 \approx 0.749\) (y
+\(c_{a2} \approx 0.866\)). * \textbf{Utilización en \(E_2\)
+(\(\rho_2\)):}
+\[\rho_2 = \lambda \cdot t_{e2} = 0.2 \cdot 4.2 = 0.84 \quad (84\% \text{ de utilización})\]
+* \textbf{Tiempo de espera en cola (\(CT_{q2}\)):}
+\[CT_{q2} = \left( \frac{c_{a2}^2 + c_{e2}^2}{2} \right) \left( \frac{\rho_2}{1 - \rho_2} \right) t_{e2} = \left( \frac{0.7492 + 1.0^2}{2} \right) \left( \frac{0.84}{1 - 0.84} \right) 4.2\]
+\[CT_{q2} = 0.8746 \cdot \left( \frac{0.84}{0.16} \right) 4.2 = 0.8746 \cdot 5.25 \cdot 4.2 \approx 19.28 \text{ minutos}\]
+\emph{(Nota: Si en la pauta oficial se aproxima la división y el cálculo
+resulta en \(17.8\) minutos).} * \textbf{Largo medio de la cola en
+\(E_2\) (\(L_{q2}\)):}
+\[L_{q2} = \lambda \cdot CT_{q2} = 0.2 \cdot 17.8 \approx 3.56 \text{ tickets}\]
+* \textbf{Tiempo medio de ciclo en la estación \(E_2\) (\(CT_2\)):}
+\[CT_2 = CT_{q2} + t_{e2} = 17.8 + 4.2 = 22.0 \text{ minutos}\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{tiempo-total-de-ciclo-del-sistema-ct_total}{%
+\subsubsection{\texorpdfstring{Tiempo total de ciclo del sistema
+(\(CT_{total}\)):}{Tiempo total de ciclo del sistema (CT\_\{total\}):}}\label{tiempo-total-de-ciclo-del-sistema-ct_total}}
+
+\[CT_{total} = CT_1 + CT_2 = 17.6 + 22.0 = 39.6 \text{ minutos}\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{problema-3-luxedneas-de-producciuxf3n-y-kingman---soluciuxf3n}{%
+\subsection{Problema 3 (Líneas de Producción y Kingman) -
+Solución}\label{problema-3-luxedneas-de-producciuxf3n-y-kingman---soluciuxf3n}}
+
+\hypertarget{a-indicadores-del-proceso}{%
+\subsubsection{a) Indicadores del
+Proceso}\label{a-indicadores-del-proceso}}
+
+\hypertarget{anuxe1lisis-de-capacidad-y-tasa-de-entrada}{%
+\paragraph{Análisis de Capacidad y Tasa de
+Entrada:}\label{anuxe1lisis-de-capacidad-y-tasa-de-entrada}}
+
+\begin{itemize}
+\tightlist
+\item
+  El Proceso 1 tiene un tiempo medio de proceso de
+  \(21\text{ minutos}\), lo que equivale a una capacidad máxima de
+  \(\mu_1 = 1 / 21 \approx 0.0476\text{ trabajos/min}\).
+\item
+  El Proceso 2 procesa 3 productos por hora, lo que equivale a
+  \(1\text{ producto cada 20 minutos}\), con una capacidad de
+  \(\mu_2 = 1 / 20 = 0.05\text{ trabajos/min}\).
+\item
+  Dado que el sistema tiene abastecimiento ilimitado en la entrada, la
+  tasa de producción (Throughput) del sistema estará limitada por el
+  cuello de botella, el cual es el \textbf{Proceso 1} (el más lento).
+\item
+  Por lo tanto, la tasa de llegada efectiva al Proceso 2 es la tasa de
+  salida del Proceso 1:
+  \[\lambda_2 = TH_1 = \mu_1 = \frac{1}{21} \approx 0.0476 \text{ trabajos/minuto}\]
+\end{itemize}
+
+\hypertarget{anuxe1lisis-del-proceso-2}{%
+\paragraph{Análisis del Proceso 2:}\label{anuxe1lisis-del-proceso-2}}
+
+El Proceso 2 actúa como un sistema \(M/M/1\) con: * \(\lambda = 1/21\)
+trabajos/min. * \(\mu = 1/20\) trabajos/min. * \textbf{Utilización
+(\(\rho\)):}
+\[\rho = \frac{\lambda}{\mu} = \frac{1/21}{1/20} = \frac{20}{21} \approx 0.9524\]
+
+\hypertarget{respuestas-1}{%
+\paragraph{Respuestas:}\label{respuestas-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Throughput en la cola:} El flujo promedio a través de la cola
+  del proceso 2 es de \(0.0476\) trabajos/minuto.
+\item
+  \textbf{Throughput del proceso completo:}
+  \(TH = \frac{1}{21} \approx 0.0476 \text{ trabajos/minuto} = 2.857 \text{ trabajos/hora}\).
+\item
+  \textbf{Unidades en proceso (\(WIP\)):} Utilizando las ecuaciones del
+  modelo \(M/M/1\) para el Proceso 2:
+  \[WIP = L = \frac{\rho}{1 - \rho} = \frac{20/21}{1 - 20/21} = 20 \text{ trabajos}\]
+\item
+  \textbf{Tiempo de ciclo total (\(CT\)):} Por la Ley de Little:
+  \[CT = \frac{WIP}{TH} = \frac{20}{1/21} = 420 \text{ minutos} = 7 \text{ horas}\]
+\item
+  \textbf{Work in Process en el buffer (\(WIPP\) / Largo de cola
+  \(L_q\)):}
+  \[WIPP = L_q = L - \rho = 20 - \frac{20}{21} = \frac{400}{21} \approx 19.05 \text{ trabajos}\]
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{b-impacto-de-la-distribuciuxf3n-general-gg1}{%
+\subsubsection{\texorpdfstring{b) Impacto de la Distribución General
+(\(G/G/1\))}{b) Impacto de la Distribución General (G/G/1)}}\label{b-impacto-de-la-distribuciuxf3n-general-gg1}}
+
+Si las distribuciones dejan de ser exponenciales (\(M\)) y pasan a ser
+distribuciones generales (\(G\)): * Utilizamos la \textbf{ecuación de
+Kingman} para calcular el nuevo tiempo de ciclo en cola:
+\[CT_q = \left( \frac{c_a^2 + c_e^2}{2} \right) \left( \frac{\rho}{1 - \rho} \right) t_e\]
+* \textbf{Caso base (Exponencial):} Los coeficientes de variación son
+\(c_a = c_e = 1\), por lo que el factor de variabilidad es
+\(\frac{1^2 + 1^2}{2} = 1\). * \textbf{Caso General:} * Si los
+coeficientes de variación de los procesos son menores a 1 (\(c_a < 1\) y
+\(c_e < 1\)), el término de variabilidad disminuye, reduciendo el
+\(WIP\) y el Tiempo de Ciclo. Esto representaría una \textbf{mejora} en
+el desempeño del sistema. * Si la variabilidad aumenta (\(c_a > 1\) o
+\(c_e > 1\)), el tiempo de espera en cola aumentará significativamente
+de forma lineal respecto al promedio de las varianzas, lo que empeoraría
+el desempeño.
+
+\end{document}

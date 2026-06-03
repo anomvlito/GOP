@@ -1,0 +1,565 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples ──────────────────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox ───────────────────────────────────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definición: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Fórmulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Pauta Interrogación 2 (1er Semestre 2025)}
+\fancyhead[C]{}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[L]{\footnotesize Solución Oficial --- Transcripción en LaTeX}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{gopcyan} Solución Interrogación 2\par}
+  \vspace{0.4cm}
+  {\LARGE\bfseries Gestión de Operaciones\par}
+  \vspace{0.3cm}
+  {\large ICS3213 --- PUC Chile --- 1er Semestre 2025\par}
+  \vspace{1.2cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+
+  {\small Profesores:\par}
+  {\large\bfseries Martín García \quad Alejandro Mac Cawley\par}
+  \vspace{0.3cm}
+  {\small Autores de Referencia de la Pauta:\par}
+  {\small\textbf{César Meneses \quad Fabián Ortega}\par}
+  \vspace{0.4cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{1cm}
+
+  \vfill
+\end{titlepage}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% DESARROLLO DE LA PRUEBA
+% ════════════════════════════════════════════════════════════════════════════
+\section{Preguntas de Desarrollo (60 Puntos)}
+
+\subsection*{Pregunta 1: Planificación de la Producción de Vacunas (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se solicita formular un modelo de optimización lineal entero-mixto (MILP) para planificar la producción de vacunas en dos laboratorios que abastecen a tres centros médicos bajo escenarios de incertidumbre en la demanda. Incorpora costos de producción, inventario, distribución, capacidad y multas lógicas.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Indexar la demanda por escenario $s \in \mathcal{S}$ y mes $t$: $D_{z,t,s}$.
+      \item Definir variables de producción, envío e inventario dependientes del escenario $s$ para capturar el comportamiento estocástico de la demanda.
+      \item Escribir la función objetivo minimizando el costo esperado (ponderando cada escenario por su probabilidad $P_s$).
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  El Ministerio de Salud debe planificar la producción y distribución de vacunas para el invierno durante los próximos $T$ meses. Dispone de dos laboratorios asociados ($i \in \{1, 2\}$) que fabrican las vacunas y de tres centros de distribución regionales ($z \in \{1, 2, 3\}$). 
+
+  Debido a la incertidumbre climática, la demanda mensual de dosis en cada región $z$ en el mes $t$ es incierta. Se definen $S$ escenarios meteorológicos posibles. Cada escenario $s \in \{1, \dots, S\}$ ocurre con una probabilidad conocida $P_s$ ($\sum_s P_s = 1$). La demanda en el escenario $s$, para la región $z$ en el mes $t$ es $D_{z,t,s}$ dosis.
+
+  El laboratorio $i$ tiene una capacidad de producción en el mes $t$ de $CAP_{i,t}$ dosis, con un costo unitario de producción de $CP_i$ pesos. El transporte desde el laboratorio $i$ al centro $z$ tiene un costo de $CT_{i,z}$ pesos por dosis. 
+  
+  Adicionalmente:
+  \begin{itemize}
+    \item Se puede almacenar stock en los laboratorios y en los centros. Almacenar una dosis durante un mes cuesta $HL_i$ pesos en el laboratorio $i$, y $HC_z$ en el centro $z$.
+    \item No existe inventario inicial al comienzo del mes $1$.
+    \item Si en algún escenario la demanda no puede ser cubierta a tiempo, se cobra una penalización por dosis no entregada de $PEN_z$ pesos en la región $z$. El faltante no se acumula para el mes siguiente.
+    \item Por motivos contractuales, el laboratorio 1 debe operar al menos al $40\%$ de su capacidad mensual instalada en cada período $t$, independientemente del escenario que ocurra.
+  \end{itemize}
+
+  Formule un modelo de programación lineal estocástica entera mixta (MILP) para minimizar el costo esperado total del plan de vacunación.
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{1. Conjuntos e Índices}
+  \begin{itemize}
+    \item $i \in \mathcal{L} = \{1, 2\}$: Laboratorios productores.
+    \item $z \in \mathcal{C} = \{1, 2, 3\}$: Centros de distribución regionales (zonas de demanda).
+    \item $t \in \mathcal{T} = \{1, \dots, T\}$: Meses del horizonte de planificación.
+    \item $s \in \mathcal{S} = \{1, \dots, S\}$: Escenarios de demanda invernal.
+  \end{itemize}
+
+  \subsubsection*{2. Parámetros}
+  \begin{itemize}
+    \item $D_{z,t,s}$: Demanda de vacunas en la región $z$, período $t$ bajo escenario $s$ (dosis).
+    \item $P_s$: Probabilidad de ocurrencia del escenario $s$ (donde $\sum_{s \in \mathcal{S}} P_s = 1$).
+    \item $CAP_{i,t}$: Capacidad máxima de producción del laboratorio $i$ en el mes $t$ (dosis).
+    \item $CP_i$: Costo unitario de producción en el laboratorio $i$ (pesos/dosis).
+    \item $CT_{i,z}$: Costo unitario de transporte del laboratorio $i$ al centro $z$ (pesos/dosis).
+    \item $HL_i$: Costo de almacenamiento mensual en el laboratorio $i$ (pesos/dosis-mes).
+    \item $HC_z$: Costo de almacenamiento mensual en el centro $z$ (pesos/dosis-mes).
+    \item $PEN_z$: Penalización unitaria por demanda no satisfecha en la región $z$ (pesos/dosis).
+  \end{itemize}
+
+  \subsubsection*{3. Variables de Decisión}
+  \begin{itemize}
+    \item $X_{i,t,s} \ge 0$: Cantidad producida en el laboratorio $i$ en el mes $t$ bajo el escenario $s$ (dosis).
+    \item $Y_{i,z,t,s} \ge 0$: Envío de vacunas del laboratorio $i$ al centro $z$ en el mes $t$ bajo el escenario $s$ (dosis).
+    \item $IL_{i,t,s} \ge 0$: Inventario en el laboratorio $i$ al final del mes $t$ bajo el escenario $s$ (dosis).
+    \item $IC_{z,t,s} \ge 0$: Inventario en el centro $z$ al final del mes $t$ bajo el escenario $s$ (dosis).
+    \item $F_{z,t,s} \ge 0$: Demanda no satisfecha (faltante) en la región $z$, mes $t$ bajo el escenario $s$ (dosis).
+  \end{itemize}
+
+  \subsubsection*{4. Función Objetivo}
+  Minimizar el costo total esperado (ponderado por la probabilidad $P_s$ de cada escenario $s$):
+  \begin{equation*}
+    \begin{aligned}
+      \min \quad \sum_{s \in \mathcal{S}} P_s \bigg[ &\sum_{t \in \mathcal{T}} \sum_{i \in \mathcal{L}} \left( CP_i \cdot X_{i,t,s} + HL_i \cdot IL_{i,t,s} \right) + \sum_{t \in \mathcal{T}} \sum_{i \in \mathcal{L}} \sum_{z \in \mathcal{C}} CT_{i,z} \cdot Y_{i,z,t,s} \\
+      &+ \sum_{t \in \mathcal{T}} \sum_{z \in \mathcal{C}} \left( HC_z \cdot IC_{z,t,s} + PEN_z \cdot F_{z,t,s} \right) \bigg]
+    \end{aligned}
+  \end{equation*}
+
+  \subsubsection*{5. Restricciones}
+  \begin{itemize}
+    \item \textbf{Límites de Capacidad Máxima en Laboratorios:}
+    \begin{equation}
+      X_{i,t,s} \le CAP_{i,t} \quad \forall i \in \mathcal{L}, t \in \mathcal{T}, s \in \mathcal{S}
+    \end{equation}
+
+    \item \textbf{Restricción Contractual de Producción Mínima (Laboratorio 1):}
+    \begin{equation}
+      X_{1,t,s} \ge 0.40 \cdot CAP_{1,t} \quad \forall t \in \mathcal{T}, s \in \mathcal{S}
+    \end{equation}
+
+    \item \textbf{Balance de Inventario en Laboratorios:}
+    \begin{equation}
+      IL_{i,t,s} = IL_{i,t-1,s} + X_{i,t,s} - \sum_{z \in \mathcal{C}} Y_{i,z,t,s} \quad \forall i \in \mathcal{L}, t \in \mathcal{T}, s \in \mathcal{S} \quad (IL_{i,0,s} = 0)
+    \end{equation}
+
+    \item \textbf{Balance de Inventario e Inventario Faltante en Centros de Demanda:}
+    \begin{equation}
+      IC_{z,t,s} = IC_{z,t-1,s} + \sum_{i \in \mathcal{L}} Y_{i,z,t,s} - (D_{z,t,s} - F_{z,t,s}) \quad \forall z \in \mathcal{C}, t \in \mathcal{T}, s \in \mathcal{S} \quad (IC_{z,0,s} = 0)
+    \end{equation}
+
+    \item \textbf{Límite de Faltante:}
+    La demanda no satisfecha no puede exceder el valor de la demanda real:
+    \begin{equation}
+      F_{z,t,s} \le D_{z,t,s} \quad \forall z \in \mathcal{C}, t \in \mathcal{T}, s \in \mathcal{S}
+    \end{equation}
+
+    \item \textbf{Naturaleza de las Variables:}
+    \begin{equation}
+      X_{i,t,s}, Y_{i,z,t,s}, IL_{i,t,s}, IC_{z,t,s}, F_{z,t,s} \ge 0 \quad \forall i, z, t, s
+    \end{equation}
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA 2 ───────────────────────────────────────────────────────────────
+\subsection*{Pregunta 2: Administración y Control de Proyectos - Campaña de Vacunación (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se entrega un proyecto con tiempos esperados y desviaciones en cada actividad. Se analizan rutas críticas y la probabilidad de cumplimiento en fechas límite fijadas por contrato, así como los impactos de posibles alternativas de crashing.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Identificar las rutas y calcular sus duraciones acumuladas para determinar la ruta crítica.
+      \item Sumar las varianzas correspondientes de las actividades sobre la ruta elegida.
+      \item Encontrar $Z = \frac{X - \mu}{\sigma}$ y obtener la probabilidad correspondiente en la distribución Normal.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  El plan nacional de vacunación invernal se estructura como un proyecto con las siguientes actividades:
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.2cm and 2cm,
+    activity/.style={draw, circle, minimum size=1.2cm, fill=gopgraylight, draw=gopgray, thick, font=\bfseries},
+    arrow/.style={-Stealth, thick, gopblue}
+  ]
+    \node[activity] (A) {A};
+    \node[activity, above right=of A] (B) {B};
+    \node[activity, below right=of A] (C) {C};
+    \node[activity, right=of B] (D) {D};
+    \node[activity, right=of C] (E) {E};
+    \node[activity, below right=of D] (F) {F};
+    
+    \draw[arrow] (A) -- (B);
+    \draw[arrow] (A) -- (C);
+    \draw[arrow] (B) -- (D);
+    \draw[arrow] (C) -- (E);
+    \draw[arrow] (D) -- (F);
+    \draw[arrow] (E) -- (F);
+  \end{tikzpicture}
+  \end{center}
+
+  \begin{center}
+  \small
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Actividad} & \textbf{Tiempo Esperado ($TE$)} & \textbf{Desviación Estándar ($\sigma$)} \\
+    \midrule
+    \textbf{A} & 6 & 1.2 \\
+    \textbf{B} & 8 & 1.5 \\
+    \textbf{C} & 10 & 2.0 \\
+    \textbf{D} & 5 & 1.0 \\
+    \textbf{E} & 4 & 0.8 \\
+    \textbf{F} & 7 & 1.4 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  Determine:
+  \begin{itemize}
+    \item[\textbf{a)}] (6 Ptos) Determine la ruta crítica y el tiempo esperado de finalización del proyecto.
+    \item[\textbf{b)}] (7 Ptos) Si el gobierno fija una meta de tener la campaña implementada en 25 semanas. ¿Cuál es la probabilidad de cumplir con esta meta a tiempo?
+    \item[\textbf{c)}] (7 Ptos) Existe una propuesta alternativa que consiste en subcontratar una de las actividades críticas. Al hacerlo, el tiempo esperado de dicha actividad se reduce en 3 semanas, pero su desviación estándar aumenta en 0.5 semanas. ¿Cuál es el impacto en la probabilidad de cumplir con la meta de 25 semanas si se implementa esta propuesta?
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{a) Ruta Crítica y Tiempo Esperado}
+  Identificamos las rutas posibles y sus duraciones acumuladas:
+  \begin{enumerate}
+    \item \textbf{Ruta 1 (A-B-D-F):}
+    \begin{itemize}
+      \item Duración esperada: $TE_{1} = 6 + 8 + 5 + 7 = 26$ semanas.
+      \item Varianza: $\sigma_1^2 = \sigma_A^2 + \sigma_B^2 + \sigma_D^2 + \sigma_F^2 = 1.2^2 + 1.5^2 + 1.0^2 + 1.4^2 = 1.44 + 2.25 + 1.0 + 1.96 = 6.65$.
+      \item Desviación estándar: $\sigma_1 = \sqrt{6.65} \approx 2.5788$ semanas.
+    \end{itemize}
+
+    \item \textbf{Ruta 2 (A-C-E-F):}
+    \begin{itemize}
+      \item Duración esperada: $TE_{2} = 6 + 10 + 4 + 7 = 27$ semanas.
+      \item Varianza: $\sigma_2^2 = \sigma_A^2 + \sigma_C^2 + \sigma_E^2 + \sigma_F^2 = 1.2^2 + 2.0^2 + 0.8^2 + 1.4^2 = 1.44 + 4.0 + 0.64 + 1.96 = 8.04$.
+      \item Desviación estándar: $\sigma_2 = \sqrt{8.04} \approx 2.8355$ semanas.
+    \end{itemize}
+  \end{enumerate}
+
+  Comparando las rutas:
+  \begin{itemize}
+    \item \textbf{Ruta Crítica:} \textbf{A-C-E-F} (Ruta 2, pues $27 > 26$).
+    \item \textbf{Tiempo esperado de finalización ($\mu$):} \textbf{27 semanas}.
+    \item \textbf{Varianza de la ruta crítica ($\sigma_c^2$):} \textbf{8.04}.
+    \item \textbf{Desviación estándar de la ruta crítica ($\sigma_c$):} $\sqrt{8.04} \approx \textbf{2.8355 semanas}$.
+  \end{itemize}
+
+  \subsubsection*{b) Probabilidad de Finalizar en 25 Semanas}
+  Utilizamos el umbral de tiempo contractual de $X = 25$ semanas:
+  \begin{equation*}
+    Z = \frac{25 - \mu}{\sigma_c} = \frac{25 - 27}{2.8355} = \frac{-2}{2.8355} \approx -0.705
+  \end{equation*}
+
+  Aproximamos usando $Z = -0.71$:
+  \begin{equation*}
+    P(T \le 25) = 1 - \Phi(0.71) \approx 1 - 0.7611 = 0.2389 \implies \textbf{23.89\%}
+  \end{equation*}
+  La probabilidad de cumplir con la meta de 25 semanas es del \textbf{23.89\%}.
+
+  \subsubsection*{c) Impacto de la Propuesta Alternativa (Subcontratación)}
+  Se evalúa aplicar subcontratación sobre la actividad $C$ (actividad crítica, con $TE_C=10, \sigma_C=2.0$).
+  \begin{itemize}
+    \item Nueva duración esperada de C: $TE_C' = 10 - 3 = 7$ semanas.
+    \item Nueva desviación estándar de C: $\sigma_C' = 2.0 + 0.5 = 2.5$ semanas.
+  \end{itemize}
+
+  Reevaluamos ambas rutas del proyecto:
+  \begin{enumerate}
+    \item \textbf{Ruta 1 (A-B-D-F):} Se mantiene sin cambios ($TE_1 = 26$ semanas, $\sigma_1^2 = 6.65$).
+    \item \textbf{Ruta 2 (A-C-E-F):}
+    \begin{itemize}
+      \item Nueva duración esperada: $TE_2' = 6 + 7 + 4 + 7 = 24$ semanas.
+      \item Nueva varianza: $\sigma_2'^2 = 1.2^2 + 2.5^2 + 0.8^2 + 1.4^2 = 1.44 + 6.25 + 0.64 + 1.96 = 10.29$.
+    \end{itemize}
+  \end{enumerate}
+
+  \begin{trampa}{Cambio de Ruta Crítica}
+    Dado que $TE_1 = 26$ semanas y $TE_2' = 24$ semanas, la ruta crítica del proyecto cambia. La nueva ruta crítica pasa a ser la \textbf{Ruta 1 (A-B-D-F)} con duración esperada de 26 semanas y varianza de 6.65.
+  \end{trampa}
+
+  Calculamos la nueva probabilidad de cumplir la meta de 25 semanas utilizando los parámetros de la nueva ruta crítica (Ruta 1):
+  \begin{equation*}
+    Z_{nuevo} = \frac{25 - 26}{\sqrt{6.65}} = \frac{-1}{2.5788} \approx -0.3878 \approx -0.39
+  \end{equation*}
+  \begin{equation*}
+    P(T' \le 25) = 1 - \Phi(0.39) = 1 - 0.6517 = 0.3483 \implies \textbf{34.83\%}
+  \end{equation*}
+
+  \textbf{Impacto:} La probabilidad de cumplir a tiempo \textbf{aumenta} de un $23.89\%$ a un $34.83\%$ (un incremento absoluto del $10.94\%$). Por lo tanto, la propuesta es positiva y se aconseja su implementación.
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA 3 ───────────────────────────────────────────────────────────────
+\subsection*{Pregunta 3: Gestión de Inventarios y Heurísticas de Reabastecimiento (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se entregan requerimientos netos y se pide aplicar la heurística Silver-Meal para calcular el plan de compra de un kit de vacunas, y realizar la explosión de MRP para componentes subordinados.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Heurística de Silver-Meal: Minimizar el costo total promedio por periodo $C(k) = \frac{S + \sum_r H \cdot (r-1) \cdot D_r}{k}$.
+      \item En MRP, multiplicar las órdenes del kit final por los coeficientes de la lista de materiales (BOM) desfasando por Lead Time.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  El centro nacional de salud distribuye "Kits de Vacunación X" a los hospitales regionales. La demanda neta proyectada de kits para las siguientes 6 semanas es:
+  \begin{itemize}
+    \item Semanas: 1: 60, \quad 2: 90, \quad 3: 40, \quad 4: 110, \quad 5: 80, \quad 6: 130
+  \end{itemize}
+
+  El BOM del Kit X indica que cada kit requiere de 2 jeringas del componente B y 3 frascos del componente C. Cada jeringa B requiere adicionalmente 1 aguja de seguridad D.
+  
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.2cm and 1.5cm,
+    item/.style={draw, rectangle, minimum width=1.5cm, minimum height=0.8cm, fill=gopbluedeflight, draw=gopbluedef, thick, font=\bfseries}
+  ]
+    \node[item] (X) {Kit X};
+    \node[item, below left=of X] (B) {B (2)};
+    \node[item, below right=of X] (C) {C (3)};
+    \node[item, below=of B] (D) {D (1)};
+    
+    \draw[thick, gopblue] (X) -- (B);
+    \draw[thick, gopblue] (X) -- (C);
+    \draw[thick, gopblue] (B) -- (D);
+  \end{tikzpicture}
+  \end{center}
+
+  La información de inventarios se resume en la siguiente tabla:
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Componente} & \textbf{Inventario Inicial} & \textbf{Stock de Seguridad} & \textbf{Lead Time} & \textbf{Costo de Mantener ($H$)} \\
+    \midrule
+    \textbf{Kit X} & 30 & 10 & 1 week & \$2.0/unidad-semana \\
+    \textbf{B} & 60 & 0 & 2 semanas & \$0.8/unidad-semana \\
+    \textbf{C} & 120 & 15 & 1 semana & \$1.0/unidad-semana \\
+    \textbf{D} & 40 & 10 & 1 semana & \$0.4/unidad-semana \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  El costo administrativo de lanzar una orden (setup) del Kit X es de $\$250$. Los componentes B, C y D operan bajo política lote a lote (L4L).
+
+  \begin{itemize}
+    \item[\textbf{a)}] (10 Ptos) Utilice la heurística de Silver-Meal para calcular el plan de pedido óptimo del Kit X (Lanzamiento de Órdenes).
+    \item[\textbf{b)}] (10 Ptos) Realice las tablas de MRP completas para los componentes B, C y D.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{a) Heurística de Silver-Meal para el Kit X}
+  Calculamos las necesidades netas de Kit X considerando Inventario Disponible = 30 y Stock de Seguridad = 10:
+  \begin{itemize}
+    \item Inventario Disponible Neto Inicial = $30 - 10 = 20$ unidades.
+    \item Semana 1: Demanda = 60. Netas = $60 - 20 = 40$ unidades.
+    \item Semanas 2 a 6: Netas = $[40, 90, 40, 110, 80, 130]$.
+  \end{itemize}
+
+  Aplicamos la heurística Silver-Meal ($S = \$250$, $H = \$2$):
+
+  \paragraph{Decisión 1 (Iniciar en Semana 1):}
+  \begin{itemize}
+    \item $k=1$ (Semana 1): $C(1) = 250 / 1 = \mathbf{250}$.
+    \item $k=2$ (Semana 1..2): $C(2) = (250 + 2 \cdot (1 \cdot 90)) / 2 = 430 / 2 = 215$.
+    \item $k=3$ (Semana 1..3): $C(3) = (430 + 2 \cdot (2 \cdot 40)) / 3 = 590 / 3 = 196.67$.
+    \item $k=4$ (Semana 1..4): $C(4) = (590 + 2 \cdot (3 \cdot 110)) / 4 = 1250 / 4 = 312.5$.
+    \item Detenemos pues $C(4) > C(3)$. Producimos en la Semana 1 para cubrir Semanas 1, 2 y 3.
+    \item \textbf{Lote 1 (Semana 1):} $40 + 90 + 40 = \mathbf{170 \text{ unidades}}$.
+  \end{itemize}
+
+  \paragraph{Decisión 2 (Iniciar en Semana 4):}
+  \begin{itemize}
+    \item $k=1$ (Semana 4): $C(1) = 250 / 1 = \mathbf{250}$.
+    \item $k=2$ (Semana 4..5): $C(2) = (250 + 2 \cdot (1 \cdot 80)) / 2 = 410 / 2 = 205$.
+    \item $k=3$ (Semana 4..6): $C(3) = (410 + 2 \cdot (2 \cdot 130)) / 3 = 930 / 3 = 310$.
+    \item Detenemos pues $C(3) > C(2)$. Producimos en la Semana 4 para cubrir Semanas 4 y 5.
+    \item \textbf{Lote 2 (Semana 4):} $110 + 80 = \mathbf{190 \text{ unidades}}$.
+  \end{itemize}
+
+  \paragraph{Decisión 3 (Iniciar en Semana 6):}
+  \begin{itemize}
+    \item Cubre Semana 6. \textbf{Lote 3 (Semana 6):} $\mathbf{130 \text{ unidades}}$.
+  \end{itemize}
+
+  \paragraph{Programa de Recepciones Planificadas (POR) del Kit X:}
+  \begin{itemize}
+    \item Semana 1: 170 \quad Semana 4: 190 \quad Semana 6: 130
+  \end{itemize}
+  Como el Lead Time del Kit X is de 1 semana, los lanzamientos (\textit{PORelease}) se desfasan:
+  \begin{itemize}
+    \item Semana 0: 170 \quad Semana 3: 190 \quad Semana 5: 130
+  \end{itemize}
+
+  \subsubsection*{b) Tablas de MRP para B, C y D}
+
+  \paragraph{1. Componente B (LT = 2, L4L, $GR_B = 2 \cdot PORelease_X$, Inventario Disponible Neto = 60)}
+  \begin{center}
+  \small
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} \\
+    \midrule
+    \textbf{GR} & 340 & 0 & 0 & 380 & 0 & 260 & 0 \\
+    \textbf{OH} & 60 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Net} & 280 & 0 & 0 & 380 & 0 & 260 & 0 \\
+    \textbf{PORelease} & 280 (Sem -2) & 0 & 380 (Sem 1) & 0 & 260 (Sem 3) & 0 & 0 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \paragraph{2. Componente C (LT = 1, L4L, $GR_C = 3 \cdot PORelease_X$, Inv. Disponible Neto = 120 - 15 = 105)}
+  \begin{center}
+  \small
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} \\
+    \midrule
+    \textbf{GR} & 510 & 0 & 0 & 570 & 0 & 390 & 0 \\
+    \textbf{OH} & 105 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Net} & 405 & 0 & 0 & 570 & 0 & 390 & 0 \\
+    \textbf{PORelease} & 405 (Sem -1) & 0 & 570 (Sem 2) & 0 & 390 (Sem 4) & 0 & 0 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \paragraph{3. Componente D (LT = 1, L4L, $GR_D = 1 \cdot PORelease_B$, Inv. Disponible Neto = 40 - 10 = 30)}
+  \begin{center}
+  \small
+  \begin{tabular}{lccccccc}
+    \toprule
+    \textbf{Semana} & \textbf{-2} & \textbf{-1} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} \\
+    \midrule
+    \textbf{GR} & 280 & 0 & 0 & 380 & 0 & 260 & 0 \\
+    \textbf{OH} & 30 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Net} & 250 & 0 & 0 & 380 & 0 & 260 & 0 \\
+    \textbf{PORelease} & 250 (Sem -3) & 0 & 420 (Sem 0) & 0 & 300 (Sem 2) & 0 & 0 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \textit{Nota: Los lanzamientos de D se programan desfasando en 1 semana sus requerimientos netos.}
+
+\end{ejercicio}
+
+\end{document}

@@ -1,0 +1,949 @@
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Pontificia Universidad Católica de Chile
+Escuela de Ingeniería
+Departamento de Ingeniería Industrial y de Sistemas
+
+Interrogación 2
+Enunciados
+ICS 3213 Gestión de Operaciones
+1er semestre 2023
+Instrucciones:
+•
+
+Responder en letra legible, en lápiz pasta o bolígrafo y poner nombre a todas las hojas.
+
+•
+
+No debe des corchetear la prueba y responda en el espacio asignado.
+
+•
+
+Esta sección de la prueba tiene 60 puntos, dura 60 minutos.
+
+•
+
+Se leerá la prueba al comienzo de clases y después se permitirán preguntas en voz alta. Posteriormente en
+la mitad de la prueba se volverá a permitir preguntas en voz alta. No se permitirán preguntas fuera de estos
+intervalos. Si su duda persiste indique el supuesto y continúe.
+
+•
+
+Al final de la prueba los alumnos deberán subir su prueba a CANVAS. Dispondrán de 15 minutos para
+escanear pruebas hoja por hoja y subirlas. Al final de subir la prueba deberán dejarla en el mismo puesto.
+Si por alguna razón hay un problema al subir la prueba, avisen al profesor/ayudante y dejen su prueba.
+
+•
+
+Este curso adscribe el Código de Honor establecido por la Escuela de Ingeniería el que es vinculante. Todo
+trabajo evaluado en este curso debe ser propio. En caso de que exista colaboración permitida con otros
+estudiantes, el trabajo deberá referenciar y atribuir correctamente dicha contribución a quien corresponda.
+Como estudiante es su deber conocer la versión en línea del Código de Honor
+(http://ing.puc.cl/codigodehonor).
+
+¡Muy Buena Suerte!
+
+Página 1 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+PARTE DESARROLLO: Responda todas las siguientes preguntas de ejercicio.
+a) (20 puntos) La nueva tienda de zapatos cerca del campus debe determinar la cantidad de zapatillas que desea comprar
+para la temporada navideña. Los zapatos tienen un precio alto y se importan de EE.UU. En costo unitario de cada par de
+zapatillas es de U$60 y los venderán a U$300. Cualquier par que no venda al final de la temporada lo compra un outlet
+por U$47 el par de zapatillas.
+i. (8 puntos) Si la venta sigue una distribución normal con media 300 y desviación estándar de 40 pares de zapatillas.
+¿Cuál sería la cantidad óptima de pares de zapatillas que debe comprar la tienda para la temporada?
+ii. (8 puntos) Un análisis detallado de los datos históricos de ventas muestra que la cantidad de zapatillas es igualmente
+probable para todos los valores entre 100 y 500 pares (inclusive) de zapatillas durante la estación. Con esa
+información, ¿cuántos pares de zapatillas debe comprar la tienda? (recomendación: esto quiere decir que la
+distribución correcta de la demanda es uniforme).
+iii. (4 puntos) Si bien la demanda esperada en las preguntas a y b es la misma, las cantidades óptimas son distintas. ¿A
+qué se debe esta diferencia? (Nota: la respuesta evidente, que es que el cálculo se ha realizado con dos distribuciones
+de demanda diferentes no se contará como correcta. Usted debe explicar en otros términos esa diferencia).
+
+Pregunta i)
+El costo de overstock y understock son 13 (60-47) y 240 (300-60) respectivamente. Por tanto,
+queremos cubrir una demanda igual a 240/240+13 = 0, 9486 por uno (el 94,86 %).
+Ya sabemos que el valor que debemos buscar es 0,9486. Este valor no aparece en nuestra tabla
+normal pero el que más se aproxima es 0,95, por lo que usaremos ese valor de z (z=1,645). Por tanto, deberíamos
+comprar µ + zσ = 300 + 1, 645 × 40 = 365, 8 pares.
+Pregunta ii)
+El costo de overstock y understock son 13 (60-47) y 240 (300-60) respectivamente. Por tanto,
+queremos cubrir una demanda igual a 240/240+13 = 0, 9486 por uno (el 94,86 %).
+Tenemos una distribución con 401 valores, cada uno con una probabilidad del 0,24938 % (procedente de 1/401). No
+podemos hacer una tabla completa de probabilidades acumuladas, pero podemos determinar el primer valor cuya
+probabilidad acumulada es mayor a 94,86 %.
+Este cálculo se puede hacer de varias maneras. Sabemos que comprar 500 cubre toda la demanda y tenemos que buscar
+el valor más grande que siga cumpliendo la siguiente condición (tenemos que encontrar x tal que: x × 0, 0024938 < (1 − 0,
+9486).
+El valor de x que hace que x × 0, 0024938 = (1 − 0, 9486) es 20,6047. Por tanto (y sabiendo que el
+valor tiene que ser entero) la condición en desigualdad estricta se cumple con x=20, así que hay
+que comprar 500-20=480.
+Pregunta iii)
+La distribución normal que hemos utilizado tiene una variabilidad mucho menor que la distribución uniforme inicial.
+Eso explica la diferencia y muestra la importancia de la variabilidad en determinar la cantidad a comprar para cubrirse ante
+lo inesperado.
+
+Página 2 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Página 3 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+b) (20 puntos) Usted se encuentra a cargo de un proyecto de infraestructura y ha determinado que la fecha esperada de la
+ruta crítica es de 180 días con una desviación estándar de 12 días. Actualmente se encuentra en el proceso de negociación
+con su mandante y este inicialmente le ha ofrecido un bono de U$2 millones si termina en o antes de 165 días y una
+penalización de U$ 1 millón si termina después de los 165 días.
+i.
+(3 ptos) ¿Aceptaría usted el contrato que le ofrecen? Si la penalización no es transable ¿Qué monto de bono lo deja
+indiferente?
+ii.
+(4 ptos) Si se mantiene los montos de bono y penalización original ¿Qué fecha lo deja indiferente?
+iii.
+(6 ptos) Usted tiene la posibilidad de implementar tecnología en una de las actividades del proyecto que es parte
+de la ruta crítica. La actividad en cuestión tiene un tiempo esperado de 20 días, una desviación estándar de 3. La
+tecnología le permite disminuir el tiempo esperado de finalización en 10 días, sin afectar la ruta crítica, y la
+desviación standard de la actividad en 1.5 días. Si la tecnología tiene un costo de U$10 mil. Para los montos de
+bono y penalización originales ¿contrataría la tecnología? (Muestre sus cálculos)
+iv.
+(7 ptos) Si ahora usted puede implementar otra tecnología que le permite reducir el tiempo esperado de cada una
+de las actividades entre los nodos (i,j) del proyecto, en un máximo de 𝑀𝑖𝑗 días y con un costo lineal de 𝐶𝑖𝑗 por cada
+día reducido (puede ser fraccional la reducción). Esta tecnología no afecta en nada la variabilidad de cada actividad.
+Para la situación inicial presente el modelo de optimización o programación matemática que permita determinar
+la óptima implementación de tecnología y reducción en el tiempo del proyecto. Indique las variables de decisión,
+función objetivo y restricciones.
+
+i.- Se debe determinar el valor de Z (165-180)/12= -1.25 en la tabla de normalidad corresponde a 0.8944, como es negativo
+se invierte. Dterminamos el valor esperado 2*(1-0.8944)-1*0.8944= -0.6832 Es decir se produce un perdida, por lo que no
+se acepta el contrato. Por ende se despéja X(1-0.8944)=1*0.8944. El bono debe ser de 8.4696 millones
+
+ii.- Se determina la probabilidad que nos deja indiferente 2*P()=1*(1-p()) La probabilidad es 1/3 Por ende como es en los
+negativos se busca 0.66 en tabla z. Es un valor de -0.43 = (x-180)/12 Se despeja x y se obtiene 174.84 Por ende son esos
+días
+iii.- Se disminuye el tiempo promedio en 10 por ende ahora es 170. No se pueden restar desviaciones por lo que hay que
+usar varianzas 12^2-1.5^2 = 141.75 y por ende la nueva desviación es de 11.91. Se debe determinar el valor de Z (165170)/11.91= -0.419 o -0.42 la probabilidad es de 0.6628 Si calculamos el valor esperado =2*(1-0.6628)-1*0.6628 =0.0116
+o 11.600 dólares y por ende se contrata.
+iv.- Las variables de decisión son: x_i La fecha de finalización de la tarea i: 1..k
+r_ij Lareducción en el tiempo de la actividad entre los nodos i,j
+Se debe plantear un modelo similar al utilizado para determinar la ruta crítica, sin embargo la función objetivo es maximizar
+el valor esperado menos el costo de la reducción.
+
+𝑀𝑎𝑥 2 ∗ (1 − 𝐹 −1 (
+
+165 − 𝑋𝑘
+165 − 𝑋𝑘
+)) − 1 ∗ 𝐹 −1 (
+) − ∑ 𝐶𝑖𝑗 ∗ 𝑟
+12
+12
+𝑖𝑗
+
+S/A
+𝑥𝑗 − 𝑥𝑖 ≥ 𝑡𝑖𝑗 − 𝑟𝑖𝑗 ∀(𝑖, 𝑗)
+𝑟𝑖𝑗 ≤ 𝑀𝑖𝑗 ∀(𝑖, 𝑗)
+𝑥𝑖 ≥ 0 𝑟𝑖𝑗 ≥ 0
+
+Página 4 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Página 5 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+(20 puntos) Lo han contratado en una empresa que fabrica e instala kits para transformar furgones de reparto en vehículos
+híbridos. Un nuevo cliente le ha adjudicado la transformación del total de su flota y dado que debe mantener operativa su
+operación ha hecho el siguiente plan de disposición de vehículos, considerando que usted se demora 1 mes en realizar el
+trabajo.
+Mes
+ene-24
+feb-24
+mar-24
+abr-24
+may-24
+Cantidad
+
+5
+
+12
+
+3
+
+15
+
+12
+
+Para este proyecto, este cliente usted debe utilizar un kit del tipo A, el cual le tarda 2 meses en tenerlo fabricado, el costo
+unitario de fabricación cada kit tipo A es de $1.000.- configurar su línea de fabricación le cuesta $5.000.- y dado que
+utiliza espacio de almacenamiento y debe tener seguro por ello, el costo de inventario por cada unidad por mes es de
+$150.- A continuación se detalla el BOM del Kit a:
+kit
+Cantidad
+LT
+
+A
+1
+2
+
+Componente
+Cantidad
+Lead Time
+
+B
+2
+1
+
+Componente
+Cantidad
+Lead Time
+
+C
+1
+2
+
+Componente
+Cantidad
+Lead Time
+
+D
+4
+1
+
+Componente
+Cantidad
+Lead Time
+
+D
+5
+1
+
+Determine:
+a) (10 Ptos) Usando el algoritmo de Wagner Whitin determine en qué mes o meses debe iniciar la fabricación de o
+los kits A ¿cuántos de ellos requiere en cada mes?
+b) (6 Ptos) Considerando el BOM adjunto, realice las tablas de MRP para los componentes B, C y D, considerando
+que este último componente tiene una cantidad mínima de pedido de 100 unidades.
+c) (4 Ptos) ¿Cuándo debería poner el primer pedido para cumplir con la primera entrega? ¿Qué componentes y
+cuanto debería ser?
+
+a)
+Mes
+Cantidad
+Ct
+At
+ht
+
+ene-24
+5
+1000
+5000
+150
+
+feb-24
+12
+1000
+5000
+150
+
+mar-24
+3
+1000
+5000
+150
+
+Zt1
+Zt2
+Zt3
+Zt4
+Zt5
+
+10000
+23800
+27700
+49450
+
+27000
+44250
+49950
+
+31800
+49050
+
+abr-24
+15
+1000
+5000
+150
+
+may-24
+12
+1000
+5000
+150
+
+47700
+61500
+
+64700
+
+MRP Kit A)
+
+Debe iniciar la fabricación en noviembre 2023 y comenzar con 20 kit, y la siguiente fecha sería en febrero con
+27 kits.
+b)
+Página 6 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+B
+
+GR
+OH
+POR
+
+0
+10
+
+0
+10
+
+0
+10
+30
+
+40
+0
+0
+
+0
+0
+0
+
+0
+0
+54
+
+54
+0
+0
+
+0
+0
+0
+
+0
+0
+0
+
+0
+0
+0
+
+C
+
+GR
+OH
+POR
+
+0
+5
+0
+
+0
+5
+15
+
+0
+5
+0
+
+20
+0
+0
+
+0
+0
+27
+
+0
+0
+0
+
+27
+0
+0
+
+0
+0
+0
+
+0
+0
+0
+
+0
+0
+0
+
+D
+
+GR
+OH
+POR
+
+0
+85
+110
+
+75
+120
+0
+
+120
+0
+0
+
+0
+0
+135
+
+135
+0
+216
+
+216
+0
+0
+
+0
+0
+0
+
+0
+0
+0
+
+0
+0
+0
+
+0
+0
+0
+
+c)
+En este caso, la primera orden debe ser de 110 unidades del componente D en el mes de Agosto para poder
+cumplir con el pedido.
+
+Página 7 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Tabla de distribución normal estándar
+
+z
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+1.7
+1.8
+1.9
+2.0
+2.1
+2.2
+2.3
+2.4
+2.5
+2.6
+2.7
+2.8
+2.9
+3.0
+3.1
+3.2
+
+0.00
+.5000
+.5398
+.5793
+.6179
+.6554
+.6915
+.7257
+.7580
+.7881
+.8159
+.8413
+.8643
+.8849
+.9032
+.9192
+.9332
+.9452
+.9554
+.9641
+.9713
+.9772
+.9821
+.9861
+.9893
+.9918
+.9938
+.9953
+.9965
+.9974
+.9981
+.9987
+.9990
+.9993
+
+.01
+.5040
+.5438
+.5832
+.6217
+.6591
+.6950
+.7291
+.7611
+.7910
+.8186
+.8438
+.8665
+.8869
+.9049
+.9207
+.9345
+.9463
+.9564
+.9649
+.9719
+.9778
+.9826
+.9864
+.9896
+.9920
+.9940
+.9955
+.9966
+.9975
+.9982
+.9987
+.9991
+.9993
+
+.02
+.5080
+.5478
+.5871
+.6255
+.6628
+.6985
+.7324
+.7642
+.7939
+.8212
+.8461
+.8686
+.8888
+.9066
+.9222
+.9357
+.9474
+.9573
+.9656
+.9726
+.9783
+.9830
+.9868
+.9898
+.9922
+.9941
+.9956
+.9967
+.9976
+.9982
+.9987
+.9991
+.9994
+
+.03
+.5120
+.5517
+.5910
+.6293
+.6664
+.7019
+.7357
+.7673
+.7967
+.8238
+.8485
+.8708
+.8907
+.9082
+.9236
+.9370
+.9484
+.9582
+.9664
+.9732
+.9788
+.9834
+.9871
+.9901
+.9925
+.9943
+.9957
+.9968
+.9977
+.9983
+.9988
+.9991
+.9994
+
+.04
+.5160
+.5557
+.5948
+.6331
+.6700
+.7054
+.7389
+.7704
+.7995
+.8264
+.8508
+.8729
+.8925
+.9099
+.9251
+.9382
+.9495
+.9591
+.9671
+.9738
+.9793
+.9838
+.9875
+.9904
+.9927
+.9945
+.9959
+.9969
+.9977
+.9984
+.9988
+.9992
+.9994
+
+.05
+.5199
+.5596
+.5987
+.6368
+.6736
+.7088
+.7422
+.7734
+.8023
+.8289
+.8531
+.8749
+.8944
+.9115
+.9265
+.9394
+.9505
+.9599
+.9678
+.9744
+.9798
+.9842
+.4878
+.9906
+.9929
+.9946
+.9960
+.9970
+.9978
+.9984
+.9989
+.9992
+.9994
+
+Formulario
+Ft + Tt
+Ft +1 = At + (1 −  )Ft FITt = 
+
+Qw =
+
+b=
+
+.07
+.5279
+.5675
+.6064
+.6443
+.6808
+.7157
+.7486
+.7794
+.8078
+.8340
+.8577
+.8790
+.8980
+.9147
+.9292
+.9418
+.9525
+.9616
+.9693
+.9756
+.9808
+.9850
+.9884
+.9911
+.9932
+.9949
+.9962
+.9972
+.9979
+.9985
+.9989
+.9992
+.9995
+
+.08
+.5319
+.5714
+.6103
+.6480
+.6844
+.7190
+.7517
+.7823
+.8106
+.8365
+.8599
+.8810
+.8997
+.9162
+.9306
+.9429
+.9535
+.9625
+.9699
+.9761
+.9812
+.9854
+.9887
+.9913
+.9934
+.9951
+.9963
+.9973
+.9980
+.9986
+.9990
+.9993
+.9995
+
+.09
+.5359
+.5753
+.6141
+.6517
+.6879
+.7224
+.7549
+.7852
+.8133
+.8389
+.8621
+.8830
+.9015
+.9177
+.9319
+.9441
+.9545
+.9633
+.9706
+.9767
+.9817
+.9857
+.9890
+.9916
+.9936
+.9952
+.9964
+.9974
+.9981
+.9986
+.9990
+.9993
+.9995
+
+k
+yt
++ (1 −  )( Lt −1 + bt −1 ) MAD = 1
+| et |
+St − s
+k
+k t =1
+Pr onóstico
+Tendencia
+bt =  ( Lt − Lt −1 ) + (1 −  )bt −1
+k
+Ft = FITt − 1 +  ( A t − 1 − FITt − 1)
+yt
+ek
+
+St =  + (1 −  ) St − s
+t =1
+TS k =
+Tt = Tt − 1 +  ( A t − 1 − FITt − 1)
+Lt
+
+2C 0 D
+Ch
+
+R = d *L
+
+.06
+.5239
+.5636
+.6026
+.6406
+.6772
+.7123
+.7454
+.7764
+.8051
+.8315
+.8554
+.8770
+.8962
+.9131
+.9279
+.9406
+.9515
+.9608
+.9686
+.9750
+.9803
+.9846
+.9881
+.9909
+.9931
+.9948
+.9961
+.9971
+.9979
+.9985
+.9989
+.9992
+.9994
+
+Ft + m = ( Lt + mbt ) St + m − s
+
+D
+Q
+CT = DC + S + H
+Q
+2
+
+n xy −  x  y
+n x 2 − ( x )
+
+2
+
+
+
+Lt = 
+
+Qopt =
+
+2 DCO
+CH
+
+MADk
+
+p
+p−d
+
+
+
+yˆ = a + bx a = n − b n = y − bx
+y
+
+x
+
+ Ch 
+
+B * = Q  
+C
++
+
+h
+
+
+Q* =
+
+2 DC o
+Ch + 
+Ch + 
+
+= Qeoq 
+Ch
+
+
+
+𝐶𝑇(𝑄) =
+
+Página 8 de 8
+
+(𝑄 − 𝐵)
+(𝑄 − 𝐵) 𝐵
+𝐵 𝐷
+∗ 𝐶ℎ ∗
++ ∗ 𝜋 ∗ + ∗ 𝐶𝑜
+2
+𝑄
+2
+𝑄 𝑄
+
+

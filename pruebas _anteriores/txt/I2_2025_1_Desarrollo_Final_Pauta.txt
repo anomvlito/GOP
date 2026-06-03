@@ -1,0 +1,824 @@
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Pontificia Universidad Católica de Chile
+Escuela de Ingeniería
+Departamento de Ingeniería Industrial y de Sistemas
+
+Interrogación 2
+Enunciados
+ICS 3213 Gestión de Operaciones
+1er semestre 2025
+Instrucciones:
+•
+
+Responder en letra legible, en lápiz pasta o bolígrafo y poner nombre a todas las hojas.
+
+•
+
+No debe des corchetear la prueba y responda en el espacio asignado.
+
+•
+
+Esta sección de la prueba tiene 60 puntos, dura 60 minutos.
+
+•
+
+Se leerá la prueba al comienzo de clases y después se permitirán preguntas en voz alta. Posteriormente en
+la mitad de la prueba se volverá a permitir preguntas en voz alta. No se permitirán preguntas fuera de estos
+intervalos. Si su duda persiste indique el supuesto y continúe.
+
+•
+
+Al final de la prueba los alumnos deberán subir su prueba a CANVAS. Dispondrán de 15 minutos para
+escanear pruebas hoja por hoja y subirlas. Al final de subir la prueba deberán dejarla en el mismo puesto.
+Si por alguna razón hay un problema al subir la prueba, avisen al profesor/ayudante y dejen su prueba.
+
+•
+
+Este curso adscribe el Código de Honor establecido por la Escuela de Ingeniería el que es vinculante. Todo
+trabajo evaluado en este curso debe ser propio. En caso de que exista colaboración permitida con otros
+estudiantes, el trabajo deberá referenciar y atribuir correctamente dicha contribución a quien corresponda.
+Como estudiante es su deber conocer la versión en línea del Código de Honor
+(http://ing.puc.cl/codigodehonor).
+
+¡Muy Buena Suerte!
+
+Página 1 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+PARTE DESARROLLO: Responda todas las siguientes preguntas de ejercicio.
+Pregunta 1.- (20 puntos) Usted es el Gerente de Operaciones de una empresa que fabrica un solo producto en varias plantas
+distribuidas en diferentes regiones. Debe planificar la producción para las siguientes T semanas. La demanda semanal de
+cada cliente i para cada semana t está dada por 𝐷𝑖𝑡 . Esta demanda debe ser satisfecha a lo largo del horizonte de
+planificación T, o tendrá una penalización de 𝑃𝑖 por unidad insatisfecha.
+La producción puede realizarse en cualquiera de las N plantas, pero cada vez que una planta comienza a operar después de
+estar inactiva, incurre en un costo fijo de activación 𝐴𝑛 . Si la planta se usa por semanas consecutivas, este costo sólo se
+paga una vez. Si se deja de operar por un periodo de tiempo y se vuelve a utilizar más adelante, el costo de activación se
+paga nuevamente. Cada planta tiene trabajadores con una capacidad de horas normales por semana 𝐻𝑁𝑛 , y puede utilizar
+hasta 𝐻𝐸𝑛 horas extra por semana a un costo adicional 𝐶𝐸𝑛 por cada hora adicional. Cada planta tiene una productividad
+de 𝑃𝑅𝑛 unidades por hora. El costo de producción por unidad en planta n es -𝐶𝑃𝑛 .
+Cada unidad producida debe enviarse a algún cliente i, y el costo de envío por unidad desde la planta n al cliente i es 𝐶𝑖𝑛 .
+Se puede mantener inventario en cada planta con un costo de almacenamiento semanal 𝐻𝑛 por unidad. El inventario inicial
+es de 𝐼𝑛0 y al final del periodo de planificación se debe terminar con 𝐼𝑛 𝑇 en cada planta.
+i)
+
+(12 puntos) Con esta información construya un modelo de programación matemática que permita determinar la
+planificación de producción. En su respuesta indique: las variables de decisión del modelo, la función objetivo y las
+restricciones. Si necesita de algún parámetro o conjunto adicional, indíquelo claramente.
+ii) (5 puntos) Modifique el modelo anterior para que cumpla con las siguientes condiciones adicionales:
+- Si una planta se activa en una semana, debe operar al menos un turno completo (40 horas normales por semana).
+- La producción en una planta solo es rentable si se fabrican al menos 𝐿𝑛 unidades en esa semana. Es decir, si se decide
+producir, debe ser por lo menos ese mínimo.
+- Por políticas de servicio al cliente, la empresa solo permite que se deje sin entregar o insatisfecha a lo más el 𝐴𝑖 porcentaje
+de la demanda del cliente i durante el horizonte de planificación T.
+iii) (3 puntos) Si 𝐷𝑖𝑡 es el pronóstico de ventas parea cliente i para cada semana t y usted dispone de un intervalo de
+confianza al 90% de las ventas dado por [𝐷𝐼𝑖𝑡 , 𝐷𝑆𝑖𝑡 ] siendo 𝐷𝐼𝑖𝑡 , 𝐷𝑆𝑖𝑡 el intervalo inferior e intervalo superior de ventas
+parea cliente i para cada semana t, respectivamente. ¿Cómo incorporaría esta información en la planificación? Indique
+paso a paso como lo haría (NO desarrolle el modelo, sólo explique) ¿Cómo puede cambiar su decisión? Incluya los
+conceptos de caso pesimista, caso esperado y caso optimista en su respuesta.
+
+Página 2 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Página 3 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Pregunta 2.- (20 puntos) Usted está a cargo del siguiente proyecto, que se compone por 6 actividades. A continuación, se
+detalla para cada actividad: sus precedentes, tiempo esperado de término en días y desviación estándar en días. Haga sus
+cálculos al cuarto decimal.
+Actividad
+A
+B
+C
+D
+E
+F
+i.
+ii.
+iii.
+iv.
+
+Precedentes
+A, B
+B, C
+E
+
+T. Esperado
+(Días)
+13
+12
+9
+14
+12
+6
+
+Desv Est.
+(Días)
+0.5
+1
+1
+2
+1
+0.4
+
+(5 ptos.) Construya el diagrama de PERT del proyecto y determine la ruta crítica.
+(3 ptos.) Construya un intervalo de confianza para el tiempo de término del proyecto al 95%.
+(5 ptos.) Su contraparte le ofrece un bono de $150 si termina en o antes de 28 días y una penalidad de $50 si en o
+después de 31 días. ¿Acepta o no el contrato? Justifique sus cálculos. ¿Qué fecha (días) en la penalidad lo deja
+indiferente?
+(7 ptos.) Determine todas las posibles secuencias o camino de actividades entre el inicio del proyecto y su término
+que no son parte de la ruta crítica. Para cada ruta o secuencia determine su tiempo esperado de término y su varianza.
+Suponiendo independencia en los tiempos de término de cada ruta, seleccione una de las rutas y determine la
+probabilidad de que se demore más que la ruta crítica determinada en i, es decir, que se transforme en crítica.
+
+Actividad
+A
+B
+C
+D
+E
+F
+
+ES
+0
+0
+0
+13
+12
+24
+
+EF
+13
+12
+9
+27
+24
+30
+
+A
+
+LS
+3
+10
+3
+16
+12
+24
+
+LF
+16
+12
+12
+30
+24
+30
+
+Holgura
+3
+0
+3
+3
+0
+0
+
+Ruta Critica: B-E-F
+
+D
+
+B
+F
+C
+
+E
+
+ii.- Varianza Ruta Critica: 1^2+1^2+0.4^2=2.16
+LS = 30+1.96*Raiz(2.16)= 32.8806
+LI = 30 -1.96*Raiz(2.16)= 27.1194
+iii.z=(28-30)/raíz(2.16)= -1.3608 → P() = 1-0.9131 = 0.0869 → 0.0869*150 = $ 13.035 VE Bono
+z=(31-30)/raíz(2.16)= 0.6804 → P() = 1-0.7517 = 0.2483 → 0.2483*50 = $ 12.415 VE Penalidad Acepto el contrato
+Indiferente 13.035 = P()*50 → P() = 0.2607 → Z(0.7393) = 0.64 → Val = 30+0.64*Raiz(2.16) = 30.9406 Dias
+
+Página 4 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Debemos obtener los tiempo, varianzas y probabilidades de terminar en cada ruta en o después de 30 días. Como se supone la
+independencia de cada ruta se debe obtener el tiempo total de cada ruta, su varianza y la probabilidad.
+
+Ruta
+B-E-F
+C-E-F
+A-D
+B-D
+
+Tiempo
+30
+27
+27
+26
+
+Var
+2.16
+2.16
+4.25
+5
+
+Z-P(>30)
+0.0000
+2.0412
+1.4552
+1.7889
+
+P(>30)
+50.00%
+2.06%
+7.28%
+3.68%
+
+P(<30)
+50.00%
+97.94%
+92.72%
+96.32%
+
+Para el calculo de la probabilidad que sea critica, nuevamente dada la independencia, se calcula la probabilidad de que una ruta
+demore más de 30 días y el resto menos de 30 días. Dado que es conjunta la probabilidad de multiplica. Por ende la probabilidad
+es:
+
+Ruta
+B-E-F
+C-E-F
+A-D
+B-D
+
+B-E-F
+50.0000%
+50.0000%
+50.0000%
+50.0000%
+
+C-E-F
+97.9387%
+2.0613%
+97.9387%
+97.9387%
+
+A-D
+92.7195%
+92.7195%
+7.2805%
+92.7195%
+
+B-D
+96.3181%
+96.3181%
+96.3181%
+3.6819%
+
+C-E-F = 0.9204 %
+A-D = 3,4339 %
+B-D = 1.6717 %
+Se debe indicar solo 1.
+
+Página 5 de 8
+
+Conjunta
+43.7324%
+0.9204%
+3.4339%
+1.6717%
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Pregunta 3.- (20 puntos) Una empresa fabrica un producto que ensambla a partir de: 1 unidad del producto A, dos unidades
+del producto B y 1 unidad del producto C. A su vez el producto A requiere una unidad del insumo A1 y dos del insumo A2,
+mientras que el producto B requiere una unidad del insumo A1 y una unidad del insumo B2.
+El tiempo de entrega de cada producto y sus componentes es de 2 semanas, pero el ensamblaje del producto final se demora
+sólo una semana.
+La empresa pronostica que la demanda del producto final para las próximas 8 semanas es:
+
+i) (5 ptos) Dibuje un árbol que represente la Lista de Materiales (Bill of Materials o BOM).
+ii) (7 ptos) Considere que el inventario disponible de producto final es de 50 unidades y ya se ha iniciado la producción
+de un lote de 20 unidades del producto final que estará disponible para su uso en la semana 2. Determine la matriz
+de MRP para el producto final, esto es, calcule el requerimiento neto para el producto final y las órdenes
+programadas para cada semana, considerando que los lotes se determinan usando la heurística de Lote a Lote (L4L).
+iii) (8 ptos) Considere que la demanda por la parte A1 es la siguiente:
+
+Asumiendo que el costo de set up (poner en marcha la producción de un lote) es de $120 y que el costo de mantener
+inventario es de $0.9 por unidad por semana. Use el método heurístico de Silver-Meal para calcular los lotes óptimos
+del ítem A1, e indique los costos totales de esta política.
+
+Parte
+
+PF
+
+Periodo
+GR: Requerimeinto Bruto
+OH: Inventario Final
+POR
+
+0
+
+1
+
+2
+
+3
+
+50
+
+70
+
+70
+
+70
+
+4
+10
+60
+
+5
+50
+10
+30
+
+Página 6 de 8
+
+6
+40
+0
+60
+
+7
+60
+0
+50
+
+8
+50
+0
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Tabla de distribución normal estándar. La tabla de normalidad es simétrica. Por ende P (Z > -x) = P (Z < x).
+
+Página 7 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+z
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+1.7
+1.8
+1.9
+2.0
+2.1
+2.2
+2.3
+2.4
+2.5
+2.6
+2.7
+2.8
+2.9
+3.0
+3.1
+3.2
+
+.06
+.5239
+.5636
+.6026
+.6406
+.6772
+.7123
+.7454
+.7764
+.8051
+.8315
+.8554
+.8770
+.8962
+.9131
+.9279
+.9406
+.9515
+.9608
+.9686
+.9750
+.9803
+.9846
+.9881
+.9909
+.9931
+.9948
+.9961
+.9971
+.9979
+.9985
+.9989
+.9992
+.9994
+
+0.00
+.5000
+.5398
+.5793
+.6179
+.6554
+.6915
+.7257
+.7580
+.7881
+.8159
+.8413
+.8643
+.8849
+.9032
+.9192
+.9332
+.9452
+.9554
+.9641
+.9713
+.9772
+.9821
+.9861
+.9893
+.9918
+.9938
+.9953
+.9965
+.9974
+.9981
+.9987
+.9990
+.9993
+
+.01
+.5040
+.5438
+.5832
+.6217
+.6591
+.6950
+.7291
+.7611
+.7910
+.8186
+.8438
+.8665
+.8869
+.9049
+.9207
+.9345
+.9463
+.9564
+.9649
+.9719
+.9778
+.9826
+.9864
+.9896
+.9920
+.9940
+.9955
+.9966
+.9975
+.9982
+.9987
+.9991
+.9993
+
+.02
+.5080
+.5478
+.5871
+.6255
+.6628
+.6985
+.7324
+.7642
+.7939
+.8212
+.8461
+.8686
+.8888
+.9066
+.9222
+.9357
+.9474
+.9573
+.9656
+.9726
+.9783
+.9830
+.9868
+.9898
+.9922
+.9941
+.9956
+.9967
+.9976
+.9982
+.9987
+.9991
+.9994
+
+.03
+.5120
+.5517
+.5910
+.6293
+.6664
+.7019
+.7357
+.7673
+.7967
+.8238
+.8485
+.8708
+.8907
+.9082
+.9236
+.9370
+.9484
+.9582
+.9664
+.9732
+.9788
+.9834
+.9871
+.9901
+.9925
+.9943
+.9957
+.9968
+.9977
+.9983
+.9988
+.9991
+.9994
+
+.04
+.5160
+.5557
+.5948
+.6331
+.6700
+.7054
+.7389
+.7704
+.7995
+.8264
+.8508
+.8729
+.8925
+.9099
+.9251
+.9382
+.9495
+.9591
+.9671
+.9738
+.9793
+.9838
+.9875
+.9904
+.9927
+.9945
+.9959
+.9969
+.9977
+.9984
+.9988
+.9992
+.9994
+
+.05
+.5199
+.5596
+.5987
+.6368
+.6736
+.7088
+.7422
+.7734
+.8023
+.8289
+.8531
+.8749
+.8944
+.9115
+.9265
+.9394
+.9505
+.9599
+.9678
+.9744
+.9798
+.9842
+.4878
+.9906
+.9929
+.9946
+.9960
+.9970
+.9978
+.9984
+.9989
+.9992
+.9994
+
+Formulario
+FIT t = 
+Ft + Tt
+Pr onóstico
+Tendencia
+Ft +1 = At + (1 −  )Ft
+
+Qw =
+
+2C 0 D
+Ch
+
+.07
+.5279
+.5675
+.6064
+.6443
+.6808
+.7157
+.7486
+.7794
+.8078
+.8340
+.8577
+.8790
+.8980
+.9147
+.9292
+.9418
+.9525
+.9616
+.9693
+.9756
+.9808
+.9850
+.9884
+.9911
+.9932
+.9949
+.9962
+.9972
+.9979
+.9985
+.9989
+.9992
+.9995
+
+.08
+.5319
+.5714
+.6103
+.6480
+.6844
+.7190
+.7517
+.7823
+.8106
+.8365
+.8599
+.8810
+.8997
+.9162
+.9306
+.9429
+.9535
+.9625
+.9699
+.9761
+.9812
+.9854
+.9887
+.9913
+.9934
+.9951
+.9963
+.9973
+.9980
+.9986
+.9990
+.9993
+.9995
+
+.09
+.5359
+.5753
+.6141
+.6517
+.6879
+.7224
+.7549
+.7852
+.8133
+.8389
+.8621
+.8830
+.9015
+.9177
+.9319
+.9441
+.9545
+.9633
+.9706
+.9767
+.9817
+.9857
+.9890
+.9916
+.9936
+.9952
+.9964
+.9974
+.9981
+.9986
+.9990
+.9993
+.9995
+
+yt
+1 k
++ (1 −  )( Lt −1 + bt −1 ) MAD =
+| et |
+k
+St − s
+k t =1
+Ft = FIT t − 1 +  ( A t − 1 − FIT t − 1) bt =  ( Lt − Lt −1 ) + (1 −  )bt −1
+k
+ek
+
+Tt = Tt − 1 +  ( A t − 1 − FIT t − 1) S =  yt + (1 −  ) S
+t =1
+t
+t −s
+TS k =
+Lt
+MADk
+D
+Q
+CT = DC + S + H
+Ft + m = ( Lt + mbt ) S t + m − s
+Q
+2
+Lt = 
+
+Z=
+
+D - TE
+
+
+
+Página 8 de 8
+
+2
+i
+
+
+
+

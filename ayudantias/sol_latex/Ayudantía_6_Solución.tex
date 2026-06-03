@@ -1,0 +1,688 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\hypertarget{ayudantuxeda-6-soluciuxf3n---planificaciuxf3n-agregada-y-mrp}{%
+\section{Ayudantía 6 Solución - Planificación agregada y
+MRP}\label{ayudantuxeda-6-soluciuxf3n---planificaciuxf3n-agregada-y-mrp}}
+
+\textbf{Pontificia Universidad Católica de Chile}\\
+\textbf{Escuela de Ingeniería}\\
+\textbf{Departamento de Ingeniería Industrial y de Sistemas}\\
+\textbf{ICS3213: Gestión de Operaciones}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{problema-1-tarea-ii-2024---soluciuxf3n}{%
+\subsection{Problema 1 (Tarea II 2024) -
+Solución}\label{problema-1-tarea-ii-2024---soluciuxf3n}}
+
+\hypertarget{a-modelo-de-programaciuxf3n-lineal-entera}{%
+\subsubsection{a) Modelo de Programación Lineal
+Entera}\label{a-modelo-de-programaciuxf3n-lineal-entera}}
+
+\hypertarget{conjuntos}{%
+\paragraph{Conjuntos}\label{conjuntos}}
+
+\begin{itemize}
+\tightlist
+\item
+  \(T = \{1, 2, \dots, 12\}\): Conjunto de períodos (meses de la
+  planificación anual).
+\end{itemize}
+
+\hypertarget{paruxe1metros}{%
+\paragraph{Parámetros}\label{paruxe1metros}}
+
+\begin{itemize}
+\tightlist
+\item
+  \(d_t\): Demanda de cajas de suministro en el período \(t \in T\).
+\item
+  \(l_{so}\): Límite de demanda insatisfecha (faltantes) permitido por
+  período.
+\item
+  \(c_{so}\): Costo de penalización por cada caja de suministros no
+  entregada a tiempo.
+\item
+  \(c_p\): Costo base de producir una caja de suministros de manera
+  propia.
+\item
+  \(c_{su}\): Costo de subcontratar la producción de una caja de
+  suministros.
+\item
+  \(l_{su}\): Límite de unidades que se pueden subcontratar por período.
+\item
+  \(i_0\): Inventario inicial de cajas de suministro.
+\item
+  \(c_i\): Costo de mantener una caja de suministro en el inventario por
+  período.
+\item
+  \(w_0\): Dotación inicial (y final requerida) de trabajadores.
+\item
+  \(c_c\): Costo de contratar un trabajador.
+\item
+  \(c_d\): Costo de despedir un trabajador.
+\item
+  \(h\): Duración de la jornada diaria de trabajo (horas/turno).
+\item
+  \(n_t\): Número de días de trabajo en el mes \(t\).
+\item
+  \(c_{sn}\): Salario por hora normal de trabajo.
+\item
+  \(l_{he}\): Límite de horas extra permitidas por trabajador por
+  período.
+\item
+  \(c_{se}\): Salario por hora extra de trabajo.
+\item
+  \(\alpha\): Factor de productividad de un trabajador novato
+  (\(0 \le \alpha \le 1\)).
+\item
+  \(p_{hn}\): Productividad de un trabajador experimentado en hora
+  normal (cajas/HH).
+\item
+  \(p_{he}\): Productividad de un trabajador experimentado en hora extra
+  (cajas/HH).
+\end{itemize}
+
+\hypertarget{variables-de-decisiuxf3n}{%
+\paragraph{Variables de Decisión}\label{variables-de-decisiuxf3n}}
+
+\begin{itemize}
+\tightlist
+\item
+  \(W_t\): Dotación total de trabajadores en el período \(t \in T\)
+  (\(W_t \in \mathbb{Z}^+\)).
+\item
+  \(C_t\): Cantidad de trabajadores contratados al inicio del período
+  \(t \in T\) (\(C_t \in \mathbb{Z}^+\)).
+\item
+  \(D_t\): Cantidad de trabajadores despedidos al inicio del período
+  \(t \in T\) (\(D_t \in \mathbb{Z}^+\)).
+\item
+  \(P_t\): Cantidad de cajas de suministros producidas de forma interna
+  en el período \(t \in T\) (\(P_t \ge 0\)).
+\item
+  \(SU_t\): Cantidad de cajas de suministros producidas por
+  subcontratación en el período \(t \in T\) (\(SU_t \ge 0\)).
+\item
+  \(PD_t\): Cantidad de cajas de suministros despachadas (entregadas) en
+  el período \(t \in T\) (\(PD_t \ge 0\)).
+\item
+  \(SO_t\): Cantidad de cajas de suministros de demanda insatisfecha
+  (faltantes) al final del período \(t \in T\) (\(SO_t \ge 0\)).
+\item
+  \(HE_t\): Horas extras totales trabajadas en la planta en el período
+  \(t \in T\) (\(HE_t \ge 0\)).
+\item
+  \(I_t\): Cantidad de cajas de suministros en el inventario al final
+  del período \(t \in T\) (\(I_t \ge 0\)).
+\end{itemize}
+
+\hypertarget{funciuxf3n-objetivo}{%
+\paragraph{Función Objetivo}\label{funciuxf3n-objetivo}}
+
+Minimizar los costos totales, los cuales incluyen: subcontratación,
+penalización por faltantes, contratación, despidos, salarios normales,
+horas extra, almacenamiento e inventario, y costo de producción propia
+(con descuento del \(30\%\) durante los primeros 3 meses):
+
+\[\begin{aligned}
+\min \sum_{t=1}^{12} \Big( &c_{su} SU_t + c_{so} SO_t + c_c C_t + c_d D_t + c_{sn} \cdot h \cdot n_t \cdot W_t + c_{se} HE_t + c_i I_t + \text{costo\_prod}_t \Big)
+\end{aligned}\]
+
+Donde el costo de producción propia es:
+\[\text{costo\_prod}_t = \begin{cases} 
+0.7 c_p P_t & \text{si } t \in \{1, 2, 3\} \\
+c_p P_t & \text{si } t \in \{4, \dots, 12\}
+\end{cases}\]
+
+\hypertarget{restricciones}{%
+\paragraph{Restricciones}\label{restricciones}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Flujo de trabajadores:} \[W_1 = w_0 + C_1 - D_1\]
+  \[W_t = W_{t-1} + C_t - D_t \quad \forall t \in \{2, \dots, 12\}\]
+  \[W_{12} = w_0\]
+\item
+  \textbf{Flujo de inventarios:} \[I_1 = i_0 + P_1 + SU_1 - PD_1\]
+  \[I_t = I_{t-1} + P_t + SU_t - PD_t \quad \forall t \in \{2, \dots, 12\}\]
+\item
+  \textbf{Capacidad de producción propia:} Considerando que los
+  trabajadores contratados en el período \(t\) son novatos con
+  productividad \(\alpha \cdot p_{hn}\) en horario normal, y que los
+  experimentados (\(W_t - C_t\)) rinden a \(p_{hn}\):
+  \[P_t \le \Big[ (W_t - C_t) + \alpha C_t \Big] \cdot h \cdot n_t \cdot p_{hn} + HE_t \cdot p_{he} \quad \forall t \in T\]
+\item
+  \textbf{Despacho y demanda insatisfecha:} La cantidad despachada es la
+  demanda menos la demanda insatisfecha acumulada del período actual,
+  considerando que lo no entregado se arrastra:
+  \[PD_t = d_t - SO_t \quad \forall t \in T\]
+\item
+  \textbf{Límite de horas extras:}
+  \[HE_t \le l_{he} \cdot W_t \quad \forall t \in T\]
+\item
+  \textbf{Límite de producción subcontratada:}
+  \[SU_t \le l_{su} \quad \forall t \in T\]
+\item
+  \textbf{Límite de demanda insatisfecha:}
+  \[SO_t \le l_{so} \quad \forall t \in T\]
+\item
+  \textbf{Naturaleza de variables:}
+  \[W_t, C_t, D_t \in \mathbb{Z}^+ \quad \forall t \in T\]
+  \[P_t, SU_t, PD_t, SO_t, HE_t, I_t \ge 0 \quad \forall t \in T\]
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{b-restricciuxf3n-de-capacidad-de-almacenamiento-limitada}{%
+\subsubsection{b) Restricción de Capacidad de Almacenamiento
+Limitada}\label{b-restricciuxf3n-de-capacidad-de-almacenamiento-limitada}}
+
+Se agrega el parámetro \(I_{max} = 50\) (inventario máximo permitido por
+período) y las siguientes restricciones:
+\[I_t \le 50 \quad \forall t \in T\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{c-sin-subcontrataciuxf3n}{%
+\subsubsection{c) Sin Subcontratación}\label{c-sin-subcontrataciuxf3n}}
+
+Se elimina la posibilidad de subcontratar. Esto implica: 1. Eliminar la
+variable \(SU_t\) del modelo (o fijar
+\(SU_t = 0 \quad \forall t \in T\)). 2. Eliminar el término
+\(c_{su} SU_t\) de la función objetivo. 3. Eliminar la restricción de
+límite de producción subcontratada: \(SU_t \le l_{su}\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{problema-2-i2-2024---soluciuxf3n}{%
+\subsection{Problema 2 (I2 2024) -
+Solución}\label{problema-2-i2-2024---soluciuxf3n}}
+
+\hypertarget{a-lista-de-materiales-bom}{%
+\subsubsection{a) Lista de Materiales
+(BOM)}\label{a-lista-de-materiales-bom}}
+
+\begin{verbatim}
+Producto Final (1 envase)
+├── Envase (1 unidad)
+├── Compuesto A (300 ml = 0.3 L)
+└── Compuesto B (200 ml = 0.2 L)
+    ├── Compuesto C (100 ml = 0.1 L)
+    └── Compuesto D (100 ml = 0.1 L)
+\end{verbatim}
+
+\emph{Nota:} Dado que la receta está en ml y los inventarios se miden en
+litros para los compuestos químicos, utilizaremos la conversión
+\(1\text{ Litro} = 1000\text{ ml}\).
+
+\begin{itemize}
+\tightlist
+\item
+  1 unidad de Producto Final requiere:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    1 pomo de Envase
+  \item
+    \(0.3\text{ L}\) de Compuesto A
+  \item
+    \(0.2\text{ L}\) de Compuesto B (que a su vez requiere
+    \(0.1\text{ L}\) de C y \(0.1\text{ L}\) de D).
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{b-tablas-de-mrp}{%
+\subsubsection{b) Tablas de MRP}\label{b-tablas-de-mrp}}
+
+\hypertarget{producto-final-lead-time-1-semana-lote-a-lote}{%
+\paragraph{1. Producto Final (Lead Time = 1 semana, Lote a
+Lote)}\label{producto-final-lead-time-1-semana-lote-a-lote}}
+
+\begin{longtable}[]{@{}lccccccc@{}}
+\toprule\noalign{}
+Semana & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Requerimiento Bruto} & & 300 & 200 & 300 & 400 & 300 & 200 \\
+\textbf{Inventario Disponible} & 500 & 200 & 0 & 0 & 0 & 0 & 0 \\
+\textbf{Requerimiento Neto} & & 0 & 0 & 100 & 400 & 300 & 200 \\
+\textbf{Recepción Planeada} & & 0 & 0 & 100 & 400 & 300 & 200 \\
+\textbf{Lanzamiento Planeado} & & 0 & 100 & 400 & 300 & 200 & 0 \\
+\end{longtable}
+
+\hypertarget{envase-lead-time-3-semanas-lote-a-lote}{%
+\paragraph{2. Envase (Lead Time = 3 semanas, Lote a
+Lote)}\label{envase-lead-time-3-semanas-lote-a-lote}}
+
+\emph{Requerimiento bruto = Lanzamiento planeado de Producto Final (1
+unidad por unidad).}
+
+\begin{longtable}[]{@{}lccccccc@{}}
+\toprule\noalign{}
+Semana & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Requerimiento Bruto} & & 0 & 100 & 400 & 300 & 200 & 0 \\
+\textbf{Recepciones Programadas} & & 0 & 400 & 0 & 0 & 0 & 0 \\
+\textbf{Inventario Disponible} & 300 & 300 & 600 & 200 & 0 & 0 & 0 \\
+\textbf{Requerimiento Neto} & & 0 & 0 & 0 & 100 & 200 & 0 \\
+\textbf{Recepción Planeada} & & 0 & 0 & 0 & 100 & 200 & 0 \\
+\textbf{Lanzamiento Planeado} & 100 & 200 & 0 & 0 & 0 & 0 & 0 \\
+\end{longtable}
+
+\emph{Nota:} El lanzamiento de 100 en la semana 0 y 200 en la semana 1
+debe programarse en el pasado.
+
+\hypertarget{compuesto-a-lead-time-1-semana-lote-a-lote}{%
+\paragraph{3. Compuesto A (Lead Time = 1 semana, Lote a
+Lote)}\label{compuesto-a-lead-time-1-semana-lote-a-lote}}
+
+\emph{Requerimiento bruto = Lanzamiento planeado de Producto Final
+\(\times 0.3\text{ L}\).}
+
+\begin{longtable}[]{@{}lccccccc@{}}
+\toprule\noalign{}
+Semana & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Requerimiento Bruto} & & 0 & 30 & 120 & 90 & 60 & 0 \\
+\textbf{Inventario Disponible} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\textbf{Requerimiento Neto} & & 0 & 30 & 120 & 90 & 60 & 0 \\
+\textbf{Recepción Planeada} & & 0 & 30 & 120 & 90 & 60 & 0 \\
+\textbf{Lanzamiento Planeado} & 0 & 30 & 120 & 90 & 60 & 0 & 0 \\
+\end{longtable}
+
+\hypertarget{compuesto-b-lead-time-1-semana-lote-a-lote}{%
+\paragraph{4. Compuesto B (Lead Time = 1 semana, Lote a
+Lote)}\label{compuesto-b-lead-time-1-semana-lote-a-lote}}
+
+\emph{Requerimiento bruto = Lanzamiento planeado de Producto Final
+\(\times 0.2\text{ L}\).}
+
+\begin{longtable}[]{@{}lccccccc@{}}
+\toprule\noalign{}
+Semana & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Requerimiento Bruto} & & 0 & 20 & 80 & 60 & 40 & 0 \\
+\textbf{Inventario Disponible} & 50 & 50 & 30 & 0 & 0 & 0 & 0 \\
+\textbf{Requerimiento Neto} & & 0 & 0 & 50 & 60 & 40 & 0 \\
+\textbf{Recepción Planeada} & & 0 & 0 & 50 & 60 & 40 & 0 \\
+\textbf{Lanzamiento Planeado} & 0 & 0 & 50 & 60 & 40 & 0 & 0 \\
+\end{longtable}
+
+\hypertarget{compuesto-c-lead-time-2-semanas-lote-a-lote}{%
+\paragraph{5. Compuesto C (Lead Time = 2 semanas, Lote a
+Lote)}\label{compuesto-c-lead-time-2-semanas-lote-a-lote}}
+
+\emph{Requerimiento bruto = Lanzamiento planeado de Compuesto B
+\(\times (100\text{ ml} / 200\text{ ml}) = 0.5\text{ L}\) por litro de
+B.} \emph{Es decir, \(50\%\) del compuesto B es compuesto C.} * Semana
+2: Req. Bruto = \(50 \times 0.5 = 25\text{ L}\). * Semana 3: Req. Bruto
+= \(60 \times 0.5 = 30\text{ L}\). * Semana 4: Req. Bruto =
+\(40 \times 0.5 = 20\text{ L}\).
+
+\begin{longtable}[]{@{}lccccccc@{}}
+\toprule\noalign{}
+Semana & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Requerimiento Bruto} & & 0 & 25 & 30 & 20 & 0 & 0 \\
+\textbf{Inventario Disponible} & 50 & 50 & 25 & 0 & 0 & 0 & 0 \\
+\textbf{Requerimiento Neto} & & 0 & 0 & 5 & 20 & 0 & 0 \\
+\textbf{Recepción Planeada} & & 0 & 0 & 5 & 20 & 0 & 0 \\
+\textbf{Lanzamiento Planeado} & 0 & 5 & 20 & 0 & 0 & 0 & 0 \\
+\end{longtable}
+
+\hypertarget{compuesto-d-lead-time-1-semana-lote-a-lote}{%
+\paragraph{6. Compuesto D (Lead Time = 1 semana, Lote a
+Lote)}\label{compuesto-d-lead-time-1-semana-lote-a-lote}}
+
+\emph{Requerimiento bruto = Lanzamiento planeado de Compuesto B
+\(\times 0.5\text{ L}\) por litro de B.}
+
+\begin{longtable}[]{@{}lccccccc@{}}
+\toprule\noalign{}
+Semana & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Requerimiento Bruto} & & 0 & 25 & 30 & 20 & 0 & 0 \\
+\textbf{Inventario Disponible} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\textbf{Requerimiento Neto} & & 0 & 25 & 30 & 20 & 0 & 0 \\
+\textbf{Recepción Planeada} & & 0 & 25 & 30 & 20 & 0 & 0 \\
+\textbf{Lanzamiento Planeado} & 0 & 25 & 30 & 20 & 0 & 0 & 0 \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{c-algoritmo-de-loteo-para-compuesto-c}{%
+\subsubsection{c) Algoritmo de Loteo para Compuesto
+C}\label{c-algoritmo-de-loteo-para-compuesto-c}}
+
+Tenemos los siguientes requerimientos netos para el Compuesto C: *
+Semana 3: \(5\text{ Litros}\) * Semana 4: \(20\text{ Litros}\)
+
+\textbf{Parámetros:} * Costo de ordenar (Setup) = \(S = 10\) * Costo de
+mantener inventario = \(H = 1\) por litro por semana.
+
+Evaluamos las dos políticas posibles:
+
+\hypertarget{opciuxf3n-1-lote-a-lote-l-times-l---no-agrupar}{%
+\paragraph{\texorpdfstring{Opción 1: Lote a Lote (\(L \times L\)) - No
+agrupar}{Opción 1: Lote a Lote (L \textbackslash times L) - No agrupar}}\label{opciuxf3n-1-lote-a-lote-l-times-l---no-agrupar}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Semana 3:} Ordenamos \(5\text{ L}\). Costo de ordenar =
+  \(10\). Costo de inventario = \(0\).
+\item
+  \textbf{Semana 4:} Ordenamos \(20\text{ L}\). Costo de ordenar =
+  \(10\). Costo de inventario = \(0\).
+\item
+  \textbf{Costo Total = 20.}
+\end{itemize}
+
+\hypertarget{opciuxf3n-2-agrupar-en-la-semana-3-la-demanda-de-la-semana-3-y-4-ordenar-25text-l-en-semana-3}{%
+\paragraph{\texorpdfstring{Opción 2: Agrupar en la Semana 3 la demanda
+de la semana 3 y 4 (Ordenar \(25\text{ L}\) en Semana
+3)}{Opción 2: Agrupar en la Semana 3 la demanda de la semana 3 y 4 (Ordenar 25\textbackslash text\{ L\} en Semana 3)}}\label{opciuxf3n-2-agrupar-en-la-semana-3-la-demanda-de-la-semana-3-y-4-ordenar-25text-l-en-semana-3}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Semana 3:} Recibimos \(25\text{ L}\). Costo de ordenar =
+  \(10\).
+\item
+  Mantenemos \(20\text{ L}\) en inventario de la semana 3 a la 4 (1
+  semana).
+\item
+  Costo de mantener inventario =
+  \(20\text{ L} \times 1\text{ semana} \times \$1 = 20\).
+\item
+  \textbf{Costo Total = 10 (orden) + 20 (inventario) = 30.}
+\end{itemize}
+
+\hypertarget{conclusiuxf3n}{%
+\paragraph{Conclusión:}\label{conclusiuxf3n}}
+
+La mejor opción es la \textbf{Opción 1: Lote a Lote} con un costo de
+\textbf{\(20\)}, comparado con los \(30\) de agrupar. No conviene
+agrupar lotes debido a que el costo de mantener inventario (\(20\))
+supera el ahorro de evitar un setup (\(10\)).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{problema-3-pert---soluciuxf3n}{%
+\subsection{Problema 3 (PERT) -
+Solución}\label{problema-3-pert---soluciuxf3n}}
+
+\hypertarget{tiempos-tempranos-tarduxedos-y-ruta-cruxedtica}{%
+\subsubsection{1. Tiempos tempranos, tardíos y Ruta
+Crítica}\label{tiempos-tempranos-tarduxedos-y-ruta-cruxedtica}}
+
+Para cada actividad se calculan el tiempo esperado y la varianza: *
+\(t_e = \frac{a + 4m + b}{6}\) *
+\(\sigma^2 = \left(\frac{b - a}{6}\right)^2\)
+
+\begin{longtable}[]{@{}ccccccc@{}}
+\toprule\noalign{}
+Actividad & Predecesores & \(a\) & \(m\) & \(b\) & \(t_e\) &
+\(\sigma^2\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{A} & --- & 4 & 5 & 6 & 5 & 0.09 \\
+\textbf{B} & --- & 2 & 3 & 4 & 3 & 0.04 \\
+\textbf{C} & A, B & 3 & 4 & 5 & 4 & 0.09 \\
+\textbf{D} & C & 2 & 3 & 4 & 3 & 0.09 \\
+\textbf{E} & C & 3 & 5 & 7 & 5 & 0.44 \\
+\textbf{F} & D, E & 2 & 4 & 6 & 4 & 0.44 \\
+\end{longtable}
+
+\hypertarget{cuxe1lculo-de-calendario}{%
+\paragraph{Cálculo de Calendario:}\label{cuxe1lculo-de-calendario}}
+
+\begin{longtable}[]{@{}ccccccc@{}}
+\toprule\noalign{}
+Actividad & \(t_e\) & ES & EF & LS & LF & Holgura (\(LF - EF\)) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{A} & 5 & 0 & 5 & 0 & 5 & 0 (Crítica) \\
+\textbf{B} & 3 & 0 & 3 & 2 & 5 & 2 \\
+\textbf{C} & 4 & 5 & 9 & 5 & 9 & 0 (Crítica) \\
+\textbf{D} & 3 & 9 & 12 & 11 & 14 & 2 \\
+\textbf{E} & 5 & 9 & 14 & 9 & 14 & 0 (Crítica) \\
+\textbf{F} & 4 & 14 & 18 & 14 & 18 & 0 (Crítica) \\
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Ruta Crítica:} \(A \rightarrow C \rightarrow E \rightarrow F\)
+\item
+  \textbf{Duración Esperada (\(T_e\)):} \(5 + 4 + 5 + 4 = 18\) semanas.
+\item
+  \textbf{Desviación Estándar de la Ruta Crítica (\(\sigma_T\)):}
+  \[\sigma_T = \sqrt{\sigma_A^2 + \sigma_C^2 + \sigma_E^2 + \sigma_F^2} = \sqrt{0.09 + 0.09 + 0.44 + 0.44} = \sqrt{1.06} \approx 1.03 \text{ semanas}\]
+  \emph{(Nota: Si usamos la desviación estándar directa del cuadro
+  original \(\sigma_i\):
+  \(\sigma_T = \sqrt{0.9^2 + 1.0^2 + 1.1^2 + 0.8^2} = \sqrt{0.81 + 1.0 + 1.21 + 0.64} = \sqrt{3.66} \approx 1.91\)
+  semanas).}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{duraciuxf3n-doble-de-probabilidad-de-excederse-que-de-cumplir}{%
+\subsubsection{2. Duración doble de probabilidad de excederse que de
+cumplir}\label{duraciuxf3n-doble-de-probabilidad-de-excederse-que-de-cumplir}}
+
+Sea \(T_0\) el plazo buscado. Queremos que:
+\[P(T > T_0) = 2 P(T \le T_0)\] Como \(P(T > T_0) + P(T \le T_0) = 1\),
+sustituyendo obtenemos:
+\[3 P(T \le T_0) = 1 \implies P(T \le T_0) = 0.3333\]
+
+Buscando en la tabla de la normal estándar para una probabilidad
+acumulada de \(0.3333\), obtenemos un valor de \(Z \approx -0.43\).
+\[\frac{T_0 - 18}{1.91} = -0.43 \implies T_0 = 18 - 0.43 \times 1.91 \approx 17.18 \text{ semanas}\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{contrato-con-bono-y-penalizaciuxf3n}{%
+\subsubsection{3. Contrato con Bono y
+Penalización}\label{contrato-con-bono-y-penalizaciuxf3n}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Bono:} \(\$200\) si se termina en \(\le 15\) semanas.
+\item
+  \textbf{Penalización:} \(-\$80\) si se termina en \(\ge 20\) semanas.
+\end{itemize}
+
+\hypertarget{probabilidad-de-ganar-el-bono-t-le-15}{%
+\paragraph{\texorpdfstring{Probabilidad de ganar el Bono
+(\(T \le 15\)):}{Probabilidad de ganar el Bono (T \textbackslash le 15):}}\label{probabilidad-de-ganar-el-bono-t-le-15}}
+
+\[Z_{bono} = \frac{15 - 18}{1.91} = -1.57 \implies P(T \le 15) = P(Z \le -1.57) \approx 0.0582 \text{ (5.8\%)}\]
+
+\hypertarget{probabilidad-de-pagar-penalizaciuxf3n-t-ge-20}{%
+\paragraph{\texorpdfstring{Probabilidad de pagar Penalización
+(\(T \ge 20\)):}{Probabilidad de pagar Penalización (T \textbackslash ge 20):}}\label{probabilidad-de-pagar-penalizaciuxf3n-t-ge-20}}
+
+\[Z_{pen} = \frac{20 - 18}{1.91} = 1.05 \implies P(T \ge 20) = P(Z \ge 1.05) = 1 - 0.8531 = 0.1469 \text{ (14.7\%)}\]
+
+\hypertarget{valor-esperado-ev}{%
+\paragraph{Valor Esperado (EV):}\label{valor-esperado-ev}}
+
+\[EV = 200 \times P(T \le 15) - 80 \times P(T \ge 20) = 200 \times 0.0582 - 80 \times 0.1469 = 11.64 - 11.75 = -0.11\]
+
+Como el \textbf{Valor Esperado es negativo (-\$0.11)}, se debería
+\textbf{rechazar} el contrato bajo estas condiciones.
+
+\hypertarget{plazo-muxe1ximo-del-bono-para-aceptar}{%
+\paragraph{Plazo máximo del bono para
+aceptar:}\label{plazo-muxe1ximo-del-bono-para-aceptar}}
+
+Para que \(EV > 0\):
+\[200 \times P(T \le X) - 80 \times 0.1469 = 0 \implies P(T \le X) = \frac{11.75}{200} = 0.0588\]
+Esto da un \(Z \approx -1.56\).
+\[\frac{X - 18}{1.91} = -1.56 \implies X \approx 15.02 \text{ semanas}\]
+El plazo máximo para ofrecer el bono debe ser de al menos \(15.02\)
+semanas para que el valor esperado sea positivo.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{reducciuxf3n-de-3-semanas-con-costo-muxednimo}{%
+\subsubsection{4. Reducción de 3 semanas con costo
+mínimo}\label{reducciuxf3n-de-3-semanas-con-costo-muxednimo}}
+
+Queremos reducir el proyecto en 3 semanas. Las actividades en la ruta
+crítica que podemos acelerar a su tiempo optimista son:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Actividad A:} De \(5 \rightarrow 4\) semanas. Ahorro = \(1\)
+  semana. Costo adicional = \(\$10\) (el doble del costo normal). Costo
+  por semana de aceleración = \(\$10\).
+\item
+  \textbf{Actividad C:} De \(4 \rightarrow 3\) semanas. Ahorro = \(1\)
+  semana. Costo adicional = \(\$7\). Costo por semana de aceleración =
+  \(\$7\).
+\item
+  \textbf{Actividad E:} De \(5 \rightarrow 3\) semanas. Ahorro = \(2\)
+  semanas. Costo adicional = \(\$12\). Costo por semana de aceleración =
+  \(\$6\).
+\item
+  \textbf{Actividad F:} De \(4 \rightarrow 2\) semanas. Ahorro = \(2\)
+  semanas. Costo adicional = \(\$10\). Costo por semana de aceleración =
+  \(\$5\).
+\end{itemize}
+
+\hypertarget{estrategia-de-aceleraciuxf3n-al-costo-muxednimo}{%
+\paragraph{Estrategia de Aceleración al Costo
+Mínimo:}\label{estrategia-de-aceleraciuxf3n-al-costo-muxednimo}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Aceleramos \textbf{F} por 2 semanas.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Costo de aceleración = \(\$10\).
+  \item
+    Duración acumulada reducida = 2 semanas.
+  \end{itemize}
+\item
+  Para la tercera semana de reducción, la opción más barata disponible
+  en la ruta crítica es acelerar \textbf{E} (costo de \(\$6\) por
+  semana) o \textbf{C} (costo de \(\$7\) por semana).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dado que el enunciado indica que no se permite aceleración parcial,
+    debemos acelerar \textbf{C} por 1 semana (costo \(\$7\)).
+  \item
+    \emph{Nota:} Si aceleráramos E, tendríamos que reducir las 2 semanas
+    completas con un costo de \(\$12\), lo cual es más caro que acelerar
+    C por \(\$7\).
+  \end{itemize}
+\item
+  \textbf{Costo Mínimo Adicional:}
+  \(\$10 \text{ (por F)} + \$7 \text{ (por C)} = \$17\).
+\item
+  \textbf{Costo Total del Proyecto:} Costo normal total
+  \((\$26) + \$17 = \$43\).
+\end{enumerate}
+
+\end{document}

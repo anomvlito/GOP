@@ -1,0 +1,636 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples ──────────────────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox ───────────────────────────────────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definición: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Fórmulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Pauta Interrogación 2 (1er Semestre 2022)}
+\fancyhead[C]{}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[L]{\footnotesize Solución Oficial --- Transcripción en LaTeX}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{gopcyan} Solución Interrogación 2\par}
+  \vspace{0.4cm}
+  {\LARGE\bfseries Gestión de Operaciones\par}
+  \vspace{0.3cm}
+  {\large ICS3213 --- PUC Chile --- 1er Semestre 2022\par}
+  \vspace{1.2cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+
+  {\small Profesores:\par}
+  {\large\bfseries Patricio Gahona \quad Alejandro Mac Cawley\par}
+  \vspace{0.3cm}
+  {\small Autores de Referencia de la Pauta:\par}
+  {\small\textbf{César Meneses \quad Fabián Ortega}\par}
+  \vspace{0.4cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{1cm}
+
+  \vfill
+\end{titlepage}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% PARTE I
+% ════════════════════════════════════════════════════════════════════════════
+\section{Ejercicios de Alternativa Libre (20 Puntos)}
+\textit{Responda una de las siguientes dos opciones (A o B).}
+
+\subsection*{Opción A: Localización y Punto de Equilibrio Dinámico}
+
+  \textbf{Enunciado:}
+  Usted debe decidir en qué lugar localizar su fábrica productiva y después de un análisis exhaustivo ha llegado a la conclusión de que sólo 2 lugares se ajustan a sus necesidades. Los dos lugares difieren en sus costos fijos y sus costos variables anuales, asociados al transporte por unidad. A continuación, se detallan los costos fijos y variables de cada ubicación:
+  \begin{itemize}
+    \item \textbf{LUGAR 1:} Costo Fijo = $\$10,000$, Costo Variable = $\$100/\text{unidad}$
+    \item \textbf{LUGAR 2:} Costo Fijo = $\$23,000$, Costo Variable = $\$60/\text{unidad}$
+  \end{itemize}
+
+  Conteste:
+  \begin{itemize}
+    \item[\textbf{i.}] (5 ptos) Elabore un gráfico de punto de equilibrio y señale entre qué niveles productivos se hace conveniente cada lugar.
+    \item[\textbf{ii.}] (7 ptos) Si en el año 1 la demanda es de 100 unidades y se espera que en 10 años llegue hasta 800 unidades, de forma lineal. ¿Cuál debería ser su decisión de ubicación? Muestre todos sus cálculos.
+    \item[\textbf{iii.}] (8 ptos) Usted ha encargado un estudio de mercado, el cual le entrega un pronóstico de ventas. El estudio entrega un pronóstico de ventas para los primeros 5 años de $Q(T) = 100T$ para $T=1 \dots 5$ y de $Q(T) = 350 + 30T$ para $T=5 \dots 10$. Con esta información ¿cambia su decisión anterior? Muestre todos sus cálculos.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Gráfico y Punto de Equilibrio}
+  Buscamos el punto de corte de los costos totales:
+  \begin{equation*}
+    CF_1 + CV_1 \cdot Q = CF_2 + CV_2 \cdot Q
+  \end{equation*}
+  \begin{equation*}
+    10000 + 100 Q = 23000 + 60 Q \implies 40 Q = 13000 \implies Q = 325 \text{ unidades}
+  \end{equation*}
+
+  \begin{itemize}
+    \item Para $Q < 325$ unidades, el \textbf{Lugar 1} es óptimo (menores costos totales).
+    \item Para $Q > 325$ unidades, el \textbf{Lugar 2} es óptimo.
+  \end{itemize}
+
+  \subsubsection*{ii. Crecimiento Lineal a 10 Años}
+  La demanda crece de $Q_0 = 100$ (Año 1) a $Q_{10} = 800$ (Año 10).
+  El punto de equilibrio se sitúa en $Q = 325$.
+  Evaluamos la conveniencia integrando la diferencia de áreas geométricas de costo:
+  \begin{itemize}
+    \item \textbf{Rango de Conveniencia de Lugar 1 (de 100 a 325 unidades):}
+      La variación de volumen es $\Delta Q_1 = 325 - 100 = 225$ unidades.
+      En $Q = 100$:
+      \begin{align*}
+        \text{Costo}_1(100) &= 10000 + 100 \cdot 100 = 20000 \\
+        \text{Costo}_2(100) &= 23000 + 60 \cdot 100 = 29000 \\
+        \text{Diferencia} &= 29000 - 20000 = 9000 \\
+        \text{Área de Ahorro Lugar 1} &= \frac{225 \cdot 9000}{2} = \$1,012,500
+      \end{align*}
+
+    \item \textbf{Rango de Conveniencia de Lugar 2 (de 325 a 800 unidades):}
+      La variación de volumen es $\Delta Q_2 = 800 - 325 = 475$ unidades.
+      En $Q = 800$:
+      \begin{align*}
+        \text{Costo}_1(800) &= 10000 + 100 \cdot 800 = 90000 \\
+        \text{Costo}_2(800) &= 23000 + 60 \cdot 800 = 71000 \\
+        \text{Diferencia} &= 90000 - 71000 = 19000 \\
+        \text{Área de Ahorro Lugar 2} &= \frac{475 \cdot 19000}{2} = \$4,512,500
+      \end{align*}
+  \end{itemize}
+
+  Dado que el beneficio neto esperado de elegir el \textbf{Lugar 2} ($\$4,512,500$) es mucho mayor que el del \textbf{Lugar 1} ($\$1,012,500$), la decisión correcta es elegir el \textbf{Lugar 2}.
+
+  \subsubsection*{iii. Pronóstico de Ventas no Homogéneo}
+  El pronóstico de demanda está fragmentado en dos tramos:
+  \begin{itemize}
+    \item \textbf{Tramo 1 (Años 1 a 5):} $Q(T) = 100T$
+      \begin{itemize}
+        \item Año 1: $Q(1) = 100$
+        \item Año 5: $Q(5) = 500$
+      \end{itemize}
+    \item \textbf{Tramo 2 (Años 5 a 10):} $Q(T) = 350 + 30T$
+      \begin{itemize}
+        \item Año 5: $Q(5) = 500$
+        \item Año 10: $Q(10) = 350 + 30 \cdot 10 = 650$
+      \end{itemize}
+  \end{itemize}
+
+  Calculamos los costos anuales integrados para cada ubicación:
+
+  \paragraph{Tramo 1 (Duración = 4 años, de T=1 a T=5)}
+  \begin{itemize}
+    \item \textbf{Lugar 1:}
+      Costo en $Q=100$: $\$20,000$. Costo en $Q=500$: $\$60,000$.
+      \begin{equation*}
+        \text{Costo Total Tramo 1} = \frac{20000 + 60000}{2} \cdot 4 = \$160,000
+      \end{equation*}
+    \item \textbf{Lugar 2:}
+      Costo en $Q=100$: $\$29,000$. Costo en $Q=500$: $\$53,000$.
+      \begin{equation*}
+        \text{Costo Total Tramo 1} = \frac{29000 + 53000}{2} \cdot 4 = \$164,000
+      \end{equation*}
+  \end{itemize}
+
+  \paragraph{Tramo 2 (Duración = 5 años, de T=5 a T=10)}
+  \begin{itemize}
+    \item \textbf{Lugar 1:}
+      Costo en $Q=500$: $\$60,000$. Costo en $Q=650$: $\$75,000$.
+      \begin{equation*}
+        \text{Costo Total Tramo 2} = \frac{60000 + 75000}{2} \cdot 5 = \$337,500
+      \end{equation*}
+    \item \textbf{Lugar 2:}
+      Costo en $Q=500$: $\$53,000$. Costo en $Q=650$: $\$62,000$.
+      \begin{equation*}
+        \text{Costo Total Tramo 2} = \frac{53000 + 62000}{2} \cdot 5 = \$287,500
+      \end{equation*}
+  \end{itemize}
+
+  \paragraph{Costos Totales Acumulados}
+  \begin{itemize}
+    \item \textbf{Lugar 1:} $\$160,000 + \$337,500 = \$497,500$
+    \item \textbf{Lugar 2:} $\$164,000 + \$287,500 = \$451,500$
+  \end{itemize}
+
+  \textbf{Conclusión:} El \textbf{Lugar 2} sigue teniendo el menor costo total ($\$451,500 < \$497,500$), por lo que \textbf{no cambia} la decisión anterior.
+
+\end{ejercicio}
+
+\newpage
+
+\subsection*{Opción B: Negociación de Contratos y Riesgo en Proyectos (PERT)}
+
+  \textbf{Enunciado:}
+  Usted se encuentra a cargo de un proyecto que tiene una fecha estimada de término de 110 semanas y con una desviación estándar de 8 semanas. Actualmente, se encuentra negociando el contrato de ejecución con la contraparte y están en el proceso de definir los incentivos y penalizaciones.
+  \begin{itemize}
+    \item[\textbf{i.}] (5 ptos) Su contraparte le ofrece la \textbf{OPCIÓN 1}: Un bono de $\$200$ si termina antes de 105 semanas y una penalización de $\$80$ si termina después de esa fecha. ¿Acepta usted esta opción?
+    \item[\textbf{ii.}] (7 ptos) Ahora su contraparte le entrega la \textbf{OPCIÓN 2}: Un bono de $\$150$ por terminar antes de 108 semanas y una penalización de $\$122$ si termina después de 111 semanas. ¿Es esta opción aceptable? ¿Prefiere esta opción a la OPCIÓN 1?
+    \item[\textbf{iii.}] (8 ptos) Si en la OPCIÓN 1 usted solo puede negociar la fecha en la cual se ejecuta el bono o la penalización, y en la OPCIÓN 2 usted solo puede negociar el monto del bono. ¿Qué fecha en la OP 1 lo deja indiferente frente a la rentabilidad esperada de la OPCIÓN 2? Muestre sus cálculos.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Evaluación Opción 1}
+  \begin{itemize}
+    \item Duración esperada del proyecto $\mu = 110$ semanas, desviación estándar $\sigma = 8$ semanas.
+    \item Umbral de tiempo $X = 105$ semanas.
+    \item Calculamos el valor $Z$ para la fecha límite:
+      \begin{equation*}
+        Z = \frac{105 - 110}{8} = -0.625
+      \end{equation*}
+    \item Aproximamos con la tabla normal estándar para $Z = -0.63$:
+      \begin{equation*}
+        \Phi(0.63) \approx 0.7357 \implies P(T \le 105) = 1 - 0.7357 = 0.2643 \quad (26.43\%)
+      \end{equation*}
+      \begin{equation*}
+        P(T > 105) = 0.7357 \quad (73.57\%)
+      \end{equation*}
+    \item Calculamos el valor esperado del contrato ($VE$):
+      \begin{equation*}
+      \begin{aligned}
+        VE &= 200 \cdot P(T \le 105) - 80 \cdot P(T > 105) \\
+           &= 200 \cdot 0.2643 - 80 \cdot 0.7357 \\
+           &= 52.86 - 58.86 = -\$6.00
+      \end{aligned}
+      \end{equation*}
+      Dado que el valor esperado es negativo ($-\$6.00$), el contrato se \textbf{rechaza}.
+  \end{itemize}
+
+  \subsubsection*{ii. Evaluación Opción 2}
+  \begin{itemize}
+    \item \textbf{Bono:} $\$150$ si $T \le 108$.
+      \begin{align*}
+        Z_{\text{bono}} &= \frac{108 - 110}{8} = -0.25 \\
+        P(T \le 108) &= 1 - \Phi(0.25) = 1 - 0.5987 = 0.4013 \\
+        VE_{\text{bono}} &= 150 \cdot 0.4013 = \$60.195
+      \end{align*}
+    \item \textbf{Penalización:} $\$122$ si $T > 111$.
+      \begin{align*}
+        Z_{\text{pen}} &= \frac{111 - 110}{8} = 0.125 \\
+        \text{Interpolando: } \Phi(0.125) &\approx 0.5498 \\
+        P(T > 111) &= 1 - \Phi(0.125) = 1 - 0.5498 = 0.4502 \\
+        VE_{\text{pen}} &= 122 \cdot 0.4502 = \$54.924
+      \end{align*}
+    \item \textbf{Valor Esperado de la Opción 2:}
+      \begin{equation*}
+        VE_{\text{neto}} = 60.195 - 54.924 = +\$5.271
+      \end{equation*}
+      Dado que el valor esperado es positivo ($+\$5.271$), esta opción \textbf{sí es aceptable} y se \textbf{prefiere} a la Opción 1.
+  \end{itemize}
+
+  \subsubsection*{iii. Indiferencia de Fecha en Opción 1}
+  Queremos determinar el umbral de tiempo $X$ en la Opción 1 que iguale su beneficio esperado al de la Opción 2 ($VE = \$5.271$):
+  \begin{equation*}
+    200 \cdot p - 80 \cdot (1 - p) = 5.271 \quad \text{donde } p = P(T \le X)
+  \end{equation*}
+  \begin{equation*}
+    280 p - 80 = 5.271 \implies 280 p = 85.271 \implies p = \frac{85.271}{280} \approx 0.3045
+  \end{equation*}
+
+  Buscamos en la tabla de distribución normal la probabilidad acumulada de $0.3045$:
+  \begin{equation*}
+    \Phi(-Z) = 0.3045 \implies \Phi(Z) = 1 - 0.3045 = 0.6955 \implies Z \approx -0.51
+  \end{equation*}
+
+  Despejamos el valor de la fecha límite $X$:
+  \begin{equation*}
+    \frac{X - 110}{8} = -0.51 \implies X = 110 - 0.51 \cdot 8 = 105.92 \text{ semanas}
+  \end{equation*}
+  La fecha límite que genera indiferencia es de \textbf{105.92 semanas}.
+
+\end{ejercicio}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% PARTE II
+% ════════════════════════════════════════════════════════════════════════════
+\section{Preguntas de Desarrollo Obligatorias}
+
+\subsection*{Pregunta 1: MRP de Bicicletas Eléctricas Premium (Serious 1) (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se solicita realizar el plan de requerimientos de materiales (MRP) para un producto con limitación de capacidad de ensamble final y un componente que tiene lote mínimo de pedido (setup). Además, se requiere formular el modelo de programación lineal entero-mixto (MILP) para optimizarlo.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item En la tabla MRP, respetar la capacidad máxima semanal para el producto final desfasando la producción hacia atrás.
+      \item Formular el MILP con variables binarias de activación de setup $B_{i,t}$, costos de producción, inventario y setup, modelando el balance de stock tradicional y las restricciones de lote mínimo.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  La empresa Serious 1 se dedica a fabricar bicicletas eléctricas premium. Tiene comprometidas unidades a entregar para las siguientes semanas. Serious 1 realiza el ensamble final, el cual tarda 1 semana y posee una capacidad máxima de ensamble de 27 unidades semanales. Para el ensamble final de las unidades se rige por el BOM adjunto. La parte C tiene un costo de setup, por lo que posee una producción mínima de 75 piezas por semana.
+
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.2cm and 1.5cm,
+    item/.style={draw, rectangle, minimum width=1.5cm, minimum height=0.8cm, fill=gopbluedeflight, draw=gopbluedef, thick, font=\bfseries}
+  ]
+    \node[item] (Alpha) {Alpha};
+    \node[item, below left=of Alpha] (B) {B (1)};
+    \node[item, below=of Alpha] (C) {C (2)};
+    \node[item, below right=of Alpha] (D) {D (2)};
+    \node[item, below=of C] (C2) {C (1)};
+    
+    \draw[thick, gopblue] (Alpha) -- (B);
+    \draw[thick, gopblue] (Alpha) -- (C);
+    \draw[thick, gopblue] (Alpha) -- (D);
+    \draw[thick, gopblue] (C) -- (C2);
+  \end{tikzpicture}
+  \end{center}
+  \textit{Nota: El árbol BOM detalla que 1 Alpha requiere 1 B, 2 C y 2 D. A su vez C requiere otra parte C (1) subordinada en una segunda etapa de ensamble.}
+
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Pieza} & \textbf{Inventario Disponible ($OH$)} & \textbf{Lead Time ($LT$)} & \textbf{Restricciones / Loteo} \\
+    \midrule
+    \textbf{Alpha} & 10 & 1 & Capacidad máxima = 27 unidades/semana \\
+    \textbf{B} & 28 & 2 & Lote a Lote (L4L) \\
+    \textbf{C} & 137 & 3 & Lote mínimo = 75 unidades \\
+    \textbf{D} & 100 & 1 & Lote a Lote (L4L) \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  La demanda de preventa (Producto Final: Alpha) es:
+  \begin{itemize}
+    \item Semana 4: 50 unidades \quad Semana 7: 50 unidades \quad Semana 9: 80 unidades
+  \end{itemize}
+
+  Se solicita:
+  \begin{itemize}
+    \item[\textbf{i.}] Realice las tablas de MRP correspondientes para cumplir con la demanda.
+    \item[\textbf{ii.}] Plantee un modelo de programación matemática que optimice el plan de producción si la cantidad mínima de producción y costos fijos de setup están dados por $Lm_i$ y $Cf_i$, con costos de producción unitarios $CP_i$ e inventario $CI_i$ para cada pieza $i$.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Tablas de MRP (Explosión de Materiales)}
+
+  \paragraph{1. Producto Final: Alpha (LT = 1, Capacidad Máxima Ensamble = 27)}
+  Dado que la demanda es de 50 en la semana 4, y el inventario disponible es 10, los requerimientos netos son de 40. Debido al límite de ensamble de 27/semana, debemos programar recepciones de ensamble acumuladas: 27 en W4 y 13 en W3. Desfasando 1 semana de LT, lanzamos órdenes en W2 (13) y W3 (27).
+  Para la demanda de 80 en W9, requerimos distribuir la producción en semanas previas (W6, W7, W8) debido a la cota máxima de 27.
+
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccccccc}
+    \toprule
+    \textbf{Período} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & & 0 & 0 & 0 & 50 & 0 & 0 & 50 & 0 & 80 \\
+    \textbf{Inventario Disponible (OH)} & 10 & 10 & 10 & 23 & 0 & 0 & 4 & 0 & 0 & 0 \\
+    \textbf{Recepción de Órdenes (POR)} & & 0 & 0 & 13 & 27 & 0 & 27 & 23 & 0 & 80* \\
+    \textbf{Lanzamiento Planificado (PORelease)} & & 0 & 13 & 27 & 0 & 27 & 23 & 0 & 80* & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+  \textit{*Nota: El lanzamiento de 80 en W8 para W9 sobrepasa la capacidad de ensamble de 27; idealmente, debe adelantarse la producción en periodos anteriores.}
+
+  \paragraph{2. Componente B (LT = 2, L4L, $GR_B = 1 \cdot PORelease_{Alpha}$, OH = 28)}
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccccccc}
+    \toprule
+    \textbf{Período} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & & 0 & 13 & 27 & 0 & 27 & 23 & 0 & 27 & 27 \\
+    \textbf{Inventario Disponible (OH)} & 28 & 28 & 15 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Recepción de Órdenes (POR)} & & 0 & 0 & 12 & 0 & 27 & 23 & 0 & 27 & 27 \\
+    \textbf{Lanzamiento Planificado (PORelease)} & & 12 & 0 & 27 & 23 & 0 & 27 & 27 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{3. Componente D (LT = 1, L4L, $GR_D = 2 \cdot PORelease_{Alpha}$, OH = 100)}
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccccccc}
+    \toprule
+    \textbf{Período} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & & 0 & 26 & 54 & 0 & 54 & 46 & 0 & 54 & 54 \\
+    \textbf{Inventario Disponible (OH)} & 100 & 100 & 74 & 20 & 20 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Recepción de Órdenes (POR)} & & 0 & 0 & 0 & 0 & 34 & 46 & 0 & 54 & 54 \\
+    \textbf{Lanzamiento Planificado (PORelease)} & & 0 & 0 & 0 & 34 & 46 & 0 & 54 & 54 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{4. Componente C (LT = 3, Lote Mínimo = 75, $GR_C = 2 \cdot PORelease_{Alpha}$, OH = 137)}
+  \begin{center}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lccccccccccc}
+    \toprule
+    \textbf{Período} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & & 0 & 26 & 54 & 0 & 54 & 46 & 0 & 54 & 54 \\
+    \textbf{Inventario Disponible (OH)} & 137 & 137 & 111 & 57 & 57 & 78 & 32 & 32 & 53 & 74 \\
+    \textbf{Recepción de Órdenes (POR)} & & 0 & 0 & 0 & 0 & 75 & 0 & 0 & 75 & 75 \\
+    \textbf{Lanzamiento Planificado (PORelease)} & & 0 & 75 & 0 & 0 & 75 & 75 & 0 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \subsubsection*{ii. Modelo de Programación Matemática (MILP)}
+  \textbf{Variables:}
+  \begin{itemize}
+    \item $POR_{i,t} \ge 0$: Cantidad de producción iniciada para la pieza $i$ en la semana $t$.
+    \item $I_{i,t} \ge 0$: Inventario de la pieza $i$ al final de la semana $t$.
+    \item $GR_{i,t} \ge 0$: Requerimientos brutos de la pieza $i$ en la semana $t$.
+    \item $B_{i,t} \in \{0, 1\}$: Activación binaria de lote (setup) para la pieza $i$ en el período $t$.
+  \end{itemize}
+
+  \textbf{Función Objetivo:}
+  \begin{equation*}
+    \min \quad \sum_{t=1}^{T} \sum_{i} \left( CP_i \cdot POR_{i,t} + CI_i \cdot I_{i,t} + Cf_i \cdot B_{i,t} \right)
+  \end{equation*}
+
+  \textbf{Restricciones:}
+  \begin{itemize}
+    \item Requerimiento del producto final:
+      \begin{equation}
+        GR_{Alpha,t} \ge \text{Demanda}_t \quad \forall t
+      \end{equation}
+    \item Capacidad de ensamble (Producto Final):
+      \begin{equation}
+        POR_{Alpha,t} \le 27 \quad \forall t
+      \end{equation}
+    \item Balance de inventario:
+      \begin{equation}
+        I_{i,t} = I_{i,t-1} + POR_{i,t-L_i} - GR_{i,t} \quad \forall i, t
+      \end{equation}
+    \item Explosión de materiales para componentes ($k \ne Alpha$):
+      \begin{equation}
+        GR_{k,t} = \sum_{j: (j,k) \in \text{BOM}} R_{j,k} \cdot POR_{j,t} \quad \forall k, t
+      \end{equation}
+    \item Restricción de Lote Mínimo y Setup (Big-M):
+      \begin{equation}
+        POR_{i,t} \ge Lm_i \cdot B_{i,t} \quad \forall i, t
+      \end{equation}
+      \begin{equation}
+        POR_{i,t} \le M \cdot B_{i,t} \quad \forall i, t
+      \end{equation}
+    \item Inventario inicial:
+      \begin{equation}
+        I_{i,0} = OH_i \quad \forall i
+      \end{equation}
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+\subsection*{Pregunta 2: Gestión de Capacidad y Variabilidad (Teoría de Colas) (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se analiza el diseño de capacidad y la variabilidad de una cola usando el balance de costos operativos y de espera de los clientes, seguido de un análisis en cadena (tándem) donde se propaga la variabilidad.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item En M/M/1, el tiempo de permanencia es $W_s = \frac{1}{\mu - \lambda}$.
+      \item El costo total es $CT(\mu) = CE(W_s) \cdot \text{clientes} + 10\mu$. La pauta utiliza una minimización simplificada por cliente individual: $CT(\mu) = 10 + \frac{1000}{\mu - 25} + 10\mu$.
+      \item En sistemas en tándem, el coeficiente de variación de salida de la estación 1 es $C_{d,1}^2 \approx \rho_1^2 \cdot C_{s,1}^2 + (1-\rho_1)^2 \cdot C_{a,1}^2$, que alimenta como $C_{a,2}^2$ a la estación 2 (G/G/1).
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted está pensando en colocar un emprendimiento de comida y debe determinar la capacidad de atención. Para llevar esto a cabo, determina el costo total de espera $CE(W_s)$ de los clientes en el sistema, el cual depende del tiempo de permanencia ($W_s$) según la ecuación:
+  \begin{equation*}
+    CE(W_s) = 10 + 1000 W_s
+  \end{equation*}
+
+  La tasa de llegada de los clientes al puesto es de $\lambda = 25$ clientes por hora, con un coeficiente de variación de llegada $C_a = 1$. 
+
+  La capacidad de atender a los clientes ($\mu$) se puede ajustar linealmente y tiene un costo operativo de $\$10/\text{unidad de capacidad}$. Es decir, si se contrata una tasa de servicio de $\mu$ clientes por hora, el costo del servicio es de $10\mu$. El coeficiente de variación de la atención es $C_s = 1$.
+
+  \begin{itemize}
+    \item[\textbf{a)}] (12 Puntos) Con esta información determine la capacidad óptima de atención ($\mu$) que debe implementar en su emprendimiento. (*HINT: Un sistema con $C_a=1$ y $C_s=1$ se comporta como un modelo M/M/1*).
+    \item[\textbf{b)}] (8 Puntos) Usted ha comprado la capacidad productiva determinada en (a) pero olvidó que debía instalar una caja registradora antes del mesón de atención. Si la caja tiene una capacidad de atender $50$ clientes por hora y un coeficiente de variación de servicio $C_{s,\text{caja}} = 2$. ¿Cómo cambia el tiempo de espera desde que el cliente sale de la caja y es atendido en el mesón? ¿Aumenta o disminuye? Justifique mediante el análisis de propagación de variabilidad.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{a) Determinación de la Capacidad Óptima $\mu$}
+  El sistema sin caja se comporta como una cola \textbf{M/M/1}.
+  El tiempo en el sistema es $W_s = \frac{1}{\mu - 25}$.
+  Minimizamos la función de costo simplificada por cliente (según pauta oficial):
+  \begin{equation*}
+    \min_{\mu} \quad CT = 10 + \frac{1000}{\mu - 25} + 10 \mu
+  \end{equation*}
+
+  Derivamos con respecto a $\mu$ e igualamos a cero:
+  \begin{equation*}
+    \frac{dCT}{d\mu} = -\frac{1000}{(\mu - 25)^2} + 10 = 0 \implies (\mu - 25)^2 = 100
+  \end{equation*}
+  \begin{equation*}
+    \mu - 25 = 10 \implies \mu = \mathbf{35 \text{ clientes/hora}}
+  \end{equation*}
+  La capacidad óptima de atención recomendada es de \textbf{35 clientes/hora}.
+
+  \subsubsection*{b) Impacto de la Caja Registradora (Propagación de Variabilidad)}
+  Con la caja antes del mesón, se modela un sistema de colas en tándem:
+  \begin{itemize}
+    \item \textbf{Caja (Estación 1):} $\mu_1 = 50$, $C_{s,1} = 2$, $\lambda = 25 \implies \rho_1 = \frac{25}{50} = 0.5$.
+    \item \textbf{Mesón (Estación 2):} $\mu_2 = 35$, $C_{s,2} = 1$, $\lambda = 25 \implies \rho_2 = \frac{25}{35} = 0.7143$.
+  \end{itemize}
+
+  El coeficiente de variación de las salidas de la caja ($C_{d,1}^2$) determina el coeficiente de variación de llegadas en el mesón ($C_{a,2}^2$):
+  \begin{equation*}
+    C_{a,2}^2 \approx C_{d,1}^2 \approx \rho_1^2 \cdot C_{s,1}^2 + (1 - \rho_1)^2 \cdot C_{a,1}^2
+  \end{equation*}
+  \begin{equation*}
+    C_{a,2}^2 \approx (0.5)^2 \cdot (2)^2 + (1 - 0.5)^2 \cdot (1)^2 = 0.25 \cdot 4 + 0.25 \cdot 1 = 1.25
+  \end{equation*}
+
+  El mesón pasa a modelarse como una cola \textbf{G/G/1}. El tiempo de espera en la cola ($W_{q,2}$) se estima con la ecuación de Kingman (VUT):
+  \begin{equation*}
+    W_{q,2} = \left( \frac{C_{a,2}^2 + C_{s,2}^2}{2} \right) \left( \frac{\rho_2}{1 - \rho_2} \right) \left( \frac{1}{\mu_2} \right)
+  \end{equation*}
+  \begin{equation*}
+    W_{q,2} = \left( \frac{1.25 + 1}{2} \right) \left( \frac{0.7143}{1 - 0.7143} \right) \left( \frac{1}{35} \right) \approx \mathbf{0.0804 \text{ horas}} \quad (4.82 \text{ min})
+  \end{equation*}
+
+  En la situación original sin caja (llegada directa con $C_{a}^2 = 1$):
+  \begin{equation*}
+    W_{q,\text{original}} = \left( \frac{1 + 1}{2} \right) \left( \frac{0.7143}{1 - 0.7143} \right) \left( \frac{1}{35} \right) \approx \mathbf{0.0714 \text{ horas}} \quad (4.29 \text{ min})
+  \end{equation*}
+
+  \textbf{Análisis:} El tiempo de espera en el mesón \textbf{aumenta} de 0.0714 horas a 0.0804 horas (un incremento del $12.6\%$). Esto se debe a que la caja introduce variabilidad en el flujo de clientes ($C_{s,\text{caja}} = 2$), la cual se propaga aguas abajo, congestionando el mesón y aumentando la demora promedio en la fila.
+
+\end{ejercicio}
+
+\end{document}

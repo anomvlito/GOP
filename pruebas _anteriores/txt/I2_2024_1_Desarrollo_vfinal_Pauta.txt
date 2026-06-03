@@ -1,0 +1,900 @@
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Pontificia Universidad Católica de Chile
+Escuela de Ingeniería
+Departamento de Ingeniería Industrial y de Sistemas
+
+Interrogación 2
+Enunciados
+ICS 3213 Gestión de Operaciones
+1er semestre 2024
+Instrucciones:
+•
+
+Responder en letra legible, en lápiz pasta o bolígrafo y poner nombre a todas las hojas.
+
+•
+
+No debe des corchetear la prueba y responda en el espacio asignado.
+
+•
+
+Esta sección de la prueba tiene 60 puntos, dura 60 minutos.
+
+•
+
+Se leerá la prueba al comienzo de clases y después se permitirán preguntas en voz alta. Posteriormente en
+la mitad de la prueba se volverá a permitir preguntas en voz alta. No se permitirán preguntas fuera de estos
+intervalos. Si su duda persiste indique el supuesto y continúe.
+
+•
+
+Al final de la prueba los alumnos deberán subir su prueba a CANVAS. Dispondrán de 15 minutos para
+escanear pruebas hoja por hoja y subirlas. Al final de subir la prueba deberán dejarla en el mismo puesto.
+Si por alguna razón hay un problema al subir la prueba, avisen al profesor/ayudante y dejen su prueba.
+
+•
+
+Este curso adscribe el Código de Honor establecido por la Escuela de Ingeniería el que es vinculante. Todo
+trabajo evaluado en este curso debe ser propio. En caso de que exista colaboración permitida con otros
+estudiantes, el trabajo deberá referenciar y atribuir correctamente dicha contribución a quien corresponda.
+Como estudiante es su deber conocer la versión en línea del Código de Honor
+(http://ing.puc.cl/codigodehonor).
+
+¡Muy Buena Suerte!
+
+Página 1 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+PARTE DESARROLLO: Responda todas las siguientes preguntas de ejercicio.
+1.- (20 puntos) Usted es el Gerente de Operaciones para una gran empresa que produce un producto y debe elaborar
+
+el plan de producción para las siguientes 52 semanas. Marketing le ha entregado la demanda de cada cliente i para
+cada semana t, la cual es 𝐷𝑖𝑡 . La producción puede ser hecha en cualquiera de la N plantas de la empresa, pero
+para ello debe activar la planta lo cual tiene un costo fijo de 𝐴𝑛 , el costo de producción unitario es 𝐶𝑃𝑛 por unidad
+en planta n y la producción debe ser despachada a cada cliente i a un costo 𝐶𝑖𝑛 por cada unidad despacha al cliente
+i de la planta n. La productividad de cada trabajador en la planta es de 𝑃𝑅𝑛 unidades por hora de producción
+(normal y hora extra) por trabajador y se trabaja turnos de 8 Hrs en 5 días a la semana. El costo semanal de cada
+trabajador es $CT y el costo de contrato es $CC y el costo de despido es $CDS. Si en algún momento se requiere,
+es posible trabajar un máximo de 2 hrs extra por día a un costo de 𝐶𝐸 pesos por hora extra trabajada. Actualmente
+(tiempo 0) usted dispone de 𝑇𝑛 trabajadores y mantiene 𝐼𝑁𝑉𝐼𝑛 unidades en inventario en cada planta, al final del
+año debe dejar 𝑇𝐹𝑛 trabajadores y 𝐼𝑁𝑉𝐹𝑛 unidades en inventario en cada planta n. El costo de mantener unidades
+en inventario es 𝐻𝑛 pesos por unidad mantenida en inventario por semana para cada planta n.
+i.
+(10 ptos) Con esta información construya un modelo de programación matemática que permita determinar la
+planificación de producción. En su respuesta indique: las variables de decisión del modelo, la función objetivo
+y las restricciones. Si necesita de algún parámetro adicional, indíquelo claramente.
+Ahora usted debe planificar el aprovisionamiento de la planta de la materia prima para producir el producto. Usted
+sabe que para producir una unidad de producto final se requiere R unidades de materia prima a un costo de 𝐼𝑁𝑡
+por unidad de materia prima en tiempo t. Actualmente (tiempo 0) usted mantiene 𝑀𝑃𝐼𝑛 unidades en inventario
+de materia prima en cada planta, al final del año debe dejar 𝑀𝑃𝐹𝑛 unidades en inventario y el costo de mantener
+unidades en inventario es 𝑀𝐶𝑛 para cada planta. Este insumo es provisto por j proveedores distintos que tienen
+un Lead-Time o tiempo entre la orden y la entrega de L semanas, cada uno puede entregar como máximo 𝑀𝐴𝑋𝑗
+unidades del insumo por semana y el costo de despacho entre cada proveedor y planta es de 𝐶𝑇𝑃𝑛𝑗 .
+ii.
+(5 ptos) Con esta información cómo cambia el modelo de programación matemática que planteo anteriormente
+para determinar la planificación de producción y abastecimiento. En su respuesta solo indique: las nuevas
+variables de decisión del modelo, los cambios en la función objetivo y las nuevas restricciones.
+Usted determina que el flujo entre cada proveedor y planta es 𝐹𝑛𝑗 unidades de cada proveedor j a planta n. Con
+esta información usted quiere determinar la ubicación de dos bodegas que permita recibir los insumos de parte de
+los proveedores. Para ello usted georreferencia cada proveedor con una coordenada en X e Y, siendo 𝐶𝑃𝑅𝑋𝑗 y
+𝐶𝑃𝑅𝑌𝑗 respectivamente para cada proveedor j y lo mismo para cada planta, siendo 𝐶𝑃𝐿𝑋𝑛 y 𝐶𝑃𝐿𝑌𝑛 para cada
+planta n.
+iii. (5 ptos) Si usted quiere determinar la cota de peor caso y asume la distancia Manhattan. Construya el modelo
+de programación matemática que permita determinar la ubicación de cada bodega y la asignación de las
+plantas y proveedores a cada bodega.
+a)
+Var Decisión
+P_nt: Producción en la Planta n en el tiempo t.
+I_nt: Inventario en la Planta n en el tiempo t.
+DE_nit: Despacho de la Planta i, para el mercado i en el tiempo t.
+B_n: Binaria activación planta n.
+TA_nt: trabajadores disponibles en planta n en tiempo t.
+TCA_nt: Trabajadore contratados en planta n en tiempo t.
+TDA_nt: Trabajadore despedidos en planta n en tiempo t.
+HE_nt: Hrs extra en la planta n en el tiempo t.
+Función objetivo
+𝑀𝑖𝑛 ∑ 𝐶𝑃𝑛 ∗ 𝑃𝑛𝑡 + ∑ 𝐶𝑖𝑛 ∗ 𝐷𝐸𝑛𝑖𝑡 + ∑ 𝐶𝐶 ∗ 𝑇𝐶𝐴𝑛𝑡 + ∑ 𝐶𝑇 ∗ 5 ∗ 𝑇𝐴𝑛𝑡 + ∑ 𝐶𝐷 ∗ 𝑇𝐷𝐴𝑛𝑡
++ ∑ 𝐶𝐸 ∗ 𝐻𝐸𝑛𝑡 + ∑ 𝐵𝑛 ∗ 𝐴𝑛
+S/A
+∑ 𝐷𝐸𝑛𝑖𝑡 ≥ 𝐷𝑖𝑡
+𝑛
+
+𝐼𝑛𝑡 = 𝐼𝑛𝑡−1 + 𝑃𝑛𝑡 − ∑ 𝐷𝐸𝑛𝑖𝑡
+𝑖
+
+Página 2 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+𝐼0𝑛 = 𝐼𝑁𝑉𝐼𝑛
+𝐼52𝑛 = 𝐼𝑁𝐹𝑛
+𝑇𝐴𝑛𝑡 = 𝑇𝐴𝑛𝑡−1 + 𝑇𝐶𝐴𝑛𝑡 − 𝑇𝐶𝐷𝑛𝑡
+𝑇𝐴𝑛0 = 𝑇𝑛
+𝑇52 = 𝑇𝐹𝑛
+𝑃𝑛𝑡 ≤ 𝑀 ∗ 𝐵𝑛
+𝑃𝑛𝑡 ∗ 𝑃𝑅𝑛 ≥ 𝑇𝐴𝑛𝑡 ∗ 8 ∗ 5 + 𝐻𝐸𝑛𝑡
+𝐻𝐸𝑛𝑡 ≤ 𝑇𝐴𝑛𝑡 ∗ 2 ∗ 5
+No negatividad en todas las variables y Ba binaria
+b)
+QSI_njt: Cantidad solicitada Insumo de proveedor j, despachado a planta n en tiempo t.
+QUI_nt: Cantidad usada Insumo de proveedor j, despachado a planta n en tiempo t.
+IIN_nt : Inventario de insumo en planta n y el tiempo t.
+∑ 𝐼𝑁𝑗𝑡 ∗ 𝑄𝑆𝐼𝑛𝑗𝑡 + ∑ 𝐶𝑇𝑃𝑛𝑗 ∗ 𝑄𝑈𝐼𝑛𝑗𝑡 + ∑ 𝑀𝐶𝑛 ∗ 𝐼𝐼𝑁𝑛𝑡
+𝑃𝑛𝑡 ∗ 𝑅 ≤ ∑ 𝑄𝑈𝐼𝑛𝑗𝑡
+𝑗
+
+𝐼𝐼𝑁𝑛𝑡 = 𝐼𝐼𝑁𝑛𝑡−1 + ∑ 𝑄𝑆𝐼𝑛𝑗𝑡−𝐿𝑗 − ∑ 𝑄𝑈𝐼𝑛𝑗𝑡
+𝑗
+
+𝑗
+
+𝐼𝐼𝑁𝑛0 = 𝑀𝑃𝐼𝑛
+𝐼𝐼𝑁𝑛52 = 𝑀𝑃𝐹𝑛
+∑ 𝑄𝑆𝐼𝑛𝑗𝑡 ≤ 𝑀𝑎𝑥𝑗
+No negatividad en las variables.
+
+𝑛
+
+c)
+Bij Variable binaria si la planta (n) o el cliente (j) se asigna a la bodega i.
+CXi: Coordenada x de la bodega i.
+CYi: Coordenada y de la bodega i.
+Dij: Distancia entre la planta (n) o el cliente (j) se asigna a la bodega i.
+Parámetros
+QPn: Cantidad de insumo asignado a planta n
+QIj: Cantidad de insumo proveniente de proveedor j
+𝑀𝑖𝑛 ∑ 𝐷𝑖𝑛 ∗ 𝑄𝑃𝑛 + ∑ 𝐷𝑖𝑗 𝑄𝐼𝑗
+𝑛,𝑗
+
+𝑖𝑗
+
+S/A
+𝑀 ∗ (1 − 𝐵𝑖𝑗 ) + 𝐷𝑖𝑗 ≥ |𝐶𝑃𝑅𝑋𝑗 − 𝐶𝑋𝑖 | + ⌈𝐶𝑃𝑅𝑌𝑗 − 𝐶𝑋𝑖 ⌉
+𝑀 ∗ (1 − 𝐵𝑖𝑛 ) + 𝐷𝑖𝑛 ≥ |𝐶𝑃𝐿𝑋𝑛 − 𝐶𝑋𝑖 | + ⌈𝐶𝑃𝐿𝑌𝑛 − 𝐶𝑋𝑖 ⌉
+∑ 𝐵𝑖𝑗 = 1
+𝑗
+
+∑ 𝐵𝑖𝑛 = 1
+𝑛
+
+Página 3 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+2.- (20 puntos) Una empresa química lo contrata a usted para gestionar la producción de uno de sus productos más
+importantes. Contéstele al Gerente de Operaciones las siguientes preguntas, justificando sus respuestas en forma clara.
+La empresa elabora un preparado en envases de 500ml. Cada envase viene con su tapa y los compuestos de la crema por
+envase son: 300ml de compuesto A y 200 ml. de compuesto B. A su vez el compuesto B consta de 100ml de compuesto C
+y 100ml de compuesto D. Los plazos de entrega de los proveedores, desde que se pone la orden, de los compuestos son:
+
+La fabricación de la mezcla de los compuestos C y D demora 1 semana y la mezcla de los compuestos A, B, C más su
+envasado también demora 1 semana. La empresa cuenta con el siguiente inventario inicial y órdenes en tránsito por recibir.
+ente, el área de planificación y gestión de clientes pronostica que la demanda por las próximas 6 semanas será la siguiente:
+1
+2
+3
+4
+5
+6
+300 200
+300
+400
+300
+200
+Considerando que no hay problemas de capacidad, conteste lo siguiente:
+i.
+ii.
+
+(5 ptos) Dibuje un árbol que represente la lista de materiales (BOM: Bill Of Materials) del producto final.
+(10 Ptos) Construya las tablas de MRP para cada uno de los componentes.
+
+El compuesto C requiere estar en un ambiente controlado (temperatura y humedad) hasta que se mezcla con el D, por lo
+mismo para transportar este producto hay que ocupar equipamiento especial, lo que tiene un costo. El costo de traslado por
+cada orden es 10. Además, mantenerlo en las bodegas hasta que se mezcla tiene un costo de 1 por semana.
+iii.
+
+(5 ptos) Utilice alguno de los algoritmos para determinar los lotes de fabricación ¿Es mejor agrupar lotes de
+fabricación? Indique el beneficio/costo económico de hacer lotes.
+
+Página 4 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Parte
+Semana
+GR
+OH
+POR
+Parte
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+Semana
+GR
+OH
+POR
+Parte
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+Semana
+GR
+OH
+POR
+Parte
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+Semana
+GR
+OH
+POR
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+Página 5 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+3.- (20 puntos) Usted dispone de la siguiente información sobre un proyecto: los tiempos mínimos u optimistas,
+
+esperados y la desviación estándar por actividad medidos en semanas.
+
+i)
+ii)
+iii)
+
+iv)
+
+Actividad
+
+Antecesores
+
+A
+B
+C
+D
+E
+F
+
+A, B
+C
+C
+D, E
+
+Tiempo
+esperado
+4
+2
+3
+2
+4
+3
+
+Tiempo
+optimista
+3
+1
+2
+1
+2
+1
+
+Desviación
+estándar
+1
+1.5
+0.8
+2
+1.3
+0.7
+
+Costo
+Normal
+4
+3
+3
+1.5
+5
+4
+
+(7 puntos) Desarrollar el diagrama del proyecto, determine los ES, EF, LS, LF y la ruta crítica.
+Además, calcule la duración esperada y la desviación estándar de la ruta crítica.
+(2 puntos) Calcule la duración del proyecto que sea el doble de probable de excederse que de no
+cumplirse.
+(6 puntos) Si le ofrecen un contrato con un bono de $200 por terminar en o antes de 11 semanas y
+una penalización de $80 por terminar en o después de 16 semanas. ¿Aceptaría o rechazaría el
+contrato? ¿Cuál es la cantidad de semanas máxima que debe ofrecer el bono para que quiera aceptar
+el contrato?
+(5 puntos) Ahora tiene la posibilidad de que la duración esperada de una actividad sea su tiempo
+optimista pagando el doble de su costo normal. Calcule el costo mínimo para que el tiempo esperado
+de la ruta crítica sea 3 semanas menos que el inicial. HINT: La ruta crítica puede variar o no.
+
+) (7 puntos)
+
+Actividad
+A
+B
+C
+D
+E
+F
+
+Antecesores
+A, B
+C
+C
+D, E
+
+ES
+0
+0
+4
+7
+7
+11
+
+EF
+4
+2
+7
+9
+11
+14
+
+LS
+0
+2
+4
+9
+7
+11
+
+LF
+4
+4
+7
+11
+11
+14
+
+La ruta crítica es A-C-E-F tiene duración esperada 14 semanas y una desviación estándar de 1,95 semanas.
+ii) (2 puntos) Se considera una distribución normal y se busca el Z equivalente a una probabilidad de 0,33. Este
+corresponde a -0,43. Luego, se calcula la cantidad de semanas con la siguiente fórmula:
+𝑋 − 𝑋𝑒
+=𝑍
+𝜎
+Página 6 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Por lo tanto, X = 13,16 semanas.
+iii) (6 puntos) Se calcula la probabilidad de terminar en menos de 11 y en más de 16 semanas:
+11 − 14
+=𝑍
+1,95
+Z = -1.53, equivalente a una probabilidad de 0,063 de terminar en 11 semanas o menos.
+16 − 14
+=𝑍
+1,95
+Z = 1.03, equivalente a una probabilidad de 0,152 de terminar en 16 semanas o más.
+Se calcula el valor esperado del bono:
+0,063 * 200 – 0,152 * 80 = 0,44
+Por lo tanto, se debe aceptar el contrato.
+Luego, se calcula la cantidad de semanas indiferentes para el bono:
+P * 200 = 0,152 * 80
+P = 0,0608 equivalente a Z = 1,55. Por lo tanto la cantidad de semanas viene dada por:
+𝑋 − 14
+= 1,55
+1,95
+Por ende, la cantidad máxima de semanas que puede tener el bono para querer aceptar el contrato es de 17,023.
+iv) (5 puntos) Se debe calcular el costo por unidad de tiempo de acortar cada actividad de la ruta crítica:
+A = 4; C=3; E=2.5; F=2.
+Por lo tanto, se debe acortar F en 2 semanas. Sin embargo, ahora solo se necesita una semana más por lo que se
+pasa a acortar C en una semana. Finalmente, el costo total del proyecto sería 4 + 3 + 6 + 1,5 + 5 +8 = 27,5.
+
+Página 7 de 8
+
+Nombre: ______________________________________
+
+email UC: ______________________
+
+Tabla de distribución normal estándar
+
+z
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+1.7
+1.8
+1.9
+2.0
+2.1
+2.2
+2.3
+2.4
+2.5
+2.6
+2.7
+2.8
+2.9
+3.0
+3.1
+3.2
+
+0.00
+.5000
+.5398
+.5793
+.6179
+.6554
+.6915
+.7257
+.7580
+.7881
+.8159
+.8413
+.8643
+.8849
+.9032
+.9192
+.9332
+.9452
+.9554
+.9641
+.9713
+.9772
+.9821
+.9861
+.9893
+.9918
+.9938
+.9953
+.9965
+.9974
+.9981
+.9987
+.9990
+.9993
+
+.01
+.5040
+.5438
+.5832
+.6217
+.6591
+.6950
+.7291
+.7611
+.7910
+.8186
+.8438
+.8665
+.8869
+.9049
+.9207
+.9345
+.9463
+.9564
+.9649
+.9719
+.9778
+.9826
+.9864
+.9896
+.9920
+.9940
+.9955
+.9966
+.9975
+.9982
+.9987
+.9991
+.9993
+
+.02
+.5080
+.5478
+.5871
+.6255
+.6628
+.6985
+.7324
+.7642
+.7939
+.8212
+.8461
+.8686
+.8888
+.9066
+.9222
+.9357
+.9474
+.9573
+.9656
+.9726
+.9783
+.9830
+.9868
+.9898
+.9922
+.9941
+.9956
+.9967
+.9976
+.9982
+.9987
+.9991
+.9994
+
+.03
+.5120
+.5517
+.5910
+.6293
+.6664
+.7019
+.7357
+.7673
+.7967
+.8238
+.8485
+.8708
+.8907
+.9082
+.9236
+.9370
+.9484
+.9582
+.9664
+.9732
+.9788
+.9834
+.9871
+.9901
+.9925
+.9943
+.9957
+.9968
+.9977
+.9983
+.9988
+.9991
+.9994
+
+.04
+.5160
+.5557
+.5948
+.6331
+.6700
+.7054
+.7389
+.7704
+.7995
+.8264
+.8508
+.8729
+.8925
+.9099
+.9251
+.9382
+.9495
+.9591
+.9671
+.9738
+.9793
+.9838
+.9875
+.9904
+.9927
+.9945
+.9959
+.9969
+.9977
+.9984
+.9988
+.9992
+.9994
+
+.05
+.5199
+.5596
+.5987
+.6368
+.6736
+.7088
+.7422
+.7734
+.8023
+.8289
+.8531
+.8749
+.8944
+.9115
+.9265
+.9394
+.9505
+.9599
+.9678
+.9744
+.9798
+.9842
+.4878
+.9906
+.9929
+.9946
+.9960
+.9970
+.9978
+.9984
+.9989
+.9992
+.9994
+
+.06
+.5239
+.5636
+.6026
+.6406
+.6772
+.7123
+.7454
+.7764
+.8051
+.8315
+.8554
+.8770
+.8962
+.9131
+.9279
+.9406
+.9515
+.9608
+.9686
+.9750
+.9803
+.9846
+.9881
+.9909
+.9931
+.9948
+.9961
+.9971
+.9979
+.9985
+.9989
+.9992
+.9994
+
+.07
+.5279
+.5675
+.6064
+.6443
+.6808
+.7157
+.7486
+.7794
+.8078
+.8340
+.8577
+.8790
+.8980
+.9147
+.9292
+.9418
+.9525
+.9616
+.9693
+.9756
+.9808
+.9850
+.9884
+.9911
+.9932
+.9949
+.9962
+.9972
+.9979
+.9985
+.9989
+.9992
+.9995
+
+.08
+.5319
+.5714
+.6103
+.6480
+.6844
+.7190
+.7517
+.7823
+.8106
+.8365
+.8599
+.8810
+.8997
+.9162
+.9306
+.9429
+.9535
+.9625
+.9699
+.9761
+.9812
+.9854
+.9887
+.9913
+.9934
+.9951
+.9963
+.9973
+.9980
+.9986
+.9990
+.9993
+.9995
+
+.09
+.5359
+.5753
+.6141
+.6517
+.6879
+.7224
+.7549
+.7852
+.8133
+.8389
+.8621
+.8830
+.9015
+.9177
+.9319
+.9441
+.9545
+.9633
+.9706
+.9767
+.9817
+.9857
+.9890
+.9916
+.9936
+.9952
+.9964
+.9974
+.9981
+.9986
+.9990
+.9993
+.9995
+
+Formulario
+
+Z=
+
+Cx =
+
+d V
+V
+ix
+
+i
+
+Cy =
+
+i
+
+𝑅 = 𝑑 × 𝐿 + 𝑧𝛼 𝜎√𝐿
+
+d V
+V
+iy
+
+D - TE
+
+
+
+2
+i
+
+Qw =
+
+2C 0 D
+Ch
+
+i
+
+i
+
+𝑄 ∗= 𝑑 × (𝑇 + 𝐿) + 𝑧𝛼 𝜎√(𝑇 + 𝐿) − 𝐼𝑒𝑥𝑖𝑠𝑡𝑒𝑛𝑡𝑒
+𝑐𝑢
+∗
+−1
+𝑄 =𝐹 (
+)
+𝑐𝑜 + 𝑐𝑢
+Página 8 de 8
+
+

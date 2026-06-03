@@ -1,0 +1,55 @@
+\section{Resumen final: qué memorizar para la etapa digital}
+
+\begin{memorizar}
+\begin{multicols}{2}
+\textbf{Definiciones exactas:}
+\begin{itemize}[leftmargin=1.2em, itemsep=0pt]
+  \item MPS = cuántos productos; MRP = qué materiales y cuándo.
+  \item L4L minimiza inventario, NO setups.
+  \item Holgura = LS--ES = LF--EF; RC tiene H=0.
+  \item Kingman: CT $= V\cdot U\cdot T$.
+  \item Little: $L=\lambda W$; WIP$=$TH$\cdot$CT.
+  \item OEE $=$ Disp $\times$ Rend $\times$ Calidad.
+\end{itemize}
+
+\textbf{Diferencias clave:}
+\begin{itemize}[leftmargin=1.2em, itemsep=0pt]
+  \item Chase (ajusta capacidad) vs.\ Nivel (inventario/faltante).
+  \item Explotar (sin \$) vs.\ Elevar (con \$).
+  \item Cross-dock (sin stock) vs.\ Bodega (almacena).
+  \item Postponement reduce inventario; Risk pooling reduce SS.
+\end{itemize}
+
+\columnbreak
+
+\textbf{La Meta 16--26 --- 5 ideas:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=0pt]
+  \item 5 pasos: Identificar, Explotar, Subordinar, Elevar, Repetir.
+  \item DBR: Tambor=CB, Buffer antes del CB, Cuerda ata liberación.
+  \item Inercia es el enemigo (volver al paso 1).
+  \item Gestionar = método socrático (preguntar).
+  \item Lotes pequeños $\Rightarrow$ mejor flujo.
+\end{enumerate}
+
+\textbf{Fórmulas a recordar:}
+\begin{itemize}[leftmargin=1.2em, itemsep=0pt]
+  \item $t_e = \tfrac{a+4m+b}{6}$,\ $\sigma=\tfrac{b-a}{6}$
+  \item $\rho=\lambda/\mu$,\ $L_q=\tfrac{\rho^2}{1-\rho}$
+  \item Slope $=\tfrac{CC-NC}{NT-CT}$
+  \item Silver-Meal: parar si $CT(k)\!>\!CT(k\!-\!1)$
+\end{itemize}
+\end{multicols}
+\end{memorizar}
+
+\begin{paradesarrollo}
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt]
+  \item \textbf{Lleva este formulario impreso} (Sección 9).
+  \item Ejercicios casi seguros: \textbf{modelo LP de Planif.\ Agregada}, \textbf{PERT con probabilidad/bono}, \textbf{MRP (BOM + L4L + Silver-Meal)}, \textbf{Colas (M/M/1, G/G/1)}.
+  \item En modelamiento: define SIEMPRE conjuntos, parámetros, variables, F.O.\ y restricciones por separado. Las binarias para condiciones lógicas dan puntos fáciles.
+  \item En MRP: cuidado con el desfase del lead time y con que la orden del padre genera el GR del hijo.
+  \item En PERT: identifica bien la ruta crítica antes de calcular varianzas; usa la tabla normal para bono/penalización.
+  \item En Colas: verifica $\rho<1$; recuerda que Kingman es VUT.
+  \item \textbf{Planificación Agregada, MRP y Proyectos} son los temas más probables en desarrollo (confirmado por I2 2025).
+\end{itemize}
+\end{paradesarrollo}
+

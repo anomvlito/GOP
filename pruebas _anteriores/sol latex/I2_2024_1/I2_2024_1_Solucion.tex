@@ -1,0 +1,771 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples ──────────────────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox ───────────────────────────────────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definición: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Fórmulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Pauta Interrogación 2 (1er Semestre 2024)}
+\fancyhead[C]{}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[L]{\footnotesize Solución Oficial --- Transcripción en LaTeX}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{gopcyan} Solución Interrogación 2\par}
+  \vspace{0.4cm}
+  {\LARGE\bfseries Gestión de Operaciones\par}
+  \vspace{0.3cm}
+  {\large ICS3213 --- PUC Chile --- 1er Semestre 2024\par}
+  \vspace{1.2cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+
+  {\small Profesores:\par}
+  {\large\bfseries Alejandro Mac Cawley \quad Rodrigo Carrasco\par}
+  \vspace{0.3cm}
+  {\small Autores de Referencia de la Pauta:\par}
+  {\small\textbf{César Meneses \quad Fabián Ortega}\par}
+  \vspace{0.4cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{1cm}
+
+  \vfill
+\end{titlepage}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% DESARROLLO DE LA PRUEBA
+% ════════════════════════════════════════════════════════════════════════════
+\section{Preguntas de Desarrollo (60 Puntos)}
+
+\subsection*{Pregunta 1: Planificación Agregada y Cadena de Suministro (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se requiere modelar una red de planificación agregada de producción en múltiples periodos y plantas, con fuerza laboral dinámica (contratación, despido, horas extra), integración de inventarios y flujo de materias primas. Además, incluye la localización de instalaciones usando distancias Manhattan lineales.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Definir variables de inventario, producción, flujos de envío, mano de obra normal y extra, y estados de activación binarios.
+      \item Linealizar las distancias Manhattan $|X_1 - X_2|$ mediante restricciones lógicas de cota superior/inferior en variables de desviación, usando Big-M en caso de asignaciones binarias.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted es el Gerente de Operaciones para una gran empresa que produce un producto y debe elaborar el plan de producción para las siguientes 52 semanas. Marketing le ha entregado la demanda de cada cliente $i$ para cada semana $t$, la cual es $D_{it}$.
+  
+  La producción puede ser hecha en cualquiera de las $N$ plantas de la empresa, pero para ello debe activar la planta, lo cual tiene un costo fijo de $A_n$. El costo de producción unitario es $CP_n$ por unidad en la planta $n$ y la producción debe ser despachada a cada cliente $i$ a un costo $C_{in}$ por cada unidad despachada al cliente $i$ de la planta $n$. La productividad de cada trabajador en la planta es de $PR_n$ unidades por hora de producción por trabajador y se trabajan turnos de 8 horas diarias en 5 días a la semana. El costo semanal de cada trabajador es $\$CT$, el costo de contratación es $\$CC$ y el de despido es $\$CDS$. Es posible trabajar un máximo de 2 horas extra por día a un costo de $CE$ pesos por hora extra trabajada. Actualmente (tiempo 0) usted dispone de $T_n$ trabajadores y mantiene $INVI_n$ unidades en inventario en cada planta. Al final del año debe dejar $TF_n$ trabajadores y $INVF_n$ unidades en inventario en cada planta $n$. El costo de mantener unidades en inventario es $H_n$ pesos por unidad por semana para cada planta $n$.
+
+  \begin{itemize}
+    \item[\textbf{i.}] (10 ptos) Con esta información construya un modelo de programación matemática que permita determinar la planificación de producción. Indique las variables de decisión, la función objetivo y las restricciones.
+    \item[\textbf{ii.}] (5 ptos) Ahora usted debe planificar el aprovisionamiento de la planta de la materia prima para producir el producto. Usted sabe que para producir una unidad de producto final se requiere $R$ unidades de materia prima a un costo de $IN_t$ por unidad de materia prima en el tiempo $t$. Actualmente (tiempo 0) mantiene $MPI_n$ unidades en inventario de materia prima en cada planta, al final del año debe dejar $MPF_n$ unidades en inventario y el costo de mantener unidades en inventario es $MC_n$ para cada planta. Este insumo es provisto por $j$ proveedores distintos que tienen un \textit{Lead-Time} de $L$ semanas, cada uno puede entregar como máximo $MAX_j$ unidades del insumo por semana y el costo de despacho entre cada proveedor y planta es de $CTP_{nj}$. Indique cómo cambia el modelo (nuevas variables, cambios en la función objetivo y nuevas restricciones).
+    \item[\textbf{iii.}] (5 ptos) Usted determina que el flujo entre cada proveedor y planta es $F_{nj}$ unidades de cada proveedor $j$ a la planta $n$. Con esta información usted quiere determinar la ubicación de dos bodegas que permitan recibir los insumos de parte de los proveedores. Para ello usted georreferencia cada proveedor con una coordenada en X e Y, siendo $CPRX_j$ y $CPRY_j$ respectivamente para cada proveedor $j$, y lo mismo para cada planta, siendo $CPLX_n$ y $CPLY_n$ para cada planta $n$. Si usted quiere determinar la cota de peor caso y asume la distancia Manhattan, construya el modelo de programación matemática que permita determinar la ubicación de cada bodega y la asignación de las plantas y proveedores a cada bodega.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Modelo Base de Planificación Agregada (MILP)}
+
+  \paragraph{1. Conjuntos e Índices:}
+  \begin{itemize}
+    \item $n \in \{1, \dots, N\}$: Plantas de producción.
+    \item $i \in \{1, \dots, I\}$: Clientes.
+    \item $t \in \{1, \dots, 52\}$: Semanas del año.
+  \end{itemize}
+
+  \paragraph{2. Variables de Decisión:}
+  \begin{itemize}
+    \item $P_{n,t} \ge 0$: Cantidad de producto final fabricado en la planta $n$ en la semana $t$.
+    \item $I_{n,t} \ge 0$: Inventario de producto final en la planta $n$ al final de la semana $t$.
+    \item $DE_{n,i,t} \ge 0$: Despacho de producto final de la planta $n$ al cliente $i$ en la semana $t$.
+    \item $TA_{n,t} \ge 0$: Trabajadores disponibles en la planta $n$ en la semana $t$.
+    \item $TCA_{n,t} \ge 0$: Trabajadores contratados en la planta $n$ al inicio de la semana $t$.
+    \item $TDA_{n,t} \ge 0$: Trabajadores despedidos en la planta $n$ al inicio de la semana $t$.
+    \item $HE_{n,t} \ge 0$: Horas extra totales trabajadas en la planta $n$ en la semana $t$.
+    \item $B_{n,t} \in \{0, 1\}$: Variable binaria que toma el valor $1$ si la planta $n$ opera en la semana $t$, y $0$ en caso contrario.
+  \end{itemize}
+
+  \paragraph{3. Función Objetivo:}
+  Minimizar los costos totales del año:
+  \begin{align*}
+    \min \quad \sum_{t=1}^{52} \sum_{n=1}^{N} \Big( &CP_n \cdot P_{n,t} + H_n \cdot I_{n,t} + CT \cdot TA_{n,t} + CC \cdot TCA_{n,t} + CDS \cdot TDA_{n,t} \\
+    &+ CE \cdot HE_{n,t} + A_n \cdot B_{n,t} + \sum_{i} C_{in} \cdot DE_{n,i,t} \Big)
+  \end{align*}
+
+  \paragraph{4. Restricciones:}
+  \begin{itemize}
+    \item \textbf{Satisfacción de Demanda de Clientes:}
+    \begin{equation}
+      \sum_{n=1}^{N} DE_{n,i,t} \ge D_{it} \quad \forall i, t
+    \end{equation}
+    \item \textbf{Balance de Inventario de Producto Final:}
+    \begin{equation}
+      I_{n,t} = I_{n,t-1} + P_{n,t} - \sum_{i} DE_{n,i,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Dinámica del Personal:}
+    \begin{equation}
+      TA_{n,t} = TA_{n,t-1} + TCA_{n,t} - TDA_{n,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Restricción de Capacidad de Producción (basado en mano de obra):}
+    Cada trabajador labora $8 \text{ horas/día} \times 5 \text{ días/semana} = 40 \text{ horas/semana}$ normales.
+    \begin{equation}
+      P_{n,t} \le PR_n \cdot \left( 40 \cdot TA_{n,t} + HE_{n,t} \right) \quad \forall n, t
+    \end{equation}
+    \item \textbf{Límite de Horas Extra (máximo 2 horas/día por trabajador):}
+    $2 \text{ horas/día} \times 5 \text{ días/semana} = 10 \text{ horas/semana}$ por trabajador.
+    \begin{equation}
+      HE_{n,t} \le 10 \cdot TA_{n,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Activación de Planta (Relación con producción, con $M$ número grande):}
+    \begin{equation}
+      P_{n,t} \le M \cdot B_{n,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Condiciones de Borde e Inventarios Iniciales/Finales:}
+    \begin{align}
+      I_{n,0} &= INVI_n, \quad I_{n,52} = INVF_n \quad \forall n \\
+      TA_{n,0} &= T_n, \quad TA_{n,52} = TF_n \quad \forall n
+    \end{align}
+  \end{itemize}
+
+  \subsubsection*{ii. Extensión para Aprovisionamiento de Materia Prima}
+
+  \paragraph{1. Nuevas Variables de Decisión:}
+  \begin{itemize}
+    \item $QSI_{n,j,t} \ge 0$: Cantidad de materia prima solicitada al proveedor $j$ para ser entregada en la planta $n$ en la semana $t$.
+    \item $QUI_{n,t} \ge 0$: Cantidad de materia prima consumida en la planta $n$ en la semana $t$ para producir.
+    \item $IIN_{n,t} \ge 0$: Inventario de materia prima en la planta $n$ al final de la semana $t$.
+  \end{itemize}
+
+  \paragraph{2. Modificaciones en la Función Objetivo (Costos de Materia Prima):}
+  Se agregan los costos de adquisición de la materia prima, transporte desde proveedores y almacenamiento:
+  \begin{equation*}
+    \text{Costo MP} = \sum_{t=1}^{52} \sum_{n=1}^{N} \left( \sum_{j} IN_t \cdot QSI_{n,j,t} + \sum_{j} CTP_{nj} \cdot QSI_{n,j,t} + MC_n \cdot IIN_{n,t} \right)
+  \end{equation*}
+  Este término se añade sumándolo a la función objetivo de minimización.
+
+  \paragraph{3. Nuevas Restricciones:}
+  \begin{itemize}
+    \item \textbf{Consumo de Materia Prima:}
+    \begin{equation}
+      QUI_{n,t} \ge R \cdot P_{n,t} \quad \forall n, t
+    \end{equation}
+    \item \textbf{Balance de Inventario de Materia Prima (con desfase por Lead-Time $L$):}
+    \begin{equation}
+      IIN_{n,t} = IIN_{n,t-1} + \sum_{j} QSI_{n,j,t-L} - QUI_{n,t} \quad \forall n, t \quad (\text{donde } QSI_{n,j,\tau} = 0 \text{ si } \tau \le 0)
+    \end{equation}
+    \item \textbf{Capacidad Máxima del Proveedor:}
+    \begin{equation}
+      \sum_{n=1}^{N} QSI_{n,j,t} \le MAX_j \quad \forall j, t
+    \end{equation}
+    \item \textbf{Condiciones de Borde para Materia Prima:}
+    \begin{equation}
+      IIN_{n,0} = MPI_n, \quad IIN_{n,52} = MPF_n \quad \forall n
+    \end{equation}
+  \end{itemize}
+
+  \subsubsection*{iii. Modelo de Ubicación de dos Bodegas (Centro de Gravedad y Distancia Manhattan)}
+  Se desea ubicar dos bodegas intermedias ($b \in \{1, 2\}$) que consoliden la materia prima de los proveedores y la despachen a las plantas.
+
+  \paragraph{1. Parámetros Derivados:}
+  \begin{itemize}
+    \item $F_j = \sum_{n} F_{nj}$: Flujo total enviado por el proveedor $j$.
+    \item $F_n = \sum_{j} F_{nj}$: Flujo total recibido por la planta $n$.
+  \end{itemize}
+
+  \paragraph{2. Variables de Decisión:}
+  \begin{itemize}
+    \item $CX_b, CY_b$: Coordenadas X e Y de la bodega $b \in \{1, 2\}$.
+    \item $Y_{j,b} \in \{0, 1\}$: $1$ si el proveedor $j$ se asigna a la bodega $b$, $0$ si no.
+    \item $Z_{n,b} \in \{0, 1\}$: $1$ si la planta $n$ se asigna a la bodega $b$, $0$ si no.
+    \item $DX_{j,b}, DY_{j,b} \ge 0$: Desviaciones absolutas en coordenadas entre el proveedor $j$ y la bodega $b$.
+    \item $DX'_{n,b}, DY'_{n,b} \ge 0$: Desviaciones absolutas en coordenadas entre la planta $n$ y la bodega $b$.
+  \end{itemize}
+
+  \paragraph{3. Función Objetivo:}
+  Minimizar la distancia Manhattan total ponderada por los flujos de carga:
+  \begin{equation*}
+    \min \quad \sum_{j} \sum_{b=1}^{2} F_{j} \left( DX_{j,b} + DY_{j,b} \right) + \sum_{n} \sum_{b=1}^{2} F_{n} \left( DX'_{n,b} + DY'_{n,b} \right)
+  \end{equation*}
+
+  \paragraph{4. Restricciones:}
+  \begin{itemize}
+    \item \textbf{Asignación Única:}
+    \begin{equation}
+      \sum_{b=1}^{2} Y_{j,b} = 1 \quad \forall j, \quad \sum_{b=1}^{2} Z_{n,b} = 1 \quad \forall n
+    \end{equation}
+    \item \textbf{Linealización de Distancia Manhattan para Proveedores (mediante Big-M):}
+    \begin{align}
+      DX_{j,b} &\ge CPRX_j - CX_b - M(1 - Y_{j,b}) \quad \forall j, b \\
+      DX_{j,b} &\ge CX_b - CPRX_j - M(1 - Y_{j,b}) \quad \forall j, b \\
+      DY_{j,b} &\ge CPRY_j - CY_b - M(1 - Y_{j,b}) \quad \forall j, b \\
+      DY_{j,b} &\ge CY_b - CPRY_j - M(1 - Y_{j,b}) \quad \forall j, b
+    \end{align}
+    \item \textbf{Linealización de Distancia Manhattan para Plantas (mediante Big-M):}
+    \begin{align}
+      DX'_{n,b} &\ge CPLX_n - CX_b - M(1 - Z_{n,b}) \quad \forall n, b \\
+      DX'_{n,b} &\ge CX_b - CPLX_n - M(1 - Z_{n,b}) \quad \forall n, b \\
+      DY'_{n,b} &\ge CPLY_n - CY_b - M(1 - Z_{n,b}) \quad \forall n, b \\
+      DY'_{n,b} &\ge CY_b - CPLY_n - M(1 - Z_{n,b}) \quad \forall n, b
+    \end{align}
+  \end{itemize}
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA 2 ───────────────────────────────────────────────────────────────
+\subsection*{Pregunta 2: Planificación de Requerimiento de Materiales (MRP) (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se solicita representar la estructura de un producto complejo mediante un árbol de materiales (BOM) y ejecutar el algoritmo de MRP desfasando los lanzamientos planificados según el Lead Time. Para el control del lote, se evalúa la heurística Silver-Meal.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Dibujar la BOM jerárquica con los coeficientes correspondientes.
+      \item En Silver-Meal, calcular recursivamente el costo total promedio por periodo: $C(k) = \frac{S + \sum_{r=1}^{k} H \cdot (r-1) \cdot D_{t+r-1}}{k}$, deteniéndose al primer incremento en el costo promedio.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Una empresa química elabora un preparado en envases de $500\text{ ml}$. Cada envase viene con su tapa y los compuestos de la crema por envase son: $300\text{ ml}$ de compuesto A y $200\text{ ml}$ de compuesto B. A su vez, el compuesto B consta de $100\text{ ml}$ de compuesto C y $100\text{ ml}$ de compuesto D.
+
+  Los tiempos de fabricación/entrega son:
+  \begin{itemize}
+    \item Mezcla de compuestos C y D: demora 1 semana.
+    \item Mezcla de compuestos A, B, C más envasado final: demora 1 semana.
+  \end{itemize}
+  
+  Demanda de envases por las próximas 6 semanas:
+  \begin{itemize}
+    \item Semana 1: 300 \quad Semana 2: 200 \quad Semana 3: 300 \quad Semana 4: 400 \quad Semana 5: 300 \quad Semana 6: 200
+  \end{itemize}
+
+  Se solicita:
+  \begin{itemize}
+    \item[\textbf{i.}] (5 ptos) Dibuje un árbol que represente la lista de materiales (BOM).
+    \item[\textbf{ii.}] (10 ptos) Construya las tablas de MRP para cada uno de los componentes, considerando inventarios iniciales nulos y lotificación Lote a Lote (L4L).
+    \item[\textbf{iii.}] (5 ptos) El compuesto C requiere estar en un ambiente controlado lo que tiene un costo de setup de envío de $10$ por cada orden. Además, mantenerlo en bodega cuesta $1$ por semana por unidad. Utilice Silver-Meal para determinar los lotes de fabricación óptimos para C y comente el beneficio de agrupar.
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Árbol de Materiales (BOM)}
+  A continuación se muestra la estructura jerárquica del producto final:
+
+  \begin{center}
+  \begin{tikzpicture}[
+    sibling distance=2.5cm,
+    level distance=1.5cm,
+    item/.style={draw, rectangle, minimum width=2.2cm, minimum height=0.8cm, fill=gopbluedeflight, draw=gopbluedef, thick, font=\bfseries\small, align=center}
+  ]
+    \node[item] {Crema Final\\(500 ml)}
+      child { node[item] {Tapa\\(1 u)} }
+      child { node[item] {Envase\\(1 u)} }
+      child { node[item] {Compuesto A\\(300 ml)} }
+      child { node[item] {Compuesto B\\(200 ml)}
+        child { node[item] {Compuesto C\\(100 ml)} }
+        child { node[item] {Compuesto D\\(100 ml)} }
+      };
+  \end{tikzpicture}
+  \end{center}
+
+  \subsubsection*{ii. Tablas de MRP (Lote a Lote --- L4L)}
+  \textbf{Parámetros de Entrada:}
+  \begin{itemize}
+    \item \textbf{Envasado/Mezcla Final:} Lead Time (LT) = 1 semana.
+    \item \textbf{Compuesto B:} Lead Time (LT) = 1 semana (mezcla de C y D).
+    \item Inventarios iniciales = 0 para todos.
+  \end{itemize}
+
+  \paragraph{1. Crema Final (Envasado):}
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & 300 & 200 & 300 & 400 & 300 & 200 \\
+    \textbf{Inventario Disponible (OH)} & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \textbf{Recepción de Órdenes (POR)} & 300 & 200 & 300 & 400 & 300 & 200 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 300 (W0) & 200 & 300 & 400 & 300 & 200 (W5) \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+  \textit{Nota: Los lanzamientos de Crema Final se realizan con 1 semana de anticipación (del W0 al W5) para satisfacer la demanda de las semanas 1 a 6.}
+
+  \paragraph{2. Tapa y Envase (1 unidad por Crema Final, LT = 0):}
+  Requerimiento bruto = Lanzamiento de Crema Final.
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR)} & 300 & 200 & 300 & 400 & 300 & 200 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 300 & 200 & 300 & 400 & 300 & 200 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{3. Compuesto A (300 ml por Crema Final, LT = 0):}
+  Requerimiento bruto = $300 \cdot PORelease_{\text{Crema}}$.
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR) [ml]} & 90.000 & 60.000 & 90.000 & 120.000 & 90.000 & 60.000 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 90.000 & 60.000 & 90.000 & 120.000 & 90.000 & 60.000 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \paragraph{4. Compuesto B (200 ml por Crema Final, LT = 1 semana):}
+  Requerimiento bruto = $200 \cdot PORelease_{\text{Crema}}$.
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR) [ml]} & 60.000 & 40.000 & 60.000 & 80.000 & 60.000 & 40.000 \\
+    \textbf{Recepción de Órdenes (POR)} & 60.000 & 40.000 & 60.000 & 80.000 & 60.000 & 40.000 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 60.000 (W-1) & 40.000 & 60.000 & 80.000 & 60.000 & 40.000 (W4) \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+  \textit{Nota: Para iniciar la mezcla final en la semana 0, B debe estar disponible en la semana 0, por lo que su fabricación debe ser lanzada en la semana -1.}
+
+  \paragraph{5. Compuestos C y D (100 ml por cada envase de B, LT = 0):}
+  B se produce en volumen (ml), y la relación es de 100 ml de C y 100 ml de D para obtener 200 ml de B (es decir, la proporción es de 0.5 unidades de C por cada unidad de B).
+  Requerimiento bruto de C (y D) = $0.5 \cdot PORelease_{\text{B}}$.
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Semana} & \textbf{-1} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} \\
+    \midrule
+    \textbf{Requerimientos Brutos (GR) [ml]} & 30.000 & 20.000 & 30.000 & 40.000 & 30.000 & 20.000 \\
+    \textbf{Lanzamiento de Órdenes (PORelease)} & 30.000 & 20.000 & 30.000 & 40.000 & 30.000 & 20.000 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \subsubsection*{iii. Loteo de Compuesto C con Heurística de Silver-Meal}
+  Considerando la demanda neta simplificada (escalada a miles de unidades):
+  \begin{equation*}
+    D_C = [30, 20, 30, 40, 30, 20] \quad \text{unidades para las semanas 1 a 6}
+  \end{equation*}
+  Parámetros: Setup $S = 10$, costo de inventario $H = 1$ por unidad/semana.
+
+  \begin{formulas}{Heurística de Silver-Meal}
+    El costo promedio por periodo para cubrir $k$ periodos de demanda a partir del periodo $t$ se define como:
+    \begin{equation*}
+      C(k) = \frac{S + \sum_{r=1}^{k} H \cdot (r - 1) \cdot D_{t + r - 1}}{k}
+    \end{equation*}
+  \end{formulas}
+
+  Procedemos con las iteraciones:
+  \begin{itemize}
+    \item \textbf{Cálculo de Lote 1 (Inicia en Semana 1):}
+    \begin{itemize}
+      \item $k=1: C(1) = \frac{10}{1} = \mathbf{10}$.
+      \item $k=2: C(2) = \frac{10 + 1 \cdot (1) \cdot 20}{2} = \frac{30}{2} = 15$.
+      \item Como $C(2) > C(1)$ ($15 > 10$), detenemos el lote 1 en $k=1$.
+      \item \textbf{Lote 1:} Fabricar \textbf{30 unidades} en Semana 1.
+    \end{itemize}
+
+    \item \textbf{Cálculo de Lote 2 (Inicia en Semana 2, Demanda = 20):}
+    \begin{itemize}
+      \item $k=1: C(1) = \frac{10}{1} = \mathbf{10}$.
+      \item $k=2: C(2) = \frac{10 + 1 \cdot (1) \cdot 30}{2} = \frac{40}{2} = 20$.
+      \item Como $C(2) > C(1)$ ($20 > 10$), detenemos el lote 2 en $k=1$.
+      \item \textbf{Lote 2:} Fabricar \textbf{20 unidades} en Semana 2.
+    \end{itemize}
+
+    \item \textbf{Cálculo de Lote 3 (Inicia en Semana 3, Demanda = 30):}
+    \begin{itemize}
+      \item $k=1: C(1) = \frac{10}{1} = \mathbf{10}$.
+      \item $k=2: C(2) = \frac{10 + 1 \cdot (1) \cdot 40}{2} = \frac{50}{2} = 25$.
+      \item Como $C(2) > C(1)$ ($25 > 10$), detenemos el lote 3 en $k=1$.
+      \item \textbf{Lote 3:} Fabricar \textbf{30 unidades} en Semana 3.
+    \end{itemize}
+  \end{itemize}
+
+  \textbf{Conclusión:}
+  Dado que el costo unitario de almacenamiento es sumamente elevado ($H=1$) en comparación con el costo de setup ($S=10$), el costo promedio aumenta de inmediato al intentar almacenar inventario para el periodo siguiente. Por esta razón, Silver-Meal decide no agrupar ningún periodo y se comporta exactamente como la política \textbf{Lote a Lote (L4L)}. No existe beneficio en agrupar bajo esta relación de costos.
+
+\end{ejercicio}
+
+\newpage
+
+% ── PREGUNTA 3 ───────────────────────────────────────────────────────────────
+\subsection*{Pregunta 3: Administración de Proyectos PERT/CPM (20 Puntos)}
+
+  \begin{tipprueba}{¿Cuándo usar este enfoque?}
+    \textbf{Identificación:} Se proporciona una tabla de actividades de un proyecto con sus antecesores y tiempos. Se pide calcular la ruta crítica, duraciones esperadas basadas en estadísticas normales, análisis de contratos de penalización/bono con valor esperado y optimización de crashing de costo mínimo.\\
+    \textbf{Qué aplicar:}
+    \begin{itemize}
+      \item Realizar pasadas hacia adelante ($ES, EF$) y hacia atrás ($LS, LF$) para identificar la ruta crítica (holgura = 0).
+      \item Calcular la probabilidad del proyecto usando la distribución normal $Z = \frac{X - \mu_p}{\sigma_p}$.
+      \item Para crashing, seleccionar secuencialmente las actividades de la ruta crítica con menor costo marginal de reducción diaria/semanal, monitoreando posibles cambios en la ruta crítica.
+    \end{itemize}
+  \end{tipprueba}
+
+  \textbf{Enunciado:}
+  Usted dispone de la siguiente información sobre un proyecto (tiempos en semanas):
+
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{cccccc}
+    \toprule
+    \textbf{Actividad} & \textbf{Antecesores} & \textbf{Tiempo Esperado ($TE$)} & \textbf{Tiempo Optimista ($TO$)} & \textbf{Desviación Estándar ($\sigma$)} & \textbf{Costo Normal} \\
+    \midrule
+    \textbf{A} & - & 4 & 3 & 1.0 & 4 \\
+    \textbf{B} & - & 2 & 1 & 1.5 & 3 \\
+    \textbf{C} & A, B & 3 & 2 & 0.8 & 3 \\
+    \textbf{D} & C & 2 & 1 & 2.0 & 1.5 \\
+    \textbf{E} & C & 4 & 2 & 1.3 & 5 \\
+    \textbf{F} & D, E & 3 & 1 & 0.7 & 4 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  \textit{Nota: Los costos están en miles de dólares. El tiempo esperado ($TE$) y la desviación estándar ($\sigma$) de cada actividad se entregan directamente en la tabla.}
+
+  Conteste:
+  \begin{itemize}
+    \item[\textbf{i.}] (7 Puntos) Desarrolle el diagrama del proyecto, determine los tiempos ES, EF, LS, LF y la ruta crítica, con su duración y desviación estándar.
+    \item[\textbf{ii.}] (2 Puntos) Calcule la duración del proyecto que sea el doble de probable de excederse que de no cumplirse.
+    \item[\textbf{iii.}] (6 Puntos) Si le ofrecen un contrato con un bono de $\$200$ por terminar en o antes de 11 semanas y una penalización de $\$80$ por terminar en o después de 16 semanas. ¿Aceptaría o rechazaría el contrato? ¿Cuál es la cantidad de semanas máxima que debe ofrecer el bono para que quiera aceptar el contrato?
+    \item[\textbf{iv.}] (5 Puntos) Ahora tiene la posibilidad de que la duración esperada de una actividad sea su tiempo optimista pagando el doble de su costo normal. Calcule el costo mínimo para que el tiempo esperado de la ruta crítica sea 3 semanas menos que el inicial. (\textit{HINT: La ruta crítica puede variar o no}).
+  \end{itemize}
+
+  \medskip
+  \begin{ejercicio}{Solución}
+  \textbf{Desarrollo de la Solución:}
+
+  \subsubsection*{i. Diagrama del Proyecto y Ruta Crítica}
+  
+  El diagrama de red PERT/CPM correspondiente a las precedencias es:
+
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.2cm and 2cm,
+    activity/.style={draw, circle, minimum size=1.2cm, fill=gopgraylight, draw=gopgray, thick, font=\bfseries},
+    arrow/.style={-Stealth, thick, gopblue}
+  ]
+    \node[activity] (A) at (0,1.2) {A};
+    \node[activity] (B) at (0,-1.2) {B};
+    \node[activity] (C) at (2.5,0) {C};
+    \node[activity] (D) at (5,1.2) {D};
+    \node[activity] (E) at (5,-1.2) {E};
+    \node[activity] (F) at (7.5,0) {F};
+
+    \draw[arrow] (A) -- (C);
+    \draw[arrow] (B) -- (C);
+    \draw[arrow] (C) -- (D);
+    \draw[arrow] (C) -- (E);
+    \draw[arrow] (D) -- (F);
+    \draw[arrow] (E) -- (F);
+  \end{tikzpicture}
+  \end{center}
+
+  Realizamos el cálculo de tiempos en las pasadas hacia adelante y hacia atrás:
+  \begin{itemize}
+    \item \textbf{Actividad A (TE=4):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = 0 \implies EF = 0 + 4 = 4$.
+        \item Pasada hacia atrás: $LF = 4 \implies LS = 4 - 4 = 0$.
+        \item Holgura: $H_A = 4 - 4 = 0$.
+      \end{itemize}
+    \item \textbf{Actividad B (TE=2):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = 0 \implies EF = 0 + 2 = 2$.
+        \item Pasada hacia atrás: $LF = 4 \implies LS = 4 - 2 = 2$.
+        \item Holgura: $H_B = 4 - 2 = 2$.
+      \end{itemize}
+    \item \textbf{Actividad C (TE=3):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = \max(EF_A, EF_B) = 4 \implies EF = 4 + 3 = 7$.
+        \item Pasada hacia atrás: $LF = \min(LS_D, LS_E) = 7 \implies LS = 7 - 3 = 4$.
+        \item Holgura: $H_C = 7 - 7 = 0$.
+      \end{itemize}
+    \item \textbf{Actividad D (TE=2):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = EF_C = 7 \implies EF = 7 + 2 = 9$.
+        \item Pasada hacia atrás: $LF = LS_F = 11 \implies LS = 11 - 2 = 9$.
+        \item Holgura: $H_D = 11 - 9 = 2$.
+      \end{itemize}
+    \item \textbf{Actividad E (TE=4):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = EF_C = 7 \implies EF = 7 + 4 = 11$.
+        \item Pasada hacia atrás: $LF = LS_F = 11 \implies LS = 11 - 4 = 7$.
+        \item Holgura: $H_E = 11 - 11 = 0$.
+      \end{itemize}
+    \item \textbf{Actividad F (TE=3):}
+      \begin{itemize}
+        \item Pasada hacia adelante: $ES = \max(EF_D, EF_E) = 11 \implies EF = 11 + 3 = 14$.
+        \item Pasada hacia atrás: $LF = 14 \implies LS = 14 - 3 = 11$.
+        \item Holgura: $H_F = 14 - 14 = 0$.
+      \end{itemize}
+  \end{itemize}
+
+  \textbf{Resultados PERT/CPM:}
+  \begin{itemize}
+    \item \textbf{Ruta Crítica:} \textbf{A --- C --- E --- F}
+    \item \textbf{Duración Esperada ($\mu_p$):} $TE_A + TE_C + TE_E + TE_F = 4 + 3 + 4 + 3 = \mathbf{14 \text{ semanas}}$.
+    \item \textbf{Varianza de la Ruta Crítica ($\sigma_p^2$):}
+      \begin{equation*}
+        \sigma_p^2 = \sigma_A^2 + \sigma_C^2 + \sigma_E^2 + \sigma_F^2 = 1.0^2 + 0.8^2 + 1.3^2 + 0.7^2 = 1.0 + 0.64 + 1.69 + 0.49 = \mathbf{3.82}
+      \end{equation*}
+    \item \textbf{Desviación Estándar ($\sigma_p$):} $\sqrt{3.82} \approx \mathbf{1.9545 \text{ semanas}}$.
+  \end{itemize}
+
+  \subsubsection*{ii. Duración del Proyecto con Probabilidad Asimétrica}
+  Se busca determinar la duración $X$ tal que la probabilidad de excederse sea el doble de la de cumplir a tiempo.
+  \begin{equation*}
+    P(T > X) = 2 \cdot P(T \le X)
+  \end{equation*}
+  Dado que $P(T > X) + P(T \le X) = 1$:
+  \begin{equation*}
+    2 \cdot P(T \le X) + P(T \le X) = 1 \implies 3 \cdot P(T \le X) = 1 \implies P(T \le X) = 0.3333
+  \end{equation*}
+  
+  Buscamos el valor de $Z$ para una probabilidad acumulada de $0.3333$ en la distribución normal estándar:
+  \begin{equation*}
+    \Phi(-0.43) \approx 0.3336 \approx 0.3333 \implies Z \approx -0.43
+  \end{equation*}
+  Despejamos la duración $X$:
+  \begin{equation*}
+    X = \mu_p + Z \cdot \sigma_p = 14 + (-0.43) \cdot 1.9545 = 14 - 0.8404 = \mathbf{13.16 \text{ semanas}}
+  \end{equation*}
+  La duración deseada es de \textbf{13.16 semanas}.
+
+  \subsubsection*{iii. Evaluación del Contrato}
+  El contrato ofrece:
+  \begin{itemize}
+    \item Bono: $+\$200$ si $T \le 11$ semanas.
+    \item Penalización: $-\$80$ si $T \ge 16$ semanas.
+  \end{itemize}
+
+  Calculamos las probabilidades de cada evento:
+  \begin{itemize}
+    \item \textbf{Probabilidad del Bono ($T \le 11$):}
+      \begin{align*}
+        Z_1 &= \frac{11 - 14}{1.9545} = -1.53 \\
+        P(T \le 11) &= \Phi(-1.53) = 1 - \Phi(1.53) = 1 - 0.9370 = \mathbf{0.0630} \quad (6.30\%)
+      \end{align*}
+      El valor esperado por el bono es: $VE_{\text{Bono}} = 200 \cdot 0.0630 = \$12.60$.
+    
+    \item \textbf{Probabilidad de Penalización ($T \ge 16$):}
+      \begin{align*}
+        Z_2 &= \frac{16 - 14}{1.9545} = 1.02 \\
+        P(T \ge 16) &= 1 - \Phi(1.02) = 1 - 0.8461 = \mathbf{0.1539} \quad (15.39\%)
+      \end{align*}
+      El valor esperado de la multa es: $VE_{\text{Multa}} = 80 \cdot 0.1539 = \$12.31$.
+  \end{itemize}
+
+  El valor esperado neto del contrato es:
+  \begin{equation*}
+    VE_{\text{Neto}} = VE_{\text{Bono}} - VE_{\text{Multa}} = 12.60 - 12.31 = \mathbf{+\$0.29 \text{ miles}} \quad (+\$290)
+  \end{equation*}
+  Dado que el valor esperado es positivo ($VE_{\text{Neto}} > 0$), \textbf{se acepta el contrato}.
+
+  \textbf{Cantidad de semanas límite para el bono para ser indiferente ($VE_{\text{Neto}} = 0$):}
+  Sustituyendo en la ecuación de indiferencia:
+  \begin{equation*}
+    P(T \le X) \cdot 200 - 12.31 = 0 \implies P(T \le X) = \frac{12.31}{200} = 0.06155
+  \end{equation*}
+  Buscamos el valor $Z$ tal que $\Phi(Z) = 0.06155 \implies Z \approx -1.54$.
+  Despejamos el plazo de tiempo límite $X$:
+  \begin{equation*}
+    X = \mu_p + Z \cdot \sigma_p = 14 - 1.54 \cdot 1.9545 = 14 - 3.0099 = \mathbf{10.99 \text{ semanas}}
+  \end{equation*}
+  \textit{(Nota: Aproximando el valor normal de la pauta se obtiene $17.01$ semanas si se usa $Z=1.54$ en positivo como límite superior, pero el planteamiento de la cota inferior exige el bono para terminar temprano $X \approx 10.99$ o $11$ semanas).}
+
+  \subsubsection*{iv. Crashing de Costo Mínimo (Reducción de 3 Semanas)}
+  Se permite reducir el tiempo de las actividades a su tiempo optimista ($TO$) pagando el doble de su costo normal.
+  \begin{itemize}
+    \item El costo de reducir la actividad (crashing) es igual a su \textbf{costo normal} original.
+    \item Analizamos el costo de acortar cada actividad de la ruta crítica (A, C, E, F):
+  \end{itemize}
+  
+  \begin{center}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{ccccc}
+    \toprule
+    \textbf{Actividad} & \textbf{Duración Original} & \textbf{Duración Optimista} & \textbf{Ahorro Máximo} & \textbf{Costo Crashing Total} \\
+    \midrule
+    \textbf{A} & 4 semanas & 3 semanas & 1 semana & \$4 \\
+    \textbf{C} & 3 semanas & 2 semanas & 1 semana & \$3 \\
+    \textbf{E} & 4 semanas & 2 semanas & 2 semanas & \$5 \\
+    \textbf{F} & 3 semanas & 1 semana & 2 semanas & \$4 \\
+    \bottomrule
+  \end{tabular}%
+  }
+  \end{center}
+
+  Queremos reducir la ruta crítica en 3 semanas:
+  \begin{enumerate}
+    \item \textbf{Primer paso:} Reducir la actividad \textbf{C} en 1 semana (ahorro de 1 semana, costo = \$3). La duración del proyecto baja de 14 a 13 semanas.
+    \item \textbf{Segundo paso:} Reducir la actividad \textbf{F} en 2 semanas (ahorro de 2 semanas, costo = \$4). La duración del proyecto baja de 13 a 11 semanas.
+  \end{enumerate}
+  
+  \textbf{Costo del Crashing:}
+  El costo adicional de estas reducciones es:
+  \begin{equation*}
+    \text{Costo Crashing} = \text{Costo C} + \text{Costo F} = 3 + 4 = \mathbf{\$7 \text{ (miles)}}
+  \end{equation*}
+
+  \textbf{Costo Total Final del Proyecto:}
+  El costo normal inicial del proyecto es:
+  \begin{equation*}
+    \text{Costo Normal} = 4 + 3 + 3 + 1.5 + 5 + 4 = \$20.5 \text{ (miles)}
+  \end{equation*}
+  Por lo tanto, el costo total final es:
+  \begin{equation*}
+    \text{Costo Total} = \text{Costo Normal} + \text{Costo Crashing} = 20.5 + 7 = \mathbf{\$27.5 \text{ (miles)}}
+  \end{equation*}
+  El costo mínimo para reducir la ruta crítica en 3 semanas es de \textbf{\$7} (costo total de \textbf{\$27.5}).
+
+\end{ejercicio}
+
+\end{document}

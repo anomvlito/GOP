@@ -1,0 +1,35 @@
+\section{Análisis del Temario y Probabilidad de Aparición}
+
+Esta sección ordena los temas según su probabilidad de aparición, cruzando el temario oficial de la I2 con el contenido de las ayudantías 6, 7 y 8 (repaso I2) y la prueba I2 2025.
+
+A partir del análisis de los certámenes históricos (\textbf{2020, 2022, 2023, 2024 y 2025}), podemos trazar la frecuencia exacta con la que cada tema ha sido evaluado en la etapa de desarrollo:
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{6.5cm}cccccc@{}}
+  \toprule
+  \textbf{Tema Específico} & \textbf{2020} & \textbf{2022} & \textbf{2023} & \textbf{2024} & \textbf{2025} & \textbf{Frecuencia} \\
+  \midrule
+  \textbf{Ruta Crítica (PERT/CPM)} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \textbf{100\% (5/5)} \\
+  \textbf{Bono/Multas e Indiferencia (PERT)} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \textbf{100\% (5/5)} \\
+  \textbf{Estructura BOM y Matriz MRP} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \textbf{100\% (5/5)} \\
+  \textbf{Modelamiento Matemático (MILP)\textsuperscript{*}} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \textbf{100\% (5/5)} \\
+  \textbf{Punto de Equilibrio (Bodegas/CD)} & \checkmark & \checkmark & -- & \checkmark & -- & \textbf{60\% (3/5)} \\
+  \textbf{Heurísticas de Loteo (Silver-Meal)} & -- & -- & \checkmark & \checkmark & \checkmark & \textbf{60\% (3/5)} \\
+  \textbf{Crashing de Proyectos (Acortar)} & -- & -- & \checkmark & \checkmark & -- & \textbf{40\% (2/5)} \\
+  \textbf{Variabilidad y Colas (Kingman/VUT)} & -- & \checkmark & -- & -- & \checkmark & \textbf{40\% (2/5)} \\
+  \textbf{Vendedor de Periódicos (Newsvendor)} & -- & -- & \checkmark & -- & -- & \textbf{20\% (1/5)} \\
+  \textbf{Wagner-Whitin (Loteo Dinámico)} & -- & -- & \checkmark & -- & -- & \textbf{20\% (1/5)} \\
+  \bottomrule
+\end{tabular}
+\par\smallskip
+\scriptsize
+\textsuperscript{*} Nota: El enfoque del modelamiento matemático de desarrollo varió históricamente entre MRP (2020, 2022), acortamiento/crashing de proyectos (2023), cadena de suministro/aprovisionamiento (2024) y planificación agregada multi-planta (2025).
+\end{center}
+
+\begin{tipprueba}{Las 4 apuestas seguras de la etapa de desarrollo}
+La revisión histórica confirma un patrón ineludible: \textbf{1) Un problema de modelamiento matemático (MILP)}, \textbf{2) Un problema de proyectos (PERT estocástico con cálculo de bono/multas e indiferencia)} y \textbf{3) Un problema de MRP (árbol BOM + tabla de explosión + Silver-Meal)}. Las colas con variabilidad general (Kingman/VUT) aparecen en el 40\% de las pruebas como cuarto bloque. Domina estos cuatro módulos y tendrás asegurada la etapa de desarrollo.
+\end{tipprueba}
+
+
+% ════════════════════════════════════════════════════════════════════════════

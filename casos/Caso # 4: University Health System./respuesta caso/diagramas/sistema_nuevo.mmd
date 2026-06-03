@@ -1,0 +1,17 @@
+flowchart TD
+    A([Llegada del paciente]) --> B[Llena formulario AVF<br/>en recepcion - 2 min]
+    B --> C[Oficinista pide ficha<br/>EN PARALELO - 8.5 min]
+    C --> D{{Cola triage<br/>espera ~4.2 min}}
+    D --> E[Coordinadora de triage:<br/>evaluacion 3-4 min]
+    E -->|13 categorias<br/>protocolo| F{{Cola NP<br/>espera 6.7 min}}
+    E -->|fuera de categoria<br/>o gravedad| G{{Cola MD<br/>espera 25.2 min}}
+    E -.->|emergencia| H[/Prioridad inmediata<br/>al medico/]
+    F --> I[Enfermera practicante NP<br/>32.8 min - 1.8 pac/hr]
+    G --> J[Medico MD<br/>19.4 min - 3.1 pac/hr]
+    H --> J
+    I -->|95% resuelto| Z([Alta])
+    I -->|5% referido| G
+    J --> Z
+    style E fill:#d6e8ff,stroke:#004080,stroke-width:2px
+    style F fill:#fff5d2,stroke:#c86400
+    style G fill:#ffd6d6,stroke:#a00000,stroke-width:2px

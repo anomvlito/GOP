@@ -1,0 +1,834 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples (formulario) ─────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox (idénticos al resumen grande) ─────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definicion: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Formulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{resumentemario}{
+  enhanced,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries, title={Estrategia de Estudio}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+}
+\newtcolorbox{estructuraprueba}{
+  enhanced,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries, title={Estructura de la Prueba}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Resumen \texttt{LITE} \texttt{I2} \texttt{2026}}
+\fancyhead[C]{}
+\fancyhead[R]{\small\nouppercase{\rightmark}}
+\fancyfoot[L]{\footnotesize Compatible con \texttt{estudio\_i2.tex} --- Prioridad por ROI de certamen}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{1.5cm}
+  {\Huge\bfseries\color{gopred} Resumen LITE \texttt{I2}\par}
+  \vspace{0.3cm}
+  {\LARGE\bfseries Gestión de Operaciones\par}
+  \vspace{0.2cm}
+  {\large ICS3213 --- PUC Chile --- \texttt{2026}\par}
+  \vspace{0.8cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+
+  {\normalsize \texttt{Miércoles 3 de Junio de 2026, 17:30 hrs (presencial)}\par}
+  \vspace{0.2cm}
+  {\small Prof.\ Alejandro Mac Cawley --- Rodrigo Carrasco\par}
+  \vspace{0.2cm}
+  {\small\textbf{Autor:} \href{https://cl.linkedin.com/in/fabian-ortega-llanten}{Fabián Ignacio Ortega Llantén}\par}
+  \vspace{0.5cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.5cm}
+
+  \begin{resumentemario}
+    \textbf{Este es el resumen de emergencia.} Cubre solo lo que aparece en todos
+    (o casi todos) los certámenes I2 (2020--2025), ordenado por \textbf{mayor puntaje
+    y menor complejidad}. Si terminas este documento, puedes continuar con
+    \texttt{estudio\_i2.tex} (los modulos tienen los mismos nombres).
+
+    \vspace{4pt}
+    \begin{tabular}{llccc}
+      \toprule
+      \textbf{Prioridad} & \textbf{Tema (Modulo)} & \textbf{Freq.} & \textbf{Pts} & \textbf{Dificultad} \\
+      \midrule
+      1 & PERT/CPM estocastico (Mod.\ 3)  & 5/5 & 15--20 & Baja \\
+      2 & MRP + Silver-Meal/WW (Mod.\ 2)  & 5/5 & 15--20 & Baja--Media \\
+      3 & MILP Planif.\ Agregada (Mod.\ 1) & 2/5 & 20     & Media \\
+      4 & Colas G/G/1 -- Kingman (Mod.\ 4) & 1/5 & 20     & Media \\
+      \midrule
+      \multicolumn{2}{l}{\textit{Omitidos del lite (baja freq.\ o alta complejidad)}} & & & \\
+      -- & Newsvendor / Inventarios         & 1/5 & 20 & Alta \\
+      -- & Localizacion / Bodegas           & 1/5 & 20 & Alta \\
+      \bottomrule
+    \end{tabular}
+  \end{resumentemario}
+
+  \vspace{0.4cm}
+
+  \begin{estructuraprueba}
+    \begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+      \item \textbf{Etapa Digital (60 min, SIN apuntes):}
+        V/F La Meta, seleccion multiple, 1 desarrollo corto.
+      \item \textbf{Descanso de 5 minutos}
+      \item \textbf{Etapa Desarrollo (60 min, APUNTES FISICOS + formulario):}
+        Ejercicios de calculo --- \textbf{es la etapa que cubre este resumen LITE}.
+        Solo papel. Escanear y subir a Canvas.
+    \end{itemize}
+  \end{estructuraprueba}
+
+  \vfill
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% MODULO 3: PERT/CPM (PRIORIDAD 1)
+% ════════════════════════════════════════════════════════════════════════════
+\section[Modulo 3: Proyectos PERT/CPM]{Modulo 3: Administracion de Proyectos (CPM / PERT)}
+\markright{Modulo 3: PERT/CPM}
+
+Aparece en \textbf{todos los certamenes I2 (2020--2025)}.
+Procedimiento completamente mecanizable: aprende los 6 pasos y ganas 15--20 puntos.
+
+% ── 3.1 CPM: Ruta Critica ─────────────────────────────────────────────────
+\subsection{CPM: Calculo de Tiempos y Ruta Critica}
+
+\begin{formulas}{Pasada Forward (ES/EF)}
+  \begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item $ES_i$ = Early Start = maximo de los $EF$ de todos los predecesores.
+          (Para actividades sin predecesores: $ES = 0$.)
+    \item $EF_i = ES_i + TE_i$
+  \end{itemize}
+\end{formulas}
+
+\begin{formulas}{Pasada Backward (LS/LF)}
+  \begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item $LF_i$ = Late Finish = minimo de los $LS$ de todos los sucesores.
+          (Para la ultima actividad: $LF = EF_{\max}$.)
+    \item $LS_i = LF_i - TE_i$
+    \item $\text{Holgura}_i = LS_i - ES_i = LF_i - EF_i$
+  \end{itemize}
+\end{formulas}
+
+\begin{tipprueba}{Identificar la Ruta Critica en 3 segundos}
+  La \textbf{ruta critica} es la cadena de actividades con holgura $= 0$.
+  Su duracion es el $EF$ maximo del proyecto.
+  Puede haber mas de una ruta critica.
+\end{tipprueba}
+
+% ── 3.2 PERT Estocastico ────────────────────────────────────────────────────
+\subsection{PERT Estocastico: IC y Contratos}
+
+\begin{formulas}{Estadisticas de la Ruta Critica}
+  \[
+    \mu_p = \sum_{i \in RC} TE_i
+    \qquad
+    \sigma_p^2 = \sum_{i \in RC} \sigma_i^2
+    \qquad
+    \sigma_p = \sqrt{\sigma_p^2}
+  \]
+  Donde $RC$ es el conjunto de actividades en la ruta critica.
+\end{formulas}
+
+\begin{formulas}{Intervalo de Confianza}
+  \[
+    IC_{1-\alpha} = \mu_p \;\pm\; Z_{\alpha/2} \cdot \sigma_p
+  \]
+  Valores usuales: $Z_{0.90} = 1.645$, $Z_{0.95} = 1.96$, $Z_{0.975} = 2.24$,
+  $Z_{0.99} = 2.576$.
+\end{formulas}
+
+\begin{formulas}{Probabilidad de Terminar en Plazo $T$}
+  \[
+    Z = \frac{T - \mu_p}{\sigma_p}
+    \qquad
+    P(\text{terminar} \le T) = \Phi(Z)
+    \qquad
+    P(\text{terminar} > T) = 1 - \Phi(Z)
+  \]
+  Si $Z < 0$: el plazo $T$ es antes del tiempo esperado (probabilidad $< 50\%$).
+\end{formulas}
+
+\begin{formulas}{Evaluacion de Contratos (Valor Esperado)}
+  \[
+    VE_{\text{neto}} = \underbrace{B \cdot P(\text{terminar} \le T_B)}_{\text{VE bono}}
+                    - \underbrace{P_{\text{pen}} \cdot P(\text{terminar} \ge T_P)}_{\text{VE penalizacion}}
+  \]
+  \textbf{Aceptar} si $VE_{\text{neto}} \ge 0$. \textbf{Rechazar} si $VE_{\text{neto}} < 0$.
+
+  \medskip
+  \textbf{Fecha de indiferencia} $T^*$: despejar $T$ tal que $VE_{\text{neto}} = 0$.
+  \[
+    B \cdot P(T \le T_B) = P_{\text{pen}} \cdot P(T \ge T^*)
+    \;\Rightarrow\;
+    P(T \ge T^*) = \frac{B \cdot \Phi(Z_B)}{P_{\text{pen}}}
+    \;\Rightarrow\;
+    T^* = \mu_p + Z^* \cdot \sigma_p
+  \]
+\end{formulas}
+
+\begin{tipprueba}{Pasos para Resolver un Contrato}
+  \begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+    \item Calcular $\mu_p$ y $\sigma_p$ de la ruta critica.
+    \item Para cada umbral ($T_B$, $T_P$): calcular $Z = (T - \mu_p)/\sigma_p$ y buscar $\Phi(Z)$.
+    \item $VE_{\text{bono}} = B \cdot \Phi(Z_B)$; $VE_{\text{pen}} = P_{\text{pen}} \cdot (1 - \Phi(Z_P))$.
+    \item Comparar: si $VE_{\text{bono}} > VE_{\text{pen}}$ aceptar.
+    \item Para indiferencia: despejar $Z^*$ y luego $T^*$.
+  \end{enumerate}
+\end{tipprueba}
+
+\begin{trampa}{Signos de Z: el error mas comun}
+  $\Phi(Z)$ es la probabilidad de estar \textbf{por debajo} de $T$.
+  Si el plazo es muy ajustado ($T < \mu_p$), entonces $Z < 0$ y $\Phi(Z) < 0.5$.
+  Nunca pongas $\Phi(-1.36) = 0.9131$; es $1 - 0.9131 = 0.0869$.
+\end{trampa}
+
+% ── 3.3 Rutas Alternativas ─────────────────────────────────────────────────
+\subsection[Rutas Alternativas]{Rutas Alternativas y Probabilidad de Volverse Critica}
+
+\begin{tipprueba}{Procedimiento para Rutas Alternativas}
+  \begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+    \item Listar \textbf{todos} los caminos de inicio a fin del proyecto.
+    \item Para cada ruta alternativa calcular su propio $\mu_r$ y $\sigma_r^2$
+          (suma de $TE$ y $\sigma^2$ de sus actividades).
+    \item Calcular $P(\text{ruta} > T_{\text{proyecto}})$ con
+          $Z = (T_{\text{proyecto}} - \mu_r)/\sigma_r$.
+    \item Una ruta alternativa ``se vuelve critica'' cuando supera la duracion
+          esperada del proyecto.
+  \end{enumerate}
+
+  \textbf{Nota:} Las rutas pueden compartir actividades, por lo que sus duraciones
+  no son independientes. La pauta solo pide la probabilidad individual de cada ruta.
+\end{tipprueba}
+
+% ── 3.4 Crashing ────────────────────────────────────────────────────────────
+\subsection{Crashing: Reduccion de Duracion a Costo Minimo}
+
+\begin{formulas}{Pendiente de Crashing}
+  \[
+    \text{Pendiente}_i = \frac{CC_i - CN_i}{TN_i - TC_i}
+    \qquad [\$/\text{semana}]
+  \]
+  donde $CN$ = costo normal, $CC$ = costo crash, $TN$ = tiempo normal, $TC$ = tiempo crash.
+  \textbf{Menor pendiente = mas barato acortar.}
+\end{formulas}
+
+\begin{tipprueba}{Algoritmo de Crashing con Valor Esperado (version certamen)}
+  Cuando el crashing se evalua bajo incertidumbre (hay un bono por terminar antes):
+  \begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+    \item Para cada nivel de reduccion (0, 1, 2, \ldots semanas), identificar
+          la combinacion mas barata de actividades a acortar en la ruta critica.
+    \item Calcular el $VE_{\text{neto}} = \text{bono} \cdot P(\text{terminar antes}) - \text{costo crashing}$.
+    \item Elegir el nivel de reduccion con mayor $VE_{\text{neto}}$ (puede ser 0 semanas).
+    \item \textbf{Verificar rutas no criticas:} tras cada reduccion, calcular la duracion
+          de las otras rutas. Si alguna supera a la ruta critica acortada, se vuelve critica
+          y debes incluirla en el siguiente paso.
+  \end{enumerate}
+\end{tipprueba}
+
+\begin{trampa}{No verificar rutas alternativas tras el crashing}
+  Si reduces la ruta critica 2 semanas pero no checas las otras rutas,
+  puedes terminar con una ruta no critica que ahora domina (se convierte en la nueva RC)
+  y tu respuesta es incorrecta aunque el calculo del crashing este bien.
+  \medskip
+  \textbf{Regla rapida:} calcula la duracion de cada ruta no critica y compara con
+  la nueva duracion de la RC. Si ninguna la supera, el analisis es valido.
+\end{trampa}
+
+\begin{trampa}{Crashing con Dos Rutas Criticas Simultaneas}
+  Si hay dos rutas criticas al mismo tiempo, debes acortar ambas.
+  Busca primero una actividad compartida (acortas las dos con un solo costo).
+  Si no hay, debes acortar una actividad de cada ruta y sumar los costos.
+\end{trampa}
+
+% ════════════════════════════════════════════════════════════════════════════
+% MODULO 2: MRP + LOTEO (PRIORIDAD 2)
+% ════════════════════════════════════════════════════════════════════════════
+\section[Modulo 2: MRP y Loteo]{Modulo 2: Planificacion de Corto Plazo y MRP}
+\markright{Modulo 2: MRP y Loteo}
+
+Aparece en \textbf{todos los certamenes I2 (2020--2025)}.
+La tabla MRP es un procedimiento mecanico; Silver-Meal tiene un criterio de parada claro.
+
+% ── 2.1 BOM y MRP ──────────────────────────────────────────────────────────
+\subsection{Arbol BOM y Logica de la Tabla MRP}
+
+\begin{definicion}{Lista de Materiales (BOM)}
+  El BOM es un arbol jerarquico que indica cuantas unidades de cada componente
+  se necesitan para fabricar una unidad del nivel superior. El \textbf{coeficiente}
+  es el multiplicador. Si el producto final necesita 2 unidades de A, y A necesita
+  3 de A1, entonces por unidad final se necesitan $2 \times 3 = 6$ unidades de A1.
+\end{definicion}
+
+\begin{formulas}{Las 6 filas de la tabla MRP}
+  \begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+    \item $GR_t$ (Requerimiento Bruto): demanda del periodo, o lanzamiento del nivel superior $\times$ coeficiente.
+    \item $SR_t$ (Scheduled Receipts / Ordenes en Transito): ordenes ya colocadas con llegada en $t$.
+    \item $I_t$ (Inventario al final de $t$): $I_t = I_{t-1} + SR_t + POR_t - GR_t$.
+    \item $NR_t$ (Requerimiento Neto): $NR_t = \max(0,\; GR_t - SR_t - I_{t-1})$.
+    \item $POR_t$ (Recepcion Planificada): cantidad que llega en $t$ para cubrir $NR_t$.
+    \item $PORelease_t$ (Lanzamiento Planificado): $POR_t$ adelantado en el Lead Time ($LT$).
+          $PORelease_{t-LT} = POR_t$.
+  \end{enumerate}
+\end{formulas}
+
+\begin{tipprueba}{Procedimiento MRP Paso a Paso}
+  \begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+    \item Calcular $GR$ del nivel superior. Propagarlo hacia abajo multiplicando
+          por el coeficiente BOM y usando el $PORelease$ como $GR$ del siguiente nivel.
+    \item Para cada periodo: calcular $NR_t = \max(0,\; GR_t - SR_t - I_{t-1})$.
+    \item Aplicar la politica de loteo ($POR_t$): L4L ($POR_t = NR_t$), Silver-Meal, WW.
+    \item Actualizar inventario: $I_t = I_{t-1} + SR_t + POR_t - GR_t$.
+    \item Adelantar $PORelease$ restando el Lead Time.
+  \end{enumerate}
+\end{tipprueba}
+
+\begin{trampa}{Lead Time y Adelanto}
+  Si $LT = 2$ semanas y la recepcion planificada es en la semana 6,
+  el \textbf{lanzamiento} ($PORelease$) debe ir en la semana $6 - 2 = 4$.
+  El error clasico es confundir la fila POR con la fila PORelease.
+\end{trampa}
+
+% ── 2.2 Silver-Meal ────────────────────────────────────────────────────────
+\subsection{Heuristica de Silver-Meal}
+
+\begin{formulas}{Costo Promedio por Periodo Silver-Meal}
+  Para un lote lanzado en el periodo $t$ que cubre $k$ periodos:
+  \[
+    C(k) = \frac{S + H \sum_{j=1}^{k-1} j \cdot D_{t+j}}{k}
+  \]
+  donde $S$ = costo de setup, $H$ = costo de almacenamiento por unidad por periodo,
+  $D_{t+j}$ = demanda en el periodo $t+j$.
+
+  \medskip
+  \textbf{Regla de parada:} calcular $C(1), C(2), C(3), \ldots$ hasta que
+  $C(k+1) > C(k)$. El lote cubre los primeros $k$ periodos.
+  Iniciar un nuevo lote a partir del periodo $t + k$.
+\end{formulas}
+
+\begin{trampa}{Periodos con demanda cero al inicio --- no empieces ahi}
+  Si los primeros periodos tienen demanda cero, \textbf{saltate directamente al primer
+  periodo con demanda positiva} y arranca Silver-Meal desde ahi.
+  Empezar en un periodo con $D_t = 0$ genera $C(1) = S/1$ si haces setup (innecesario)
+  o $C(1) = 0$ si no (comparacion degenerada). Ambos confunden sin aportar.
+  \medskip
+  La pauta de la Ay.\ 8 empieza en $t=0$ con demanda $=0$ y obtiene $C(1) = 0$,
+  luego $C(2) = 73{,}5 > 0$ y ``para''. El resultado es correcto pero el razonamiento
+  es innecesariamente confuso. La forma limpia: ignorar $t=1$ y arrancar en $t=2$.
+\end{trampa}
+
+\begin{ejercicio}{Silver-Meal: esquema rapido}
+  Demanda: $[30, 120, 180, 150]$. $S = 120$, $H = 0.9$.
+
+  \medskip
+  \textbf{Lote 1 (desde periodo 1):}
+  \begin{itemize}[leftmargin=1.5em, itemsep=1pt]
+    \item $C(1) = 120 / 1 = 120$
+    \item $C(2) = (120 + 1 \cdot 0.9 \cdot 120) / 2 = 228 / 2 = 114$ $\to$ baja, seguir.
+    \item $C(3) = (228 + 2 \cdot 0.9 \cdot 180) / 3 = 552 / 3 = 184$ $\to$ sube. \textbf{Parar en $k=2$.}
+  \end{itemize}
+  Lote 1: cubre periodos 1 y 2 $\Rightarrow$ $30 + 120 = 150$ unidades.
+
+  \medskip
+  \textbf{Lote 2 (desde periodo 3):}
+  \begin{itemize}[leftmargin=1.5em, itemsep=1pt]
+    \item $C(1) = 120$
+    \item $C(2) = (120 + 1 \cdot 0.9 \cdot 150) / 2 = 255 / 2 = 127.5$ $\to$ sube. \textbf{Parar en $k=1$.}
+  \end{itemize}
+  Lote 2: solo periodo 3 $\Rightarrow$ 180 unidades.
+
+  \textbf{Lote 3}: periodo 4 $\Rightarrow$ 150 unidades.
+\end{ejercicio}
+
+% ── 2.3 Wagner-Whitin ──────────────────────────────────────────────────────
+\subsection{Algoritmo de Wagner-Whitin (WW)}
+
+\begin{formulas}{Programacion Dinamica WW}
+  Sea $f(t)$ el costo minimo para cubrir la demanda de los periodos $1, \ldots, t$:
+  \[
+    f(t) = \min_{1 \le j \le t} \left[ S + c(j, t) + f(j-1) \right]
+  \]
+  donde $c(j, t)$ es el costo de almacenamiento si el lote lanzado en $j$ cubre
+  hasta $t$:
+  \[
+    c(j, t) = H \sum_{i=j+1}^{t} (i - j) \cdot D_i
+  \]
+  Condicion inicial: $f(0) = 0$.
+  Se reconstruye la solucion trazando hacia atras los $j^*$ que minimizan cada $f(t)$.
+\end{formulas}
+
+\begin{tipprueba}{Tabla WW Paso a Paso}
+  \begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+    \item Construir la tabla de costos $c(j,t)$ para todo $j \le t$.
+    \item Para $t = 1$: $f(1) = S + 0 = S$ (el lote cubre solo el periodo 1).
+    \item Para cada $t$ siguiente, evaluar todas las opciones $j$ y tomar la minima.
+    \item Al final, reconstruir los lotes trazando $j^*(t) \to j^*(j^*-1) \to \ldots$
+  \end{enumerate}
+\end{tipprueba}
+
+% ════════════════════════════════════════════════════════════════════════════
+% MODULO 1: MILP PLANIFICACION AGREGADA (PRIORIDAD 3)
+% ════════════════════════════════════════════════════════════════════════════
+\section[Modulo 1: Planificacion Agregada MILP]{Modulo 1: Planificacion Agregada --- Modelo MILP}
+\markright{Modulo 1: Planificacion Agregada}
+
+Aparecio en los \textbf{dos certamenes mas recientes (2024 y 2025)}.
+La pregunta siempre tiene la misma estructura: (i) variables + FO + restricciones base;
+(ii) agregar condiciones complejas con binarias. Si memorizas la \textbf{receta de 5 preguntas}
+puedes plantear cualquier modelo sin haberlo visto antes.
+
+% ── 1.0 Receta general ────────────────────────────────────────────────────
+\subsection{La Receta: 5 Preguntas para Plantear Cualquier MILP}
+
+\begin{tipprueba}{Receta MILP --- Hazte estas 5 preguntas en orden}
+  \begin{enumerate}[leftmargin=1.5em, itemsep=4pt]
+
+    \item \textbf{?`Que DECIDO cada periodo?} $\to$ Variables de decision.
+      \begin{itemize}[leftmargin=1.2em, itemsep=1pt]
+        \item Continuas ($\ge 0$): cuanto produzco ($P$), cuanto guardo ($I$),
+              cuanto despacho ($S$), cuantas horas extra ($HE$), cuantos trabajadores ($TA$).
+        \item Binarias ($\in \{0,1\}$): ?`opera la planta? ($X$), ?`arranca esta semana? ($Y$).
+      \end{itemize}
+      \textit{Regla practica:} necesitas una variable por cada cantidad que el modelo
+      debe elegir. Si el enunciado dice ``decide si'' $\to$ binaria; si dice ``decide cuanto'' $\to$ continua.
+
+    \item \textbf{?`Que CUESTA?} $\to$ Funcion objetivo $= \min \sum (\text{costo unitario} \times \text{variable})$.
+      Recorre el enunciado buscando: produccion, inventario, despacho/envio, horas extra,
+      salarios, contratacion/despido, activacion de planta, ventas perdidas.
+      Cada uno es un termino en la FO.
+
+    \item \textbf{?`Que DEBO satisfacer?} $\to$ Restriccion de demanda (una por cliente y periodo).
+      \[
+        \sum_n S_{n,i,t} + NS_{i,t} = D_{it} \quad \forall i,t
+        \qquad \text{(si hay ventas perdidas)}
+      \]
+      \[
+        \sum_n S_{n,i,t} \ge D_{it} \quad \forall i,t
+        \qquad \text{(si no hay ventas perdidas)}
+      \]
+
+    \item \textbf{?`Que PUEDO hacer?} $\to$ Restricciones de capacidad.
+      La produccion esta acotada por los recursos disponibles.
+      Si hay una variable binaria $X_{n,t}$, la capacidad se ``enciende'' con ella:
+      \[
+        P_{n,t} \le \text{capacidad}_n \cdot X_{n,t} \quad \forall n,t
+      \]
+
+    \item \textbf{?`Como EVOLUCIONA el inventario?} $\to$ Restriccion de balance (una por planta y periodo).
+      \[
+        I_{n,t} = I_{n,t-1} + P_{n,t} - \sum_i S_{n,i,t} \quad \forall n,t
+      \]
+      Incluir condiciones de borde: $I_{n,0} = I_0^{\text{dato}}$, $I_{n,T} = I_T^{\text{requerido}}$.
+
+  \end{enumerate}
+
+  \medskip
+  \textbf{Parte (ii) del certamen: condiciones complejas.}
+  Lee cada condicion en lenguaje natural e identifica el patron:
+  \begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item ``Si opera, entonces al menos $L$ unidades'' $\to P_{n,t} \ge L \cdot X_{n,t}$
+    \item ``Solo produce si opera'' $\to P_{n,t} \le M \cdot X_{n,t}$ (Big-M)
+    \item ``Si arranca, paga costo fijo'' $\to$ necesitas $Y_{n,t}$ con $Y_{n,t} \ge X_{n,t} - X_{n,t-1}$
+    \item ``A lo mas el $\alpha$\% insatisfecho'' $\to \sum_t NS_{i,t} \le \alpha \cdot \sum_t D_{it}$
+    \item ``Si A ocurre, B debe ocurrir'' $\to X^A \le X^B$ (o $X^A + X^B \le 1$ si son excluyentes)
+  \end{itemize}
+\end{tipprueba}
+
+% ── 1.1 Variables tipicas ──────────────────────────────────────────────────
+\subsection{Variables de Decision Tipicas}
+
+\begin{definicion}{Catalogo de Variables (Mod.\ 1)}
+  \begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+    \item $P_{n,t} \ge 0$: produccion en planta $n$, semana $t$.
+    \item $I_{n,t} \ge 0$: inventario en planta $n$ al final de $t$.
+    \item $S_{n,i,t} \ge 0$ (o $DE$): despacho de planta $n$ a cliente $i$ en $t$.
+    \item $NS_{i,t} \ge 0$: demanda insatisfecha del cliente $i$ en $t$ (si se permite).
+    \item $TA_{n,t} \ge 0$: trabajadores en planta $n$ semana $t$.
+    \item $TCA_{n,t}, TDA_{n,t} \ge 0$: contratados y despedidos al inicio de $t$.
+    \item $HE_{n,t} \ge 0$: horas extra en planta $n$, semana $t$.
+    \item $X_{n,t} \in \{0,1\}$: 1 si la planta $n$ opera en $t$.
+    \item $Y_{n,t} \in \{0,1\}$: 1 si la planta $n$ \textbf{se activa} en $t$
+          (estaba inactiva en $t-1$).
+  \end{itemize}
+\end{definicion}
+
+% ── 1.2 FO tipica ──────────────────────────────────────────────────────────
+\subsection{Funcion Objetivo Tipica}
+
+\begin{formulas}{Componentes del Costo Total (Minimizar)}
+  \[
+    \min \; \sum_t \sum_n \Big(
+      CP_n P_{n,t} + H_n I_{n,t} + A_n Y_{n,t} + CE_n HE_{n,t}
+    \Big)
+  \]
+  \[
+    + \sum_t \sum_n \Big(
+      CT\, TA_{n,t} + CC\, TCA_{n,t} + CDS\, TDA_{n,t}
+      + \textstyle\sum_i C_{in} S_{n,i,t}
+    \Big)
+    + \sum_t \sum_i P_i \cdot NS_{i,t}
+  \]
+  No todas las variables aparecen en todos los modelos; incluir solo las del enunciado.
+\end{formulas}
+
+% ── 1.3 Restricciones clave ────────────────────────────────────────────────
+\subsection{Restricciones Clave}
+
+\begin{formulas}{Restricciones Fundamentales}
+  \textbf{Balance de inventario:}
+  \[
+    I_{n,t} = I_{n,t-1} + P_{n,t} - \sum_i S_{n,i,t} \quad \forall n, t
+  \]
+
+  \textbf{Satisfaccion de demanda} (con o sin ventas perdidas):
+  \[
+    \sum_n S_{n,i,t} + NS_{i,t} = D_{it} \quad \forall i, t
+    \qquad \text{(con ventas perdidas)}
+  \]
+  \[
+    \sum_n S_{n,i,t} \ge D_{it} \quad \forall i, t
+    \qquad \text{(sin ventas perdidas)}
+  \]
+
+  \textbf{Capacidad de produccion} (horas normales + extras):
+  \[
+    P_{n,t} \le PR_n \cdot (HN_n \cdot X_{n,t} + HE_{n,t}) \quad \forall n, t
+  \]
+  \[
+    HE_{n,t} \le HE_{\max,n} \cdot X_{n,t} \quad \forall n, t
+  \]
+
+  \textbf{Dinamica de fuerza laboral:}
+  \[
+    TA_{n,t} = TA_{n,t-1} + TCA_{n,t} - TDA_{n,t} \quad \forall n, t
+  \]
+
+  \textbf{Activacion de planta} (detectar arranque):
+  \[
+    Y_{n,t} \ge X_{n,t} - X_{n,t-1} \quad \forall n, t
+  \]
+\end{formulas}
+
+\begin{tipprueba}{Condiciones Complejas con Big-M}
+  Estas aparecen frecuentemente en la parte (ii) de la pregunta:
+  \begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+    \item \textbf{Produccion minima si opera:}
+      $P_{n,t} \ge L_n \cdot X_{n,t}$
+    \item \textbf{Turno completo obligatorio:}
+      $P_{n,t} \ge PR_n \cdot 40 \cdot X_{n,t}$
+    \item \textbf{Produccion 0 si no opera (Big-M):}
+      $P_{n,t} \le M \cdot X_{n,t}$
+    \item \textbf{Limite de demanda insatisfecha:}
+      $\displaystyle\sum_t NS_{i,t} \le A_i \cdot \sum_t D_{it}$
+    \item \textbf{Relacion entre variables binarias:} si $X=1$ implica $Z=1$,
+      usar $X_{n,t} \le Z_{n,t}$ o $X_{n,t} + Z_{n,t} \le 1$ segun la logica.
+  \end{itemize}
+\end{tipprueba}
+
+\begin{trampa}{Plan Chase: el supuesto de redondeo que las pautas no declaran}
+  En la practica, los panaderos son enteros. Al calcular ``trabajadores necesarios $= D_t / \text{cap}$''
+  suele salir un numero fraccionario. Las pautas redondean ($7{,}5 \to 8$), pero eso
+  significa que se \textbf{produce mas de lo demandado} (80 unidades extra que la pauta ignora).
+  Si el enunciado dice ``producir exactamente la demanda'', usa el numero exacto aunque sea fraccionario.
+  Si dice ``trabajadores enteros'', redondea y ajusta la produccion en consecuencia.
+  \medskip
+  \textbf{En la prueba:} si hay ambiguedad, indica el supuesto que estas asumiendo.
+  La pauta te da el beneficio de la duda si el calculo es consistente con tu supuesto.
+\end{trampa}
+
+\begin{trampa}{El costo de activacion va en $Y_{n,t}$, no en $X_{n,t}$}
+  $A_n \cdot X_{n,t}$ cobra el costo cada semana que opera.
+  $A_n \cdot Y_{n,t}$ solo cobra cuando la planta \textbf{arranca} (transicion $0 \to 1$).
+  Verifica siempre que la restriccion $Y_{n,t} \ge X_{n,t} - X_{n,t-1}$ este en el modelo.
+\end{trampa}
+
+% ════════════════════════════════════════════════════════════════════════════
+% MODULO 4: COLAS G/G/1 (PRIORIDAD 4)
+% ════════════════════════════════════════════════════════════════════════════
+\section[Modulo 4: Variabilidad y Colas G/G/1]{Modulo 4: Variabilidad en las Operaciones (Colas G/G/1)}
+\markright{Modulo 4: Variabilidad -- Colas G/G/1}
+
+Aparecio en 1/5 certamenes (2022). Alta probabilidad de aparecer este ano dado que
+el modulo es parte del temario oficial. Las formulas son mecanicas.
+
+% ── 4.1 Formulas G/G/1 ─────────────────────────────────────────────────────
+\subsection{Formula de Kingman (VUT)}
+
+\begin{formulas}{Formula de Kingman para Tiempo en Cola G/G/1}
+  \[
+    CT_q = \underbrace{\frac{C_a^2 + C_s^2}{2}}_{\text{Variabilidad}}
+           \cdot \underbrace{\frac{\rho}{1 - \rho}}_{\text{Utilizacion}}
+           \cdot \underbrace{ST}_{\text{Tiempo de Servicio}}
+  \]
+  donde:
+  \begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+    \item $\rho = \lambda / \mu$ (utilizacion, debe ser $< 1$ para estabilidad).
+    \item $C_a$ = coeficiente de variacion de llegadas $ = \sigma_a / (1/\lambda)$.
+    \item $C_s$ = coeficiente de variacion del servicio $ = \sigma_s \cdot \mu$.
+    \item $ST = 1/\mu$ = tiempo promedio de servicio.
+  \end{itemize}
+
+  \medskip
+  \textbf{Caso especial M/M/1:} $C_a = C_s = 1$ $\Rightarrow$
+  $CT_q = \frac{1}{\mu - \lambda} = \frac{\rho}{\mu(1-\rho)}$.
+\end{formulas}
+
+\begin{formulas}{Metricas de la Cola}
+  \[
+    W_q = CT_q \quad [\text{tiempo en cola}]
+    \qquad
+    W = W_q + \frac{1}{\mu} \quad [\text{tiempo total en sistema}]
+  \]
+  \[
+    L_q = \lambda \cdot W_q \quad [\text{clientes en cola}]
+    \qquad
+    L = \lambda \cdot W \quad [\text{clientes en sistema}]
+  \]
+  (Ley de Little: $L = \lambda \cdot W$)
+\end{formulas}
+
+% ── 4.2 Optimizacion de capacidad ──────────────────────────────────────────
+\subsection{Optimizacion de Capacidad}
+
+\begin{tipprueba}{Minimizar costo total: capacidad + espera}
+  El costo total suele tener la forma:
+  \[
+    CT(\mu) = c_\mu \cdot \mu + c_w \cdot \lambda \cdot W_q(\mu)
+  \]
+  \begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+    \item Expresar $W_q$ en funcion de $\mu$ usando Kingman.
+    \item Derivar $CT(\mu)$ respecto a $\mu$ e igualar a cero.
+    \item Verificar que $\rho = \lambda/\mu < 1$ en la solucion.
+  \end{enumerate}
+  Si la derivacion es compleja, probar con valores enteros y comparar costos.
+\end{tipprueba}
+
+% ── 4.3 Propagacion de variabilidad en serie ──────────────────────────────
+\subsection{Propagacion de Variabilidad en Serie}
+
+\begin{formulas}{Coeficiente de Variacion de Salida (Aproximacion)}
+  \[
+    C_{d}^2 \approx (1 - \rho^2) \cdot C_a^2 + \rho^2 \cdot C_s^2
+  \]
+  $C_d$ es el coeficiente de variacion de las salidas de la estacion,
+  que se convierte en el $C_a$ de la siguiente estacion en serie.
+
+  \medskip
+  \textbf{Interpretacion:}
+  \begin{itemize}[leftmargin=1.2em, itemsep=1pt]
+    \item Alta utilizacion ($\rho \to 1$): $C_d \approx C_s$ (el servicio domina la variabilidad de salida).
+    \item Baja utilizacion ($\rho \to 0$): $C_d \approx C_a$ (las llegadas dominan).
+  \end{itemize}
+\end{formulas}
+
+\begin{trampa}{Cuando M/M/1 no aplica}
+  Si el enunciado da $C_a \ne 1$ o $C_s \ne 1$, debes usar Kingman completo.
+  M/M/1 es solo el caso $C_a = C_s = 1$ (llegadas y servicio exponenciales).
+\end{trampa}
+
+% ════════════════════════════════════════════════════════════════════════════
+% FORMULARIO RAPIDO
+% ════════════════════════════════════════════════════════════════════════════
+\newpage
+\section*{Formulario Rapido --- Resumen LITE}
+\markright{Formulario Rapido}
+\addcontentsline{toc}{section}{Formulario Rapido}
+
+\begin{multicols}{2}
+
+\subsubsection*{PERT / CPM}
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt, label={$\bullet$}]
+  \item $ES_i = \max(EF_{\text{predecesores}})$
+  \item $EF_i = ES_i + TE_i$
+  \item $LS_i = LF_i - TE_i$
+  \item $LF_i = \min(LS_{\text{sucesores}})$
+  \item Holgura $= LS - ES$; RC: holgura $= 0$
+  \item $\mu_p = \sum_{RC} TE_i$; $\sigma_p^2 = \sum_{RC} \sigma_i^2$
+  \item $Z = (T - \mu_p)/\sigma_p$; $P(\le T) = \Phi(Z)$
+  \item $IC_{95\%} = \mu_p \pm 1.96\,\sigma_p$
+  \item $VE = B \cdot \Phi(Z_B) - P\cdot(1-\Phi(Z_P))$
+  \item Pendiente crashing $= (CC-CN)/(TN-TC)$
+\end{itemize}
+
+\subsubsection*{MRP}
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt, label={$\bullet$}]
+  \item $NR_t = \max(0,\; GR_t - SR_t - I_{t-1})$
+  \item $I_t = I_{t-1} + SR_t + POR_t - GR_t$
+  \item L4L: $POR_t = NR_t$
+  \item $PORelease_{t-LT} = POR_t$
+\end{itemize}
+
+\subsubsection*{Silver-Meal}
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt, label={$\bullet$}]
+  \item $C(k) = \left[S + H\sum_{j=1}^{k-1} j\,D_{t+j}\right]/k$
+  \item Parar cuando $C(k+1) > C(k)$
+\end{itemize}
+
+\subsubsection*{Wagner-Whitin}
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt, label={$\bullet$}]
+  \item $f(t) = \min_{j \le t}[S + c(j,t) + f(j-1)]$
+  \item $c(j,t) = H\sum_{i=j+1}^{t}(i-j)D_i$; $f(0)=0$
+\end{itemize}
+
+\subsubsection*{Colas G/G/1 (Kingman)}
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt, label={$\bullet$}]
+  \item $\rho = \lambda/\mu$ (debe ser $<1$)
+  \item $CT_q = \frac{C_a^2+C_s^2}{2}\cdot\frac{\rho}{1-\rho}\cdot\frac{1}{\mu}$
+  \item $W = CT_q + 1/\mu$; $L = \lambda\,W$
+  \item M/M/1: $CT_q = \frac{1}{\mu-\lambda}$
+  \item $C_d^2 \approx (1-\rho^2)C_a^2 + \rho^2 C_s^2$
+\end{itemize}
+
+\subsubsection*{MILP: Restricciones Clave}
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt, label={$\bullet$}]
+  \item Balance: $I_{n,t} = I_{n,t-1} + P_{n,t} - \sum_i S_{n,i,t}$
+  \item Demanda: $\sum_n S_{n,i,t} + NS_{i,t} = D_{it}$
+  \item Capacidad: $P_{n,t} \le PR_n(HN_n X_{n,t} + HE_{n,t})$
+  \item Activacion: $Y_{n,t} \ge X_{n,t} - X_{n,t-1}$
+  \item Min prod.: $P_{n,t} \ge L_n X_{n,t}$
+  \item Big-M: $P_{n,t} \le M\,X_{n,t}$
+\end{itemize}
+
+\subsubsection*{Tabla Normal Estandar (valores clave)}
+\begin{tabular}{cc|cc}
+  \toprule
+  $Z$ & $\Phi(Z)$ & $Z$ & $\Phi(Z)$ \\
+  \midrule
+  0.00 & 0.5000 & 1.28 & 0.8997 \\
+  0.43 & 0.6664 & 1.36 & 0.9131 \\
+  0.52 & 0.6985 & 1.45 & 0.9265 \\
+  0.64 & 0.7389 & 1.53 & 0.9370 \\
+  0.68 & 0.7517 & 1.64 & 0.9495 \\
+  0.84 & 0.7995 & 1.96 & 0.9750 \\
+  1.00 & 0.8413 & 2.04 & 0.9793 \\
+  1.02 & 0.8461 & 2.33 & 0.9901 \\
+  \bottomrule
+\end{tabular}
+
+\end{multicols}
+
+\end{document}

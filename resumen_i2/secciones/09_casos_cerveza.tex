@@ -1,0 +1,162 @@
+\section{Casos: Barilla SpA y University Health System}
+
+\subsection[Caso: Barilla SpA]{Caso 3: Barilla SpA (Efecto Látigo / Bullwhip)}
+
+\begin{definicion}{Contexto de Barilla}
+Barilla, el mayor fabricante de pasta de Italia, enfrenta enormes fluctuaciones en los pedidos de sus distribuidores, pese a que la demanda del \textbf{consumidor final} es bastante estable. Propone el sistema \textbf{JITD (Just-In-Time Distribution)}: que Barilla decida los envíos según la demanda real de los distribuidores en lugar de esperar sus pedidos.
+\end{definicion}
+
+\begin{definicion}{El Efecto Látigo (Bullwhip)}
+La variabilidad de los pedidos se \textbf{amplifica} a medida que se sube en la cadena de suministro (consumidor $\to$ minorista $\to$ distribuidor $\to$ fábrica). Conecta directamente con la propagación de la variabilidad del módulo de colas.
+\end{definicion}
+
+\begin{definicion}{Causas del efecto látigo (puntos evaluables)}
+El Efecto Látigo (o \textit{Bullwhip Effect}) describe cómo pequeñas fluctuaciones en la demanda del cliente final se amplifican progresivamente a medida que se avanza hacia atrás en la cadena de suministro. Sus causas principales son:
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt, parsep=2pt]
+  \item \textbf{Procesamiento de señales de demanda (Actualización de pronósticos):} Cada eslabón realiza sus pronósticos utilizando solo el historial de \textit{pedidos} de su cliente directo (no la demanda del consumidor final). Si un cliente aumenta un pedido en la semana $t$, el proveedor asume que la demanda subió permanentemente y pide un volumen aún mayor a su propio proveedor para cubrir el stock de seguridad.
+  \item \textbf{Loteo de pedidos (Order Batching):} Los clientes no compran de forma continua; en lugar de eso, consolidan pedidos y ordenan en lotes grandes periódicos (semanales/mensuales) para aprovechar economías de escala en transporte (ej. camiones llenos) o costos de orden fijo ($S$). Esto genera picos masivos de demanda seguidos de largos períodos con demanda cero para el proveedor.
+  \item \textbf{Fluctuaciones de precio (Promociones / Forward Buying):} Las promociones temporales de precio, descuentos y rebajas incitan a los compradores a realizar \textit{forward buying} (comprar por adelantado grandes volúmenes para almacenar). Esto altera el patrón de consumo regular y genera un pico artificial de demanda seguido de una caída prolongada (valle) en las compras del distribuidor.
+  \item \textbf{Racionamiento y juegos de escasez (Shortage Gaming):} Ante una escasez esperada de producto, el fabricante raciona la entrega dando a cada cliente un porcentaje de su orden (ej. 50\% de lo pedido). Para contrarrestar esto y obtener las unidades que realmente necesitan, los distribuidores inflan artificialmente sus órdenes. Cuando la escasez termina y la capacidad del fabricante se normaliza, las órdenes infladas se cancelan de golpe, dejando al fabricante con inventario ocioso masivo.
+  \item \textbf{Lead times largos:} El tiempo que transcurre entre colocar una orden y recibirla amplifica todos los problemas anteriores. Lead times más largos aumentan la incertidumbre, lo que obliga a los eslabones a incrementar significativamente su stock de seguridad ($SS = z \cdot \sigma_D \cdot \sqrt{L}$), haciendo que las fluctuaciones de pedidos sean aún más extremas.
+\end{enumerate}
+
+\vspace{0.4em}
+\textbf{Solución JITD / VMI (Vendor Managed Inventory):}
+Centralizar las decisiones de reabastecimiento en el fabricante (Barilla). En lugar de reaccionar a los pedidos de los distribuidores, el fabricante recibe datos de demanda en tiempo real del punto de venta (POS) y decide de forma continua cuánto enviar a cada bodega basándose en consumo real. Esto elimina el \textit{order batching} y reduce drásticamente la actualización descentralizada de pronósticos.
+
+\vspace{0.4em}
+\textbf{Resistencias al cambio encontradas:}
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+  \item \textbf{Distribuidores:} Temen perder el poder de control sobre sus inventarios, sintiendo que quedan a merced de lo que el fabricante decida enviarles.
+  \item \textbf{Fuerza de ventas interna (Vendedores de Barilla):} Temen perder sus bonificaciones por volumen de ventas a corto plazo. Sus comisiones dependían de lograr metas de volumen mensuales (los cuales inflaban ofreciendo promociones de precios agresivas que a su vez agravaban el efecto látigo).
+\end{itemize}
+\end{definicion}
+
+\begin{center}
+\small
+\begin{tabular}{@{}clp{11cm}@{}}
+  \toprule
+  $\#$ & R & Afirmación y justificación (Caso Barilla) \\
+  \midrule
+  1 & \textbf{V} & El efecto látigo amplifica la variabilidad de pedidos a medida que se avanza hacia atrás en la cadena de suministro. \\
+    &            & \textit{Verdadero. La variabilidad observada por la fábrica es significativamente mayor que la variabilidad de la demanda del consumidor final.} \\
+  2 & \textbf{F} & Las fluctuaciones en los pedidos que Barilla recibe son causadas por la alta inestabilidad en el consumo final de pasta. \\
+    &            & \textit{Falso. El consumo de pasta es sumamente estable; la volatilidad en los pedidos es artificial y la generan los propios distribuidores.} \\
+  3 & \textbf{V} & El sistema JITD (Just-In-Time Distribution) funciona como una política VMI (Vendor Managed Inventory). \\
+    &            & \textit{Verdadero. Barilla decide de forma centralizada los despachos hacia los distribuidores usando información de stock en tiempo real compartida por ellos.} \\
+  4 & \textbf{F} & Las promociones de precios temporales aplicadas por Barilla ayudan a mitigar el efecto látigo. \\
+    &            & \textit{Falso. Las promociones incentivan el forward buying (compras adelantadas para almacenar), agravando drásticamente el efecto látigo.} \\
+  5 & \textbf{F} & Los distribuidores rechazaban el sistema JITD principalmente por el costo de implementar la integración de datos. \\
+    &            & \textit{Falso. El rechazo se debió al temor de perder el control de su propio negocio y a la desconfianza de quedar desabastecidos por Barilla.} \\
+  6 & \textbf{F} & La fuerza de ventas interna apoyó JITD porque mejoraba el nivel de servicio y reducía la fricción con los clientes. \\
+    &            & \textit{Falso. Los vendedores se opusieron firmemente porque sus comisiones dependían del volumen mensual facturado, el cual solían inflar a fin de mes con promociones.} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\subsection[Caso: University Health]{Caso 4: University Health System (Colas en Servicios)}
+
+\begin{definicion}{Contexto de University Health System}
+Una clínica universitaria enfrenta largas \textbf{esperas} de pacientes. El caso conecta directamente con \textbf{Teoría de Colas} (M/M/c) y la gestión de la \textbf{variabilidad} en servicios. El análisis compara el sistema ``antiguo'' vs.\ uno ``nuevo''.
+\end{definicion}
+
+\begin{definicion}{Puntos clave evaluables (University)}
+\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
+  \item \textbf{Flujograma y cuello de botella:} identificar dónde se generan las esperas en el sistema antiguo.
+  \item \textbf{Variabilidad:} distinguir variabilidad de \textbf{llegadas} (pacientes) vs.\ de \textbf{servicio} (doctores). Señalar al menos 3 de cada una.
+  \item \textbf{Utilización $\rho = \lambda/(c\mu)$:} calcular para distintos números de doctores $c$ y niveles objetivo (100\%, 90\%, 75\%, 60\%).
+  \item \textbf{Trade-off:} más doctores $\Rightarrow$ menor espera del paciente pero mayor costo ocioso. El óptimo no es el 100\% de utilización (la cola explota).
+  \item \textbf{Solución nueva:} típicamente \textit{pooling} (unifila), \textbf{triage}/segmentación y nivelación de llegadas.
+\end{itemize}
+\end{definicion}
+
+\begin{center}
+\small
+\begin{tabular}{@{}clp{11cm}@{}}
+  \toprule
+  $\#$ & R & Afirmación y justificación (Caso University) \\
+  \midrule
+  1 & \textbf{V} & Operar un sistema de servicios con variabilidad al 100\% de utilización dispara exponencialmente los tiempos de espera. \\
+    &            & \textit{Verdadero. A medida que $\rho \to 1$, la fórmula de Kingman muestra que el tiempo de espera tiende a infinito debido a que no queda capacidad ociosa para amortiguar la variabilidad.} \\
+  2 & \textbf{V} & La implementación de un sistema de unifila (pooling) con varios doctores reduce el tiempo de espera promedio frente a colas separadas. \\
+    &            & \textit{Verdadero. El pooling comparte la capacidad disponible para atender al siguiente de la fila, evitando que haya servidores ociosos mientras los clientes esperan en otras colas.} \\
+  3 & \textbf{F} & La variabilidad de las llegadas de pacientes es irrelevante para el tiempo de espera si los médicos atienden muy rápido en promedio. \\
+    &            & \textit{Falso. La variabilidad en las llegadas ($C_a$) y en el tiempo de servicio ($C_s$) son factores multiplicativos en la ecuación de Kingman que determinan directamente el tiempo en cola.} \\
+  4 & \textbf{F} & Al centralizar a los doctores en un sistema de pooling, la utilización promedio de los doctores disminuye considerablemente. \\
+    &            & \textit{Falso. La utilización promedio depende únicamente de la tasa de llegadas total y de la capacidad total ($\rho = \lambda / (c \cdot \mu)$); el pooling optimiza los tiempos de espera pero no altera la carga de trabajo agregada.} \\
+  5 & \textbf{V} & Si la variabilidad de las llegadas ($C_a$) y de servicio ($C_s$) fuesen exactamente cero, no se generarían colas en la clínica incluso con una utilización del 99\%. \\
+    &            & \textit{Verdadero. En un sistema totalmente determinístico (D/D/c) con $\rho < 1$, los pacientes llegan exactamente en intervalos coordinados con el término del servicio anterior, por lo que la espera es cero.} \\
+  6 & \textbf{F} & El triage (clasificación de pacientes) incrementa el tiempo de espera de los pacientes con cuadros médicos más graves. \\
+    &            & \textit{Falso. El triage prioriza la atención según severidad, reduciendo drásticamente el tiempo de espera de los pacientes graves a costa de demorar los casos leves.} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\subsection[Juego de la Cerveza]{Juego de la Cerveza (Beer Game)}
+
+El Juego de la Cerveza (\textit{Beer Distribution Game}) es una simulación de rol desarrollada por el MIT en la década de 1960 para vivenciar la dinámica operativa y los desafíos de coordinación en una cadena de suministro lineal. Demuestra empíricamente cómo el Efecto Látigo emerge naturalmente debido a la estructura del sistema, incluso ante comportamientos individuales racionales.
+
+\begin{definicion}{Estructura de la Cadena de Suministro}
+  La simulación modela una cadena lineal con cuatro etapas descentralizadas:
+  \[
+    \text{Consumidor Final} \longrightarrow \text{Minorista} \longrightarrow \text{Mayorista} \longrightarrow \text{Distribuidor} \longrightarrow \text{Fábrica}
+  \]
+  \textbf{Regla de Oro:} Está estrictamente prohibida la comunicación entre las posiciones. Cada participante solo conoce las órdenes que le cursa su cliente inmediato y su propio nivel de inventario o faltante.
+\end{definicion}
+
+\begin{formulas}{Dinámica de Tiempos y Costos}
+  La cadena posee retrasos inherentes que simulan la física de la logística real:
+  \begin{enumerate}[leftmargin=1.6em, itemsep=1pt]
+    \item \textbf{Retrasos de Información (Lags de Pedido):} Una orden tarda \textbf{1 semana} en llegar de un nodo a su proveedor directo.
+    \item \textbf{Retrasos Físicos (Lags de Despacho):} El producto tarda \textbf{2 semanas} en transitar entre cada eslabón.
+    \item \textbf{Retraso en Fábrica:} La producción requiere de \textbf{2 semanas} de procesamiento.
+    \item \textbf{Estructura de Costos Periódicos (Semanales):}
+      \begin{itemize}[leftmargin=1.2em, itemsep=1pt]
+        \item Costo de mantener inventario: \textbf{\$1 por caja/semana}.
+        \item Costo de faltante (backorder): \textbf{\$4 por caja/semana}.
+      \end{itemize}
+    \item \textbf{Acumulación de Faltantes:} La demanda no satisfecha en la semana $t$ se acumula obligatoriamente como \textit{backorder} y debe ser despachada en las semanas siguientes tan pronto como llegue inventario.
+  \end{enumerate}
+\end{formulas}
+
+\begin{definicion}{Causas del Efecto Látigo en el Juego}
+  \begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+    \item \textbf{Ignorar el Inventario en Tránsito (\textit{Pipeline Inventory}):} El error de comportamiento más común de los jugadores es desesperarse cuando entran en \textit{backorder} y colocar pedidos gigantescos semana tras semana. Olvidan que ya tienen órdenes cursadas en tránsito (en el lag de 2 semanas de despacho y 1 semana de pedido) que terminarán llegando y sobre-saturando su inventario.
+    \item \textbf{Falta de Visibilidad de la Demanda Real:} Dado que solo el Minorista ve la demanda del consumidor final, los eslabones aguas arriba (Distribuidor y Fábrica) solo ven pedidos intermedios distorsionados por las políticas de seguridad de sus clientes directos.
+    \item \textbf{Efecto Pánico y Acumulación de Stock:} Cuando la demanda del cliente final tiene un pequeño incremento (por ejemplo, sube de 4 a 8 cajas permanentes), cada eslabón sobrerreacciona tratando de reconstruir su inventario de seguridad. Para cuando la Fábrica reacciona y produce en exceso, la demanda ya se ha estabilizado, gatillando una acumulación masiva de stock no deseado en toda la cadena.
+  \end{itemize}
+\end{definicion}
+
+\begin{definicion}{Estrategias de Mitigación}
+  \begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+    \item \textbf{Compartir Información Centralizada (POS --- Point of Sale):} Si todos los nodos ven en tiempo real lo que el consumidor final está comprando al Minorista, pueden planificar la producción directamente sobre la demanda real, eliminando la amplificación artificial de pedidos.
+    \item \textbf{Reducción de Lead Times:} Acortar los retrasos de envío y de pedido disminuye el tiempo de reacción del sistema, requiriendo menos inventario de seguridad.
+    \item \textbf{Coordinación y Centralización de Decisiones (VMI):} Permitir que un solo ente controle el reaprovisionamiento a lo largo de toda la cadena (al igual que la iniciativa JITD de Barilla) elimina el comportamiento defensivo/especulativo de los actores locales.
+  \end{itemize}
+\end{definicion}
+
+\subsection[V/F Juego de Cerveza]{Cuestionario Verdadero o Falso (Juego de la Cerveza)}
+
+\begin{center}
+\small
+\begin{tabular}{@{}clp{11cm}@{}}
+  \toprule
+  $\#$ & R & Afirmación y justificación (Juego de la Cerveza) \\
+  \midrule
+  1 & \textbf{F} & El efecto látigo en el Juego de la Cerveza se debe principalmente a comportamientos irracionales e incompetencia individual de los jugadores. \\
+    &            & \textit{Falso. El efecto látigo es una propiedad sistémica de la estructura de la cadena (retrasos de tiempo y falta de información compartida). Incluso con tomadores de decisiones experimentados, el fenómeno se replica.} \\
+  2 & \textbf{V} & Mantener un faltante (backorder) es cuatro veces más costoso por período que mantener una caja en inventario. \\
+    &            & \textit{Verdadero. El costo de faltante es \$4 por caja/semana, mientras que el costo de almacenamiento es \$1 por caja/semana, lo que penaliza fuertemente el desabastecimiento.} \\
+  3 & \textbf{F} & Cuando la fábrica inicia la producción de cerveza en el Juego de la Cerveza, las cajas quedan disponibles inmediatamente para el Distribuidor en la misma semana. \\
+    &            & \textit{Falso. La fábrica requiere 2 semanas de producción interna más las 2 semanas del lag de despacho para que el producto sea recibido por el Distribuidor.} \\
+  4 & \textbf{V} & La falta de visibilidad del inventario en tránsito (pipeline) fomenta la sobre-ordenación en períodos de escasez. \\
+    &            & \textit{Verdadero. Los jugadores ordenan cajas adicionales para cubrir el faltante inmediato, ignorando que las órdenes colocadas previamente ya vienen en camino.} \\
+  5 & \textbf{V} & Compartir la demanda del consumidor final con toda la cadena en tiempo real ayuda a la fábrica a programar su producción de manera más estable. \\
+    &            & \textit{Verdadero. Elimina el efecto distorsionador de los pedidos intermedios, permitiendo a la fábrica programar su producción en base a consumo real.} \\
+  6 & \textbf{F} & El inventario físico disponible en bodega ($OH$) puede tomar valores negativos si se tienen cajas en backorder. \\
+    &            & \textit{Falso. El inventario físico disponible siempre es mayor o igual a cero ($OH \ge 0$). El stock faltante se registra aparte como backorder ($BO$), y la posición neta sí puede ser negativa ($I_{neto} = OH - BO$).} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ════════════════════════════════════════════════════════════════════════════

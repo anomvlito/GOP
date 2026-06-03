@@ -1,0 +1,240 @@
+\section{Módulo 3: Administración de Proyectos (CPM / PERT)}
+
+\subsection{Conceptos y triángulo de hierro}
+
+\begin{definicion}{Proyecto y sus objetivos}
+Un \textbf{proyecto} es un esfuerzo temporal con inicio y fin para crear un resultado único. Sus tres objetivos forman el \textbf{triángulo de hierro}: \textbf{Alcance, Tiempo y Costo}. Están en conflicto permanente: mejorar uno típicamente empeora otro (\textit{trade-off}). El ciclo de vida: Concepto $\to$ Factibilidad $\to$ Planificación $\to$ Ejecución $\to$ Término.
+\end{definicion}
+
+\begin{definicion}{Definiciones clave de redes}
+\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
+  \item \textbf{Pseudo-actividad (dummy):} actividad de duración cero, no consume recursos; solo indica precedencias.
+  \item \textbf{Ruta crítica:} secuencia de actividades que forman la \textbf{cadena más larga} en tiempo. SIEMPRE existe al menos una; puede haber varias.
+  \item \textbf{Holgura (slack):} margen de retraso de una actividad \textbf{sin} afectar el fin del proyecto. Las actividades de la ruta crítica tienen holgura \textbf{cero}.
+\end{itemize}
+\end{definicion}
+
+\subsection{CPM: el método de la ruta crítica}
+
+\begin{formulas}{Cálculo de tiempos CPM (forward y backward pass)}
+\begin{align*}
+  EF &= ES + t && \text{(término más temprano)}\\
+  ES_j &= \max\{EF_{ij}\} && \text{(inicio más temprano = máx de predecesores)}\\
+  LS &= LF - t && \text{(inicio más tardío)}\\
+  LF_k &= \min\{LS_{kj}\} && \text{(término más tardío = mín de sucesores)}\\
+  H &= LF - EF = LS - ES && \text{(holgura)}
+\end{align*}
+\textbf{Forward pass} (izq.\ a der., $ES/EF$): la duración del proyecto $T$ es el mayor $EF$. \textbf{Backward pass} (der.\ a izq., $LS/LF$): en el nodo final $LF=T$. \textbf{Ruta crítica:} camino continuo de actividades con $H=0$.
+\end{formulas}
+
+\subsection{PERT: incorporando incertidumbre}
+
+\begin{formulas}{PERT con 3 estimaciones (distribución Beta)}
+Cada actividad tiene tres estimaciones: $a$ (optimista), $m$ (más probable), $b$ (pesimista). Bajo distribución Beta:
+\[
+  t_e = \mu = \frac{a + 4m + b}{6}, \qquad
+  \sigma = \frac{b - a}{6}, \qquad
+  \sigma^2 = \left(\frac{b-a}{6}\right)^2
+\]
+\end{formulas}
+
+\begin{formulas}{Duración del proyecto y probabilidades}
+Por el \textbf{Teorema Central del Límite}, la duración total $T$ (suma de actividades de la ruta crítica) se distribuye \textbf{Normal}:
+\[
+  T \sim \mathcal{N}\!\left(\textstyle\sum_{i\in RC} t_{e,i},\ \sum_{i\in RC} \sigma_i^2\right)
+\]
+Para calcular probabilidades se estandariza:
+\[
+  z_0 = \frac{t_0 - T}{\sigma_T}, \qquad \sigma_T = \sqrt{\textstyle\sum_{i\in RC}\sigma_i^2}
+\]
+\textbf{Intervalo de confianza} al $(1-\alpha)$: $\;T \pm z_{\alpha/2}\cdot\sigma_T$.
+\end{formulas}
+
+\begin{trampa}{La varianza SOLO suma sobre la ruta crítica}
+$\sigma_T^2$ se calcula sumando las varianzas \textbf{únicamente} de las actividades de la ruta crítica, no de todas. Si una pregunta pide la probabilidad de que \textbf{otra} ruta (no crítica) se vuelva crítica, debes calcular el tiempo y varianza \textbf{de esa ruta} y, asumiendo independencia, $P(\text{esa ruta} > T_{RC})$. Para la probabilidad de que una sea la crítica entre varias, se multiplican las probabilidades (independencia).
+\end{trampa}
+
+\subsection{Modelos tiempo-costo (Crashing)}
+
+\begin{formulas}{Crashing: acortar la ruta crítica al mínimo costo}
+Notación: $NT$ (tiempo normal), $CT$ (tiempo acelerado/crash), $NC$ (costo normal), $CC$ (costo crash). El costo de acelerar por unidad de tiempo (pendiente):
+\[
+  \text{Slope} = \frac{CC - NC}{NT - CT}
+\]
+\textbf{Procedimiento:} (1) preparar diagrama CPM, (2) calcular slope de cada actividad, (3) hallar ruta crítica, (4) \textbf{acortar la actividad crítica de menor slope}, un paso a la vez. ¡Ojo! al acortar, la ruta crítica puede cambiar.
+\end{formulas}
+
+\begin{tipprueba}{Bono y penalización (pregunta clásica de PERT)}
+\textbf{Identificación:} te ofrecen un bono \$$X$ si terminas en $\le t_1$ días y/o penalización \$$Y$ si terminas en $\ge t_2$. \textbf{Qué aplicar:} calcula el \textbf{valor esperado} de cada incentivo: $VE_{\text{bono}} = P(T\le t_1)\cdot X$ y $VE_{\text{pen}} = P(T\ge t_2)\cdot Y$. Aceptas el contrato si $VE_{\text{bono}} > VE_{\text{pen}}$. Para el punto de \textbf{indiferencia}, igualas $VE_{\text{bono}} = P(T\ge t^*) \cdot Y$ y despejas $t^*$ vía la tabla normal.
+\end{tipprueba}
+
+\begin{tipprueba}{Crashing con bono: comparar escenarios por VE neto}
+Cuando el crashing se combina con un bono por terminar antes, no basta con ``minimizar el costo de crashing''. El procedimiento correcto es:
+\begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+  \item Para cada nivel de reducción posible (0, 1, 2, \ldots semanas), identificar la combinación más barata de actividades a acortar en la ruta crítica.
+  \item Para cada escenario, calcular $VE_{\text{neto}} = \text{bono} \cdot P(T < T_{\text{bono}}) - \text{costo de aceleración}$.
+  \item Elegir el escenario con mayor $VE_{\text{neto}}$. ¡Puede ser 0 semanas (no acelerar)!
+  \item \textbf{Verificar rutas alternativas:} tras cada reducción, calcular la duración de las rutas no críticas. Si alguna supera la nueva RC, se convierte en la nueva ruta crítica y debe incluirse en el siguiente paso.
+\end{enumerate}
+\textit{Error frecuente:} resolver directamente ``¿cómo llego de 20 a 18 semanas al mínimo costo?'' sin evaluar si acortar 1 semana en vez de 2 da mayor VE neto.
+\end{tipprueba}
+
+
+\clearpage
+\subsection[Proyectos: PERT y Crashing (Ay. 8)]{Ejercicio de Aplicación: PERT Completo, Crashing y Evaluación de Contrato (Ayudantía 8)}
+
+\begin{ejercicio}{PERT estocástico, IC y crashing de costo mínimo (Ayudantía 8)}
+\begin{tipprueba}{¿Cuándo usar este enfoque?}
+\textbf{Identificación:} te dan actividades, dependencias, y tiempos estimulados (optimista, más probable, pesimista). Piden calcular $t_e$ y $\sigma^2$ por actividad, dibujar diagrama, encontrar ruta crítica, calcular probabilidades normales e intervalos de confianza, y determinar el crashing óptimo.
+\textbf{Qué aplicar:} Fórmulas Beta de PERT, método de ruta crítica (holguras = 0), Teorema Central del Límite para el proyecto ($T_e = \sum_{RC} t_{e,i}$, $\sigma_T^2 = \sum_{RC} \sigma_i^2$), normalización $Z$ y análisis de costo marginal de crashing.
+\end{tipprueba}
+
+\textbf{Enunciado:}
+Se dispone de la relación de dependencia y tiempos (en semanas) de las etapas de un proyecto:
+\begin{center}
+\small
+\begin{tabular}{@{}ccccc@{}}
+  \toprule
+  \textbf{Etapa} & \textbf{Predecesor} & \textbf{Optimista ($a$)} & \textbf{Probable ($m$)} & \textbf{Pesimista ($b$)} \\
+  \midrule
+  A & - & 2 & 3 & 4 \\
+  B & A & 2 & 4 & 6 \\
+  C & A & 5 & 6 & 13 \\
+  D & B, C & 3 & 6 & 9 \\
+  E & B & 2 & 5 & 8 \\
+  F & D, E & 2 & 4 & 6 \\
+  \bottomrule
+\end{tabular}
+\end{center}
+1. Encuentre los tiempos esperados y varianzas de cada actividad.
+2. Obtenga los tiempos ES, EF, LS, LF y holgura para cada etapa. Indique la ruta crítica y duración esperada.
+3. Calcule la probabilidad de terminar en menos de 22 semanas, y el intervalo de confianza al 95\%.
+4. Si el cliente ofrece un bono de \$8.000 al finalizar el proyecto si este se termina en menos de 18 semanas, ¿qué actividades acortaría usando la tabla de costos de crashing?
+\begin{center}
+\small
+\begin{tabular}{@{}cccc@{}}
+  \toprule
+  \textbf{Actividad} & \textbf{Reducción Máx. (semanas)} & \textbf{Costo Normal (\$)} & \textbf{Costo Acelerado (\$)} \\
+  \midrule
+  A & 1 & 10.000 & 13.000 \\
+  B & 1 & 6.000 & 9.000 \\
+  C & 2 & 4.000 & 7.000 \\
+  D & 2 & 13.000 & 18.000 \\
+  E & 2 & 9.000 & 13.000 \\
+  F & 1 & 7.000 & 8.000 \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Solución:}
+
+\textbf{1) Tiempos esperados y varianzas:}
+Usando $t_e = \frac{a+4m+b}{6}$ y $\sigma^2 = \left(\frac{b-a}{6}\right)^2$:
+\begin{itemize}
+  \item \textbf{A:} $t_e = 3$ semanas; $\sigma^2 = 1/9 \approx 0,111$.
+  \item \textbf{B:} $t_e = 4$ semanas; $\sigma^2 = 4/9 \approx 0,444$.
+  \item \textbf{C:} $t_e = 7$ semanas; $\sigma^2 = 16/9 \approx 1,778$.
+  \item \textbf{D:} $t_e = 6$ semanas; $\sigma^2 = 1,0$.
+  \item \textbf{E:} $t_e = 5$ semanas; $\sigma^2 = 1,0$.
+  \item \textbf{F:} $t_e = 4$ semanas; $\sigma^2 = 4/9 \approx 0,444$.
+\end{itemize}
+
+\textbf{2) Tiempos de calendario (Forward and Backward Pass):}
+
+Para calcular los tiempos de calendario de cada actividad, aplicamos recursivamente las siguientes reglas:
+\begin{itemize}
+  \item \textbf{Forward Pass (Tiempos Tempranos):} Recorremos el proyecto desde el inicio hasta el final para determinar el inicio más temprano ($ES$) y el término más temprano ($EF$).
+    \begin{itemize}
+      \item Para actividades sin predecesores (iniciales): $ES = 0$.
+      \item Para cualquier otra actividad $i$: $ES_i = \max_{j} (EF_j)$ de todos sus predecesores inmediatos $j$.
+      \item Término temprano: $EF_i = ES_i + t_e(i)$.
+      \item La duración esperada total del proyecto es $T_e = \max(EF_F) = \mathbf{20\text{ semanas}}$.
+    \end{itemize}
+  \item \textbf{Backward Pass (Tiempos Tardíos):} Recorremos el proyecto de atrás hacia adelante para determinar el término más tardío ($LF$) y el inicio más tardío ($LS$), fijando el tiempo final igual a la duración esperada ($LF_F = T_e = 20$).
+    \begin{itemize}
+      \item Para actividades finales: $LF = T_e$.
+      \item Para cualquier otra actividad $i$: $LF_i = \min_{k} (LS_k)$ de todos sus sucesores inmediatos $k$.
+      \item Inicio tardío: $LS_i = LF_i - t_e(i)$.
+    \end{itemize}
+  \item \textbf{Holguras ($H_i$) y Ruta Crítica:} La holgura total de una actividad representa el margen de retraso disponible sin aplazar el proyecto: $H_i = LF_i - EF_i = LS_i - ES_i$. Aquellas actividades con holgura nula ($H_i = 0$) son las actividades críticas.
+\end{itemize}
+
+El cálculo ordenado se resume en la siguiente tabla de tiempos de calendario:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lcccccccc@{}}
+  \toprule
+  \textbf{Actividad} & \textbf{Predecesores} & \textbf{$t_e$ (sem)} & \textbf{ES} & \textbf{EF} & \textbf{LS} & \textbf{LF} & \textbf{Holgura ($H$)} & \textbf{¿Crítica?} \\
+  \midrule
+  A & --   & 3 & 0  & 3  & 0  & 3  & 0 & Sí \\
+  B & A    & 4 & 3  & 7  & 6  & 10 & 3 & No \\
+  C & A    & 7 & 3  & 10 & 3  & 10 & 0 & Sí \\
+  D & B, C & 6 & 10 & 16 & 10 & 16 & 0 & Sí \\
+  E & B    & 5 & 7  & 12 & 11 & 16 & 4 & No \\
+  F & D, E & 4 & 16 & 20 & 16 & 20 & 0 & Sí \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Ruta Crítica:} \textbf{A - C - D - F}. Duración esperada = \textbf{20 semanas}.
+
+\textbf{3) Probabilidades e Intervalos de Confianza:}
+\begin{itemize}
+  \item Varianza de la duración total ($\sigma_T^2$):
+\end{itemize}
+    $$\sigma_T^2 = \sigma_A^2 + \sigma_C^2 + \sigma_D^2 + \sigma_F^2 = \frac{1}{9} + \frac{16}{9} + 1,0 + \frac{4}{9} = \frac{30}{9} \approx 3,333 \text{ semanas}^2$$
+    $$\sigma_T = \sqrt{3,333} \approx 1,826 \text{ semanas}$$
+\begin{itemize}
+  \item Probabilidad de completar en menos de 22 semanas:
+\end{itemize}
+    $$Z = \frac{22 - 20}{1,826} = 1,095 \approx 1,10 \implies P(Z \le 1,10) = 0,8643 \implies \mathbf{86,43\%}$$
+\begin{itemize}
+  \item Intervalo de confianza del 95\%:
+\end{itemize}
+    $$[20 - 1,96(1,826); \; 20 + 1,96(1,826)] \implies [16,42; \; 23,58] \text{ semanas}$$
+
+\textbf{4) Crashing (Aceleración de Proyecto):}
+Queremos bajar de 20 a 18 semanas (reducción de 2 semanas) al costo mínimo acortando actividades de la ruta crítica:
+\begin{itemize}
+  \item \textbf{A:} Reducción máx 1 sem, costo marginal = \$3.000/semana.
+  \item \textbf{C:} Reducción máx 2 sem, costo marginal = \$1.500/semana.
+  \item \textbf{D:} Reducción máx 2 sem, costo marginal = \$2.500/semana.
+  \item \textbf{F:} Reducción máx 1 sem, costo marginal = \$1.000/semana.
+\end{itemize}
+
+Estrategia de acortamiento óptimo:
+1.  Acortamos \textbf{F} por 1 semana (costo = \$1.000). Duración baja a 19 semanas.
+2.  Acortamos \textbf{C} por 1 semana (costo = \$1.500). Duración baja a 18 semanas.
+\begin{itemize}
+  \item Costo de crashing total = \$2.500.
+  \item \textit{Decisión:} Conviene acortar \textbf{F por 1 semana y C por 1 semana}, obteniendo una ganancia neta de \$8.000 - \$2.500 = \$5.500.
+\end{itemize}
+\end{ejercicio}
+
+\subsection{Last Planner (planificación operativa)}
+
+\begin{definicion}{El Último Planificador (Ballard, 2000)}
+El gran problema operativo: ``nunca resulta exactamente lo planificado'' (variabilidad + errores). El \textbf{Last Planner} cambia la visión \textit{push} por \textit{pull} e incorpora pasos intermedios: análisis de restricciones, compromisos entre las partes, mantener trabajos ``por hacer'' (\textit{lookahead}) y retroalimentación. Lógica: \textbf{Puede $\to$ Debe $\to$ Hace}. Lleva la planificación a la realidad: \textit{Planificación $\to$ Restricciones $\to$ Variabilidad}.
+\end{definicion}
+
+\subsection{V/F frecuentes de Proyectos}
+
+\begin{center}
+\small
+\begin{tabular}{@{}clp{10.5cm}@{}}
+  \toprule
+  $\#$ & R & Afirmación y corrección \\
+  \midrule
+  1 & \textbf{V} & ``Las actividades de la ruta crítica tienen holgura cero.'' \\
+  2 & \textbf{F} & ``La varianza del proyecto es la suma de las varianzas de todas las actividades.'' --- Falso: solo las de la \textbf{ruta crítica}. \\
+  3 & \textbf{F} & ``Acortar cualquier actividad reduce la duración del proyecto.'' --- Falso: solo acortar actividades de la \textbf{ruta crítica} (y hasta que cambie la RC). \\
+  4 & \textbf{V} & ``En PERT el tiempo esperado de una actividad no coincide con el tiempo más probable $m$.'' \\
+  5 & \textbf{F} & ``Una pseudo-actividad consume recursos y tiene duración positiva.'' --- Falso: duración 0 y no consume recursos. \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ════════════════════════════════════════════════════════════════════════════
+
+

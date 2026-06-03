@@ -1,0 +1,281 @@
+
+Pontificia Universidad Católica de Chile
+Escuela de Ingeniería
+Departamento de Ingeniería Industrial y de Sistemas
+
+
+
+
+
+	
+
+
+Interrogación 2
+Enunciados
+
+ICS 3213 Gestión de Operaciones
+1er semestre 2025
+
+
+Instrucciones:
+
+Responder en letra legible, en lápiz pasta o bolígrafo y poner nombre a todas las hojas.
+
+No debe des corchetear la prueba y responda en el espacio asignado.
+
+Esta sección de la prueba tiene 60 puntos, dura 60 minutos.
+
+Se leerá la prueba al comienzo de clases y después se permitirán preguntas en voz alta. Posteriormente en la mitad de la prueba se volverá a permitir preguntas en voz alta. No se permitirán preguntas fuera de estos intervalos. Si su duda persiste indique el supuesto y continúe.
+
+Al final de la prueba los alumnos deberán subir su prueba a CANVAS. Dispondrán de 15 minutos para escanear pruebas hoja por hoja y subirlas. Al final de subir la prueba deberán dejarla en el mismo puesto. Si por alguna razón hay un problema al subir la prueba, avisen al profesor/ayudante y dejen su prueba.
+
+Este curso adscribe el Código de Honor establecido por la Escuela de Ingeniería el que es vinculante. Todo trabajo evaluado en este curso debe ser propio. En caso de que exista colaboración permitida con otros estudiantes, el trabajo deberá referenciar y atribuir correctamente dicha contribución a quien corresponda. Como estudiante es su deber conocer la versión en línea del Código de Honor  (http://ing.puc.cl/codigodehonor).  
+
+
+
+
+¡Muy Buena Suerte!
+PARTE DESARROLLO: Responda todas las siguientes preguntas de ejercicio. 
+Pregunta 1.- (20 puntos) Usted es el Gerente de Operaciones de una empresa que fabrica un solo producto en varias plantas distribuidas en diferentes regiones. Debe planificar la producción para las siguientes T semanas. La demanda semanal de cada cliente i para cada semana t está dada por . Esta demanda debe ser satisfecha a lo largo del horizonte de planificación T, o tendrá una penalización de  por unidad insatisfecha.
+La producción puede realizarse en cualquiera de las N plantas, pero cada vez que una planta comienza a operar después de estar inactiva, incurre en un costo fijo de activación . Si la planta se usa por semanas consecutivas, este costo sólo se paga una vez. Si se deja de operar por un periodo de tiempo y se vuelve a utilizar más adelante, el costo de activación se paga nuevamente. Cada planta tiene trabajadores con una capacidad de horas normales por semana , y puede utilizar hasta  horas extra por semana a un costo adicional  por cada hora adicional. Cada planta tiene una productividad de  unidades por hora. El costo de producción por unidad en planta n es -.
+Cada unidad producida debe enviarse a algún cliente i, y el costo de envío por unidad desde la planta n al cliente i es . Se puede mantener inventario en cada planta con un costo de almacenamiento semanal  por unidad. El inventario inicial es de  y al final del periodo de planificación se debe terminar con  en cada planta.
+
+(12 puntos) Con esta información construya un modelo de programación matemática que permita determinar la planificación de producción. En su respuesta indique: las variables de decisión del modelo, la función objetivo y las restricciones. Si necesita de algún parámetro o conjunto adicional, indíquelo claramente.
+ii)	(5 puntos) Modifique el modelo anterior para que cumpla con las siguientes condiciones adicionales:
+
+- Si una planta se activa en una semana, debe operar al menos un turno completo (40 horas normales por semana).
+- La producción en una planta solo es rentable si se fabrican al menos  unidades en esa semana. Es decir, si se decide producir, debe ser por lo menos ese mínimo.
+- Por políticas de servicio al cliente, la empresa solo permite que se deje sin entregar o insatisfecha a lo más el  porcentaje de la demanda del cliente i durante el horizonte de planificación T.
+iii)	(3 puntos) Si  es el pronóstico de ventas parea cliente i para cada semana t y usted dispone de un intervalo de confianza al 90% de las ventas dado por [ siendo  el intervalo inferior e intervalo superior de ventas parea cliente i para cada semana t, respectivamente. ¿Cómo incorporaría esta información en la planificación? Indique paso a paso como lo haría (NO desarrolle el modelo, sólo explique) ¿Cómo puede cambiar su decisión? Incluya los conceptos de caso pesimista, caso esperado y caso optimista en su respuesta.
+  
+
+i) 
+
+
+
+
+
+
+
+
+
+
+
+
+ii) 
+
+
+
+
+
+
+
+iii) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pregunta 2.- (20 puntos) Usted está a cargo del siguiente proyecto, que se compone por 6 actividades. A continuación, se detalla para cada actividad: sus precedentes, tiempo esperado de término en días y desviación estándar en días. Haga sus cálculos al cuarto decimal.
+
+
+(5 ptos.) Construya el diagrama de PERT del proyecto y determine la ruta crítica.
+(3 ptos.) Construya un intervalo de confianza para el tiempo de término del proyecto al 95%.
+(5 ptos.) Su contraparte le ofrece un bono de $150 si termina en o antes de 28 días y una penalidad de $50 si en o después de 31 días. ¿Acepta o no el contrato? Justifique sus cálculos. ¿Qué fecha (días) en la penalidad lo deja indiferente?
+(7 ptos.) Determine todas las posibles secuencias o camino de actividades entre el inicio del proyecto y su término que no son parte de la ruta crítica. Para cada ruta o secuencia determine su tiempo esperado de término y su varianza. Suponiendo independencia en los tiempos de término de cada ruta, seleccione una de las rutas y determine la probabilidad de que se demore más que la ruta crítica determinada en i, es decir, que se transforme en crítica. 
+i) 
+
+ Ruta Critica: B-E-F
+
+
+
+ii.- Varianza Ruta Critica: 1^2+1^2+0.4^2=2.16
+LS = 30+1.96*Raiz(2.16)= 32.8806
+LI = 30 -1.96*Raiz(2.16)= 27.1194
+
+
+iii.-  
+
+z=(28-30)/raíz(2.16)= -1.3608  P() = 1-0.9131 = 0.0869  0.0869*150 = $ 13.035  VE Bono
+
+z=(31-30)/raíz(2.16)= 0.6804  P() = 1-0.7517 = 0.2483  0.2483*50 = $ 12.415  VE Penalidad Acepto el contrato
+
+Indiferente 13.035 = P()*50  P() = 0.2607  Z(0.7393) = 0.64  Val = 30+0.64*Raiz(2.16) = 30.9406 Dias
+
+iv) 
+
+Debemos obtener los tiempo, varianzas y probabilidades de terminar en cada ruta en o después de 30 días. Como se supone la independencia de cada ruta se debe obtener el tiempo total de cada ruta, su varianza y la probabilidad.
+
+
+
+Para el calculo de la probabilidad que sea critica, nuevamente dada la independencia, se calcula la probabilidad de que una ruta demore más de 30 días y el resto menos de 30 días. Dado que es conjunta la probabilidad de multiplica. Por ende la probabilidad es:
+
+
+
+C-E-F = 0.9204 %
+A-D = 3,4339 %
+B-D = 1.6717 %
+Se debe indicar solo 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pregunta 3.- (20 puntos) Una empresa fabrica un producto que ensambla a partir de: 1 unidad del producto A, dos unidades del producto B y 1 unidad del producto C. A su vez el producto A requiere una unidad del insumo A1 y dos del insumo A2, mientras que el producto B requiere una unidad del insumo A1 y una unidad del insumo B2.
+El tiempo de entrega de cada producto y sus componentes es de 2 semanas, pero el ensamblaje del producto final se demora sólo una semana.
+La empresa pronostica que la demanda del producto final para las próximas 8 semanas es:
+
+
+	
+(5 ptos) Dibuje un árbol que represente la Lista de Materiales (Bill of Materials o BOM).
+(7 ptos) Considere que el inventario disponible de producto final es de 50 unidades y ya se ha iniciado la producción de un lote de 20 unidades del producto final que estará disponible para su uso en la semana 2. Determine la matriz de MRP para el producto final, esto es, calcule el requerimiento neto para el producto final y las órdenes programadas para cada semana, considerando que los lotes se determinan usando la heurística de Lote a Lote (L4L).
+(8 ptos) Considere que la demanda por la parte A1 es la siguiente: 
+
+
+
+Asumiendo que el costo de set up (poner en marcha la producción de un lote) es de $120 y que el costo de mantener inventario es de $0.9 por unidad por semana. Use el método heurístico de Silver-Meal para calcular los lotes óptimos del ítem A1, e indique los costos totales de esta política.
+
+
+i) 
+
+
+ii) 
+
+
+
+
+
+iii) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tabla de distribución normal estándar.  La tabla de normalidad es simétrica. Por ende P (Z > -x) = P (Z < x).
+
+Formulario
+     
+   
+
+
+ 
+Actividad	Precedentes	T. Esperado (Días)	Desv Est. (Días)
+A	-	13	0.5
+B	-	12	1
+C	-	9	1
+D	A, B	14	2
+E	B, C	12	1
+F	E	6	0.4
+z	0.00	.01	.02	.03	.04	.05	.06	.07	.08	.09
+0.0	.5000	.5040	.5080	.5120	.5160	.5199	.5239	.5279	.5319	.5359
+0.1	.5398	.5438	.5478	.5517	.5557	.5596	.5636	.5675	.5714	.5753
+0.2	.5793	.5832	.5871	.5910	.5948	.5987	.6026	.6064	.6103	.6141
+0.3	.6179	.6217	.6255	.6293	.6331	.6368	.6406	.6443	.6480	.6517
+0.4	.6554	.6591	.6628	.6664	.6700	.6736	.6772	.6808	.6844	.6879
+0.5	.6915	.6950	.6985	.7019	.7054	.7088	.7123	.7157	.7190	.7224
+0.6	.7257	.7291	.7324	.7357	.7389	.7422	.7454	.7486	.7517	.7549
+0.7	.7580	.7611	.7642	.7673	.7704	.7734	.7764	.7794	.7823	.7852
+0.8	.7881	.7910	.7939	.7967	.7995	.8023	.8051	.8078	.8106	.8133
+0.9	.8159	.8186	.8212	.8238	.8264	.8289	.8315	.8340	.8365	.8389
+1.0	.8413	.8438	.8461	.8485	.8508	.8531	.8554	.8577	.8599	.8621
+1.1	.8643	.8665	.8686	.8708	.8729	.8749	.8770	.8790	.8810	.8830
+1.2	.8849	.8869	.8888	.8907	.8925	.8944	.8962	.8980	.8997	.9015
+1.3	.9032	.9049	.9066	.9082	.9099	.9115	.9131	.9147	.9162	.9177
+1.4	.9192	.9207	.9222	.9236	.9251	.9265	.9279	.9292	.9306	.9319
+1.5	.9332	.9345	.9357	.9370	.9382	.9394	.9406	.9418	.9429	.9441
+1.6	.9452	.9463	.9474	.9484	.9495	.9505	.9515	.9525	.9535	.9545
+1.7	.9554	.9564	.9573	.9582	.9591	.9599	.9608	.9616	.9625	.9633
+1.8	.9641	.9649	.9656	.9664	.9671	.9678	.9686	.9693	.9699	.9706
+1.9	.9713	.9719	.9726	.9732	.9738	.9744	.9750	.9756	.9761	.9767
+2.0	.9772	.9778	.9783	.9788	.9793	.9798	.9803	.9808	.9812	.9817
+2.1	.9821	.9826	.9830	.9834	.9838	.9842	.9846	.9850	.9854	.9857
+2.2	.9861	.9864	.9868	.9871	.9875	.4878	.9881	.9884	.9887	.9890
+2.3	.9893	.9896	.9898	.9901	.9904	.9906	.9909	.9911	.9913	.9916
+2.4	.9918	.9920	.9922	.9925	.9927	.9929	.9931	.9932	.9934	.9936
+2.5	.9938	.9940	.9941	.9943	.9945	.9946	.9948	.9949	.9951	.9952
+2.6	.9953	.9955	.9956	.9957	.9959	.9960	.9961	.9962	.9963	.9964
+2.7	.9965	.9966	.9967	.9968	.9969	.9970	.9971	.9972	.9973	.9974
+2.8	.9974	.9975	.9976	.9977	.9977	.9978	.9979	.9979	.9980	.9981
+2.9	.9981	.9982	.9982	.9983	.9984	.9984	.9985	.9985	.9986	.9986
+3.0	.9987	.9987	.9987	.9988	.9988	.9989	.9989	.9989	.9990	.9990
+3.1	.9990	.9991	.9991	.9991	.9992	.9992	.9992	.9992	.9993	.9993
+3.2	.9993	.9993	.9994	.9994	.9994	.9994	.9994	.9995	.9995	.9995

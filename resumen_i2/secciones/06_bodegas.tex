@@ -1,0 +1,67 @@
+\section{Módulo 5: Bodegas, Centros de Distribución y Decisiones Estratégicas}
+
+\subsection{Logística y centros de distribución}
+
+\begin{definicion}{Logística y el rol del CD}
+\textbf{Logística:} tener el producto/servicio preciso, en el lugar preciso, en el momento preciso, al costo mínimo. El \textbf{tiempo para completar una orden} tiene tres ventanas: recepción de órdenes, procesamiento y transporte. El gran \textbf{trade-off} de bodegas y CD es \textbf{Tiempo vs.\ Espacio}.
+\end{definicion}
+
+\begin{definicion}{Beneficios de un Centro de Distribución}
+\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
+  \item \textbf{Consolidación geográfica:} reduce costos de transporte (menos arcos: con centro \$10 vs.\ sin centro \$25).
+  \item \textbf{Consolidación temporal} de la demanda.
+  \item \textbf{Agregar valor / servicios:} ensamblaje, \textit{postponement} (DELL), etiquetado (vinos), kitting, control aduanero.
+  \item \textbf{Logística reversa} (Ley REP en Chile).
+\end{itemize}
+Costos: infraestructura y personal. Decisiones: externalizar (construir/dueño vs.\ \textbf{3PL}), localización, tipo (\textit{cross-dock} vs.\ bodega), tamaño.
+\end{definicion}
+
+\subsection{Postponement y Risk Pooling}
+
+\begin{definicion}{Postponement (postergación)}
+Retrasar la diferenciación del producto hasta el último momento posible reduce el inventario. \textbf{Ejemplo:} 4 procesadores $\times$ 4 memorias $\times$ 4 tarjetas = 64 PC terminados $\Rightarrow$ con 10 c/u son 640 en inventario. Si \textbf{postpongo} el ensamble: $4\times10 + 4\times10 + 4\times10 = 120$ componentes en inventario con el \textbf{mismo} nivel de servicio.
+\end{definicion}
+
+\begin{definicion}{Risk Pooling (agregación de riesgo)}
+Centralizar el inventario de varios mercados reduce la variabilidad relativa (CV) de la demanda agregada, bajando el stock de seguridad total. La reducción es mayor mientras \textbf{menos correlacionadas} estén las demandas. Conecta con \textbf{Newsvendor / SS} de la I1.
+\end{definicion}
+
+\subsection{Análisis de flujo y localización}
+
+\begin{formulas}{Ley de flujo en bodegas ($Q = A\cdot v$)}
+\[
+  Q = A \times v
+\]
+$Q$ = caudal/volumen (capacidad de mover inventario, rotación), $A$ = área/tamaño de bodega en unidades, $v$ = velocidad de flujo o rotación (unidades/tiempo). Sirve para dimensionar bodegas: dada la demanda anual y la capacidad, se despeja la rotación $v$ y de ahí el personal/montacargas requerido.
+\end{formulas}
+
+\begin{formulas}{Localización: modelo de distancia euclidiana}
+Minimizar la suma ponderada de distancias a instalaciones existentes:
+\[
+  \min f(X) = \sum_{i=1}^{m} w_i\, d(X, P_i), \qquad
+  d(X,P_i) = 111\sqrt{(x-a_i)^2 + (y-b_i)^2}\ \text{[km, con lat/long]}
+\]
+Factor $111$ km $\approx 69$ millas por grado. Para optimizar se usa la versión cuadrática (centro de gravedad). También existe distancia \textbf{Manhattan} (rectilínea).
+\end{formulas}
+
+\subsection{V/F frecuentes de Bodegas/CD}
+
+\begin{center}
+\small
+\begin{tabular}{@{}clp{10.5cm}@{}}
+  \toprule
+  $\#$ & R & Afirmación y corrección \\
+  \midrule
+  1 & \textbf{V} & ``El postponement reduce el inventario manteniendo el mismo nivel de servicio.'' \\
+  2 & \textbf{F} & ``El risk pooling funciona mejor cuando las demandas están muy correlacionadas.'' --- Falso: funciona mejor con demandas \textbf{poco correlacionadas / independientes}. \\
+  3 & \textbf{V} & ``Un centro de distribución reduce el costo de transporte por consolidación geográfica.'' \\
+  4 & \textbf{F} & ``Un cross-dock almacena inventario por largos períodos.'' --- Falso: el cross-dock \textbf{minimiza} el almacenaje (recibe y despacha rápido). \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ════════════════════════════════════════════════════════════════════════════
+
+
+
+% ════════════════════════════════════════════════════════════════════════════
