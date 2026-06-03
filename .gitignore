@@ -16,3 +16,10 @@
 
 # Claude / AI tools
 .claude/skills/agy
+
+# Specific files to ignore
+CHANGELOG.md
+CLAUDE.md
+ayudantia_8_transcripcion_solucion.md
+estudio_i2.pdf
+temario.md
