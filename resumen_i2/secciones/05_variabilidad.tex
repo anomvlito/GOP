@@ -116,6 +116,9 @@ Los clientes tienen una función de costo de espera total $CE(W) = 100 + W$, don
 \begin{itemize}
   \item \textbf{Función de costo total a minimizar ($f(\Delta)$):}
 \end{itemize}
+    \begin{quotation}
+    \small \textit{\textbf{Nota intuitiva:} ¿De dónde sale esta función? La imprenta busca minimizar la suma de sus dos ``fugas de dinero'' por hora: (1) La plata que deja de ganar por los descuentos ($\lambda \times \Delta$), y (2) El costo o castigo social de tener a los clientes esperando en la fila ($\lambda \times CE(W)$). ¡Por eso simplemente se suman!}
+    \end{quotation}
     $$\min_{\Delta} \quad f(\Delta) = \lambda(\Delta) \cdot \Delta + \lambda(\Delta) \cdot CE(W(\Delta))$$
     $$\min_{\Delta} \quad f(\Delta) = \lambda_0 e^{-\Delta} \left[ \Delta + 100 + \left( \frac{c_a^2 + c_e^2}{2} \right) \left( \frac{\lambda_0 e^{-\Delta}}{\mu(\mu - \lambda_0 e^{-\Delta})} \right) + \frac{1}{\mu} \right]$$
 \begin{itemize}
@@ -127,8 +130,11 @@ Los clientes tienen una función de costo de espera total $CE(W) = 100 + W$, don
 \begin{itemize}
   \item \textbf{Condiciones de Primer Orden (CPO):}
 \end{itemize}
+    \begin{quotation}
+    \small \textit{\textbf{Nota matemática:} La expresión de abajo sale de aplicar la \textbf{Regla del Producto} a la función objetivo $f(\Delta) = u \cdot v$, donde $u = \lambda(\Delta)$ y $v = [\Delta + 100 + W(\Delta)]$. Su derivada es $u'v + uv'$. Recuerda que al derivar $u = \lambda_0 e^{-\Delta}$, baja un signo menos, quedando $u' = -\lambda_0 e^{-\Delta} = -\lambda(\Delta)$.}
+    \end{quotation}
     Derivando la función objetivo $f(\Delta)$ con respecto a $\Delta$ e igualando a cero:
-    $$\frac{df}{d\Delta} = 0 \implies -\lambda(\Delta) \left[ \Delta + 100 + W(\Delta) \right] + \lambda(\Delta) \left[ 1 + \frac{dW}{d\Delta} \right] = 0$$
+    $$\frac{df}{d\Delta} = 0 \implies \underbrace{-\lambda(\Delta)}_{u'} \underbrace{\left[ \Delta + 100 + W(\Delta) \right]}_{v} + \underbrace{\lambda(\Delta)}_{u} \underbrace{\left[ 1 + \frac{dW}{d\Delta} \right]}_{v'} = 0$$
     Simplificando por $\lambda(\Delta)$ (dado que $\lambda(\Delta) > 0$):
     $$W(\Delta) + 100 + \Delta - 1 - \frac{dW}{d\Delta} = 0$$
     Donde la derivada del tiempo de espera es:
