@@ -1,0 +1,69 @@
+\subsection{Solucion desarrollada}
+
+\begin{respuesta}{Kanbans base}
+La demanda por minuto es:
+\[
+d=\frac{22800}{8(60)}=47.5\ \text{unidades/min}.
+\]
+Protegiendo por variacion:
+\[
+d'=47.5(1.05)=49.875\ \text{unidades/min}.
+\]
+Para cada tramo se calcula el tiempo de reposicion relevante:
+\[
+T_{M3}=\frac{100}{120}+2+6=8.833,
+\quad
+T_{M2}=\frac{100}{55}+2+6=9.818,
+\]
+\[
+T_{M1}=\frac{100}{100}+2+6=9.000,
+\quad
+T_P=15+3+10=28.
+\]
+Reemplazando:
+\[
+K_{M3}=\left\lceil\frac{49.875(8.833)}{100}\right\rceil=5,
+\quad
+K_{M2}=\left\lceil\frac{49.875(9.818)}{100}\right\rceil=5,
+\]
+\[
+K_{M1}=\left\lceil\frac{49.875(9.000)}{100}\right\rceil=5,
+\quad
+K_P=\left\lceil\frac{49.875(28)}{100}\right\rceil=14.
+\]
+\end{respuesta}
+
+\begin{respuesta}{Fallas en M1}
+La disponibilidad de M1 es:
+\[
+A=\frac{100}{100+25/60}=0.99585.
+\]
+Entonces su capacidad efectiva es:
+\[
+\mu_{M1,\text{ef}}=100(0.99585)=99.59\ \text{unidades/min}.
+\]
+El tiempo de procesamiento de un lote cambia de \(1.000\) a:
+\[
+\frac{100}{99.59}=1.004\ \text{min}.
+\]
+Ese cambio es marginal y no modifica el redondeo de Kanbans: el tramo de M1 sigue requiriendo \(5\).
+\end{respuesta}
+
+\begin{respuesta}{Defectos de M1}
+Si \(20\%\) sale defectuoso y se detecta despues de M3, la linea completa debe procesar mas unidades:
+\[
+d''=\frac{49.875}{0.8}=62.344\ \text{unidades/min}.
+\]
+Recalculando:
+\[
+K_{M3}=\left\lceil\frac{62.344(8.833)}{100}\right\rceil=6,
+\quad
+K_{M2}=\left\lceil\frac{62.344(9.818)}{100}\right\rceil=7,
+\]
+\[
+K_{M1}=\left\lceil\frac{62.344(9.000)}{100}\right\rceil=6,
+\quad
+K_P=\left\lceil\frac{62.344(28)}{100}\right\rceil=18.
+\]
+El control de calidad debe ubicarse inmediatamente despues de M1, porque ahi se origina el defecto. Si solo detecta y elimina defectuosos, evita costos en M2 y M3 pero mantiene sobreproduccion en M1. Si elimina la causa raiz, el sistema vuelve al caso base de \(5,5,5,14\).
+\end{respuesta}

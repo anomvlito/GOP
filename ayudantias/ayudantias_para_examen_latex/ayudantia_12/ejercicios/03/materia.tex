@@ -1,0 +1,26 @@
+\subsection{Materia necesaria}
+
+\begin{definicion}{Sistema \(G/G/c\)}
+Cuando hay llegadas generales, servicios generales y \(c\) servidores, se puede aproximar la espera con Sakasegawa. Primero se calcula utilizacion:
+\[
+\rho=\frac{\lambda}{c\mu}.
+\]
+Si \(\rho\ge 1\), el sistema no es estable.
+\end{definicion}
+
+\begin{formulas}{Sakasegawa}
+\[
+W_q\approx
+\left(\frac{CV_a^2+CV_s^2}{2}\right)
+\frac{\rho^{\sqrt{2c+2}-1}}{c(1-\rho)\mu}.
+\]
+\end{formulas}
+
+\begin{algoritmo}{Asignacion de capacidad}
+\begin{enumerate}
+    \item Convertir demanda de cada bloque a tasa horaria \(\lambda_b\).
+    \item Calcular \(\mu\) por taxi.
+    \item Calcular \(\rho_b\); si supera 1, falta capacidad.
+    \item Para una meta de utilizacion, despejar \(c_b\ge \lambda_b/(\rho^*\mu)\).
+\end{enumerate}
+\end{algoritmo}

@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{fancyhdr}
+
+\title{Ayudantía 9 - Centros de Distribución \\ \Large Solución}
+\author{Gestión de Operaciones (ICS3213)}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Problema 1}
+
+A partir de la información del enunciado, se calculan las métricas operativas del centro de distribución:
+
+\paragraph{a) Tasa de servicio del CD:}
+El CD cuenta con $12$ operadores que trabajan $8$ horas al día, $250$ días al año. 
+El tiempo total disponible por año para todos los operadores es:
+$$ \text{Tiempo total} = 12 \text{ op} \times 8 \frac{\text{horas}}{\text{op}\cdot\text{día}} \times 60 \frac{\text{min}}{\text{hora}} \times 250 \frac{\text{días}}{\text{año}} = 1.440.000 \text{ min/año} $$
+Dado que la tasa de servicio individual es de $9$ minutos por pallet, la tasa de servicio anual del CD es:
+$$ R = \frac{1.440.000 \text{ min/año}}{9 \text{ min/pallet}} = 160.000 \text{ pallets/año} $$
+
+\paragraph{b) Capacidad de pallets del CD:}
+Por la Ley de Little, y asumiendo que el sistema opera a capacidad ($ \lambda = R $), el inventario promedio $L$ se relaciona con la rotación $W = 1,5$ meses. Convirtiendo la rotación a años:
+$$ W = \frac{1,5}{12} = 0,125 \text{ años} $$
+Reemplazando en la ecuación de Little:
+$$ L = R \cdot W = 160.000 \frac{\text{pallets}}{\text{año}} \cdot 0,125 \text{ años} = 20.000 \text{ pallets} $$
+Por lo tanto, la capacidad del CD debe ser de $20.000$ pallets.
+
+\paragraph{c) Área del terreno requerido por el CD:}
+Cada pallet tiene un área base de $1,4 \text{ m} \times 1,2 \text{ m} = 1,68 \text{ m}^2$ y una altura de $1 \text{ m}$.
+Dado que la altura máxima de la bodega es $5 \text{ m}$, es posible apilar hasta $5$ pallets por columna.
+El número de columnas requeridas para almacenar el inventario es:
+$$ \text{Columnas} = \frac{20.000 \text{ pallets}}{5 \text{ pallets/columna}} = 4.000 \text{ columnas} $$
+El área total del terreno para almacenaje (sin pasillos) es:
+$$ \text{Área} = 4.000 \text{ columnas} \times 1,68 \frac{\text{m}^2}{\text{columna}} = 6.720 \text{ m}^2 $$
+
+\paragraph{d) Capacidad en $\text{m}^3$ del CD, sin considerar pasillos:}
+El volumen total requerido corresponde al área de la base por la altura máxima (o la suma del volumen individual de cada pallet):
+$$ \text{Volumen} = 20.000 \text{ pallets} \times (1,4 \times 1,2 \times 1) \text{ m}^3\text{/pallet} = 33.600 \text{ m}^3 $$
+
+\paragraph{e) Ubicación óptima (Centro de Gravedad):}
+Utilizando el método de centro de gravedad, calculamos las coordenadas ponderadas por la demanda de cada ubicación:
+$$ X_{cg} = \frac{\sum D_i X_i}{\sum D_i} = \frac{1000(10) + 1500(30) + 1200(50)}{1000 + 1500 + 1200} = \frac{115.000}{3.700} \approx 31,08 $$
+$$ Y_{cg} = \frac{\sum D_i Y_i}{\sum D_i} = \frac{1000(20) + 1500(40) + 1200(10)}{3700} = \frac{92.000}{3.700} \approx 24,86 $$
+Por lo tanto, la ubicación óptima según este método es la coordenada $(31,08; 24,86)$.
+
+
+\section*{Problema 2}
+
+El pasillo tiene un ancho de $A = 5 \text{ m}$ y el enunciado indica que se ubica "a un solo lado". Esto implica que el pasillo sirve a la fila de pallets en una única dirección (no es compartido con una fila opuesta), por lo tanto todo el ancho $A$ se imputa a la pérdida de espacio por pasillo.
+
+El espacio esperado $E[S]$ para un producto $i$ con lote de reposición $q_i$, apilamiento $z_i$, ancho de cara al pasillo $w = 1,1 \text{ m}$, profundidad $l = 1,3 \text{ m}$ y una profundidad de fila $k$ pallets es:
+$$ E[S_i] = w \left( k l + A \right) \left( \frac{q_i}{z_i k} + \frac{1}{2} \right) $$
+Derivando con respecto a $k$ e igualando a cero para encontrar el óptimo continuo:
+$$ \frac{\partial E[S_i]}{\partial k} = w \left( \frac{l}{2} - \frac{A q_i}{z_i k^2} \right) = 0 \implies k_i^* = \sqrt{\frac{2 A q_i}{z_i l}} $$
+
+\paragraph{a) Profundidad óptima para cada SKU:}
+Reemplazando $A = 5$ y $l = 1,3$:
+\begin{itemize}
+    \item SKU E ($q=29, z=4$): $k_E^* = \sqrt{\frac{10 \cdot 29}{4 \cdot 1,3}} = \sqrt{55,77} = 7,47 \implies k_E \approx 7 \text{ pallets}$.
+    \item SKU F ($q=13, z=7$): $k_F^* = \sqrt{\frac{10 \cdot 13}{7 \cdot 1,3}} = \sqrt{14,28} = 3,78 \implies k_F \approx 4 \text{ pallets}$.
+    \item SKU G ($q=7, z=4$): $k_G^* = \sqrt{\frac{10 \cdot 7}{4 \cdot 1,3}} = \sqrt{13,46} = 3,67 \implies k_G \approx 4 \text{ pallets}$.
+    \item SKU H ($q=15, z=2$): $k_H^* = \sqrt{\frac{10 \cdot 15}{2 \cdot 1,3}} = \sqrt{57,69} = 7,59 \implies k_H \approx 8 \text{ pallets}$.
+\end{itemize}
+
+\paragraph{b) Profundidad óptima global:}
+Si el centro de distribución debe diseñarse con una profundidad única $k_g$ para todos los SKU, la función a minimizar es la suma de los espacios esperados:
+$$ E[S_{total}] = \sum_i w \left( k l + A \right) \left( \frac{q_i}{z_i k} + \frac{1}{2} \right) $$
+Derivando respecto a $k_g$, el óptimo global es:
+$$ k_g^* = \sqrt{ \frac{2 A \sum \left(\frac{q_i}{z_i}\right)}{l \cdot N} } $$
+Calculamos la suma de $\frac{q_i}{z_i}$:
+$$ \sum_{i=1}^4 \frac{q_i}{z_i} = \frac{29}{4} + \frac{13}{7} + \frac{7}{4} + \frac{15}{2} = 7,25 + 1,857 + 1,75 + 7,5 = 18,357 $$
+Reemplazando para $N=4$ SKU:
+$$ k_g^* = \sqrt{ \frac{10 \cdot 18,357}{1,3 \cdot 4} } = \sqrt{\frac{183,57}{5,2}} = \sqrt{35,30} = 5,94 \implies k_g \approx 6 \text{ pallets}. $$
+
+\paragraph{c) Configuración óptima de la bodega:}
+Para optimizar el uso del espacio, comparamos el área esperada entre la asignación individual y la global.
+Utilizando la función de área $ E[S_i] = 1,1 \cdot (1,3 k + 5) \cdot \left( \frac{q_i}{z_i k} + 0,5 \right) $:
+\begin{itemize}
+    \item \textbf{Individual ($k = 7, 4, 4, 8$)}:
+    \begin{align*}
+        E[S_E] &= 1,1 \cdot 14,1 \cdot (29/28 + 0,5) \approx 23,82 \text{ m}^2 \\
+        E[S_F] &= 1,1 \cdot 10,2 \cdot (13/28 + 0,5) \approx 10,82 \text{ m}^2 \\
+        E[S_G] &= 1,1 \cdot 10,2 \cdot (7/16 + 0,5) \approx 10,51 \text{ m}^2 \\
+        E[S_H] &= 1,1 \cdot 15,4 \cdot (15/16 + 0,5) \approx 24,34 \text{ m}^2 
+    \end{align*}
+    Total Individual $= 69,49 \text{ m}^2$.
+
+    \item \textbf{Global ($k = 6$)}:
+    \begin{align*}
+        E[S_E] &= 1,1 \cdot 12,8 \cdot (29/24 + 0,5) \approx 24,05 \text{ m}^2 \\
+        E[S_F] &= 1,1 \cdot 12,8 \cdot (13/42 + 0,5) \approx 11,39 \text{ m}^2 \\
+        E[S_G] &= 1,1 \cdot 12,8 \cdot (7/24 + 0,5) \approx 11,15 \text{ m}^2 \\
+        E[S_H] &= 1,1 \cdot 12,8 \cdot (15/12 + 0,5) \approx 24,64 \text{ m}^2 
+    \end{align*}
+    Total Global $= 71,23 \text{ m}^2$.
+\end{itemize}
+Por lo tanto, la configuración óptima para optimizar el espacio es utilizar \textbf{profundidades individuales} adaptadas a cada SKU, ya que requiere un área total esperada menor ($69,49 \text{ m}^2$ frente a $71,23 \text{ m}^2$).
+
+
+\section*{Problema 3}
+
+\paragraph{a) Problema de optimización:}
+Sea $V_i$ el volumen asignado al SKU $i$, $D_i$ la demanda en cajas por mes, y $v_i$ el volumen por caja.
+El número de restocks mensuales para el SKU $i$ es $\frac{D_i v_i}{V_i}$. 
+El problema busca minimizar el costo total mensual de restock sujeto a la capacidad volumétrica:
+\begin{align*}
+    \min_{V_X, V_Y, V_Z, V_W} \quad & C_r \sum_{i \in \{X,Y,Z,W\}} \frac{D_i v_i}{V_i} \\
+    \text{s.a.} \quad & \sum_{i} V_i \le 1500 \\
+    & V_i \ge 0 \quad \forall i
+\end{align*}
+
+\paragraph{b) Espacio óptimo y frecuencia de restock:}
+Utilizando multiplicadores de Lagrange, la asignación óptima es proporcional a $\sqrt{D_i v_i}$:
+$$ V_i^* = 1500 \cdot \frac{\sqrt{D_i v_i}}{\sum_j \sqrt{D_j v_j}} $$
+Calculamos $D_i$ (Unidades al mes / Unidades por caja) y el producto $D_i v_i$:
+\begin{itemize}
+    \item X: $D_X = 3000 / 20 = 150 \implies D_X v_X = 150 \cdot 3 = 450 \implies \sqrt{450} \approx 21,213$
+    \item Y: $D_Y = 3600 / 24 = 150 \implies D_Y v_Y = 150 \cdot 2 = 300 \implies \sqrt{300} \approx 17,321$
+    \item Z: $D_Z = 2040 / 36 = 56,67 \implies D_Z v_Z = 56,67 \cdot 1,5 = 85 \implies \sqrt{85} \approx 9,220$
+    \item W: $D_W = 1000 / 50 = 20 \implies D_W v_W = 20 \cdot 5 = 100 \implies \sqrt{100} = 10,000$
+\end{itemize}
+La suma de las raíces es $\sum \sqrt{D_i v_i} = 57,754$. Asignando el volumen $1500 \text{ m}^3$ proporcionalmente y calculando la frecuencia $f_i = \frac{D_i v_i}{V_i}$:
+\begin{itemize}
+    \item $V_X = 1500 \cdot \frac{21,213}{57,754} = \mathbf{550,95 \text{ m}^3} \implies f_X = \frac{450}{550,95} = \mathbf{0,817} \text{ restocks/mes}$.
+    \item $V_Y = 1500 \cdot \frac{17,321}{57,754} = \mathbf{449,86 \text{ m}^3} \implies f_Y = \frac{300}{449,86} = \mathbf{0,667} \text{ restocks/mes}$.
+    \item $V_Z = 1500 \cdot \frac{9,220}{57,754} = \mathbf{239,46 \text{ m}^3} \implies f_Z = \frac{85}{239,46} = \mathbf{0,355} \text{ restocks/mes}$.
+    \item $V_W = 1500 \cdot \frac{10}{57,754} = \mathbf{259,72 \text{ m}^3} \implies f_W = \frac{100}{259,72} = \mathbf{0,385} \text{ restocks/mes}$.
+\end{itemize}
+
+\paragraph{c) Configuraciones alternativas:}
+\textbf{1. Igual volumen ($V_i = 1500/4 = 375 \text{ m}^3$ para todo $i$):}
+Las frecuencias serán $f_i = \frac{D_i v_i}{375}$:
+\begin{itemize}
+    \item $f_X = 450 / 375 = \mathbf{1,200 \text{ restocks/mes}}$.
+    \item $f_Y = 300 / 375 = \mathbf{0,800 \text{ restocks/mes}}$.
+    \item $f_Z = 85 / 375 = \mathbf{0,227 \text{ restocks/mes}}$.
+    \item $f_W = 100 / 375 = \mathbf{0,267 \text{ restocks/mes}}$.
+\end{itemize}
+
+\textbf{2. Igual frecuencia de restock:}
+Para que la frecuencia sea constante, el volumen debe ser estrictamente proporcional a $D_i v_i$.
+La frecuencia común $f$ es:
+$$ f = \frac{\sum D_i v_i}{1500} = \frac{450 + 300 + 85 + 100}{1500} = \frac{935}{1500} = \mathbf{0,623 \text{ restocks/mes}} $$
+Los volúmenes asignados ($V_i = \frac{D_i v_i}{f}$) son:
+\begin{itemize}
+    \item $V_X = 450 / 0,623 = \mathbf{721,93 \text{ m}^3}$.
+    \item $V_Y = 300 / 0,623 = \mathbf{481,28 \text{ m}^3}$.
+    \item $V_Z = 85 / 0,623 = \mathbf{136,36 \text{ m}^3}$.
+    \item $V_W = 100 / 0,623 = \mathbf{160,43 \text{ m}^3}$.
+\end{itemize}
+
+
+\section*{Problema 4}
+
+De la tabla se deduce que \textit{Demanda (pallets)} corresponde al volumen de demanda originado por los picks de cajas, mientras que \textit{Demanda pallets completos} representa al volumen originado por picks de pallets completos (cada uno siendo $1$ pick). 
+Dado que se permite efectuar ambos tipos de picks en la zona frontal, el ahorro por cada pick (caja o pallet) es de $c_R - c_F = 2 - 1 = 1 \text{ minuto}$. El costo de restock es $c_r = 3 \text{ minutos/pallet}$.
+La demanda total a reponer en pallets es $D_i = \text{Demanda (pallets)} + \text{Demanda pallets completos}$, y el total de picks es $P_i = \text{Picks} + \text{Demanda pallets completos}$.
+\begin{itemize}
+    \item A: $P_A = 100 + 20 = 120$, $D_A = 8 + 20 = 28$.
+    \item B: $P_B = 100 + 1 = 101$, $D_B = 40 + 1 = 41$.
+    \item C: $P_C = 100 + 20 = 120$, $D_C = 20 + 20 = 40$.
+    \item D: $P_D = 10 + 1 = 11$, $D_D = 1 + 1 = 2$.
+\end{itemize}
+El beneficio neto (BN) de asignar $x$ posiciones (cada una con capacidad de 2 pallets) es:
+$$ BN_i(x) = 1 \cdot P_i - 3 \cdot \frac{D_i}{2x} = P_i - 1,5 \frac{D_i}{x} $$
+
+\paragraph{a) Beneficio en zona frontal (por posición):}
+Asumiendo la asignación mínima feasible (al menos 1 posición, equivalente a 2 pallets, respetando el mínimo para A de 3 pallets, por lo que A requiere 2 posiciones):
+\begin{itemize}
+    \item A ($x=2$): $BN_A(2) = 120 - 1,5(28)/2 = 120 - 21 = \mathbf{99 \text{ min/mes}}$.
+    \item B ($x=1$): $BN_B(1) = 101 - 1,5(41)/1 = 101 - 61,5 = \mathbf{39,5 \text{ min/mes}}$.
+    \item C ($x=1$): $BN_C(1) = 120 - 1,5(40)/1 = 120 - 60 = \mathbf{60 \text{ min/mes}}$.
+    \item D ($x=1$): $BN_D(1) = 11 - 1,5(2)/1 = 11 - 3 = \mathbf{8 \text{ min/mes}}$.
+\end{itemize}
+Dado que todos los beneficios son positivos, conviene ubicar todos los SKU en la zona de picking frontal.
+
+\paragraph{b) Asignación limitada de 10 posiciones:}
+Para maximizar el beneficio bajo 10 posiciones, utilizamos un enfoque marginal. 
+El beneficio marginal de la posición $x$ es $MB_i(x) = BN_i(x) - BN_i(x-1) = 1,5 \frac{D_i}{x(x-1)}$.
+Se asignan primero las \textbf{posiciones mínimas}: 
+A requiere mínimo 3 pallets ($x=2$ posiciones), B requiere $x=1$, C requiere $x=1$, y D requiere $x=1$. Esto consume $5$ posiciones iniciales.
+Restan $5$ posiciones por asignar. Calculamos los beneficios marginales para las siguientes posiciones factibles (D tiene tope de 2 pallets, es decir $x=1$, por lo que no compite más):
+\begin{itemize}
+    \item B ($x=2$): $1,5(41)/(2\cdot 1) = 30,75$
+    \item C ($x=2$): $1,5(40)/(2\cdot 1) = 30,00$
+    \item B ($x=3$): $1,5(41)/(3\cdot 2) = 10,25$
+    \item C ($x=3$): $1,5(40)/(3\cdot 2) = 10,00$
+    \item A ($x=3$): $1,5(28)/(3\cdot 2) = 7,00$
+    \item B ($x=4$): $1,5(41)/(4\cdot 3) = 5,125$
+    \item C ($x=4$): $1,5(40)/(4\cdot 3) = 5,00$
+\end{itemize}
+Las 5 mayores contribuciones marginales son, en orden de selección: $MB_B(2)$, $MB_C(2)$, $MB_B(3)$, $MB_C(3)$ y $MB_A(3)$.
+El \textbf{orden de asignación} de las 10 posiciones en total es:
+\begin{enumerate}
+    \item Asignación de mínimos ($5$ posiciones): 2 para A, 1 para B, 1 para C, 1 para D.
+    \item Posición 6: para B (alcanza 2).
+    \item Posición 7: para C (alcanza 2).
+    \item Posición 8: para B (alcanza 3).
+    \item Posición 9: para C (alcanza 3).
+    \item Posición 10: para A (alcanza 3).
+\end{enumerate}
+
+La \textbf{cantidad de ubicaciones} finales a usar para cada SKU es:
+\begin{itemize}
+    \item \textbf{SKU A}: 3 posiciones (6 pallets, respeta rango [3, 40]).
+    \item \textbf{SKU B}: 3 posiciones (6 pallets, respeta rango [1, $\infty$]).
+    \item \textbf{SKU C}: 3 posiciones (6 pallets, respeta rango [2, 10]).
+    \item \textbf{SKU D}: 1 posición (2 pallets, respeta rango [2, 2]).
+\end{itemize}
+
+\end{document}

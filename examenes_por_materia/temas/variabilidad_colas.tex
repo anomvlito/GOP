@@ -1,0 +1,473 @@
+\section{Variabilidad, Colas y Fallas}
+
+\subsection{M/M/1 y decisiones de llegada}
+
+\begin{materia}{M/M/1}
+Para llegada Poisson y servicio exponencial:
+\[
+  \rho=\frac{\lambda}{\mu}<1,
+\]
+\[
+  L_q=\frac{\rho^2}{1-\rho},\qquad
+  W_q=\frac{\rho}{\mu(1-\rho)},\qquad
+  W_s=\frac{1}{\mu-\lambda}.
+\]
+Aqui $\lambda$ es la tasa media de llegada, $\mu$ es la tasa media de servicio, $\rho$ es la utilizacion del servidor, $L_q$ es el numero esperado de clientes en cola, $W_q$ es el tiempo esperado en cola y $W_s$ es el tiempo esperado total en el sistema.
+\end{materia}
+
+\begin{enunciado}{Examen 2021, tienda de mascotas}
+Usted quiere abrir una tienda de mascotas y desea dar un buen servicio a sus clientes. Usted hace un estudio de mercado y determina que en la zona la tasa de llegada de clientes a la tienda sera de 18 clientes/hora y se distribuye Poisson. Por otro lado, usted tiene una caja que tiene la capacidad de atender a 20 clientes/hora y se distribuye Poisson. Si el tiempo promedio que el cliente se encuentra en la tienda, mirando productos y en la caja, es de 3 minutos. Si por la pandemia, el aforo maximo de la tienda es de 1 cliente adentro:
+
+\begin{enumerate}[label=\alph*)]
+  \item Cuanto tiempo esperan los clientes en la cola afuera?
+  \item Si usted puede hacer un sistema online de reserva de horario, que permita que lleguen los clientes sigan llegando Poisson pero a una tasa definida. Si desea que sus clientes no esperen mas de 15 minutos, cual deberia ser la tasa de llegada de clientes que debe apuntar a tener con el sistema de citas?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2021}
+La caja se modela como una cola M/M/1. Los parametros son:
+\[
+  \lambda=18\ \frac{\text{clientes}}{\text{hora}},
+  \qquad
+  \mu=20\ \frac{\text{clientes}}{\text{hora}}.
+\]
+La utilizacion es:
+\[
+  \rho=\frac{\lambda}{\mu}=\frac{18}{20}=0.9.
+\]
+El tiempo esperado en cola es:
+\[
+  W_q=\frac{\rho}{\mu(1-\rho)}
+  =\frac{0.9}{20(1-0.9)}
+  =\frac{0.9}{2}
+  =0.45\ \text{horas}.
+\]
+En minutos:
+\[
+  0.45\cdot 60=27\ \text{minutos}.
+\]
+Por lo tanto, los clientes esperan en promedio 27 minutos en la cola afuera.
+
+Para el sistema de reservas se quiere:
+\[
+  W_q\leq 15\ \text{minutos}=0.25\ \text{horas}.
+\]
+Con $\mu=20$ y $\lambda$ como variable:
+\[
+  W_q=\frac{\lambda/\mu}{\mu(1-\lambda/\mu)}.
+\]
+Imponiendo igualdad en el limite:
+\[
+  0.25=\frac{\lambda/20}{20(1-\lambda/20)}.
+\]
+Como $20(1-\lambda/20)=20-\lambda$:
+\[
+  0.25=\frac{\lambda}{20(20-\lambda)}.
+\]
+Despejando:
+\[
+  0.25\cdot 20(20-\lambda)=\lambda,
+\]
+\[
+  5(20-\lambda)=\lambda,
+\]
+\[
+  100-5\lambda=\lambda,
+  \qquad
+  100=6\lambda,
+  \qquad
+  \lambda=16.667.
+\]
+La tasa objetivo debe ser aproximadamente:
+\[
+  \lambda^\star=16.67\ \frac{\text{clientes}}{\text{hora}}.
+\]
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2022, marketing y cola}
+Usted ya ha establecido un carro de comida y determina que el costo total de los clientes en el sistema es $CE(W_s)$, depende del tiempo total $W_s$ que estos estan en el sistema y la ecuacion que describe este costo es:
+\[
+  CE(W_s)=10+2000W_s.
+\]
+Actualmente tiene una capacidad de atender a 15 clientes por hora, con un coeficiente de variacion de la atencion igual a 1, la cual no puede variar.
+
+Usted debe decidir la cantidad de dinero a invertir en marketing para atraer clientes y, a su vez, dar un buen servicio. Para ello se realiza un estudio de mercado que indica que por cada \$12 que coloca en marketing, la tasa de llegada de clientes aumenta en 1 cliente por hora. Es decir, si desea tener 10 clientes por hora debera invertir \$120 en marketing. Tambien usted determina que cada cliente atendido le entrega un margen operacional de \$20, que no incluye el costo de marketing.
+
+\begin{enumerate}[label=\roman*.]
+  \item Con esta informacion plantee un modelo de optimizacion que le permita determinar la cantidad optima de marketing que debe implementar en su emprendimiento para tener un buen servicio y atraer a la maxima cantidad de clientes. Hint: un sistema con coeficiente de variacion de arribo y servicio de 1 se comporta como un M/M/1.
+  \item Determine la inversion optima en marketing que debe realizar.
+  \item Si usted puede tambien variar la capacidad de atencion de clientes, como cambia el modelo planteado en i)? Que informacion adicional debe disponer? Con esta informacion plantee el modelo de optimizacion que le permita determinar el valor de estas variables.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2022}
+Como el coeficiente de variacion de llegada y de servicio es 1, se usa el modelo M/M/1:
+\[
+  W_s=\frac{1}{\mu-\lambda},
+  \qquad
+  0\leq \lambda<\mu.
+\]
+La variable de decision natural es $\lambda$, tasa de llegada inducida por marketing. Como cada cliente/hora cuesta \$12 en marketing, el costo de marketing es:
+\[
+  12\lambda.
+\]
+Cada cliente atendido deja margen operacional de \$20, luego el ingreso neto antes de espera es:
+\[
+  20\lambda-12\lambda=8\lambda.
+\]
+La utilidad total se modela como:
+\[
+  \max_\lambda\; 20\lambda-12\lambda-\left(10+2000W_s\right)
+\]
+sujeto a:
+\[
+  W_s=\frac{1}{15-\lambda},
+  \qquad
+  0\leq \lambda<15.
+\]
+Reemplazando $W_s$:
+\[
+  \max_\lambda\; 8\lambda-\left(10+\frac{2000}{15-\lambda}\right),
+  \qquad
+  0\leq \lambda<15.
+\]
+
+Para determinar el optimo, se deriva:
+\[
+  F(\lambda)=8\lambda-10-\frac{2000}{15-\lambda}.
+\]
+\[
+  F'(\lambda)=8-\frac{2000}{(15-\lambda)^2}.
+\]
+La condicion de primer orden es:
+\[
+  8-\frac{2000}{(15-\lambda)^2}=0.
+\]
+Entonces:
+\[
+  (15-\lambda)^2=\frac{2000}{8}=250,
+\]
+\[
+  15-\lambda=\sqrt{250}=15.811.
+\]
+Esto implicaria $\lambda=15-15.811=-0.811$, que no es factible. Por lo tanto, con la funcion escrita literalmente, el objetivo decrece desde el borde y el maximo factible ocurre en:
+\[
+  \lambda^\star=0.
+\]
+
+\textbf{Nota de consistencia.} La pauta transcrita deriva una expresion con $(225-15\lambda)^2$ y reporta $\lambda=13.9$. Ese resultado no se obtiene de $W_s=1/(15-\lambda)$ escrito en la misma pauta. Para estudiar el procedimiento de examen, la estructura correcta es plantear ingreso, costo de marketing, costo de espera y restriccion $\lambda<\mu$. Si se sigue estrictamente la pauta antigua, se reporta la inversion como:
+\[
+  M=12(13.9)=166.8.
+\]
+Si se sigue la formulacion M/M/1 literal, el optimo interior no existe y se debe discutir el borde factible.
+
+Si ahora tambien se puede variar la capacidad de atencion, se agrega $\mu$ como variable de decision y se necesita conocer el costo de capacidad, por ejemplo $C_S$ pesos por cliente/hora de capacidad. El modelo queda:
+\[
+  \max_{\lambda,\mu}\;20\lambda-12\lambda-C_S\mu-\left(10+2000W_s\right)
+\]
+sujeto a:
+\[
+  W_s=\frac{1}{\mu-\lambda},
+  \qquad
+  0\leq \lambda<\mu.
+\]
+Equivalente:
+\[
+  \max_{\lambda,\mu}\;8\lambda-C_S\mu-\left(10+\frac{2000}{\mu-\lambda}\right),
+  \qquad
+  0\leq \lambda<\mu.
+\]
+\end{pautacompleta}
+
+\subsection{Kingman / VUT}
+
+\begin{materia}{G/G/1}
+La aproximacion de Kingman usada en el curso:
+\[
+  CT_q=
+  \left(\frac{C_a^2+C_e^2}{2}\right)
+  \left(\frac{\rho}{1-\rho}\right)t_e,
+\]
+donde $C_a$ es el coeficiente de variacion de llegadas, $C_e$ es el coeficiente de variacion de servicio efectivo, $t_e$ es el tiempo medio de proceso y $\rho=t_e/t_a$ si $t_a$ es el tiempo medio entre llegadas.
+
+La variabilidad de salida aproximada:
+\[
+  C_s^2\simeq \rho^2C_e^2+(1-\rho^2)C_a^2.
+\]
+\end{materia}
+
+\begin{enunciado}{Examen 2023, centro de distribucion G/G/1}
+Usted es el Gerente de Logistica y debe determinar el tamaño del nuevo centro de distribucion de la empresa. Un problema que enfrenta es que la demanda es variable y debe tomar en cuenta esto para definir el tamaño. En una primera etapa usted captura la informacion de la llegada de las ordenes al centro, determinando que distribuye de forma general y que, en promedio, las ordenes llegan cada 3 minutos con un coeficiente de variacion de 0.4.
+
+\begin{enumerate}[label=\alph*)]
+  \item Si la tasa de atencion o capacidad de procesamiento promedio del centro tiene un coeficiente de variacion de 0.2 y distribuye general, cuanto es lo maximo que se debe demorar en promedio pickear la orden, si los pedidos de los clientes no pueden estar en espera mas de 1 hora en promedio en cola para pickeo? Hint: suponga que el sistema se comporta como G/G/1.
+  \item Suponga que decide dejar en 2.6 minutos el tiempo promedio en pickear una orden. Si usted quiere contratar a solo 5 personas en el CD y el tamaño promedio de cada orden es de 1 caja, cada pallet tiene 40 cajas y la demanda promedio es de 5.000 pallets a la semana, cual deberia ser el tamaño optimo, en terminos de pallets, de la bodega para manejar el flujo? Suponga que cada trabajador dispone de 40 horas semanales.
+  \item Si usted determina que puede reducir el tiempo $\Delta$ en minutos desde que el cliente coloca la orden hasta que recibe el producto, y esto genera un beneficio monetario $B$ para la organizacion con rendimientos decrecientes, descrito por $B(\Delta)=Ke^{-\Delta}$ donde $K$ es una constante. Si el costo por almacenar un pallet adicional tiene un costo \$MT por pallet, plantee el problema de programacion matematica u optimizacion que le permitiria obtener el tamaño optimo de la bodega. Indique variables de decision, funcion objetivo y restricciones.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2023}
+Para el inciso a), se usa Kingman:
+\[
+  CT_q=
+  \left(\frac{C_a^2+C_e^2}{2}\right)
+  \left(\frac{\rho}{1-\rho}\right)t_e.
+\]
+Los datos son:
+\[
+  C_a=0.4,\qquad C_e=0.2,\qquad t_a=3\ \text{minutos}.
+\]
+Si $t_e$ es el tiempo medio de pickeo:
+\[
+  \rho=\frac{t_e}{3}.
+\]
+La restriccion es $CT_q=60$ minutos en el limite:
+\[
+  \left(\frac{0.4^2+0.2^2}{2}\right)
+  \left(\frac{t_e/3}{1-t_e/3}\right)t_e=60.
+\]
+Como:
+\[
+  \frac{0.4^2+0.2^2}{2}=\frac{0.16+0.04}{2}=0.1,
+\]
+se obtiene:
+\[
+  0.1\left(\frac{t_e}{3-t_e}\right)t_e=60,
+\]
+\[
+  \frac{t_e^2}{3-t_e}=600.
+\]
+Entonces:
+\[
+  t_e^2=600(3-t_e),
+\]
+\[
+  t_e^2+600t_e-1800=0.
+\]
+La raiz positiva es:
+\[
+  t_e=\frac{-600+\sqrt{600^2+4(1800)}}{2}=2.985\ \text{minutos}.
+\]
+Por lo tanto, el tiempo medio de pickeo debe ser como maximo aproximadamente:
+\[
+  t_e^{\max}=2.985\ \text{minutos por orden}.
+\]
+
+Para el inciso b), hay 5 trabajadores y cada uno dispone de 40 horas semanales:
+\[
+  5\cdot 40\cdot 60=12000\ \text{minutos de trabajador/semana}.
+\]
+Si cada orden demora 2.6 minutos:
+\[
+  \frac{12000}{2.6}=4615.38\ \text{ordenes/semana}.
+\]
+Cada orden es de 1 caja y cada pallet tiene 40 cajas, luego:
+\[
+  \frac{4615.38}{40}=115.38\ \text{pallets/semana}.
+\]
+Usando la relacion de flujo:
+\[
+  q=A\cdot v.
+\]
+El caudal requerido es $q=5000$ pallets/semana y la velocidad es $v=115.38$ pallets/semana por unidad de inventario equivalente. Por lo tanto:
+\[
+  A=\frac{5000}{115.38}=43.33.
+\]
+Se redondea a:
+\[
+  A=44\ \text{pallets}.
+\]
+
+Para el inciso c), las variables de decision de la pauta son:
+\[
+  t_n=\text{nuevo tiempo de espera del cliente},
+  \qquad
+  BA=\text{pallets adicionales en bodega}.
+\]
+La funcion objetivo propuesta es:
+\[
+  \max\; K e^{-(60-t_n)}-MT\cdot BA.
+\]
+Las restricciones son:
+\[
+  \left(\frac{0.4^2+0.2^2}{2}\right)
+  \left(\frac{t/3}{1-t/3}\right)t=t_n,
+\]
+\[
+  t_n\leq 60,
+\]
+\[
+  5000=(50+BA)\left(\frac{5\cdot 40\cdot 60}{t}\cdot \frac{1}{40}\right),
+\]
+\[
+  BA\geq 0,\qquad t_n\geq 0.
+\]
+La interpretacion es que aumentar la bodega en $BA$ pallets cambia la capacidad de manejar flujo y, por medio del tiempo $t$, afecta la espera del cliente. El beneficio decreciente por reducir tiempo se equilibra contra el costo de pallets adicionales.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2020, optimizar capacidad del cuello de botella}
+Se le ha encomendado determinar la capacidad optima del cuello de botella de un proceso productivo. El proceso se caracteriza por dos maquinas en serie: M1 y CB, en que CB es el cuello de botella, y el producto pierde calidad desde que entra al proceso en M1 hasta que este no es ingresado a la maquina cuello de botella.
+
+\[
+  \text{M1 (Capacidad: CM1 min/unid)}
+  \rightarrow
+  \text{Espera}
+  \rightarrow
+  \text{CB (Capacidad: CCB min/unid)}.
+\]
+
+Si por cada minuto que el producto espera a ser procesado por CB, tanto en proceso en M1 como en la cola de espera, se pierden $CE$ pesos por minuto. Por otro lado, M1 requiere de $CM1$ minutos para terminar cada trabajo, con una distribucion general del proceso y con un coeficiente de variacion $VM1$. La maquina cuello de botella tiene una capacidad inicial de $CCB$ min/unidad, pero se puede reducir el tiempo de procesamiento a un costo lineal $ICB$ pesos por cada minuto reducido. El CB tiene una distribucion general del proceso y un coeficiente de variacion del proceso $VCB$, independiente de la capacidad. Si el tiempo medio de llegada entre las ordenes al proceso es de $LL$ minutos entre orden, distribuidos general y con un coeficiente de variacion $VLL$, construya un modelo de optimizacion que permita determinar la capacidad optima del cuello de botella.
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2020}
+La variable de decision principal es:
+\[
+  CMR=\text{minutos reducidos al tiempo de procesamiento de CB}.
+\]
+Tambien se usa:
+\[
+  T_q=\text{tiempo de espera entre M1 y CB}.
+\]
+El nuevo tiempo medio de proceso del cuello de botella es:
+\[
+  CCB-CMR.
+\]
+La funcion objetivo minimiza perdida de calidad e inversion en reduccion de capacidad:
+\[
+  \min\; CE(T_q+CM1)+ICB\cdot CMR.
+\]
+La espera se modela con VUT/Kingman:
+\[
+  T_q=(CCB-CMR)
+  \left(\frac{\rho}{1-\rho}\right)
+  \left(\frac{CV_{M1}^2+VCB^2}{2}\right).
+\]
+La utilizacion del cuello de botella es:
+\[
+  \rho=\frac{CCB-CMR}{LL}.
+\]
+La variabilidad que sale de M1 se aproxima mediante propagacion de variabilidad:
+\[
+  CV_{M1}^2=VM1^2\rho_1^2+VLL^2(1-\rho_1^2),
+\]
+donde:
+\[
+  \rho_1=\frac{CM1}{LL}.
+\]
+La reduccion debe ser factible:
+\[
+  0\leq CMR<CCB.
+\]
+Ademas, para estabilidad del cuello:
+\[
+  \rho<1
+  \quad\Leftrightarrow\quad
+  CCB-CMR<LL.
+\]
+El modelo completo queda:
+\[
+\begin{aligned}
+\min_{CMR,T_q}\quad & CE(T_q+CM1)+ICB\cdot CMR\\
+\text{s.a.}\quad
+&T_q=(CCB-CMR)
+  \left(\frac{\rho}{1-\rho}\right)
+  \left(\frac{CV_{M1}^2+VCB^2}{2}\right),\\
+&CV_{M1}^2=VM1^2\rho_1^2+VLL^2(1-\rho_1^2),\\
+&\rho=\frac{CCB-CMR}{LL},\\
+&\rho_1=\frac{CM1}{LL},\\
+&0\leq CMR<CCB,\\
+&\rho<1.
+\end{aligned}
+\]
+\end{pautacompleta}
+
+\subsection{Fallas y disponibilidad}
+
+\begin{materia}{disponibilidad y variabilidad efectiva}
+Para una maquina reparable:
+\[
+  A=\frac{MTTF}{MTTF+MTTR}.
+\]
+El curso usa una correccion de variabilidad efectiva:
+\[
+  C_e^2=C_0^2+(1+C_r^2)A(1-A)\frac{MTTR}{t_0},
+\]
+donde $C_0$ es el coeficiente de variacion del proceso sin fallas, $C_r$ es el coeficiente de variacion de reparacion, $t_0$ es el tiempo medio nominal de proceso, $MTTF$ es el tiempo medio entre fallas y $MTTR$ es el tiempo medio de reparacion.
+\end{materia}
+
+\begin{enunciado}{Examen 2024, perfiladoras}
+Usted esta realizando su trabajo de titulo en una empresa metalmecanica encargada de fabricar perfiles de aluminio para la construccion de edificios. Para la construccion de los perfiles, que son de 1.5 metros de largo, la empresa compra rollos de aluminio de 150 metros de largo, que por diseño tienen el ancho justo para los perfiles. Los rollos de aluminio son cortados en trozos de 1.5 metros que se dejan como inventario en proceso para entrar a la maquina que fabrica los perfiles. La perfiladora recibe uno de los trozos de 1.5 mt de la estacion anterior y procede a fabricar el perfil.
+
+El proceso para fabricar el perfil implica introducir la hoja de aluminio y calentar el metal a $200^\circ C$, doblandolo para crear el perfil y pasarlo a la estacion de trabajo siguiente. El tiempo que demora en llevar el metal a esa temperatura depende de las condiciones ambientales, lo que implica variabilidad en el tiempo que demora en fabricar cada perfil. Se toman mediciones del proceso y en promedio demora 12 minutos, con una desviacion estandar de 2 minutos.
+
+\begin{enumerate}[label=\alph*)]
+  \item Calcule el coeficiente de variabilidad del tiempo de flujo de cada perfil en esta maquina.
+\end{enumerate}
+
+Se ha decidido invertir en una nueva maquina perfiladora, que sea mas moderna para poder fabricar en forma mas eficiente y rapido. La nueva maquina identificada demora en promedio 10 minutos en fabricar cada perfil, con una desviacion estandar de 100 segundos.
+
+\begin{enumerate}[label=\alph*),resume]
+  \item Calcule el coeficiente de variabilidad del tiempo de produccion de cada perfil en la nueva maquina.
+\end{enumerate}
+
+La maquina original, dada su edad, tiene un tiempo medio entre fallas de 57 horas, con un tiempo de reparacion promedio de 19 horas dada su simplicidad. Por otro lado, la nueva maquina posee un tiempo medio entre fallas de 372 horas, muy superior a la maquina antigua. Dada su complejidad, cuando falla es necesario traer un tecnico para repararla, lo cual implica un tiempo medio de reparacion de 124 horas. Considere que todos los tiempos tienen distribucion exponencial y en ambos casos las reparaciones tienen un coeficiente de variabilidad de 1.
+
+\begin{enumerate}[label=\alph*),resume]
+  \item Determine la disponibilidad de cada maquina.
+  \item Calcule ahora el coeficiente de variabilidad efectivo de cada maquina. Considerando su nueva metrica, cual maquina considera que es mejor y por que?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2024}
+Para la maquina original:
+\[
+  C_{0,1}=\frac{s_1}{t_1}=\frac{2}{12}=0.167.
+\]
+Para la maquina nueva, primero se convierten 100 segundos a minutos:
+\[
+  100\ \text{s}=\frac{100}{60}=1.667\ \text{min}.
+\]
+Entonces:
+\[
+  C_{0,2}=\frac{1.667}{10}=0.167.
+\]
+Ambas maquinas tienen el mismo coeficiente de variacion nominal del tiempo de proceso.
+
+La disponibilidad se calcula con:
+\[
+  A=\frac{MTTF}{MTTF+MTTR}.
+\]
+Para la maquina original:
+\[
+  A_1=\frac{57}{57+19}=\frac{57}{76}=0.75.
+\]
+Para la maquina nueva:
+\[
+  A_2=\frac{372}{372+124}=\frac{372}{496}=0.75.
+\]
+Con solo disponibilidad, ambas parecen equivalentes.
+
+Ahora se calcula el coeficiente de variabilidad efectivo:
+\[
+  C_e^2=C_0^2+(1+C_r^2)A(1-A)\frac{MTTR}{t_0}.
+\]
+Como las reparaciones tienen coeficiente de variabilidad 1:
+\[
+  C_r=1.
+\]
+Para la maquina original:
+\[
+  C_{e,1}^2=0.1667^2+(1+1^2)(0.75)(1-0.75)\frac{19}{12}.
+\]
+\[
+  C_{e,1}^2=0.0278+2(0.75)(0.25)(1.5833)=0.6215\approx 0.62.
+\]
+Para la maquina nueva:
+\[
+  C_{e,2}^2=0.1667^2+(1+1^2)(0.75)(1-0.75)\frac{124}{10}.
+\]
+\[
+  C_{e,2}^2=0.0278+2(0.75)(0.25)(12.4)=4.6778\approx 4.68.
+\]
+Aunque ambas tienen igual disponibilidad y variabilidad nominal parecida, la maquina nueva genera mucha mas variabilidad efectiva porque sus reparaciones son muy largas en relacion con su tiempo de proceso. Bajo esta metrica, la maquina original es mejor si el objetivo es reducir variabilidad del flujo.
+\end{pautacompleta}

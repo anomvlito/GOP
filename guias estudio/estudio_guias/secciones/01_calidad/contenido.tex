@@ -1,0 +1,169 @@
+\section{Calidad: Aceptacion, Graficos de Control y Diagnostico}
+
+\subsection{Muestreo de aceptacion con distribucion binomial}
+
+\begin{ejercicio}{Guia 11, pregunta 1}
+Se muestrean $n=30$ componentes de un lote grande. Hay tres planes:
+\[
+  A: c=0, \qquad B: c=1, \qquad C: c=2,
+\]
+donde $c$ es el numero maximo de defectuosos permitidos para aceptar el lote. Se pide escoger plan para lotes buenos con $p=0.02$, lotes malos con $p=0.08$ y un balance entre ambos.
+\end{ejercicio}
+
+\begin{materia}{plan de muestreo}
+Sea $X$ la cantidad de defectuosos encontrados en la muestra. Si cada unidad tiene probabilidad $p$ de ser defectuosa y la muestra es pequena respecto del lote, se modela:
+\[
+  X \sim \operatorname{Binomial}(n,p).
+\]
+Para un plan $(n,c)$:
+\[
+  P_{\text{aceptar}}(p)
+  =
+  \Pp(X \le c)
+  =
+  \sum_{x=0}^{c}\binom{n}{x}p^x(1-p)^{n-x}.
+\]
+El parametro $p$ representa la fraccion defectuosa real del lote. Un AQL es un nivel de defectos considerado aceptable; un LPTD es un nivel de defectos considerado malo o rechazable. El plan debe aceptar con alta probabilidad cuando $p$ es bajo y rechazar con alta probabilidad cuando $p$ es alto.
+\end{materia}
+
+\begin{solucion}{probabilidades clave}
+Para $p=0.02$:
+\[
+\begin{aligned}
+P_A &= \Pp(X=0)=0.98^{30}=0.545,\\
+P_B &= \Pp(X\le 1)=0.98^{30}+30(0.02)(0.98)^{29}=0.879,\\
+P_C &= \Pp(X\le 2)=0.978.
+\end{aligned}
+\]
+Si el lote es bueno, conviene el plan $C$ porque tiene mayor probabilidad de aceptarlo.
+
+Para $p=0.08$:
+\[
+  P_A=0.082, \qquad P_B=0.296, \qquad P_C=0.565.
+\]
+Si el lote es malo, conviene el plan $A$ porque tiene menor probabilidad de aceptarlo, es decir, mayor probabilidad de rechazarlo.
+
+El balance natural es el plan $B$: no es tan permisivo como $C$ ni tan estricto como $A$.
+\end{solucion}
+
+\begin{alerta}{frase de examen}
+Si preguntan ``alta probabilidad de aceptar lotes buenos'', elige el plan con mayor $P_{\text{aceptar}}$ en el AQL. Si preguntan ``alta probabilidad de rechazar lotes malos'', elige el plan con menor $P_{\text{aceptar}}$ en el LPTD.
+\end{alerta}
+
+\subsection{Grafico de medias con desviacion conocida}
+
+\begin{ejercicio}{Guia 11, pregunta 2}
+Se muestrean cajas cada hora. Cada dato de la tabla es el promedio de $n=9$ cajas. Se sabe que la desviacion estandar individual es $\sigma=1$ y se piden limites que incluyan el $99.73\%$ de las medias muestrales.
+\end{ejercicio}
+
+\begin{materia}{limites para $\bar X$ con $\sigma$ conocida}
+Sea $X$ el peso individual y $\bar X$ el promedio de una muestra de tamano $n$. Si la media objetivo es $\mu_0$ y la desviacion individual conocida es $\sigma$:
+\[
+  \sigma_{\bar X}=\frac{\sigma}{\sqrt n}.
+\]
+Para un nivel $99.73\%$ se usa $z=3$. Los limites son:
+\[
+  LCS_{\bar X}=\mu_0+z\frac{\sigma}{\sqrt n},
+  \qquad
+  LCI_{\bar X}=\mu_0-z\frac{\sigma}{\sqrt n}.
+\]
+\end{materia}
+
+\begin{solucion}{diagnostico}
+Con $\mu_0=16$, $\sigma=1$, $n=9$ y $z=3$:
+\[
+  \sigma_{\bar X}=\frac{1}{3},\qquad
+  LCS_{\bar X}=16+3\cdot \frac13=17,\qquad
+  LCI_{\bar X}=16-3\cdot \frac13=15.
+\]
+Los promedios horarios $14.8$, $14.2$ y $17.3$ quedan fuera de los limites $[15,17]$. Por lo tanto, el proceso no esta bajo control estadistico.
+
+Si la desviacion individual fuera $\sigma=2$, entonces:
+\[
+  LCS_{\bar X}=16+3\cdot \frac{2}{3}=18,\qquad
+  LCI_{\bar X}=16-3\cdot \frac{2}{3}=14.
+\]
+Con esos limites, los mismos datos quedarian dentro.
+\end{solucion}
+
+\subsection{Grafico $\bar X/R$ con eliminacion de outlier}
+
+\begin{ejercicio}{Guia 10, pregunta 2b--2c}
+Se tienen cinco dias de mediciones del largo de tarjetas, con cinco observaciones por dia. Se pide calcular limites de control, eliminar outliers y diagnosticar una muestra nueva del dia 6:
+\[
+  63,\;54,\;43,\;69,\;65.
+\]
+\end{ejercicio}
+
+\begin{materia}{grafico $\bar X/R$}
+Para $m$ subgrupos de tamano $n$, se calcula para cada subgrupo $k$:
+\[
+  \bar x_k=\frac{1}{n}\sum_{j=1}^{n}x_{kj},
+  \qquad
+  R_k=\max_j x_{kj}-\min_j x_{kj}.
+\]
+Luego:
+\[
+  \bar{\bar x}=\frac{1}{m}\sum_{k=1}^{m}\bar x_k,
+  \qquad
+  \bar R=\frac{1}{m}\sum_{k=1}^{m}R_k.
+\]
+Para $n=5$, la guia usa:
+\[
+  A_2=0.58,\qquad D_3=0,\qquad D_4=2.11.
+\]
+Los limites son:
+\[
+\begin{aligned}
+LCS_{\bar X}&=\bar{\bar x}+A_2\bar R, &
+LCI_{\bar X}&=\bar{\bar x}-A_2\bar R,\\
+LCS_R&=D_4\bar R, &
+LCI_R&=D_3\bar R.
+\end{aligned}
+\]
+\end{materia}
+
+\begin{solucion}{calculo de la guia}
+Con los datos originales:
+\[
+\begin{array}{c|cc}
+\text{Dia} & \bar x_k & R_k\\
+\hline
+1&60.6&21\\
+2&64.0&23\\
+3&54.6&28\\
+4&53.2&20\\
+5&55.8&17\\
+\hline
+\text{Promedio}&58.04&21.8
+\end{array}
+\]
+Por lo tanto:
+\[
+  LCS_R=2.11(21.8)\approx 46.0,\qquad LCI_R=0,
+\]
+\[
+  LCS_{\bar X}=58.04+0.58(21.8)\approx 70.7,\qquad
+  LCI_{\bar X}=58.04-0.58(21.8)\approx 45.4.
+\]
+La pauta elimina el dato $42$ como outlier. Recalculando, la guia reporta:
+\[
+  \bar{\bar x}=58.8,\qquad \bar R=24.6,
+\]
+\[
+  LCS_R\approx 43,\qquad LCI_R=0,\qquad
+  LCS_{\bar X}\approx 70.6,\qquad LCI_{\bar X}\approx 46.9.
+\]
+
+Para el dia 6:
+\[
+  \bar x_6=\frac{63+54+43+69+65}{5}=58.8,
+  \qquad
+  R_6=69-43=26.
+\]
+Como $46.9\le 58.8\le 70.6$ y $0\le 26\le 43$, la muestra nueva queda bajo control segun los limites recalculados.
+\end{solucion}
+
+\begin{alerta}{criterio practico}
+En un examen, si piden ``eliminar outliers'', primero calcula limites, identifica puntos fuera de control, retira esos datos/subgrupos segun indique el enunciado y recalcula limites. No mezcles limites antiguos con diagnostico final.
+\end{alerta}

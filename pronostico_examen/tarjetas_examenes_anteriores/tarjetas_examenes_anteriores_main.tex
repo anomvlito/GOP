@@ -1,0 +1,65 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=0.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}     % Para abiertas
+\definecolor{goporange}{RGB}{200, 100, 0}   % Para V/F
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% Configuración global de la tarjeta (8 por página -> altura = textheight / 4)
+\tcbset{
+  tarjetabase/.style={
+    enhanced,
+    fit,
+    height=\textheight/4,
+    sharp corners,
+    boxrule=0.5pt,
+    colframe=black,
+    colback=white,
+    coltitle=white,
+    fonttitle=\bfseries\small,
+    boxsep=1mm,
+    left=2mm, right=2mm, top=2mm, bottom=2mm,
+    halign=left,
+    valign=center,
+    halign lower=left,
+    valign lower=center,
+    segmentation style={solid, draw=black!50, line width=0.5pt, dashed}
+  }
+}
+
+\newcounter{numtarjeta}
+
+% Macro para Tarjetas V/F (Naranja)
+\newcommand{\tarjetavf}[4]{%
+\stepcounter{numtarjeta}%
+\tcbitem[tarjetabase, colbacktitle=goporange, title={\#\thenumtarjeta\ | #1 \hfill \scriptsize #2}]
+\textbf{Pregunta (V/F):}\\ #3
+\tcblower
+\textbf{Respuesta:}\\ #4
+}
+
+% Macro para Tarjetas Abiertas (Azul)
+\newcommand{\tarjetaabierta}[4]{%
+\stepcounter{numtarjeta}%
+\tcbitem[tarjetabase, colbacktitle=gopblue, title={\#\thenumtarjeta\ | #1 \hfill \scriptsize #2}]
+\textbf{Pregunta:}\\ #3
+\tcblower
+\textbf{Respuesta:}\\ #4
+}
+
+\begin{document}
+
+\begin{tcbitemize}[raster columns=2, raster column skip=0pt, raster row skip=0pt]
+
+\input{materia/01_vf_examenes.tex}
+\end{tcbitemize}
+
+\end{document}

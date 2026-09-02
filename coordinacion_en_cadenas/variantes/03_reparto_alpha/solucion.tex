@@ -1,0 +1,93 @@
+\begin{solucion}{Contrato con \(\alpha\)}
+Definimos:
+\[
+\begin{array}{c|l}
+\toprule
+\text{Simbolo} & \text{Significado} \\
+\midrule
+\alpha\in(0,1) & \text{fraccion asignada al minorista en el contrato.}\\
+w\in\mathbb{R}_+ & \text{precio mayorista pagado por unidad al proveedor.}\\
+q\in\mathbb{R}_+ & \text{cantidad elegida por el minorista.}\\
+R(q)=p(q)q & \text{ingreso total generado por vender } q.\\
+\bottomrule
+\end{array}
+\]
+La variable de decision del minorista sigue siendo \(q\in\mathbb{R}_+\). El contrato coordina si la decision privada del minorista coincide con la decision eficiente de la cadena centralizada.
+
+La utilidad del minorista bajo reparto es:
+\[
+\Pi_r(q)=\alpha R(q)-wq.
+\]
+Su condicion de primer orden es:
+\[
+\alpha R'(q)-w=0
+\quad\Rightarrow\quad
+R'(q)=\frac{w}{\alpha}.
+\]
+La cadena integrada elige la cantidad eficiente cuando:
+\[
+R'(q)=c.
+\]
+Por lo tanto, para coordinar:
+\[
+\frac{w}{\alpha}=c
+\quad\Rightarrow\quad
+\boxed{w=\alpha c}.
+\]
+
+En el caso base:
+\[
+c=1,
+\qquad
+\Pi_{SC}^C=2450.25.
+\]
+Si \(\alpha=0.35\), entonces:
+\[
+w=\alpha c=0.35(1)=0.35.
+\]
+La utilidad del minorista es:
+\[
+\Pi_r^A=\alpha\Pi_{SC}^C
+=0.35(2450.25)
+=857.5875.
+\]
+La utilidad del proveedor es:
+\[
+\Pi_s^A=(1-\alpha)\Pi_{SC}^C
+=0.65(2450.25)
+=1592.6625.
+\]
+
+Como en el caso descentralizado:
+\[
+\Pi_r^D=612.5625,
+\qquad
+\Pi_s^D=1225.125,
+\]
+ambos mejoran:
+\[
+857.5875>612.5625,
+\qquad
+1592.6625>1225.125.
+\]
+
+Para encontrar el rango aceptable:
+\[
+\alpha(2450.25)>612.5625
+\quad\Rightarrow\quad
+\alpha>0.25.
+\]
+Para el proveedor:
+\[
+(1-\alpha)(2450.25)>1225.125
+\quad\Rightarrow\quad
+1-\alpha>0.5
+\quad\Rightarrow\quad
+\alpha<0.5.
+\]
+Por lo tanto:
+\[
+\boxed{0.25<\alpha<0.50.}
+\]
+Cualquier valor dentro de ese rango coordina la cadena y deja a ambos agentes mejor que en el escenario descentralizado.
+\end{solucion}

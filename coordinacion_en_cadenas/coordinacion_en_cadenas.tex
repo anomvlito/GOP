@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+\definecolor{gopblue}{RGB}{31,78,121}
+\definecolor{gopgreen}{RGB}{0,100,0}
+\definecolor{gopred}{RGB}{160,0,0}
+\definecolor{gopgray}{RGB}{245,245,242}
+
+\newtcolorbox{materia}[1]{
+  enhanced, breakable, colback=blue!4!white, colframe=gopblue,
+  fonttitle=\bfseries, title={Materia: #1}
+}
+\newtcolorbox{enunciado}[1]{
+  enhanced, breakable, colback=gopgray, colframe=black!45,
+  fonttitle=\bfseries, title={Enunciado: #1}
+}
+\newtcolorbox{solucion}[1]{
+  enhanced, breakable, colback=green!4!white, colframe=gopgreen,
+  fonttitle=\bfseries, title={Solucion: #1}
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable, colback=red!4!white, colframe=gopred,
+  fonttitle=\bfseries, title={Trampa de prueba: #1}
+}
+
+\title{\textbf{Coordinacion en Cadenas}}
+\author{Guia express GOP 2026}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\large Modelo fabricante--minorista, doble marginalizacion, contratos y variantes de analisis.
+\end{center}
+
+\tableofcontents
+\newpage
+
+\input{variantes/00_materia/materia.tex}
+\newpage
+\input{variantes/01_base_descentralizado/enunciado.tex}
+\input{variantes/01_base_descentralizado/solucion.tex}
+\newpage
+\input{variantes/02_costo_minorista/enunciado.tex}
+\input{variantes/02_costo_minorista/solucion.tex}
+\newpage
+\input{variantes/03_reparto_alpha/enunciado.tex}
+\input{variantes/03_reparto_alpha/solucion.tex}
+\newpage
+\input{variantes/04_comparar_contratos/enunciado.tex}
+\input{variantes/04_comparar_contratos/solucion.tex}
+\newpage
+\input{variantes/05_checklist_examen/checklist.tex}
+
+\end{document}

@@ -1,0 +1,69 @@
+\section{Formulario y Ecuaciones Clave (Para imprimir)}
+
+\begin{multicols}{2}
+
+\textbf{1. Costos de Inventario y MRP}
+\begin{itemize}[leftmargin=*]
+    \item $CT = CF + \frac{D}{Q}S + \frac{Q}{2}H$
+    \item $Q_{eoq} = \sqrt{\frac{2 \cdot D \cdot S}{H}}$
+    \item \textbf{Silver-Meal:} \\
+    $C(k) = \frac{S + H \sum (j-1)D_{t+j-1}}{k}$
+\end{itemize}
+
+\textbf{2. PERT / CPM (Proyectos)}
+\begin{itemize}[leftmargin=*]
+    \item $\mu = \frac{a + 4m + b}{6} \quad ; \quad \sigma = \frac{b-a}{6}$
+    \item $EF = ES + t \quad ; \quad LS = LF - t$
+    \item $Z = \frac{T_{contrato} - \mu_{ruta}}{\sqrt{\sum_{criticas} \sigma_i^2}}$
+\end{itemize}
+
+\textbf{3. Teoría de Colas (Kingman)}
+\begin{itemize}[leftmargin=*]
+    \item $\rho = \frac{\lambda}{\mu} \quad ; \quad C_V = \frac{\sigma}{Media}$
+    \item $W_q = \left( \frac{C_a^2 + C_e^2}{2} \right) \left( \frac{\rho}{1-\rho} \right) t_e$
+    \item $W = W_q + t_e \quad ; \quad L = \lambda \cdot W$
+\end{itemize}
+
+\textbf{4. Fallas y Disponibilidad}
+\begin{itemize}[leftmargin=*]
+    \item $A = \frac{MTTF}{MTTF + MTTR}$
+    \item $t_e = \frac{t_0}{A}$
+    \item $C_e^2 = C_0^2 + (1 + C_r^2)A(1-A)\frac{MTTR}{t_0}$
+\end{itemize}
+
+\vfill\null
+\columnbreak
+
+\textbf{5. Calidad: Límites de Control ($\bar{X}, R$)}
+\begin{itemize}[leftmargin=*]
+    \item $LCS_{\bar{X}} = \bar{\bar{X}} + A_2 \cdot \bar{R}$
+    \item $LCI_{\bar{X}} = \bar{\bar{X}} - A_2 \cdot \bar{R}$
+    \item $LCS_R = D_4 \cdot \bar{R}$
+    \item $LCI_R = D_3 \cdot \bar{R}$
+\end{itemize}
+
+\textbf{6. Capacidad del Proceso}
+\begin{itemize}[leftmargin=*]
+    \item $\hat{\sigma} = \frac{\bar{R}}{d_2}$
+    \item $C_p = \frac{USL - LSL}{6\hat{\sigma}}$
+    \item $C_{pk} = \min \left( \frac{USL - \bar{\bar{X}}}{3\hat{\sigma}}, \frac{\bar{\bar{X}} - LSL}{3\hat{\sigma}} \right)$
+\end{itemize}
+
+\textbf{7. Localización (Bodegas)}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Break-Even Lineal:}\\
+    $X_{indiferencia} = \frac{CF_A - CF_B}{CV_B - CV_A}$
+    \item \textbf{Centro de Gravedad:}\\
+    $X_{CG} = \frac{\sum X_i V_i}{\sum V_i} \quad ; \quad Y_{CG} = \frac{\sum Y_i V_i}{\sum V_i}$
+    \item \textbf{Distancia Euclidiana:}\\
+    $d = \sqrt{(X_2 - X_1)^2 + (Y_2 - Y_1)^2}$
+    \item \textbf{Distancia Manhattan:}\\
+    $d = |X_2 - X_1| + |Y_2 - Y_1|$
+\end{itemize}
+
+\end{multicols}
+
+\vspace{1cm}
+\begin{center}
+\textbf{¡Éxito en tu Examen de GOP!}
+\end{center}

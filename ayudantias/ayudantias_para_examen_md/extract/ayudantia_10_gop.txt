@@ -1,0 +1,87 @@
+                        Pontificia Universidad Católica de Chile
+                        Escuela de Ingenierı́a
+                        Departamento de Ingenierı́a Industrial y de Sistemas
+                        ICS3213 – Gestión de operaciones
+                        Profesores Alejandro Mac Cawley - Rodrigo Carrasco
+                        Primer Semestre 2026
+
+
+
+                                    Ayudantı́a 10
+                                  Bodegas y Calidad
+                        Ayudante: Alonso Parada Frigerio (alonso.parada@uc.cl)
+
+
+Problema 1
+El CD dispone de un volumen de 1.900 m3 en un área de picking rápido que se surte desde un área de
+reserva. Todos los SKU deben ingresar a esta área. Se entrega la siguiente información:
+
+                            SKU      Pick/mes    un/mes     un/caja   m3 /caja
+                             A          780       4600        25        4.5
+                             B          610       1150        17        4.0
+                             C          300       2100        11        3.0
+                             D          480       2900        20        2.0
+
+
+Se pide:
+
+ (a) ¿Cuánto espacio se le asigna a cada SKU?
+ (b) ¿Con qué frecuencia se deben reponer si todos los SKU se reponen al mismo tiempo?
+
+
+Problema 2
+Usted decide que quiere implementar un sistema de control estadı́stico en su panaderı́a, ya que ha recibido
+muchas quejas de que sus paquetes de panes tienen un peso distinto al que aparece en el etiquetado. Por
+lo mismo, decide hacer un esquema de 27 muestras de paquetes, a los cuales les mide su peso en gramos.
+Los resultados de las muestras se muestran en la siguiente tabla:
+
+                           Muestra    Peso   Muestra      Peso    Muestra   Peso
+                             1        342      10         342       19      376
+                             2        356      11         366       20      320
+                             3        381      12         371       21      359
+                             4        322      13         340       22      378
+                             5        355      14         370       23      397
+                             6        359      15         365       24      319
+                             7        368      16         354       25      347
+                             8        341      17         353       26      374
+                             9        333      18         326       27      324
+
+
+También se sabe que:
+                                                X
+                                                    X̂ = 9538
+
+                                             X
+                                                 X̂ 2 = 3376759
+
+
+                                        V ar[X] = E[X 2 ] − E[X]2
+ (a) Calcule la media y la desviación estándar de la muestra.
+ (b) Establezca los lı́mites de control del proceso para un 96% de confianza.
+
+ (c) Presente el gráfico con los lı́mites de control encontrados.
+ (d) Determine si el proceso se encuentra en control o no. En caso de no estarlo, ¿qué muestras se
+     encuentran fuera de los lı́mites? ¿Cómo queda el gráfico sin estos datos?
+
+
+Problema 3
+Usted es el gerente de calidad de una empresa metalmecánica y se encuentra estableciendo un sistema
+de aseguramiento de la calidad. Para el proceso A, usted decide tomar muestras y obtiene el siguiente
+resultado:
+
+                                  Fecha        Valores de las Muestras (mm)
+                               24 de Junio     0.5 0.6 0.4          0.3
+                               25 de Junio     0.5 0.5 0.4          0.6
+                               26 de Junio     0.7 0.5 0.5          0.7
+                               27 de Junio     0.5 0.5 0.5          0.5
+
+
+ (a) Con esta información encuentre los lı́mites para el promedio y, a su vez, para la diferencia entre el
+     máximo y mı́nimo.
+
+ (b) Si hoy toma una muestra la cual entrega los siguientes resultados: 0.4 mm, 0.7 mm, 0.5 mm y 0.9
+     mm. Basándose en la gráfica anteriormente realizada, ¿qué puede decir del proceso?
+ (c) Usted cree que debe controlar mejor lo que recibe como insumo, para lo cual desea proponer un
+     sistema de muestreo. Para ello define un AQL de 0.02 y un LPTD de 0.08, con un α de 0.05 y un β
+     de 0.1. Indique y explique el plan de muestreo.
+

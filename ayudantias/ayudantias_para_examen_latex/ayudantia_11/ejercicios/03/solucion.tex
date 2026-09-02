@@ -1,0 +1,75 @@
+\subsection{Solucion desarrollada}
+
+\begin{respuesta}{Politica descentralizada}
+Anualizando con \(52\) semanas:
+\[
+D_1=41.6(52)=2163.2,\qquad D_2=37.6(52)=1955.2.
+\]
+Para mercado 1:
+\[
+Q_1^*=\sqrt{\frac{2(60)(2163.2)}{0.27}}=980.52,
+\]
+\[
+SS_1=1.88(8.6)=16.17,\qquad ROP_1=41.6+16.17=57.77.
+\]
+Para mercado 2:
+\[
+Q_2^*=\sqrt{\frac{2(60)(1955.2)}{0.27}}=932.19,
+\]
+\[
+SS_2=1.88(7.6)=14.29,\qquad ROP_2=37.6+14.29=51.89.
+\]
+Costos anuales aproximados:
+\[
+C_1=2540.47,\qquad C_2=2308.51,
+\qquad C_D=4848.98.
+\]
+\end{respuesta}
+
+\begin{respuesta}{Politica centralizada}
+La demanda promedio semanal centralizada es:
+\[
+\mu_C=41.6+37.6=79.2.
+\]
+La desviacion agregada es:
+\[
+\sigma_C=\sqrt{8.6^2+7.6^2}=11.48.
+\]
+Anualmente:
+\[
+D_C=79.2(52)=4118.4.
+\]
+Entonces:
+\[
+Q_C^*=\sqrt{\frac{2(60)(4118.4)}{0.27}}=1352.92,
+\]
+\[
+SS_C=1.88(11.48)=21.58,\qquad ROP_C=79.2+21.58=100.78.
+\]
+El costo anual centralizado, usando transporte de \(1.10\), es:
+\[
+C_C=4901.35.
+\]
+\end{respuesta}
+
+\begin{respuesta}{Recomendacion y modelo general}
+Aunque la centralizacion reduce stock de seguridad:
+\[
+SS_D=16.17+14.29=30.46>SS_C=21.58,
+\]
+el mayor costo de transporte elimina el ahorro. Como:
+\[
+C_D=4848.98<C_C=4901.35,
+\]
+se recomienda mantener despacho descentralizado.
+
+Para \(N\) productos y \(M\) mercados, una formulacion compacta es:
+\[
+\min \sum_{i=1}^N\left[(1-y_i)\sum_{m=1}^M C_{im}^{D}+y_i C_i^{C}\right]
+\]
+sujeto a:
+\[
+y_i\in\{0,1\}\qquad \forall i.
+\]
+La variable \(y_i=1\) indica que el producto \(i\) se centraliza. Los costos \(C_{im}^{D}\) y \(C_i^C\) se calculan con EOQ, stock de seguridad y transporte.
+\end{respuesta}

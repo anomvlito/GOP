@@ -1,0 +1,42 @@
+\section{La Meta (Goldratt) - Heurísticas V/F}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Mapa Mental Rápido (Cópialo)]
+\textbf{Objetivo:} Ganar dinero (Aumentar Throughput $\uparrow$, Bajar Inventario $\downarrow$, Bajar Gasto Operativo $\downarrow$).\\
+\textbf{Cuello de Botella (CB):} Recurso con Capacidad $\le$ Demanda (Herbie).\\
+\textbf{Regla de Oro:} Una hora ganada en un CB es una hora ganada para el sistema. Una hora ganada en un NO-CB es un espejismo.
+\end{tcolorbox}
+
+\subsection{Heurísticas Verdadero / Falso (Trampas Clásicas)}
+Anota estas reglas. Si lees lo contrario en el examen, es \textbf{FALSO}.
+
+\begin{itemize}[itemsep=1ex]
+    \item \textbf{Sobre Tamaños de Lote:}
+    \begin{itemize}
+        \item Reducir el lote de transferencia $\rightarrow$ Disminuye el WIP (Inventario en Proceso) y el Lead Time (Tiempo de Flujo).
+        \item Reducir el lote $\rightarrow$ \textbf{NO} aumenta el Lead Time (es falso si dice lo contrario).
+        \item Los lotes de transferencia \textbf{no} tienen que ser iguales a los lotes de proceso.
+    \end{itemize}
+    
+    \item \textbf{Sobre Cuellos de Botella (CB):}
+    \begin{itemize}
+        \item Optimizar un recurso no-CB es una pérdida de tiempo y solo genera más inventario (WIP) atascado frente al CB.
+        \item El CB dicta el ritmo (Tambor / Drum) de toda la planta.
+        \item Si se daña una máquina frente al CB, importa menos que si se daña el propio CB.
+    \end{itemize}
+    
+    \item \textbf{Sobre las Fluctuaciones Estadísticas:}
+    \begin{itemize}
+        \item Las fluctuaciones y eventos dependientes se acumulan en lugar de promediarse (fenómeno de la excursión de boy scouts).
+        \item El último paso de la línea siempre sufrirá los peores retrasos heredados de los procesos anteriores.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Los 5 Pasos de la Teoría de Restricciones (TOC)}
+(Anota el orden exacto, es evaluado siempre):
+\begin{enumerate}
+    \item \textbf{Identificar} la restricción del sistema (Encontrar a Herbie).
+    \item \textbf{Explotar} la restricción (Que Herbie no se detenga por tonterías, quitarle la carga inútil).
+    \item \textbf{Subordinar} todo lo demás a la decisión anterior (Los rápidos no deben adelantar a Herbie; sistema de cuerdas).
+    \item \textbf{Elevar} la restricción (Comprar otra máquina, contratar más gente para el CB).
+    \item \textbf{Volver al paso 1} (Si se rompió la restricción, buscar el nuevo CB. No dejar que la inercia gane).
+\end{enumerate}

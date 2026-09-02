@@ -1,0 +1,638 @@
+\section{Arrastre I1/I2: Recetas que Siguen Apareciendo}
+
+\subsection{Pronosticos}
+
+\begin{enunciado}{Examen 2023, medias moviles y proposito del pronostico}
+Un almacen ha decidido sofisticar la forma que hace los pedidos. Para ello la dueña del almacen ha tomado varias decisiones que espera surtan efecto en reducir sus costos y mejorar la atencion a sus clientes. Ahora, usted, como ingeniero industrial experto en gestion de operaciones, debe apoyarla y darle buenas recomendaciones en que hacer. La primera accion que hace es mejorar la forma de gestion de los productos que compran a Carozzi. En particular, quiere gestionar los tallarines grado 1 en paquetes de 400 gramos. A continuacion, esta una tabla con las ventas semanales de las ultimas 5 semanas de este producto.
+
+\begin{center}
+\begin{tabular}{c|ccccc}
+\toprule
+Semana & 1 & 2 & 3 & 4 & 5\\
+\midrule
+Ventas (unidades) & 36 & 18 & 0 & 20 & 27\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+  \item Lo primero que ha hecho la dueña es comenzar a usar metodos de estimacion de demanda. En particular, para la semana 6 ha decidido usar medias moviles, pero no sabe si el tamaño de la ventana deberia ser 2 o 3 semanas. Cual de las dos le recomendaria usted?
+  \item Como vimos en clase, un pronostico siempre debe venir asociado a un ``para que hacerlo'', es decir, a una finalidad. Conteste:
+  \begin{enumerate}[label=\roman*.]
+    \item Esta de acuerdo con los datos usados por el dueño del almacen para hacer el pronostico de demanda? Justifique si el pronostico obtenido logra o no el objetivo.
+    \item La almacenera no sabe si su pronostico es bueno. Cuales metricas recomendaria utilizar y por que?
+  \end{enumerate}
+  \item Suponga que la estimacion de demanda para la semana 6 resulta en 25 unidades y la dueña considera que se mantendra constante semanalmente por las proximas 20 semanas. Comprar a Carozzi cada paquete cuesta \$580. Considerando costos de almacenar, costo financiero y mermas, estima que mantener inventario cuesta 7\% del costo del producto por semana. Cada vez que compra, entre tiempo y transporte, gasta \$1.316 por compra y demora 2 semanas en llegar. Cuantas unidades recomienda comprar cada vez para asegurar producto siempre y minimizar costos de gestion de inventario?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2023}
+Para comparar ventanas se usa una metrica historica comparable, como MSE o MAPE. La pauta indica que el mejor pronostico historico se obtiene con $n=3$:
+\[
+  MSE_{n=3}=104.7,\qquad MSE_{n=2}=379.7.
+\]
+Por lo tanto se recomienda ventana de 3 semanas.
+
+El punto conceptual central es que ventas no siempre es igual a demanda. En la semana 3 hubo venta cero, pero no se sabe si fue por demanda cero o por quiebre de stock. Si no habia inventario, usar esa venta como demanda subestima la demanda futura y contradice el objetivo de no perder ventas.
+
+MSE sirve para medir error promedio, pero no detecta si se esta subestimando sistematicamente. Como el objetivo es no perder ventas, conviene complementar con MFE:
+\[
+  MFE=\frac{1}{n}\sum_t e_t.
+\]
+Si $MFE$ es positivo o negativo de forma persistente, muestra sesgo.
+
+Para el inciso c), la demanda total del horizonte es:
+\[
+  D=25(20)=500.
+\]
+El costo de mantener una unidad por semana es:
+\[
+  H=0.07(580)=40.6.
+\]
+El costo de ordenar es:
+\[
+  S=1316.
+\]
+Con EOQ:
+\[
+  Q^\star=\sqrt{\frac{2DS}{H}}
+  =\sqrt{\frac{2(500)(1316)}{40.6}}
+  \approx 180.
+\]
+Se recomienda ordenar aproximadamente 180 unidades por pedido.
+\end{pautacompleta}
+
+\subsection{PERT y contratos}
+
+\begin{enunciado}{Examen 2021, bono y penalidad}
+Usted se encuentra a cargo de un proyecto y ha determinado que la ruta critica esperada tiene una duracion de 240 dias con una desviacion standard de 20 dias. Actualmente se encuentra cerrando el contrato del proyecto y su contraparte le ofrece un bono de \$300 millones por terminar antes de una fecha y una penalidad de \$200 millones si termina despues de dicha fecha.
+
+\begin{enumerate}[label=\alph*)]
+  \item Si la contraparte le ofrece terminar el proyecto en 220 dias, acepta usted el contrato? Muestre todos sus calculos.
+  \item Una empresa consultora le asegura que puede reducir el tiempo del proyecto a 225 dias y su desviacion standard a 15 dias a costo fijo de \$10 millones. Utilizando la consultora, aceptaria el contrato de terminar en 220 dias? Muestre todos sus calculos.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2021}
+Sin consultora:
+\[
+  Z=\frac{D-T_E}{\sigma_c}=\frac{220-240}{20}=-1.
+\]
+\[
+  P(T\leq 220)=P(Z\leq -1)=0.1587.
+\]
+El valor esperado del bono es:
+\[
+  300(0.1587)=47.61.
+\]
+El valor esperado de la penalidad es:
+\[
+  200(1-0.1587)=168.26.
+\]
+Como $47.61-168.26<0$, no conviene aceptar.
+
+Con consultora:
+\[
+  Z=\frac{220-225}{15}=-0.33.
+\]
+\[
+  P(T\leq 220)\approx 0.3707.
+\]
+El valor esperado neto incluyendo costo fijo es:
+\[
+  VE=300(0.3707)-200(1-0.3707)-10.
+\]
+\[
+  VE=111.21-125.86-10=-24.65.
+\]
+Tampoco conviene aceptar el contrato bajo estos datos.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2023, PERT con confianza}
+Usted trabaja en una empresa vitivinicola, en donde se han ganado un importante contrato que requiere ampliar su capacidad de produccion de vinos embotellados para el proximo año. Para asegurar la fecha del primer envio al nuevo cliente, usted contrata a una empresa de ingenieria que entrega la secuencia mas logica de construccion y escenarios de duracion.
+
+\begin{center}
+\begin{tabular}{c|c|ccc}
+\toprule
+Actividad & Antecesora & Optimista & Mas probable & Pesimista\\
+\midrule
+A & - & 1 & 2 & 3\\
+B & A & 4 & 5 & 12\\
+C & B & 5 & 6 & 7\\
+D & B & 1 & 1 & 1\\
+E & B,D & 1.5 & 3 & 4.5\\
+F & C,E & 2 & 2 & 2\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+  \item Elabore el diagrama de PERT y determine la ruta critica del proyecto.
+  \item Considerando que la construccion parte en un mes mas, y en base a los antecedentes entregados, en cuantos meses mas podria asegurar el primer envio al nuevo cliente usando 95\% de confianza?
+  \item Usted va a implementar el sistema del Ultimo Planificador y su cliente quiere estar despachando en la semana 15 con 98\% de confianza. Cual deberia ser la maxima variabilidad permitida para cumplir?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta PERT 2023}
+Para cada actividad:
+\[
+  \mu_i=\frac{a_i+4m_i+b_i}{6},\qquad
+  \sigma_i=\frac{b_i-a_i}{6},\qquad
+  \Var_i=\sigma_i^2.
+\]
+La red es:
+\[
+  A\rightarrow B,\qquad B\rightarrow C,\qquad B\rightarrow D,\qquad (B,D)\rightarrow E,\qquad (C,E)\rightarrow F.
+\]
+La pauta obtiene ruta critica:
+\[
+  A-B-C-F,
+\]
+con:
+\[
+  T_E=16,\qquad \Var_c=2.
+\]
+Con 95\% de confianza:
+\[
+  D_{95}=16+1.65\sqrt{2}=18.33\ \text{semanas}.
+\]
+Si la construccion parte en un mes mas, se suma ese mes al compromiso calendario.
+
+Para semana 15 con 98\%, se exigiria:
+\[
+  15\geq 16+z_{0.98}\sigma_c.
+\]
+Como $15<16$, reducir solo la variabilidad no basta: incluso con $\sigma_c=0$, el promedio esperado es 16. Para cumplir semana 15 con mas de 50\% de confianza hay que reducir tambien la duracion esperada.
+\end{pautacompleta}
+
+\subsection{Wagner-Whitin y lotificacion}
+
+\begin{enunciado}{Examen 2019, EOQ versus Wagner-Whitin}
+La demanda semanal del producto se muestra en la siguiente tabla.
+
+\begin{center}
+\begin{tabular}{c|ccccccc|c}
+\toprule
+Semana & 1 & 2 & 3 & 4 & 5 & 6 & 7 & Promedio\\
+\midrule
+Pedido & 140 & 90 & 130 & 120 & 100 & 60 & 80 & 102.86\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Si la maquina que produce el producto tiene un costo de setup de \$100 cada vez que se inicia el proceso y el producto tiene un costo de inventario de \$1 por semana, determine un plan de produccion utilizando EOQ y otro plan utilizando Wagner-Whitin. Cual prefiere y por que se producen las diferencias?
+\end{enunciado}
+
+\begin{pautacompleta}{pauta 2019}
+Con EOQ se usa demanda promedio:
+\[
+  D=102.86,\qquad S=100,\qquad H=1.
+\]
+\[
+  Q^\star=\sqrt{\frac{2DS}{H}}\approx 143.33\approx 144.
+\]
+La pauta reporta un plan EOQ con costo total 950.
+
+Wagner-Whitin usa demanda deterministica por periodo y minimiza setup mas inventario:
+\[
+  F(t)=\min_{1\le k\le t}\left\{F(k-1)+S+\sum_{j=k}^{t}h(j-k)D_j\right\}.
+\]
+La pauta reporta un plan WW con costo 669. Se prefiere WW porque produce considerando explicitamente la variabilidad temporal de la demanda; EOQ suaviza por promedio y genera inventario innecesario.
+\end{pautacompleta}
+
+\subsection{MRP y modelos de produccion}
+
+\begin{enunciado}{Examen 2017, BOM y programacion matematica}
+Usted es el Gerente de Operaciones de una empresa que produce el producto P1. A continuacion se detalla el BOM, donde el numero indica las piezas necesarias:
+
+\begin{itemize}
+  \item P1 requiere PO (1) y PU (2).
+  \item PO requiere A (3) y B (2).
+  \item B requiere C (2).
+  \item PU requiere A (1) y C (2).
+\end{itemize}
+
+El tiempo de produccion o entrega de cada pieza es $L_k$ semanas para cada pieza $k$, y las maquinas y proveedores tienen una capacidad maxima de entregar $C_k$ unidades a la semana. Los costos semanales de inventario son \$ $I_k$ por cada unidad de pieza $k$ mantenida en inventario y el costo de produccion es \$ $P_k$ por cada unidad de pieza $k$ producida. La demanda por cada unidad de pieza $k$ en el periodo $t$ es $d_{kt}$. Finalmente, las piezas PO y PU comparten la maquina M1 y las piezas A y B comparten la maquina M2, por lo que no pueden ser producidas en la misma semana.
+
+Con esta informacion plantee un problema de programacion matematica que permita obtener el plan de produccion de la empresa.
+\end{enunciado}
+
+\begin{pautacompleta}{modelo matematico}
+Sea:
+\[
+  K=\{P1,PO,PU,A,B,C\},\qquad T=\{1,\ldots,H\}.
+\]
+Variables:
+\[
+  x_{kt}\geq 0=\text{cantidad de }k\text{ lanzada/producida en }t,
+\]
+\[
+  I_{kt}\geq 0=\text{inventario de }k\text{ al final de }t,
+  \qquad
+  y_{kt}\in\{0,1\}.
+\]
+La variable $y_{kt}$ vale 1 si se produce la pieza $k$ en la semana $t$.
+
+La funcion objetivo:
+\[
+  \min \sum_{k\in K}\sum_{t\in T} P_kx_{kt}
+  +\sum_{k\in K}\sum_{t\in T} I_k I_{kt}.
+\]
+Los balances deben incluir demanda independiente y dependiente:
+\[
+  I_{kt}=I_{k,t-1}+x_{k,t-L_k}-D_{kt}^{\text{total}},
+\]
+donde:
+\[
+  D_{P1,t}^{\text{total}}=d_{P1,t},
+\]
+\[
+  D_{PO,t}^{\text{total}}=d_{PO,t}+x_{P1,t},
+  \qquad
+  D_{PU,t}^{\text{total}}=d_{PU,t}+2x_{P1,t},
+\]
+\[
+  D_{A,t}^{\text{total}}=d_{A,t}+3x_{PO,t}+x_{PU,t},
+\]
+\[
+  D_{B,t}^{\text{total}}=d_{B,t}+2x_{PO,t},
+\]
+\[
+  D_{C,t}^{\text{total}}=d_{C,t}+2x_{B,t}+2x_{PU,t}.
+\]
+Capacidad:
+\[
+  x_{kt}\leq C_k y_{kt}\qquad \forall k,t.
+\]
+Maquinas compartidas:
+\[
+  y_{PO,t}+y_{PU,t}\leq 1,\qquad
+  y_{A,t}+y_{B,t}\leq 1.
+\]
+No negatividad e integralidad:
+\[
+  x_{kt},I_{kt}\geq 0,\qquad y_{kt}\in\{0,1\}.
+\]
+\end{pautacompleta}
+
+\subsection{Localizacion y punto de equilibrio}
+
+\begin{enunciado}{Examen 2024, localizacion L1 versus L2}
+Usted se encuentra seleccionando la localizacion para su planta de produccion. Actualmente tiene dos lugares como posibles candidatos L1 y L2. Los valores de compra del terreno y costos variables de operacion para cada localizacion son:
+
+\begin{center}
+\begin{tabular}{c|cc}
+\toprule
+Localizacion & Costo Compra (U\$) & Costo Operacion (U\$/unidad)\\
+\midrule
+L1 & 10.000 & 25\\
+L2 & 40.000 & 10\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+  \item Que nivel de produccion lo deja indiferente entre L1 o L2?
+  \item Usted sabe que hoy, tiempo 0, tiene demanda de 1.000 unidades, estima que en tiempo 9 tendra demanda de 3.100 unidades y la demanda crece linealmente. Si puede colocarse en L1 y despues cambiarse a L2, pero a un costo fijo de cambio, que maximo costo fijo estaria dispuesto a aceptar?
+  \item Si ahora solo puede decidir por una ubicacion y la demanda es $Q(t)=1000+250t$, sin cambio de valor del dinero, desde $t=0$ a $t=10$, que ubicacion es mas adecuada?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta 2024}
+Punto de indiferencia:
+\[
+  10000+25X=40000+10X
+  \Rightarrow X=2000.
+\]
+Para el cambio, el beneficio aparece despues de cruzar el punto de equilibrio. La pauta calcula:
+\[
+  \text{Lugar 1}=\frac{(3100-2000)(87500-60000)}{2}=15{,}125{,}000,
+\]
+\[
+  \text{Lugar 2}=\frac{(3100-2000)(71000-60000)}{2}=6{,}050{,}000.
+\]
+El diferencial es:
+\[
+  15{,}125{,}000-6{,}050{,}000=9{,}075{,}000.
+\]
+Ese es el maximo costo fijo de cambio aceptable.
+
+Para elegir una sola ubicacion:
+\[
+  C_1(t)=10000+25(1000+250t)=35000+6250t,
+\]
+\[
+  C_2(t)=40000+10(1000+250t)=50000+2500t.
+\]
+Integrando de 0 a 10:
+\[
+  \int_0^{10}C_1(t)dt=662500,
+  \qquad
+  \int_0^{10}C_2(t)dt=625000.
+\]
+Conviene L2.
+\end{pautacompleta}
+
+\subsection{Inventario EOQ con entrega gradual}
+
+\begin{enunciado}{Examen 2016, insumos de autos de juguete}
+La empresa Jot Wilz fabrica autos de juguete. Cada auto requiere una unidad de aluminio y 4 ruedas. El precio de una unidad de aluminio es \$500 y cada rueda cuesta \$100. El proveedor demora 2 dias habiles en entregar pedidos. Cada orden cuesta \$50.000 y mantener inventario a la semana cuesta 10\% del precio de cada insumo. Con demanda diaria de 2.400 autos:
+
+\begin{enumerate}[label=\alph*)]
+  \item Asumiendo pedidos instantaneos, calcule las cantidades optimas a pedir de aluminio y ruedas. Cual es el punto de reorden de cada insumo?
+  \item Calcule el costo anual total asociado.
+  \item Si el proveedor ya no entrega pedidos completos sino a tasa de 4.000 unidades/dia para aluminio y 12.000 ruedas/dia, calcule cuanto pedir ahora y cuanto cuesta el cambio.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta 2016}
+Demanda anual de autos:
+\[
+  D=2400(5)(52)=624000.
+\]
+Para aluminio:
+\[
+  H_A=500(0.1)(52).
+\]
+\[
+  Q_A^\star=\sqrt{\frac{2(624000)(50000)}{500(0.1)(52)}}=4898.98\approx 4899.
+\]
+Para ruedas:
+\[
+  D_R=4(624000),\qquad H_R=100(0.1)(52).
+\]
+\[
+  Q_R^\star=\sqrt{\frac{2(624000)(4)(50000)}{100(0.1)(52)}}=21908.9\approx 21909.
+\]
+Puntos de reorden:
+\[
+  R_A=2(2400)=4800,
+  \qquad
+  R_R=2(2400)(4)=19200.
+\]
+Costos anuales:
+\[
+  CT_A=624000(500)+\frac{624000(50000)}{4899}
+  +\frac{4899(500)(0.1)(52)}{2}=324{,}737{,}347.
+\]
+\[
+  CT_R=624000(4)(100)+\frac{624000(4)(50000)}{21909}
+  +\frac{21909(100)(0.1)(52)}{2}=260{,}992{,}629.
+\]
+\[
+  CT_{\text{total}}=585{,}729{,}976.
+\]
+Con entrega gradual:
+\[
+  Q^\star_{\text{gradual}}=\sqrt{\frac{2DS}{H}}\sqrt{\frac{p}{p-d}}.
+\]
+Para aluminio la pauta reporta:
+\[
+  Q_A=7746.
+\]
+La razon conceptual es que al recibir gradualmente y consumir simultaneamente, el inventario maximo baja respecto de $Q$, y eso cambia el lote economico.
+\end{pautacompleta}
+
+\subsection{Newsvendor y productos perecibles}
+
+\begin{enunciado}{Examen 2017, parkas por temporada}
+Usted tiene una tienda de ropa mayorista y esta preocupado porque no puso atencion en clases cuando se vieron los modelos de inventarios. Tiene un problema con un producto nuevo: parkas. La venta se hace en lotes de 25 y marketing entrega la distribucion de probabilidades de venta:
+
+\begin{center}
+\begin{tabular}{c|cccccc}
+\toprule
+Cantidad parkas & 300 & 325 & 350 & 375 & 400 & 425\\
+\midrule
+Probabilidad & 0.1 & 0.2 & 0.3 & 0.24 & 0.1 & 0.06\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Cada parka se vende en temporada a \$130, el proveedor cobra \$100 y si no se vende debe liquidarse en outlet a \$80.
+
+\begin{enumerate}[label=\alph*)]
+  \item Que cantidad de parkas deberia pedir? Cual es la ganancia/perdida esperada?
+  \item Suponiendo que la distribucion subyacente es normal, cambia la cantidad a pedir?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta newsvendor}
+Costo de quedarse corto:
+\[
+  C_u=130-100=30.
+\]
+Costo de quedarse largo:
+\[
+  C_o=100-80=20.
+\]
+Fractil critico:
+\[
+  \frac{C_u}{C_u+C_o}=\frac{30}{50}=0.6.
+\]
+Distribucion acumulada:
+\[
+  F(300)=0.1,\quad F(325)=0.3,\quad F(350)=0.6.
+\]
+El menor lote con acumulada al menos 0.6 es:
+\[
+  Q^\star=350.
+\]
+La ganancia esperada:
+\[
+  \E[\Pi(350)]=
+  \sum_d p_d\left[130\min(350,d)+80(350-d)^+-100(350)\right].
+\]
+Si se asume normal, se calcula:
+\[
+  \mu=\sum d p_d,\qquad \sigma^2=\sum(d-\mu)^2p_d,
+\]
+y:
+\[
+  Q_N^\star=\mu+z_{0.6}\sigma.
+\]
+Luego se redondea al multiplo de 25 mas cercano que maximice utilidad esperada.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2022, producto perecible premium/secundario}
+Usted esta a cargo del proceso productivo que produce un producto $P$ que usa solo un insumo $I$. Para producir una unidad de $P$ se requiere una unidad de $I$. El proceso se compone de dos maquinas en serie. La maquina A toma el insumo $I$ y lo procesa a una tasa de 1 segundo por unidad, produciendo un producto semiterminado. Este se almacena en una camara de temperatura controlada para ser procesado por la maquina B a 50 unidades por minuto. El proceso opera 24 horas al dia los 365 dias del año.
+
+El producto final se vende al mercado premium a \$150 por unidad. Si no es vendido durante el dia, debe liquidarse en mercado secundario a \$80 por unidad. La demanda es normal con media 68.000 unidades/dia y desviacion standard 12.000. El costo total del producto terminado es \$100 por unidad. El costo de almacenamiento anual es \$17 por unidad por dia para producto final, \$15 por unidad al año para semiterminado y \$7.3 por unidad para insumo $I$. Emitir una orden al proveedor cuesta \$200.000 y el proveedor demora 5 dias en entregar.
+
+\begin{enumerate}[label=\roman*.]
+  \item Determine la cantidad diaria a producir y el inventario de producto terminado.
+  \item Cual es el lote optimo de pedido del insumo $I$ y su punto de reorden?
+  \item Si solo la maquina A tiene costo de setup $CT_{\text{Setup}}=300000/Q$, desarrolle una forma funcional del costo total de pedido del semiterminado y plantee la ecuacion del lote optimo.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta 2022}
+Newsvendor:
+\[
+  C_u=150-100=50,\qquad C_o=100-80=20.
+\]
+\[
+  F(Q^\star)=\frac{50}{50+20}=0.7142.
+\]
+La pauta usa $z=0.57$:
+\[
+  Q^\star=68000+0.57(12000)=74840.
+\]
+Capacidad:
+\[
+  A=24(60)(60)=86400\ \text{unid/dia},
+\]
+\[
+  B=50(60)(24)=72000\ \text{unid/dia}.
+\]
+El cuello es B, por lo que:
+\[
+  Q=72000\ \text{unid/dia}.
+\]
+La pauta deja inventario terminado en 0 porque se produce y vende diariamente.
+
+Para insumo:
+\[
+  R=dL=72000(5)=360000.
+\]
+El lote optimo se calcula con EOQ:
+\[
+  Q^\star=\sqrt{\frac{2DS}{H}}.
+\]
+Para semiterminado:
+\[
+  CT(Q)=DC+\frac{300000D}{Q^2}
+  +\frac{1}{2}\left(1-\frac{d}{p}\right)QH.
+\]
+La condicion de optimalidad:
+\[
+  -2\frac{300000D}{Q^3}
+  +\frac{1}{2}\left(1-\frac{d}{p}\right)H=0.
+\]
+\end{pautacompleta}
+
+\subsection{Centralizacion de inventarios}
+
+\begin{enunciado}{Examen 2017, dos mercados y centralizacion}
+Usted esta a cargo de la logistica de una empresa que vende al retail. Actualmente la empresa cuenta con un producto y dos mercados. El costo de cada orden es \$60 y mantener inventario cuesta \$0.27 por unidad a la semana. El gerente pide nivel de servicio 97\% ($z=1.88$). La fabrica tiene lead time de 1 semana. La demanda es:
+
+\begin{center}
+\begin{tabular}{c|ccccc|cc}
+\toprule
+Mercado & Semana 1 & 2 & 3 & 4 & 5 & Promedio & Desv. Est.\\
+\midrule
+1 & 33 & 45 & 37 & 38 & 55 & 41.6 & 8.6\\
+2 & 46 & 35 & 41 & 40 & 26 & 37.6 & 7.6\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Se despacha a cada mercado independientemente y se analiza centralizar. El transporte descentralizado cuesta \$1.05 por unidad y centralizado \$1.10 por unidad; el precio de venta es \$1.
+
+\begin{enumerate}[label=\alph*)]
+  \item Determine politica descentralizada para cada mercado bajo revision continua y costo anual.
+  \item Determine politica centralizada bajo revision continua y costo anual.
+  \item Recomiende centralizar o mantener descentralizado. Para $N$ productos y $M$ mercados, construya un modelo matematico para decidir.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta pooling}
+Para cada mercado:
+\[
+  Q_m^\star=\sqrt{\frac{2D_mS}{H}},\qquad
+  R_m=d_mL+z\sigma_m\sqrt{L}.
+\]
+Con semanas como unidad:
+\[
+  R_1=41.6+1.88(8.6),\qquad
+  R_2=37.6+1.88(7.6).
+\]
+Centralizado:
+\[
+  d_C=41.6+37.6=79.2.
+\]
+Si las demandas son independientes:
+\[
+  \sigma_C=\sqrt{8.6^2+7.6^2}=11.48.
+\]
+\[
+  R_C=79.2+1.88(11.48).
+\]
+El beneficio potencial de centralizar viene del risk pooling: la desviacion agregada no es $8.6+7.6$, sino la raiz de la suma de varianzas. La decision compara costo de inventario, ordenes y transporte:
+\[
+  CT_D \quad \text{versus}\quad CT_C.
+\]
+Para $N$ productos y $M$ mercados, se puede definir $y_i=1$ si producto $i$ se centraliza y minimizar:
+\[
+  \min \sum_i \left[y_i CT_{i,C}+(1-y_i)CT_{i,D}\right],
+\]
+con $y_i\in\{0,1\}$ y restricciones de capacidad si existen.
+\end{pautacompleta}
+
+\subsection{Regresion de demanda y lotes con maquinas en serie}
+
+\begin{enunciado}{Examen 2018, acido sulfurico}
+Usted es gerente de una planta de acido sulfurico que provee a la mineria. La demanda diaria de acido en toneladas depende del precio diario del cobre $PCu$ en U\$ por libra.
+
+\begin{center}
+\begin{tabular}{c|cc|c|cc}
+\toprule
+\# & Precio Cu & Q acido & \# & Precio Cu & Q acido\\
+\midrule
+1&3.2&1200&10&3.5&1450\\
+2&3.0&1000&11&2.6&750\\
+3&3.1&1050&12&3.1&1100\\
+4&3.3&1270&13&3.2&1200\\
+5&2.7&800&14&2.9&990\\
+6&3.4&1350&15&2.6&750\\
+7&3.0&1025&16&2.8&900\\
+8&2.8&850&17&3.0&1025\\
+9&2.9&950&18&3.1&1050\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Se tiene:
+\[
+  \sum PCu=54.2,\quad \sum Q=18710,\quad \sum PCu^2=164.3,
+\]
+\[
+  \sum Q^2=20114250,\quad \sum Q\cdot PCu=57192.
+\]
+El proceso tiene dos maquinas en serie:
+\[
+  M1:\;0.016\ \text{hr/ton},\qquad M2:\;40\ \text{ton/hr}.
+\]
+Opera 3 turnos, 24 horas al dia, 7 dias a la semana. Cada vez que se enciende una maquina hay setup: M1 cuesta \$80/setup y M2 \$120/setup. Las maquinas no ajustan capacidad y funcionan siempre al maximo. Mantener inventario en proceso cuesta \$30 por tonelada al año.
+
+\begin{enumerate}[label=\alph*)]
+  \item Determine politica optima de inventarios en proceso/terminado y tiempos de produccion para precio promedio 3.0 U\$/lb de cobre.
+  \item Para escenario optimista 3.3 U\$/lb y pesimista 2.7 U\$/lb, calcule nuevamente la politica.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{receta regresion + lote economico}
+Ajuste:
+\[
+  \hat Q=a+bP.
+\]
+\[
+  b=\frac{n\sum PQ-\sum P\sum Q}{n\sum P^2-(\sum P)^2},
+  \qquad
+  a=\bar Q-b\bar P.
+\]
+Con $n=18$ se pronostica demanda para $P=3.0$, $3.3$ y $2.7$.
+
+Capacidades:
+\[
+  M1:\frac{1}{0.016}=62.5\ \text{ton/hr},\qquad M2=40\ \text{ton/hr}.
+\]
+M2 es el cuello. Como las maquinas producen a maxima capacidad al encenderse, se usa lote economico con tasa finita:
+\[
+  Q_j^\star=\sqrt{\frac{2dS_j}{H}}\sqrt{\frac{p_j}{p_j-d}},
+\]
+si $p_j>d$. El tiempo de corrida:
+\[
+  t_j=\frac{Q_j^\star}{p_j}.
+\]
+La receta es: estimar $d$ con regresion para cada escenario, verificar que $d<p_j$, calcular lote por maquina con setup e inventario, y reportar tiempos de produccion e inventario esperado.
+\end{pautacompleta}

@@ -1,0 +1,374 @@
+\section{Bodegas y Centros de Distribucion}
+
+\subsection{Picking rapido y asignacion de espacio}
+
+\begin{materia}{volumen optimo para picking rapido}
+Sea $I$ el conjunto de SKU. Para cada SKU $i\in I$:
+\begin{itemize}
+  \item $f_i$ es el flujo volumetrico mensual en $m^3/\text{mes}$.
+  \item $v_i$ es el volumen asignado al SKU $i$.
+  \item $V$ es el volumen total disponible.
+  \item $c_r$ es el costo por reposicion.
+\end{itemize}
+El modelo clasico es:
+\[
+  \min_{v_i\ge 0}\; c_r\sum_{i\in I}\frac{f_i}{v_i}
+  \quad \text{s.a.}\quad
+  \sum_{i\in I}v_i=V.
+\]
+La condicion de optimalidad entrega:
+\[
+  v_i^\star=V\frac{\sqrt{f_i}}{\sum_{j\in I}\sqrt{f_j}}.
+\]
+Si los costos de reposicion son distintos:
+\[
+  \min \sum_i c_{r,i}\frac{f_i}{v_i},
+  \qquad
+  v_i^\star=V\frac{\sqrt{c_{r,i}f_i}}{\sum_j\sqrt{c_{r,j}f_j}}.
+\]
+\end{materia}
+
+\begin{enunciado}{Examen 2016, centro de distribucion}
+En otro centro de distribucion se tiene un area de Picking rapido cuyo espacio total disponible es de $1500\ \text{m}^3$, en la cual se busca disponer tres SKU: X, Y, Z y W.
+
+\begin{center}
+\begin{tabular}{c|ccc}
+\toprule
+SKU & UNIDADES/MES & UNIDADES/CAJA & M3/CAJA\\
+\midrule
+X & 3000 & 20 & 3\\
+Y & 3600 & 24 & 2\\
+Z & 2040 & 36 & 1.5\\
+W & 1000 & 50 & 5\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+  \item Plantee el problema de optimizacion que minimiza el costo total del area de picking rapido. Suponga que el costo de \emph{restock} es $c_r$.
+  \item Con los datos de la tabla anterior calcule el espacio optimo y la frecuencia de \emph{restock} para cada SKU.
+  \item Calcule el espacio asignado y el \emph{restock} para cada SKU considerando las siguientes configuraciones: igual volumen para los SKU y con igual frecuencia de \emph{restock}.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2016}
+Primero convierte cada SKU a flujo volumetrico:
+\[
+  f_i=\frac{\text{unidades/mes}_i}{\text{unidades/caja}_i}\cdot m_i^3/\text{caja}.
+\]
+Con los datos de la tabla:
+\[
+  f_X=\frac{3000}{20}\cdot 3=450,\qquad
+  f_Y=\frac{3600}{24}\cdot 2=300,
+\]
+\[
+  f_Z=\frac{2040}{36}\cdot 1.5=85,\qquad
+  f_W=\frac{1000}{50}\cdot 5=100.
+\]
+El modelo que minimiza el costo total de reposiciones es:
+\[
+  \min_{v_i\geq 0}\; c_r\sum_{i\in I}\frac{f_i}{v_i}
+  \quad\text{s.a.}\quad
+  \sum_{i\in I} v_i=1500,
+\]
+donde $I=\{X,Y,Z,W\}$, $f_i$ es el flujo volumetrico mensual del SKU $i$ y $v_i$ es el volumen asignado al SKU $i$.
+
+La condicion de optimalidad entrega:
+\[
+  v_i^\star=1500\frac{\sqrt{f_i}}{\sqrt{450}+\sqrt{300}+\sqrt{85}+\sqrt{100}}.
+\]
+La suma de raices es:
+\[
+  \sqrt{450}+\sqrt{300}+\sqrt{85}+\sqrt{100}=57.754.
+\]
+Los volumenes optimos y frecuencias son:
+\[
+\begin{array}{c|cc}
+\text{SKU} & v_i^\star & \text{restock } f_i/v_i\\
+\hline
+X&550.96&0.82\\
+Y&449.86&0.67\\
+Z&239.46&0.35\\
+W&259.73&0.39
+\end{array}
+\]
+
+Para igual volumen:
+\[
+  v_i=\frac{1500}{4}=375\ \text{m}^3\quad \forall i.
+\]
+Las frecuencias de reposicion son:
+\[
+\begin{array}{c|cc}
+\text{SKU} & v_i & f_i/v_i\\
+\hline
+X&375&1.20\\
+Y&375&0.80\\
+Z&375&0.23\\
+W&375&0.27
+\end{array}
+\]
+
+Para igual frecuencia, se exige $f_i/v_i=k$ para todo $i$, por lo tanto:
+\[
+  v_i=V\frac{f_i}{\sum_j f_j}.
+\]
+Como $\sum_j f_j=935$, se obtiene:
+\[
+\begin{array}{c|cc}
+\text{SKU} & v_i & f_i/v_i\\
+\hline
+X&1500(450/935)=721.93&0.623\\
+Y&1500(300/935)=481.28&0.623\\
+Z&1500(85/935)=136.36&0.623\\
+W&1500(100/935)=160.43&0.623
+\end{array}
+\]
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2021, picking rapido}
+Su empresa ha construido una zona de \emph{picking} rapido de $20\ \text{m}^3$ y se le pide a usted ubicar los SKU que se detallan en la tabla a continuacion.
+
+\begin{center}
+\begin{tabular}{c|cc}
+\toprule
+SKU & cajas/mes & $\text{m}^3$/caja\\
+\midrule
+A & 40 & 2\\
+B & 20 & 1.5\\
+C & 45 & 1\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Si el costo de reposicion es de \$3 por reposicion para cada SKU y usando una politica de volumen optimo y otra de igual tiempo, determine:
+
+\begin{enumerate}[label=\alph*)]
+  \item Para cada politica, cuanto espacio asigna a cada uno y cual es el costo de cada politica.
+  \item Si los costos de cada reposicion son distintos para cada SKU, siendo \$3 para SKU A, \$2 para SKU B y \$3 para SKU C, plantee un modelo que permita determinar la asignacion optima para cada SKU.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2021}
+Se calculan los flujos:
+\[
+  f_A=40(2)=80,\qquad f_B=20(1.5)=30,\qquad f_C=45(1)=45.
+\]
+Con volumen optimo:
+\[
+  v_i^\star=V\frac{\sqrt{f_i}}{\sum_j \sqrt{f_j}}.
+\]
+Con $V=20$:
+\[
+  \sum_j\sqrt{f_j}=\sqrt{80}+\sqrt{30}+\sqrt{45}=21.131.
+\]
+Por lo tanto:
+\[
+  v_A^\star=20\frac{\sqrt{80}}{21.131}=8.47,\quad
+  v_B^\star=20\frac{\sqrt{30}}{21.131}=5.18,\quad
+  v_C^\star=20\frac{\sqrt{45}}{21.131}=6.35.
+\]
+Las reposiciones mensuales son:
+\[
+  r_A=\frac{80}{8.47}=9.45,\quad
+  r_B=\frac{30}{5.18}=5.79,\quad
+  r_C=\frac{45}{6.35}=7.09.
+\]
+El costo mensual de reposicion con volumen optimo es:
+\[
+  CT_{\text{opt}}=3(r_A+r_B+r_C)=3(22.33)=66.99.
+\]
+
+En igual tiempo se igualan las frecuencias:
+\[
+  \frac{f_A}{v_A}=\frac{f_B}{v_B}=\frac{f_C}{v_C}.
+\]
+Entonces se asigna proporcional a flujo:
+\[
+  v_i=V\frac{f_i}{\sum_j f_j},\qquad \sum_j f_j=155.
+\]
+La tabla queda:
+\[
+\begin{array}{c|ccc}
+\text{SKU} & f_i & v_i & f_i/v_i\\
+\hline
+A&80&20(80/155)=10.32&7.75\\
+B&30&20(30/155)=3.87&7.75\\
+C&45&20(45/155)=5.81&7.75
+\end{array}
+\]
+El costo mensual es:
+\[
+  CT_{\text{igual tiempo}}=3(7.75+7.75+7.75)=69.75.
+\]
+
+\textbf{Nota de consistencia.} La pauta escrita usa $V=25$ en los calculos numericos y obtiene $v_A=10.58$, $v_B=6.48$, $v_C=7.94$, costo $53.575$, y para igual tiempo volumenes $12.90$, $4.84$, $7.26$ con costo $55.8$. El enunciado transcrito dice $20\ \text{m}^3$; por eso aqui se recalcula con $V=20$. La proporcion y el algoritmo son los mismos.
+
+Si los costos de reposicion son distintos, el modelo correcto es:
+\[
+  \min_{v_A,v_B,v_C\geq 0}\;
+  3\frac{80}{v_A}+2\frac{30}{v_B}+3\frac{45}{v_C}
+\]
+sujeto a:
+\[
+  v_A+v_B+v_C\leq 20,
+  \qquad
+  v_A,v_B,v_C\geq 0.
+\]
+En forma general:
+\[
+  \min_{v_i\geq 0}\sum_{i\in I} c_{r,i}\frac{f_i}{v_i}
+  \quad\text{s.a.}\quad
+  \sum_{i\in I}v_i\leq V.
+\]
+\end{pautacompleta}
+
+\subsection{Profundidad optima de pallets}
+
+\begin{materia}{profundidad}
+Para SKU $i$:
+\[
+  d_i^\star=\sqrt{\frac{a q_i}{2z_i}},
+\]
+donde $a$ es ancho de pasillo medido en pallets, $q_i$ es cantidad de pallets demandados o recibidos, y $z_i$ es altura maxima de apilado. Si hay profundidad unica, se agregan los SKU y se calcula una profundidad comun segun el uso de espacio equivalente.
+\end{materia}
+
+\begin{enunciado}{Examen 2022, profundidad de pallets}
+Usted debe determinar la profundidad optima de los pallets en una bodega que tiene unos pasillos de 3.5 metros de ancho. Para ello considera una demanda constante y que los pallets tienen una medida de $1\times 1$ metros. Usted recopila la informacion de los 4 SKU que maneja.
+
+\begin{center}
+\begin{tabular}{c|cc}
+\toprule
+SKU & \# Pallets Demandados & Max. Altura de Apilado\\
+\midrule
+A & 24 & 3\\
+B & 20 & 4\\
+C & 10 & 2\\
+D & 12 & 2\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\roman*.]
+  \item Determine la profundidad optima para cada SKU individualmente.
+  \item Determine la profundidad optima para todos en conjunto en el cual hay un pasillo y no se comparte. Muestre sus calculos.
+  \item Si ahora puede tener 2 profundidades distintas y comparten el pasillo, cuales serian estas profundidades? Mejora el uso de espacio y por que?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2022}
+Como $a=3.5$:
+\[
+  d_A=\sqrt{\frac{3.5(24)}{2(3)}}=3.74,\quad
+  d_B=\sqrt{\frac{3.5(20)}{2(4)}}=2.96,
+\]
+\[
+  d_C=\sqrt{\frac{3.5(10)}{2(2)}}=2.96,\quad
+  d_D=\sqrt{\frac{3.5(12)}{2(2)}}=3.24.
+\]
+La tabla de la pauta es:
+\[
+\begin{array}{c|cccc}
+\text{SKU} & \#\text{ pallets} & \text{altura max.} & \text{prof.} & \text{efectiva}\\
+\hline
+A&24&3&3.7417&4\\
+B&20&4&2.9580&3\\
+C&10&2&2.9580&3\\
+D&12&2&3.2404&4
+\end{array}
+\]
+
+Para una profundidad comun sin compartir pasillo, la pauta agrega el espacio equivalente:
+\[
+\begin{array}{c|ccc}
+\text{SKU} & \#\text{ pallets} & \text{altura max.} & \text{espacio}\\
+\hline
+A&24&3&8\\
+B&20&4&5\\
+C&10&2&5\\
+D&12&2&6\\
+\hline
+\multicolumn{3}{r}{\text{total}}&24
+\end{array}
+\]
+La profundidad continua reportada es:
+\[
+  d=4.5826.
+\]
+Por lo tanto, la profundidad operativa comun es:
+\[
+  d=5.
+\]
+
+Para dos profundidades, se agrupan los SKU con profundidades individuales parecidas:
+\[
+  \{A,D\}\quad \text{y}\quad \{B,C\}.
+\]
+La pauta resume:
+\[
+\begin{array}{c|ccc|c|ccc}
+\text{SKU} & \# & h & \text{esp.} & \text{SKU} & \# & h & \text{esp.}\\
+\hline
+A&24&3&8 & B&20&4&5\\
+D&12&2&6 & C&10&2&5\\
+\hline
+\multicolumn{3}{r}{\text{total}}&14 & \multicolumn{3}{r}{\text{total}}&10
+\end{array}
+\]
+Esto entrega una profundidad de 4 para el grupo $\{A,D\}$ y una profundidad de 3 para el grupo $\{B,C\}$. Mejora el uso de espacio porque evita obligar a los SKU B y C, que naturalmente requieren profundidad cercana a 3, a operar con profundidad comun 5.
+\end{pautacompleta}
+
+\subsection{Tamaño de bodega por flujo}
+
+\begin{materia}{flujo, area y trabajadores}
+Usa la relacion:
+\[
+  Q=A\cdot v,
+\]
+donde $Q$ es flujo anual o semanal, $A$ es inventario/area disponible expresada en pallets, y $v$ es rotacion. Si $T$ es numero de trabajadores, muchas preguntas modelan $v$ como proporcional a $T$.
+\end{materia}
+
+\begin{enunciado}{Examen 2021, tamaño minimo de bodega}
+Usted se encuentra determinando el tamaño minimo de bodega que debe adquirir. Para ello usted determina que la demanda anual es de 60.000 pallets y los operadores de montacargas trabajan turnos de 8 hrs. por 250 dias al año, con un sueldo mensual de \$15 mil. El tiempo medio desde la recepcion a bodega y a despacho es de 20 minutos. Si el costo anual por $\text{mt}^2$ de terreno e infraestructura para bodega es de \$1.000 el $\text{mt}^2$ y cada pallet utiliza $4\ \text{mt}^2$ de piso en la bodega, ya que pueden ser apilados, caracterice la funcion de costos totales anuales de la bodega. Determine la cantidad de trabajadores y el tamaño optimo de bodega. Muestre todos sus calculos.
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2021}
+Minutos anuales por operador:
+\[
+  60\cdot 8\cdot 250=120{,}000.
+\]
+Como cada pallet requiere 20 minutos, un operador mueve:
+\[
+  \frac{120{,}000}{20}=6{,}000\;\text{pallets/año}.
+\]
+Si la demanda es $60{,}000$, la rotacion por operador se usa como:
+\[
+  \frac{60{,}000}{6{,}000}=10\;\text{rotaciones/año}.
+\]
+Con $T$ trabajadores:
+\[
+  v=10T,\qquad A=\frac{60{,}000}{10T}.
+\]
+El costo de espacio por pallet es:
+\[
+  1000\ \frac{\$}{m^2}\cdot 4\ \frac{m^2}{\text{pallet}}
+  =4000\ \frac{\$}{\text{pallet}}.
+\]
+La pauta escrita transforma este costo como 250 \$/pallet y plantea:
+\[
+  CT(T)=250\frac{60{,}000}{10T}+15{,}000T.
+\]
+Siguiendo esa pauta:
+\[
+  CT'(T)=-\frac{1{,}500{,}000}{T^2}+15{,}000=0
+  \Rightarrow T=10.
+\]
+Entonces:
+\[
+  A=\frac{60{,}000}{10(10)}=600\;\text{pallets},
+  \qquad
+  \text{area}=600(4)=2400\,m^2.
+\]
+
+\textbf{Nota de consistencia.} El enunciado dice costo anual de \$1.000 por $m^2$ y cada pallet usa $4m^2$, lo que aritmeticamente da \$4.000 por pallet, no \$250. La pauta antigua usa \$250/pallet para llegar a $T=10$ y $2400m^2$. Para estudiar la mecanica del examen, lo importante es plantear $CT(T)$ y derivar; si se usa literalmente el costo del enunciado, cambia el optimo numerico.
+\end{pautacompleta}

@@ -1,0 +1,432 @@
+\section{Calidad}
+
+\subsection{Control estadistico de procesos: pan, tarjetas y botellas}
+
+\begin{materia}{graficos de control}
+Cuando el enunciado entrega subgrupos con promedio y recorrido, define para cada subgrupo $k$:
+\[
+  \bar x_k=\frac{1}{n}\sum_{j=1}^n x_{kj}, \qquad
+  R_k=\max_j x_{kj}-\min_j x_{kj}.
+\]
+Luego:
+\[
+  \bar{\bar x}=\frac{1}{m}\sum_{k=1}^{m}\bar x_k,
+  \qquad
+  \bar R=\frac{1}{m}\sum_{k=1}^{m}R_k.
+\]
+Con constantes de tabla para tamaño de muestra $n$:
+\[
+  LCS_{\bar X}=\bar{\bar x}+A_2\bar R,\quad
+  LCI_{\bar X}=\bar{\bar x}-A_2\bar R,
+\]
+\[
+  LCS_R=D_4\bar R,\quad
+  LCI_R=D_3\bar R.
+\]
+Si el enunciado pide un nivel de confianza usando agregados de medias, usa:
+\[
+  LCS=\bar x+z s,\qquad LCI=\bar x-zs,
+\]
+donde $s^2=\frac{1}{m}\sum \bar x_k^2-\bar x^2$.
+\end{materia}
+
+\begin{enunciado}{Examen 2020, pan}
+Usted decide controlar el proceso de produccion de pan y decide hacer un esquema de muestra de 30 panes a los cuales les mide el peso en gramos. Los resultados de los 27 grupos de muestra se detallan a continuacion, con el respectivo promedio de cada muestra y recorrido.
+
+\begin{center}
+\small
+\begin{tabular}{c|cc@{\hspace{1.0em}}c|cc@{\hspace{1.0em}}c|cc}
+\toprule
+\# & Promedio & Recorrido & \# & Promedio & Recorrido & \# & Promedio & Recorrido\\
+\midrule
+1 & 8.67 & 1.6 & 10 & 9.52 & 1.1 & 19 & 9.61 & 1.2\\
+2 & 9.70 & 1.5 & 11 & 10.61 & 1.2 & 20 & 11.65 & 1.6\\
+3 & 9.73 & 2.0 & 12 & 11.56 & 0.6 & 21 & 11.00 & 0.9\\
+4 & 10.00 & 0.1 & 13 & 10.10 & 1.1 & 22 & 10.72 & 1.5\\
+5 & 9.55 & 1.3 & 14 & 9.46 & 0.3 & 23 & 9.41 & 1.8\\
+6 & 10.67 & 1.5 & 15 & 10.18 & 0.0 & 24 & 8.67 & 1.3\\
+7 & 10.90 & 0.0 & 16 & 11.26 & 0.6 & 25 & 12.30 & 0.0\\
+8 & 9.91 & 1.8 & 17 & 8.03 & 0.4 & 26 & 9.28 & 1.2\\
+9 & 9.91 & 1.8 & 18 & 10.81 & 0.6 & 27 & 9.93 & 0.9\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Ademas se sabe que:
+\[
+  \sum \text{promedios}=273.14,\qquad
+  \sum \text{recorrido}=27.9,
+\]
+\[
+  \sum(\text{promedios})^2=2788.03,\qquad
+  \sum(\text{recorrido})^2=38.67.
+\]
+Hint:
+\[
+  \sigma^2=\frac{1}{n}\sum X^2-\bar X^2=E[X^2]-E[X]^2.
+\]
+
+\textbf{Pregunta.} Con esta informacion desarrolle los graficos de control del proceso para un control $96\%$.
+\end{enunciado}
+
+\begin{pautacompleta}{Examen 2020, pan}
+La pauta usa normalidad sobre los promedios de los 27 grupos:
+\[
+  \bar x=\frac{273.14}{27}=10.116.
+\]
+La varianza de los promedios se calcula como:
+\[
+  s^2=\frac{2788.03}{27}-(10.116)^2\approx 0.921.
+\]
+Para $96\%$ bilateral, la pauta usa $z\simeq 2.05$. Entonces:
+\[
+  LCS=10.116+2.05\sqrt{0.921},\qquad
+  LCI=10.116-2.05\sqrt{0.921}.
+\]
+Se eliminan las muestras fuera de limite, en la pauta las muestras 17 y 25, y se recalcula:
+\[
+  \sum \bar x_k=273.14-8.03-12.30=251.81,
+\]
+\[
+  \sum \bar x_k^2=2788.03-8.03^2-12.30^2=2572.26.
+\]
+Con $m=25$:
+\[
+  \bar x_{\text{nuevo}}=\frac{251.81}{25}=10.112,\qquad
+  s^2_{\text{nuevo}}=\frac{2572.26}{25}-(10.112)^2\approx 0.793.
+\]
+Los limites finales son:
+\[
+  LCS=10.112+2.05\sqrt{0.793},\qquad
+  LCI=10.112-2.05\sqrt{0.793}.
+\]
+Todo lo restante queda dentro de rango, por lo que esos son los limites finales del proceso segun la pauta.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2024, botellas de vidrio}
+Usted decide controlar un proceso de produccion de botellas de vidrio y decide hacer un esquema de muestras de 20 botellas cada una a las cuales les mide el grosor en milimetros. Los resultados de 25 grupos de muestra se detallan a continuacion, con su respectivo promedio, valor minimo y maximo de cada muestra.
+
+\begin{center}
+\small
+\begin{tabular}{c|ccc@{\hspace{1.2em}}c|ccc}
+\toprule
+Muestra & Promedio & Minimo & Maximo & Muestra & Promedio & Minimo & Maximo\\
+\midrule
+1 & 25.1 & 24.0 & 26.2 & 14 & 26.1 & 24.9 & 27.3\\
+2 & 25.8 & 24.5 & 27.1 & 15 & 24.6 & 23.4 & 25.8\\
+3 & 24.7 & 23.9 & 25.5 & 16 & 27.5 & 26.2 & 28.8\\
+4 & 26.4 & 25.2 & 27.8 & 17 & 25.7 & 24.5 & 26.9\\
+5 & 25.3 & 24.3 & 26.3 & 18 & 24.8 & 23.6 & 26.0\\
+6 & 24.5 & 23.5 & 25.5 & 19 & 26.3 & 25.0 & 27.6\\
+7 & 25.9 & 24.6 & 27.2 & 20 & 25.0 & 23.9 & 26.1\\
+8 & 25.2 & 24.2 & 26.2 & 21 & 24.5 & 23.3 & 25.7\\
+9 & 24.9 & 23.7 & 26.1 & 22 & 27.6 & 26.3 & 28.9\\
+10 & 26.0 & 24.8 & 27.2 & 23 & 25.6 & 24.4 & 26.8\\
+11 & 26.4 & 25.1 & 27.7 & 24 & 25.1 & 23.8 & 26.4\\
+12 & 25.4 & 24.4 & 26.4 & 25 & 24.4 & 23.1 & 25.7\\
+13 & 24.2 & 23.0 & 25.4 & & & &\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Datos agregados de la tabla:
+\[
+\sum \text{Promedio}=637.1,\quad
+\sum \text{Minimo}=607.6,\quad
+\sum \text{Maximo}=666.6,
+\]
+\[
+\sum(\text{Promedio})^2=16255.53,\quad
+\sum(\text{Minimo})^2=14784.56,\quad
+\sum(\text{Maximo})^2=17796.96.
+\]
+
+\begin{enumerate}[label=\alph*)]
+  \item Con esta informacion determine los limites de control del grosor de botella.
+  \item Suponga ahora que calcula una nueva muestra, con media $25.3$ mm y recorrido $0.8$ mm. ¿Que puede decir del proceso? ¿Se encuentra bajo control? ¿Por que?
+  \item Si ahora le informan que las muestras tomadas son de 30 botellas cada una, con la misma informacion de la tabla inicial. En base a esta nueva informacion, desarrolle los graficos de control del proceso para un control $90\%$. ¿Como cambia lo obtenido en a)?
+  \item Para el tamaño de muestra de 30 botellas, ¿cual es el porcentaje de confianza minimo necesario para que no se deban eliminar muestras en el desarrollo de graficos del inciso anterior?
+  \item ¿Este porcentaje es alto o bajo? ¿Que indica esto sobre el proceso de produccion? ¿Que efecto tiene eliminar muestras con respecto al porcentaje de confianza en este proceso?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{Examen 2024, botellas de vidrio}
+Para $n=20$, la pauta usa constantes:
+\[
+  A_2=0.18,\qquad D_3=0.415,\qquad D_4=1.585.
+\]
+El promedio global de los promedios es:
+\[
+  \bar{\bar x}=\frac{637.1}{25}=25.484.
+\]
+El recorrido de cada muestra es $R_k=\max_k-\min_k$. Con los datos agregados:
+\[
+  \bar R=\frac{\sum \max-\sum \min}{25}
+  =
+  \frac{666.6-607.6}{25}
+  =
+  2.36.
+\]
+Los limites para el grafico de promedios son:
+\[
+  LCI_{\bar X}=25.484-0.18(2.36)=25.06,\qquad
+  LCS_{\bar X}=25.484+0.18(2.36)=25.90,
+\]
+y los limites para el grafico de recorridos:
+\[
+  LCI_R=0.415(2.36)=0.979,\qquad
+  LCS_R=1.585(2.36)=3.741.
+\]
+
+La nueva muestra tiene media $25.3$ y recorrido $0.8$. La media cae dentro de $[25.06,25.90]$, pero el recorrido queda bajo el limite inferior:
+\[
+  0.8<0.979.
+\]
+Por lo tanto, el proceso no se encuentra bajo control segun el grafico de recorrido.
+
+Para $n=30$ y confianza $90\%$, la pauta usa $z=1.64$ sobre la desviacion de los promedios:
+\[
+  s=\sqrt{\frac{\sum \bar x_k^2}{25}-(25.484)^2}=0.887.
+\]
+Limites iniciales:
+\[
+  25.484\pm 1.64(0.887)=[24.046,26.922].
+\]
+Se eliminan las muestras 16 y 22, se recalcula $\bar x=25.304$, $s=0.685$, y quedan:
+\[
+  25.304\pm 1.64(0.685)=[24.181,26.427].
+\]
+Para que no se eliminen muestras, se iguala el limite a los promedios extremos. El promedio inferior extremo es $24.2$ y el superior extremo es $27.6$:
+\[
+  Z_{\inf}=\frac{25.484-24.2}{0.887}=1.44,\qquad
+  Z_{\sup}=\frac{27.6-25.484}{0.887}=2.39.
+\]
+El valor que protege ambos extremos es $Z=2.39$, por lo que la confianza minima aproximada es:
+\[
+  2\Phi(2.39)-1\simeq 98.32\%.
+\]
+Ese porcentaje es alto: para no eliminar muestras se necesita un intervalo muy ancho, lo que sugiere un proceso con variabilidad relevante. Eliminar muestras estrecha los limites y aumenta el riesgo de rechazar muestras que antes se aceptaban; en lenguaje de muestreo, aumenta el riesgo del productor.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2015, Tarjetas ABC}
+La empresa Tarjetas ABC desea establecer un plan de produccion JIT. La demanda diaria registrada es de 200 tarjetas telefonicas por hora. El proceso de produccion de estas tarjetas pasa por 3 grandes operaciones antes del control de calidad ubicado al final de la linea: impresion de las leyendas (P1), inclusion del chip (P2) y cortado de la tarjeta (P3).
+
+La empresa cuenta con un registro de los tiempos promedios de procesamiento ($t_{pi}$) por operacion, ademas de los tiempos de envio de los Kanbans ($t_{ki}$) y tiempos de envio de los lotes ($t_{vi}$).
+
+\begin{center}
+\begin{tabular}{c|cccc}
+\toprule
+Operacion & Lote $C$ & $t_{pi}$ seg & $t_{ki}$ seg & $t_{vi}$ seg\\
+\midrule
+P1 & 200 & 85 & 45 & 200\\
+P2 & 250 & 78 & 67 & 300\\
+P3 & 300 & 50 & 92 & 150\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Los registros historicos del control de calidad indican que en promedio un $15\%$ de las unidades son descartadas.
+
+\begin{enumerate}[label=\alph*)]
+  \item A partir de los datos anteriores, calcule el numero de Kanbans necesarios en el proceso productivo.
+\end{enumerate}
+
+Las investigaciones de la empresa han determinado que el proceso P3 es el que esta actualmente generando el $15\%$ del descarte de las tarjetas, las cuales no estan saliendo con los tamaños adecuados. Se realizo un muestreo del largo de las tarjetas de 5 lotes recibidos durante los ultimos 5 dias.
+
+\begin{center}
+\begin{tabular}{c|ccccc}
+\toprule
+Dia & \multicolumn{5}{c}{Largo (milimetros)}\\
+\midrule
+1 & 70 & 56 & 49 & 67 & 61\\
+2 & 65 & 47 & 70 & 70 & 68\\
+3 & 70 & 49 & 42 & 68 & 54\\
+4 & 50 & 47 & 52 & 67 & 50\\
+5 & 48 & 65 & 51 & 50 & 65\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A partir de lo anterior:
+\begin{enumerate}[label=\alph*),resume]
+  \item Calcule los limites de control, eliminando los outliers. Realice los graficos correspondientes.
+  \item Si el dia 6 usted toma una muestra con los siguientes resultados: $63$, $54$, $43$, $69$ y $65$. ¿Que puede decir de la muestra? ¿Esta el proceso bajo control?
+  \item El implementar el control reduce las fallas del sistema a solo un $5\%$. Con esta informacion, ¿cambia el numero Kanbans? Argumente.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{Examen 2015, Tarjetas ABC}
+Primero se calcula el lead time total de reposicion por proceso:
+\[
+  L_i=t_{p,i}+t_{k,i}+t_{v,i}.
+\]
+Por lo tanto:
+\[
+  L_1=85+45+200=330,\qquad
+  L_2=78+67+300=445,\qquad
+  L_3=50+92+150=292.
+\]
+Con descarte de $15\%$, el rendimiento es $y=0.85$. La pauta calcula:
+\[
+  N_i=\frac{D}{0.85}\frac{L_i}{C_i}.
+\]
+Resultados reportados:
+\[
+  N_1=389,\qquad N_2=419,\qquad N_3=230.
+\]
+
+Para calidad, calcula $\bar x_k$ y $R_k$ por dia:
+\[
+\begin{array}{c|cc}
+\text{Dia} & \bar x_k & R_k\\
+\hline
+1&60.6&21\\
+2&64.0&23\\
+3&54.6&28\\
+4&53.2&20\\
+5&55.8&17\\
+\hline
+\text{Promedio}&58.04&21.8
+\end{array}
+\]
+Con $A_2=0.58$, $D_3=0$, $D_4=2.11$:
+\[
+  LCS_{\bar X}=58.04+0.58(21.8),\qquad
+  LCI_{\bar X}=58.04-0.58(21.8),
+\]
+\[
+  LCS_R=2.11(21.8),\qquad LCI_R=0.
+\]
+Despues de eliminar el dato fuera de control, la pauta usa $\bar{\bar x}=58.8$ y $\bar R=24.6$. La muestra del dia 6 tiene:
+\[
+  \bar x_6=\frac{63+54+43+69+65}{5}=58.8,\qquad R_6=69-43=26.
+\]
+Se compara contra los limites recalculados. La regla de examen es: media dentro y recorrido dentro implica muestra bajo control; si uno sale, no.
+
+Si las fallas bajan a $5\%$, el nuevo rendimiento es $y=0.95$. Como lo demas queda constante:
+\[
+  N_{i,\text{nuevo}}=N_{i,\text{viejo}}\frac{0.85}{0.95}.
+\]
+La pauta reporta:
+\[
+  N_1=348,\qquad N_2=375,\qquad N_3=205.
+\]
+\end{pautacompleta}
+
+\subsection{Muestreo de aceptacion, AQL y LPTD}
+
+\begin{materia}{curva OC y riesgos}
+En muestreo de aceptacion simple, se define $X$ como numero de defectuosos en una muestra de tamaño $n$:
+\[
+  X\sim Bin(n,p),\qquad
+  P_{\text{aceptar}}(p)=\Prob(X\le c)=\sum_{x=0}^{c}\binom{n}{x}p^x(1-p)^{n-x}.
+\]
+La curva OC es $P_{\text{aceptar}}(p)$ como funcion de $p$. En AQL se quiere aceptar con probabilidad alta; en LPTD se quiere aceptar con probabilidad baja. El riesgo del productor $\alpha$ es rechazar un lote bueno; el riesgo del consumidor $\beta$ es aceptar un lote malo.
+\end{materia}
+
+\begin{enunciado}{Examen 2019, verdadero/falso}
+Seccion verdadero o falso. Indique si la siguiente afirmacion es verdadera o falsa. En caso de ser falsa, indique la razon:
+
+``Al disminuir el numero o nivel maximo de aceptacion en un muestreo, por ejemplo de 5 unidades a 3 unidades, se aumenta el riesgo del productor o error tipo $\alpha$.''
+\end{enunciado}
+
+\begin{pautacompleta}{pauta 2019}
+Verdadero. Al bajar $c$, el plan es mas estricto. Eso reduce $P_{\text{aceptar}}(p)$ para todo $p$, incluyendo lotes buenos en AQL. Por lo tanto aumenta la probabilidad de rechazar un lote bueno:
+\[
+  \alpha=1-P_{\text{aceptar}}(p_{AQL}).
+\]
+\end{pautacompleta}
+
+\subsection{Calidad de proveedores y mejora de proceso}
+
+\begin{enunciado}{Examen 2016, vasos termicos y proveedor}
+Usted es el titular de una empresa de cafe preparado llamada ``Juana Valdez Cafe''. Habitualmente compra el grano, y en cada uno de sus tres locales lo muele y sirve en vasos de carton termico. Debido a las quejas de los clientes, han registrado que los vasos no siempre se comportan termicamente bien. Por ello ha decidido hacer un estudio de proveedores.
+
+Usted ha determinado que los vasos deberian tolerar un minimo de $90^\circ\text{C}$ para que sean seguros y coincida con lo que exige a sus proveedores. Por otro lado, tiene un historico de muestreos de recepcion en donde, en promedio, los vasos tienen una resistencia de $95^\circ\text{C}$, con una desviacion estandar de $2^\circ\text{C}$. Actualmente su proveedor ``Kartoon'' le entrega en lotes de 5000 vasos.
+
+Usted ha decidido iniciar un estudio del problema y esta analizando como definir bien el problema para poder llegar a una solucion. Revisando sus apuntes de Gestion de Operaciones se encuentra con 4 preguntas que le pueden ayudar en su trabajo. A continuacion, desarrolle las respuestas para cada pregunta:
+
+\begin{enumerate}[label=\alph*)]
+  \item Determine la informacion que necesitaria recopilar del proceso y del proveedor para analizar el problema.
+  \item Establezca que metodologia utilizaria para mejorar la calidad del proceso y como evaluaria esta.
+  \item Realice el mismo analisis, pero ahora enfocado en la recepcion de los insumos del proveedor.
+  \item La aplicacion de ambos cambios llevaria a mejorar la calidad del producto final?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta completa 2016}
+Esta pregunta no es de calculo directo; es de diagnostico de calidad. La respuesta debe separar proceso interno, proveedor, sistema de medicion, metodologia de mejora y recepcion de lotes.
+
+Para el inciso a), en el proceso interno hay que registrar variables que permitan observar el problema y sus posibles causas:
+\begin{itemize}
+  \item Temperatura de llenado de los vasos, separada por tipo de bebida.
+  \item Temperaturas indicadas por los equipos en sus visores.
+  \item Lote de producto ingresado a linea, usado para despachos de bebidas calientes.
+  \item Volumen de llenado habitual, porque el problema podria venir de salpicaduras o sobrellenado y no solamente de resistencia termica del vaso.
+  \item Registro de quejas de clientes con detalle: local, fecha, bebida, temperatura, lote del vaso y descripcion del incidente.
+\end{itemize}
+
+Respecto del proveedor, hay que recuperar informacion del comportamiento historico de su proceso:
+\begin{itemize}
+  \item Ensayos de resistencia termica en produccion.
+  \item Registros historicos de control estadistico de proceso, para ver si existen curvas fuera de control o lotes cercanos a especificacion.
+  \item Tasa media de defectos.
+  \item Tamaño de lote, que en este caso es 5000 vasos.
+  \item Especificaciones, tolerancias aceptadas y criterios usados para liberar lotes.
+  \item Productos mas criticos y trazabilidad de lote.
+\end{itemize}
+
+Tambien se debe homologar el sistema de medicion. No basta con comparar la media historica $95^\circ\text{C}$ contra el minimo $90^\circ\text{C}$ si el proveedor y la cafeteria miden de forma distinta. La pauta exige cotejar la practica de muestreo usada por el proveedor para liberar producto con el esquema de aceptacion de la cafeteria. Esto corresponde a revisar practicas analiticas y, si corresponde, hacer un estudio R\&R.
+
+Para el inciso b), una metodologia natural es DMAIC:
+\[
+  \text{Definir} \rightarrow \text{Medir} \rightarrow \text{Analizar} \rightarrow \text{Mejorar} \rightarrow \text{Controlar}.
+\]
+Aunque no se implemente Six Sigma completo, DMAIC entrega una estructura valida. En este caso:
+\begin{itemize}
+  \item Definir el defecto: vaso que no tolera el uso termico esperado o genera queja de cliente.
+  \item Medir temperaturas de llenado, resistencia del vaso, lotes, maquinas y locales.
+  \item Analizar si la causa esta en el proveedor, en el diseño del vaso, en la variabilidad de temperatura, en el volumen de llenado o en la manipulacion.
+  \item Mejorar mediante estandarizacion operacional, desarrollo de proveedores y ajustes de proceso.
+  \item Controlar con protocolos de medicion, auditorias periodicas y seguimiento SPC.
+\end{itemize}
+
+La pauta menciona tres lineas de mejora: reducir dispersion en la temperatura de llenado, desarrollar proveedores para que la resistencia termica venga desde el diseño del vaso, y estandarizar operaciones dentro de la cafeteria con controles visuales.
+
+La evaluacion de estas medidas debe hacerse con un plan de analisis que pruebe la funcionalidad del vaso en condiciones extremas. Con esos datos se puede construir un historico tipo SPC. Ademas, deben realizarse auditorias periodicas al proveedor, revisando fabricacion en linea y registros historicos.
+
+Para el inciso c), enfocado en recepcion de insumos, se plantea un sistema de muestreo de aceptacion. El proceso mecanico es:
+\begin{enumerate}
+  \item Elegir el tipo de muestreo: simple, doble o triple.
+  \item Usar el tamaño de lote $N=5000$, el nivel de calidad aceptable y la diferencia que se desea detectar para determinar el tamaño de muestra $n$.
+  \item Definir el criterio de aceptacion $c$, es decir, el maximo numero de vasos defectuosos permitido en la muestra para aceptar el lote.
+  \item Definir como se hara el pickeo de muestras segun la constitucion de pallets, evitando tomar muestras sesgadas de una sola zona del lote.
+  \item Aplicar los ensayos de resistencia termica y decidir aceptar o rechazar el lote.
+\end{enumerate}
+
+Matematicamente, si $X$ es el numero de vasos defectuosos en la muestra:
+\[
+  X\sim Bin(n,p),
+  \qquad
+  P(\text{aceptar lote})=\Prob(X\le c).
+\]
+La especificacion relevante es:
+\[
+  \text{resistencia termica}\geq 90^\circ\text{C}.
+\]
+Un vaso bajo $90^\circ\text{C}$ se considera no conforme para este criterio.
+
+Para el inciso d), la respuesta correcta no es afirmar mecanicamente que ambos cambios siempre mejoran. La pauta indica que el producto final deberia mejorar, pero la mejora podria no ser sostenible e incluso tener efectos negativos si solo se endurece la recepcion. Por ejemplo, si aumentan los rechazos sin mejorar la calidad de origen, podria haber quiebres de stock.
+
+La mejora real exige dos condiciones:
+\begin{itemize}
+  \item Desarrollar con el proveedor una alternativa que produzca calidad desde el proceso de fabricacion, no solo un control mas estricto de tipo pasa/no pasa.
+  \item Controlar suficientemente el procedimiento de la cafeteria para evitar que el uso real lleve los vasos al borde de la especificacion. Los limites del proceso interno deben quedar dentro de las especificaciones de uso del vaso.
+\end{itemize}
+
+La frase clave para responder en examen es: el control de recepcion detecta lotes malos, pero el desarrollo del proveedor y el control del proceso interno reducen la probabilidad de producir o usar mal el vaso.
+\end{pautacompleta}
+
+\begin{alerta}{frase para examen}
+En calidad de proveedores, distinguir entre \emph{control de recepcion} y \emph{desarrollo de proveedor}. El primero detecta defectos; el segundo reduce la probabilidad de que aparezcan.
+\end{alerta}

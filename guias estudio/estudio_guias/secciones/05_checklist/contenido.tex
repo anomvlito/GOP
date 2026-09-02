@@ -1,0 +1,31 @@
+\section{Checklist de Examen}
+
+\begin{longtable}{p{0.24\linewidth}p{0.36\linewidth}p{0.31\linewidth}}
+\toprule
+Tema & Senal en el enunciado & Algoritmo que debes activar \\
+\midrule
+\endhead
+Muestreo de aceptacion & Planes $(n,c)$, AQL, LPTD, $\alpha$, $\beta$, porcentaje defectuoso & Modelar $X\sim Bin(n,p)$ y calcular $P(X\le c)$. \\
+Grafico $\bar X$ & Promedios muestrales, $\sigma$ conocida, nivel de confianza & Usar $\mu_0\pm z\sigma/\sqrt n$. \\
+Grafico $\bar X/R$ & Subgrupos, rangos, constantes $A_2,D_3,D_4$ & Calcular $\bar{\bar x}$, $\bar R$, limites de medias y rangos. \\
+Kanban & Demanda, lote/contenedor, tiempos de reposicion, defectos & $N_i=D L_i/(y C_i)$ con unidades consistentes. \\
+Bodegas & Pallets, pasillos, altura, ciclos de pedido & $d_i^\star=\sqrt{a q_i/(2z_i)}$ y ponderar por frecuencias si hay profundidad unica. \\
+Colas & Llegadas por hora, servicio promedio, servidor unico & Calcular $\lambda$, $\mu$, $\rho$, $L_q$, $L$, $W$. \\
+Fallas & MTTF, MTTR, disponibilidad & $A=MTTF/(MTTF+MTTR)$ y ajustar tiempo por $1/A$. \\
+\bottomrule
+\end{longtable}
+
+\begin{materia}{ranking de estudio rapido}
+Si queda poco tiempo, el orden recomendado es:
+\begin{enumerate}
+  \item Guia 11 pregunta 1: muestreo de aceptacion.
+  \item Guia 10 pregunta 2: kanban y graficos $\bar X/R$.
+  \item Guia 9 problema 1: profundidad de pallets.
+  \item Guia 11 pregunta 2: limites $\bar X$ con $\sigma$ conocida.
+  \item Guia 8 problemas 1 y 3: M/M/1, CV y disponibilidad.
+\end{enumerate}
+\end{materia}
+
+\begin{alerta}{como responder para ganar puntos}
+Define siempre la variable aleatoria o decision antes de usar formulas. Por ejemplo: ``Sea $X$ el numero de defectuosos en la muestra'', ``sea $N_i$ el numero de kanbans de la operacion $i$'', ``sea $d_i$ la profundidad en pallets del SKU $i$''. Eso evita perder puntos por notacion aunque el calculo este bien.
+\end{alerta}

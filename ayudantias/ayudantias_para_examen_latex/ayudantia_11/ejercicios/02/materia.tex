@@ -1,0 +1,29 @@
+\subsection{Materia necesaria}
+
+\begin{formulas}{Kanban con demanda variable}
+Si existe una variacion de demanda \(s\), se usa demanda protegida:
+\[
+d'=d(1+s).
+\]
+Luego:
+\[
+K=\left\lceil\frac{d'T}{C}\right\rceil.
+\]
+\end{formulas}
+
+\begin{definicion}{Disponibilidad por fallas}
+Si una maquina falla, su capacidad efectiva se reduce por disponibilidad:
+\[
+A=\frac{MTBF}{MTBF+MTTR},
+\qquad
+\mu_{\text{efectiva}}=A\mu.
+\]
+\end{definicion}
+
+\begin{algoritmo}{Defectos detectados tarde}
+Si una maquina genera una fraccion \(q\) de defectos y estos se descubren al final, todo el sistema aguas abajo procesa unidades malas. Para entregar demanda buena:
+\[
+d_{\text{inicio}}=\frac{d_{\text{buena}}}{1-q}.
+\]
+El control de calidad conviene ubicarlo justo despues de la etapa que genera los defectos.
+\end{algoritmo}

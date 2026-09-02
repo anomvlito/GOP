@@ -1,0 +1,35 @@
+\tarjetaabierta{Inventarios (EOQ)}{I1}{%
+En el modelo Clásico de Wilson (EOQ), ¿qué dos costos se equilibran matemáticamente para encontrar el lote económico óptimo?
+}{%
+Se equilibran el \textbf{Costo Anual de Ordenar/Setup} (que baja a mayor lote) y el \textbf{Costo Anual de Mantener Inventario} o Holding (que sube a mayor lote).
+}
+
+\tarjetavf{Inventarios (EOQ)}{I1}{%
+Según la fórmula matemática del EOQ, si la demanda anual de un producto se multiplica por 4, el tamaño de lote óptimo también debe cuadruplicarse.
+}{%
+\textbf{FALSO.} Como la demanda $D$ está dentro de una raíz cuadrada ($EOQ = \sqrt{2DS/H}$), al multiplicarse por 4 la demanda, el lote óptimo solo se multiplica por 2.
+}
+
+\tarjetaabierta{Gestión de Proyectos}{I1}{%
+¿Cuál es la principal diferencia técnica entre el método CPM y el método PERT al analizar la red de un proyecto?
+}{%
+El \textbf{CPM} asume tiempos de actividad \textit{deterministas} (fijos y conocidos). El \textbf{PERT} asume tiempos \textit{estocásticos} (probabilísticos), usando 3 estimaciones (optimista, probable, pesimista).
+}
+
+\tarjetaabierta{Gestión de Proyectos}{I1}{%
+En un proyecto de red PERT/CPM, si decidimos hacer \textit{crashing} (acortamiento), ¿qué actividad debemos acortar primero?
+}{%
+Se debe acortar la actividad que pertenezca a la \textbf{Ruta Crítica} y que, al mismo tiempo, tenga el \textbf{menor costo marginal} por período acortado.
+}
+
+\tarjetavf{Planificación - MRP}{I1}{%
+En el algoritmo de Wagner-Whitin, se asume un costo constante por período y garantiza encontrar una solución óptima local, pero no global.
+}{%
+\textbf{FALSO.} Wagner-Whitin es un modelo de programación dinámica que \textbf{garantiza matemáticamente encontrar el óptimo global} exacto de balanceo entre costo de preparación y almacenamiento.
+}
+
+\tarjetaabierta{Planificación - MRP}{I1}{%
+¿Cuál es la principal diferencia entre la heurística de Silver-Meal y el algoritmo de Wagner-Whitin?
+}{%
+\textbf{Silver-Meal} es una heurística (minimiza costo promedio por período) que puede caer en óptimos locales. \textbf{Wagner-Whitin} usa programación dinámica y asegura encontrar siempre el óptimo global.
+}

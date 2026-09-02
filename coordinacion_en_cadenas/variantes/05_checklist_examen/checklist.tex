@@ -1,0 +1,97 @@
+\section{Checklist de examen}
+
+\begin{trampa}{Si cambian los numeros}
+Si cambian \(100\), \(1\), \(c\), o se agrega un costo al minorista, no cambia la logica. Cambian los parametros:
+\[
+p=a-bq,
+\qquad
+c=\text{costo proveedor},
+\qquad
+k=\text{costo unitario adicional del minorista}.
+\]
+
+Si existe \(k\), reemplaza \(c\) por \(c+k\) en la cadena centralizada y usa:
+\[
+w_D=\frac{a+c-k}{2},
+\qquad
+q_D=\frac{a-c-k}{4b},
+\qquad
+p_D=\frac{3a+c+k}{4}.
+\]
+Centralizado:
+\[
+q_C=\frac{a-c-k}{2b},
+\qquad
+p_C=\frac{a+c+k}{2}.
+\]
+\end{trampa}
+
+\begin{materia}{Frases que suman puntos}
+\begin{itemize}[itemsep=2pt]
+    \item ``La cadena descentralizada no maximiza la utilidad total, porque cada agente optimiza localmente.''
+    \item ``La doble marginalizacion genera un precio final mayor y una cantidad vendida menor.''
+    \item ``El contrato coordina si induce al minorista a elegir la cantidad centralizada.''
+    \item ``El parametro \(\alpha\) no cambia la utilidad total si el contrato coordina; solo reparte la utilidad entre agentes.''
+    \item ``La eleccion entre contratos depende de eficiencia total y distribucion de beneficios.''
+\end{itemize}
+\end{materia}
+
+\begin{materia}{Mini algoritmo}
+\[
+\begin{array}{c|l}
+\text{Paso} & \text{Que hacer} \\
+\hline
+1 & \text{Escribir demanda inversa } p=a-bq.\\
+2 & \text{Resolver respuesta del minorista } q(w).\\
+3 & \text{Maximizar utilidad del proveedor para obtener } w_D.\\
+4 & \text{Calcular } q_D,p_D,\Pi_s^D,\Pi_r^D,\Pi_{SC}^D.\\
+5 & \text{Resolver centralizado } q_C,p_C,\Pi_{SC}^C.\\
+6 & \text{Comparar: cantidad, precio, utilidad total.}\\
+7 & \text{Si hay contrato, verificar si logra } q_C.\\
+8 & \text{Repartir utilidad y chequear participacion de ambos.}
+\end{array}
+\]
+\end{materia}
+
+\begin{materia}{Como leer la notacion de utilidad}
+La regla es:
+\[
+\Pi_{\text{quien}}^{\text{escenario}}.
+\]
+El subindice dice quien gana la utilidad:
+\[
+s=\text{proveedor},
+\qquad
+r=\text{minorista},
+\qquad
+SC=\text{cadena completa}.
+\]
+El superindice dice en que escenario:
+\[
+D=\text{descentralizado},
+\qquad
+C=\text{centralizado},
+\qquad
+A,B=\text{contratos comparados}.
+\]
+Ejemplos:
+\[
+\Pi_s^D=\text{utilidad del proveedor sin coordinacion},
+\]
+\[
+\Pi_r^D=\text{utilidad del minorista sin coordinacion},
+\]
+\[
+\Pi_{SC}^C=\text{utilidad maxima total si la cadena se coordina perfectamente}.
+\]
+\end{materia}
+
+\begin{trampa}{Errores frecuentes}
+\begin{itemize}[itemsep=2pt]
+    \item Confundir \(w\) con \(p\). \(w\) es precio mayorista; \(p\) es precio al cliente final.
+    \item Maximizar primero al proveedor sin considerar la respuesta del minorista.
+    \item Decir que un contrato es mejor solo porque mejora al proveedor. Debe evaluarse tambien al minorista y a la utilidad total.
+    \item Olvidar que una tarifa fija \(F\) no cambia la cantidad si no altera el costo marginal del minorista.
+    \item Olvidar la frase final de interpretacion: doble marginalizacion.
+\end{itemize}
+\end{trampa}

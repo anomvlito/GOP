@@ -1,0 +1,136 @@
+\section{Casos, La Meta, Toyota y Zara}
+
+\subsection{La Meta: cuello de botella y throughput}
+
+\begin{materia}{ideas que se repiten}
+En \emph{La Meta}, la meta operacional no es maximizar utilizacion local sino aumentar throughput del sistema, controlando inventario y gasto operacional:
+\[
+  \text{Utilidad del sistema} \uparrow
+  \quad \Leftrightarrow \quad
+  T \uparrow,\; I \downarrow,\; OE \downarrow.
+\]
+El cuello de botella determina el throughput maximo. Una hora perdida en el cuello es una hora perdida del sistema; una hora ahorrada en un no-cuello puede no cambiar nada.
+\end{materia}
+
+\begin{enunciado}{Examen 2015, pregunta La Meta}
+Responda cada una de las siguientes preguntas relacionadas con el libro ``La Meta''.
+
+El gerente de una fabrica le pide su ayuda con respecto a la gestion de sus procesos productivos. El proceso en cuestion corresponde a 3 etapas que funcionan como una linea de produccion serie donde se le realizan operaciones de transformacion al producto. El gerente se leyo un resumen del libro ``La Meta'' en donde se habla del cuello de botella y detecto que la tercera etapa del proceso es el cuello de botella. Como se debe asociar la entrada de material al cuello de botella, siempre se mantiene inventario disponible mediante un buffer antes de la primera etapa. Ademas, se trabaja 24 horas al dia mediante 3 turnos de 8 horas; sin embargo, en los cambios de turno se detiene la produccion. Finalmente, para evitar problemas de calidad, existe un control al final del proceso. Usted, que se leyo el libro completo y no el resumen, explique:
+
+\begin{enumerate}[label=\alph*)]
+  \item Como y por que se podria aumentar el throughput del proceso.
+  \item Si pudiera mover el control de calidad dentro del proceso, donde lo pondria?
+  \item La segunda etapa del proceso depende principalmente del trabajo de obreros, mientras que la tercera se encuentra casi totalmente automatizada. La variabilidad de la segunda etapa es del doble que la de la tercera. Que problemas puede causar este factor en la productividad de la planta? Refierase a ejemplos del libro para explicar mas claramente.
+\end{enumerate}
+
+Diagrama:
+\[
+  \text{Inventario}\rightarrow \text{Etapa 1}\rightarrow \text{Etapa 2}\rightarrow \text{Etapa 3}.
+\]
+\end{enunciado}
+
+\begin{pautacompleta}{pauta La Meta 2015}
+Para aumentar throughput se puede reducir los tiempos muertos provocados por el cambio de turno, asegurarse de que el cuello de botella este siempre ocupado, aumentar la capacidad del cuello de botella o externalizar parte del trabajo que realiza el cuello de botella. La razon es que el throughput total queda determinado por la restriccion del sistema.
+
+El control de calidad debe ponerse antes del cuello de botella. Si los productos defectuosos pasan por el cuello y se rechazan al final, consumen capacidad critica y generan perdida para todo el sistema.
+
+La variabilidad en la segunda etapa puede provocar que el cuello de botella no reciba materia prima a tiempo. Como el cuello trabaja a toda su capacidad, no logra recuperar el tiempo perdido cuando recibe los insumos mas adelante. Un ejemplo del libro es el juego de Alex con los scouts y los fosforos: la variabilidad acumulada reduce el flujo real aunque los promedios parezcan suficientes.
+\end{pautacompleta}
+
+\subsection{Zara y efecto latigo}
+
+\begin{enunciado}{Examen 2015, verdadero/falso Zara}
+Seccion verdadero o falso. Indique si la siguiente afirmacion es verdadera o falsa. En caso de ser falsa, indique la razon:
+
+``En el caso Zara se aprendio que para disminuir el efecto latigo dentro de una cadena de suministro basta con integrar la informacion y centralizar la decision de cuanto producir.''
+\end{enunciado}
+
+\begin{pautacompleta}{pauta conceptual Zara}
+Falso si se interpreta que ``basta'' solo con informacion integrada y decision centralizada. Esas medidas ayudan porque reducen distorsion de demanda entre eslabones, pero el caso Zara tambien se sostiene en tiempos de respuesta cortos, lotes pequeños, flexibilidad productiva, reposicion frecuente, cercania entre diseño-produccion-distribucion y lectura rapida de ventas reales.
+
+La respuesta completa debe decir: integrar informacion reduce el efecto latigo, pero no es suficiente si la cadena sigue teniendo lead times largos, grandes lotes y poca flexibilidad.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2018, Juego de la Cerveza}
+El Juego de la Cerveza muestra como pequeñas variaciones en la demanda final pueden amplificarse a medida que se avanza aguas arriba en la cadena de suministro. Identifique al menos tres causas del efecto latigo y explique como las empresas pueden abordarlas.
+\end{enunciado}
+
+\begin{pautacompleta}{pauta conceptual efecto latigo}
+Tres causas clasicas son:
+\begin{itemize}
+  \item falta de informacion de demanda real entre eslabones;
+  \item pedidos por lote y politicas de reposicion que amplifican cambios;
+  \item promociones o descuentos que inducen compras adelantadas;
+  \item lead times largos que obligan a sobrerreaccionar;
+  \item racionamiento o escasez que incentiva inflar pedidos.
+\end{itemize}
+Las empresas lo abordan compartiendo informacion de venta real, reduciendo lead times, usando VMI o CPFR, estabilizando precios, reduciendo tamaños de lote y coordinando reglas de reposicion. La idea central es que la cadena debe reaccionar a consumo real, no a señales distorsionadas por cada eslabon.
+\end{pautacompleta}
+
+\subsection{Toyota, TPS y Lean}
+
+\begin{materia}{TPS en una respuesta corta}
+TPS se sostiene en Just in Time y Jidoka. JIT produce lo necesario, cuando se necesita y en la cantidad necesaria; Jidoka detiene y visibiliza problemas para no traspasar defectos. Herramientas asociadas: Kanban, Heijunka, Andon, 5S, Kaizen, Genchi Genbutsu y eliminacion de muda.
+\end{materia}
+
+\begin{enunciado}{Examen 2019, verdadero/falso JIT}
+Seccion verdadero o falso. Indique si la siguiente afirmacion es verdadera o falsa. En caso de ser falsa, indique la razon:
+
+``El objetivo final del Just in Time y el Lean es que el sistema productivo tenga cero inventario.''
+\end{enunciado}
+
+\begin{pautacompleta}{pauta 2019}
+Falso. La pauta indica que JIT no busca tener 0 inventario, porque siempre es necesario tener algo de inventario en el sistema incluso en JIT o Lean.
+
+La respuesta completa es que Lean/JIT busca eliminar desperdicio e inventario innecesario, no declarar que todo inventario debe ser cero. En sistemas con variabilidad, lead times y demanda incierta, ciertos buffers pueden ser necesarios. El inventario en Lean es una señal de problemas, pero tambien puede ser una proteccion operacional racional cuando existe incertidumbre.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2018, evolucion de calidad}
+En calidad se ha evolucionado primero desde Total Quality Management (TQM), hacia Calidad Robusta y ahora se orienta el proceso a Six Sigma. Describa cada uno de estos conceptos de calidad y comente que es lo que ha aportado cada uno a mejorar la calidad en las organizaciones.
+\end{enunciado}
+
+\begin{pautacompleta}{pauta conceptual calidad}
+TQM, o Total Quality Management, entiende la calidad como una responsabilidad transversal de toda la organizacion. Su aporte es instalar mejora continua, orientacion al cliente, participacion de las personas y gestion sistematica de procesos.
+
+Calidad robusta busca diseñar productos y procesos que sean menos sensibles a fuentes de variacion o ruido. Su aporte es mover la calidad desde la inspeccion hacia el diseño: si el proceso es robusto, pequeñas variaciones de insumos, ambiente o uso no destruyen el desempeño.
+
+Six Sigma se enfoca en reducir la variabilidad del proceso usando datos, estadistica y proyectos estructurados. Su metodologia tipica es DMAIC:
+\[
+  \text{Definir}\rightarrow \text{Medir}\rightarrow \text{Analizar}\rightarrow \text{Mejorar}\rightarrow \text{Controlar}.
+\]
+Su aporte es operacionalizar la mejora con metricas, control estadistico, analisis de causa raiz y objetivos cuantitativos de defectos.
+\end{pautacompleta}
+
+\subsection{V/F conceptuales frecuentes}
+
+\begin{longtable}{p{0.20\linewidth}p{0.48\linewidth}p{0.22\linewidth}}
+\toprule
+Año & Afirmacion resumida & Respuesta-receta \\
+\midrule
+\endhead
+2015 & SPC controla la variable del proceso en torno al promedio. & Incompleta/falsa si omite variabilidad: se controla media y dispersion. \\
+2015 & Cross Dock minimiza inventario. & Verdadero en espiritu: reduce almacenamiento al transferir rapido recepcion-despacho. \\
+2016/2017 & Actividades de CD: recepcionar, guardar, buscar y despachar. & Verdadero como cadena operacional basica. \\
+2016/2017 & Siempre conviene aumentar posiciones en almacenamiento compartido. & Falso: hay tradeoff espacio, complejidad y tiempos. \\
+2019 & SKU popular con pocos pickeos debe ir a pick frontal. & Falso: si sale en pallet completo, puede no generar beneficio de picking rapido. \\
+2019 & Disminuir aceptacion $c$ aumenta riesgo productor $\alpha$. & Verdadero: se rechazan mas lotes buenos. \\
+\bottomrule
+\end{longtable}
+
+\subsection{V/F de Arrastre que se repiten}
+
+\begin{longtable}{p{0.18\linewidth}p{0.50\linewidth}p{0.24\linewidth}}
+\toprule
+Tema & Afirmacion frecuente & Respuesta-receta \\
+\midrule
+\endhead
+Pronosticos & Los errores sistematicos son los que no pueden explicarse con ningun modelo. & Falso: esos son aleatorios. Sistematicos tienen patron/sesgo. \\
+EOQ & En EOQ el costo de emitir una orden disminuye al aumentar la cantidad ordenada. & Falso: el costo por orden $S$ es constante; lo que baja es el numero de ordenes $D/Q$. \\
+L4L & Lote a lote produce solo lo necesario y por eso siempre minimiza inventario. & Falso/incompleto: minimiza inventario, pero ignora setups y puede no ser optimo si setup es relevante. \\
+PERT & Pseudoactividades requieren mas de un recurso. & Falso: son actividades ficticias, sin duracion ni consumo de recursos. \\
+Localizacion & Punto de equilibrio y centro de gravedad tienen soluciones factibles acotadas. & Falso: centro de gravedad tiene continuo de ubicaciones factibles. \\
+Colas & El tiempo de flujo promedio es directamente proporcional a la utilizacion. & Falso: crece de forma convexa y explota cuando $\rho\to 1$. \\
+VUT & Kingman entrega el tiempo exacto de espera. & Falso: es aproximacion para sistemas generales. \\
+Calidad & Calidad percibida por cliente es objetiva. & Falso: depende de expectativas, percepcion, servicio y contexto. \\
+\bottomrule
+\end{longtable}

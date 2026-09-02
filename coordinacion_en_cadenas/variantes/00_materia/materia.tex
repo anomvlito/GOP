@@ -1,0 +1,266 @@
+\section{Materia necesaria}
+
+\begin{materia}{Notacion, dominios y agentes}
+La cadena tiene dos agentes:
+\[
+\mathcal{A}=\{s,r\},
+\]
+donde \(s\) representa al proveedor o fabricante (\emph{supplier}) y \(r\) representa al minorista o retailer.
+
+La cantidad vendida al cliente final se denota por
+\[
+q\in\mathbb{R}_+,
+\]
+y el precio final pagado por el cliente se denota por
+\[
+p\in\mathbb{R}_+.
+\]
+La demanda inversa es una funcion \(p:\mathbb{R}_+\to\mathbb{R}_+\) dada por:
+\[
+p(q)=a-bq,
+\qquad
+a>0,\quad b>0.
+\]
+Equivalentemente, la demanda directa es:
+\[
+q(p)=a-bp,
+\]
+pero en esta guia se trabaja principalmente con la demanda inversa \(p(q)\), porque la variable de decision natural sera la cantidad \(q\).
+
+Los parametros principales son:
+\[
+\begin{array}{c|l}
+\toprule
+\text{Parametro} & \text{Significado} \\
+\midrule
+c\in\mathbb{R}_+ & \text{costo unitario de produccion del proveedor.}\\
+w\in\mathbb{R}_+ & \text{precio mayorista cobrado al minorista.}\\
+k\in\mathbb{R}_+ & \text{costo operativo unitario adicional del minorista, si existe.}\\
+\alpha\in(0,1) & \text{fraccion asignada al minorista en un contrato de reparto.}\\
+F\in\mathbb{R}_+ & \text{tarifa fija pagada por el minorista al proveedor.}\\
+\bottomrule
+\end{array}
+\]
+
+La letra griega \(\Pi\) se lee ``pi'' y representa \textbf{utilidad} o beneficio economico. No es la constante \(3.1416\). En este documento:
+\[
+\Pi=\text{utilidad}.
+\]
+El subindice indica \textbf{quien recibe} esa utilidad:
+\[
+\begin{array}{c|l}
+\toprule
+\text{Simbolo} & \text{Significado} \\
+\midrule
+\Pi_s & \text{utilidad del proveedor/fabricante } s.\\
+\Pi_r & \text{utilidad del minorista/retailer } r.\\
+\Pi_{SC} & \text{utilidad total de la cadena de suministro.}\\
+\bottomrule
+\end{array}
+\]
+El subindice \(SC\) viene de \emph{supply chain}. Por definicion:
+\[
+\Pi_{SC}=\Pi_s+\Pi_r.
+\]
+
+El superindice indica \textbf{en que escenario} se calcula esa utilidad:
+\[
+\begin{array}{c|l}
+\toprule
+\text{Superindice} & \text{Escenario} \\
+\midrule
+D & \text{descentralizado: proveedor y minorista optimizan por separado.}\\
+C & \text{centralizado: la cadena completa se optimiza como una sola firma.}\\
+A & \text{contrato A.}\\
+B & \text{contrato B.}\\
+\bottomrule
+\end{array}
+\]
+Por lo tanto, la lectura correcta es:
+\[
+\begin{array}{c|l}
+\toprule
+\text{Simbolo} & \text{Como se lee} \\
+\midrule
+\Pi_s^D & \text{utilidad del proveedor en el escenario descentralizado.}\\
+\Pi_r^D & \text{utilidad del minorista en el escenario descentralizado.}\\
+\Pi_{SC}^D & \text{utilidad total de la cadena en el escenario descentralizado.}\\
+\Pi_{SC}^C & \text{utilidad total maxima de la cadena centralizada.}\\
+\Pi_s^A,\Pi_r^A & \text{utilidades del proveedor y minorista bajo el contrato A.}\\
+\Pi_s^B,\Pi_r^B & \text{utilidades del proveedor y minorista bajo el contrato B.}\\
+\bottomrule
+\end{array}
+\]
+
+No se usara \(\Pi_D\) ni \(\Pi_C\) como abreviacion, porque es ambiguo: podria referirse al proveedor, al minorista o a la cadena completa. Siempre se escribira el subindice del agente o de la cadena: \(\Pi_s\), \(\Pi_r\) o \(\Pi_{SC}\).
+\end{materia}
+
+\begin{materia}{La idea economica}
+El ejercicio compara decisiones en una cadena de suministro con dos agentes:
+\[
+\text{Proveedor/Fabricante}
+\quad\longrightarrow\quad
+\text{Minorista/Retailer}
+\quad\longrightarrow\quad
+\text{Cliente final}.
+\]
+
+El proveedor produce con costo unitario \(c\) y vende al minorista a precio mayorista \(w\). El minorista vende al mercado a precio final \(p\), enfrentando una demanda:
+\[
+q=a-bp
+\quad\Longleftrightarrow\quad
+p=a-bq.
+\]
+En lo que sigue, \(a\) mide el intercepto de demanda y \(b\) mide la sensibilidad de la demanda al precio. Se asume:
+\[
+a>c,
+\]
+para que exista una cantidad eficiente positiva.
+
+Cuando cada agente maximiza su propia utilidad aparece \textbf{doble marginalizacion}: el proveedor agrega margen sobre \(c\), y luego el minorista agrega margen sobre \(w\). Esto sube el precio final, baja la cantidad vendida y reduce la utilidad total de la cadena.
+\end{materia}
+
+\begin{materia}{Cadena descentralizada}
+En la cadena descentralizada hay una decision secuencial:
+\[
+\text{proveedor elige } w\in\mathbb{R}_+,
+\qquad
+\text{minorista observa } w \text{ y elige } q\in\mathbb{R}_+.
+\]
+El precio final \(p\) no es una variable independiente una vez elegido \(q\), porque queda determinado por la demanda inversa:
+\[
+p=p(q)=a-bq.
+\]
+
+Para un \(w\) dado, el minorista maximiza:
+\[
+\Pi_r(q)=q(p-w)=q(a-bq-w).
+\]
+La expresion \(q(p-w)\) corresponde a:
+\[
+\text{cantidad vendida}\times\text{margen unitario del minorista}.
+\]
+Su condicion de primer orden es:
+\[
+\frac{d\Pi_r}{dq}=a-w-2bq=0
+\quad\Rightarrow\quad
+q(w)=\frac{a-w}{2b}.
+\]
+
+El proveedor anticipa esa respuesta y elige \(w\):
+\[
+\Pi_s(w)=(w-c)q(w)
+=(w-c)\frac{a-w}{2b}.
+\]
+Aqui \((w-c)\) es el margen unitario del proveedor y \(q(w)\) es la cantidad que el minorista decidira comprarle al observar \(w\).
+Derivando:
+\[
+w_D=\frac{a+c}{2}.
+\]
+Luego:
+\[
+q_D=\frac{a-c}{4b},
+\qquad
+p_D=\frac{3a+c}{4}.
+\]
+Utilidades:
+\[
+\Pi_s^D=\frac{(a-c)^2}{8b},
+\qquad
+\Pi_r^D=\frac{(a-c)^2}{16b},
+\qquad
+\Pi_{SC}^D=\frac{3(a-c)^2}{16b}.
+\]
+\end{materia}
+
+\begin{materia}{Cadena centralizada}
+En la cadena centralizada se supone que proveedor y minorista actuan como una sola firma integrada. La unica variable de decision relevante es:
+\[
+q\in\mathbb{R}_+.
+\]
+El precio final queda dado por \(p(q)=a-bq\). La utilidad total de la cadena no incluye \(w\), porque \(w\) es una transferencia interna entre agentes. Por eso se maximiza:
+\[
+\Pi_{SC}(q)=q(p-c)=q(a-bq-c).
+\]
+La condicion de primer orden es:
+\[
+\frac{d\Pi_{SC}}{dq}=a-c-2bq=0.
+\]
+Entonces:
+\[
+q_C=\frac{a-c}{2b},
+\qquad
+p_C=\frac{a+c}{2},
+\qquad
+\Pi_{SC}^C=\frac{(a-c)^2}{4b}.
+\]
+
+Comparacion clave:
+\[
+q_C=2q_D,
+\qquad
+p_C<p_D,
+\qquad
+\Pi_{SC}^C>\Pi_{SC}^D.
+\]
+\end{materia}
+
+\begin{materia}{Contrato de reparto de utilidades con \(\alpha\)}
+El contrato de reparto de ingresos/utilidades busca que el minorista elija la cantidad centralizada. Definimos el ingreso total de la cadena como:
+\[
+R(q)=p(q)q=(a-bq)q.
+\]
+El ingreso marginal es:
+\[
+R'(q)=a-2bq.
+\]
+
+Si el minorista conserva una fraccion \(\alpha\in(0,1)\) de los ingresos y paga \(w\) por unidad:
+\[
+\Pi_r(q)=\alpha R(q)-wq.
+\]
+El minorista elige:
+\[
+\alpha R'(q)-w=0
+\quad\Rightarrow\quad
+R'(q)=\frac{w}{\alpha}.
+\]
+La cadena integrada exige:
+\[
+R'(q)=c.
+\]
+Para coordinar:
+\[
+\frac{w}{\alpha}=c
+\quad\Rightarrow\quad
+\boxed{w=\alpha c}.
+\]
+
+Con este contrato:
+\[
+\Pi_r=\alpha\Pi_{SC}^C,
+\qquad
+\Pi_s=(1-\alpha)\Pi_{SC}^C.
+\]
+El rango viable de \(\alpha\) se obtiene imponiendo que ambos agentes ganen mas que en el caso descentralizado:
+\[
+\alpha\Pi_{SC}^C>\Pi_r^D,
+\qquad
+(1-\alpha)\Pi_{SC}^C>\Pi_s^D.
+\]
+\end{materia}
+
+\begin{trampa}{Plantilla de prueba}
+Si cambian numeros, no memorices resultados. Memoriza esta secuencia:
+\[
+\begin{aligned}
+&\text{descentralizado}
+\rightarrow q(w)
+\rightarrow w_D
+\rightarrow (q_D,p_D,\Pi_s^D,\Pi_r^D,\Pi_{SC}^D),\\
+&\text{centralizado}
+\rightarrow (q_C,p_C,\Pi_{SC}^C)
+\rightarrow \text{comparar contratos}.
+\end{aligned}
+\]
+\end{trampa}

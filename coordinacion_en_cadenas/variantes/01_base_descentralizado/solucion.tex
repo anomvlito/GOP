@@ -1,0 +1,102 @@
+\begin{solucion}{Caso base}
+Definimos:
+\[
+\begin{array}{c|l}
+\toprule
+\text{Simbolo} & \text{Significado} \\
+\midrule
+q\in\mathbb{R}_+ & \text{cantidad vendida al cliente final.}\\
+p\in\mathbb{R}_+ & \text{precio final al cliente.}\\
+w\in\mathbb{R}_+ & \text{precio mayorista elegido por el proveedor.}\\
+c\in\mathbb{R}_+ & \text{costo unitario de produccion.}\\
+\bottomrule
+\end{array}
+\]
+Las utilidades son:
+\[
+\Pi_s=\text{utilidad del proveedor},
+\qquad
+\Pi_r=\text{utilidad del minorista},
+\qquad
+\Pi_{SC}=\Pi_s+\Pi_r.
+\]
+El superindice \(D\) indica escenario descentralizado y el superindice \(C\) indica cadena centralizada.
+
+La demanda se puede escribir como:
+\[
+q=100-p
+\quad\Longleftrightarrow\quad
+p=100-q.
+\]
+Por lo tanto:
+\[
+a=100,\qquad b=1,\qquad c=1.
+\]
+Aqui \(a\) es el intercepto de la demanda inversa \(p(q)=a-bq\), y \(b\) es la pendiente absoluta de esa demanda.
+
+En la cadena descentralizada:
+\[
+w_D=\frac{a+c}{2}
+=\frac{100+1}{2}
+=50.5.
+\]
+La cantidad y el precio final son:
+\[
+q_D=\frac{a-c}{4b}
+=\frac{100-1}{4}
+=24.75,
+\]
+\[
+p_D=\frac{3a+c}{4}
+=\frac{3(100)+1}{4}
+=75.25.
+\]
+
+Utilidad proveedor:
+\[
+\Pi_s^D=(w_D-c)q_D
+=(50.5-1)(24.75)
+=1225.125.
+\]
+Utilidad minorista:
+\[
+\Pi_r^D=(p_D-w_D)q_D
+=(75.25-50.5)(24.75)
+=612.5625.
+\]
+Utilidad total:
+\[
+\Pi_{SC}^D=1225.125+612.5625
+=1837.6875.
+\]
+
+En la cadena centralizada:
+\[
+q_C=\frac{a-c}{2b}
+=\frac{100-1}{2}
+=49.5,
+\]
+\[
+p_C=\frac{a+c}{2}
+=\frac{100+1}{2}
+=50.5.
+\]
+La utilidad total centralizada es:
+\[
+\Pi_{SC}^C=(p_C-c)q_C
+=(50.5-1)(49.5)
+=2450.25.
+\]
+
+Comparando:
+\[
+q_C=49.5>24.75=q_D,
+\qquad
+p_C=50.5<75.25=p_D,
+\]
+\[
+\Pi_{SC}^C=2450.25>1837.6875=\Pi_{SC}^D.
+\]
+
+La cadena descentralizada vende menos y cobra mas caro porque proveedor y minorista agregan margen por separado. Esa perdida se llama \textbf{doble marginalizacion}.
+\end{solucion}

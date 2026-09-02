@@ -1,0 +1,125 @@
+\begin{solucion}{Comparacion de contratos}
+Definimos los escenarios:
+\[
+\begin{array}{c|l}
+\toprule
+\text{Escenario} & \text{Significado} \\
+\midrule
+D & \text{sin contrato, cadena descentralizada.}\\
+A & \text{contrato de reparto con } \alpha.\\
+B & \text{contrato con tarifa fija } F.\\
+\bottomrule
+\end{array}
+\]
+Para cada escenario \(e\in\{D,A,B\}\):
+\[
+\begin{array}{c|l}
+\toprule
+\text{Simbolo} & \text{Significado} \\
+\midrule
+\Pi_s^e & \text{utilidad del proveedor en el escenario } e.\\
+\Pi_r^e & \text{utilidad del minorista en el escenario } e.\\
+\Pi_{SC}^e & \text{utilidad total de la cadena: } \Pi_s^e+\Pi_r^e.\\
+\bottomrule
+\end{array}
+\]
+Ademas:
+\[
+\begin{array}{c|l}
+\toprule
+\text{Parametro} & \text{Significado} \\
+\midrule
+\alpha\in(0,1) & \text{fraccion asignada al minorista en el contrato A.}\\
+F\in\mathbb{R}_+ & \text{pago fijo del minorista al proveedor en el contrato B.}\\
+\bottomrule
+\end{array}
+\]
+
+Primero recordamos los resultados sin contrato:
+\[
+\Pi_s^D=1225.125,
+\qquad
+\Pi_r^D=612.5625,
+\qquad
+\Pi_{SC}^D=1837.6875.
+\]
+
+La utilidad centralizada maxima es:
+\[
+\Pi_{SC}^C=2450.25.
+\]
+
+\textbf{Contrato A: reparto de utilidades.}
+
+Con \(\alpha=0.35\):
+\[
+w=\alpha c=0.35.
+\]
+El contrato coordina, por lo que la utilidad total es:
+\[
+\Pi_{SC}^{A}=2450.25.
+\]
+La utilidad del minorista:
+\[
+\Pi_r^{A}=\alpha\Pi_{SC}^{A}
+=0.35(2450.25)
+=857.5875.
+\]
+La utilidad del proveedor:
+\[
+\Pi_s^{A}=(1-\alpha)\Pi_{SC}^{A}
+=0.65(2450.25)
+=1592.6625.
+\]
+
+\textbf{Contrato B: tarifa fija.}
+
+Si \(w=c=1\), el minorista enfrenta el costo marginal real de la cadena. Por lo tanto, elige la cantidad centralizada:
+\[
+q_C=49.5,
+\qquad
+p_C=50.5,
+\qquad
+\Pi_{SC}^{B}=2450.25.
+\]
+Antes de pagar la tarifa fija, toda la utilidad operacional queda en el minorista:
+\[
+2450.25.
+\]
+Como paga \(F=1400\), queda:
+\[
+\Pi_r^B=2450.25-1400=1050.25.
+\]
+El proveedor recibe:
+\[
+\Pi_s^B=F=1400.
+\]
+
+\textbf{Resumen:}
+\[
+\begin{array}{l|ccc}
+\toprule
+\text{Escenario} & \Pi_s & \Pi_r & \Pi_{SC} \\
+\midrule
+\text{Sin contrato} & 1225.13 & 612.56 & 1837.69 \\
+\text{Contrato A: } \alpha=0.35 & 1592.66 & 857.59 & 2450.25 \\
+\text{Contrato B: } F=1400 & 1400.00 & 1050.25 & 2450.25 \\
+\bottomrule
+\end{array}
+\]
+
+Ambos contratos A y B coordinan la cadena, porque ambos logran:
+\[
+\Pi_{SC}=2450.25.
+\]
+Pero distribuyen la utilidad de forma distinta. El proveedor prefiere A:
+\[
+1592.66>1400.
+\]
+El minorista prefiere B:
+\[
+1050.25>857.59.
+\]
+
+La respuesta tecnica es: ambos contratos son eficientes para la cadena, pero la eleccion depende del poder de negociacion de las partes.
+\end{solucion}

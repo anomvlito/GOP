@@ -1,0 +1,617 @@
+\section{TPS, Just in Time, Lean y Casos}
+
+\subsection{Kanban y defectos}
+
+\begin{materia}{kanbans}
+Para una etapa $i$:
+\[
+  N_i=\frac{D_iL_i}{C_i},
+\]
+donde $D_i$ es demanda durante la unidad de tiempo, $L_i$ es lead time total de reposicion y $C_i$ es tamaño del contenedor. Si hay defectos y $D$ es demanda buena:
+\[
+  D_i^{\text{bruta}}=\frac{D}{y},\qquad y=1-\text{tasa de defecto}.
+\]
+Por tanto:
+\[
+  N_i=\frac{DL_i}{yC_i}.
+\]
+\end{materia}
+
+\begin{enunciado}{Examen 2015, Tarjetas ABC JIT}
+La empresa Tarjetas ABC desea establecer un plan de produccion JIT. La demanda diaria registrada es de 200 tarjetas telefonicas por hora. El proceso de produccion de estas tarjetas pasa por 3 grandes operaciones antes del control de calidad ubicado al final de la linea: impresion de las leyendas (P1), la inclusion del chip (P2) y cortado de la tarjeta (P3).
+
+El diagrama del proceso es:
+\[
+  P1\rightarrow P2\rightarrow P3\rightarrow \text{Control de calidad}.
+\]
+
+La empresa cuenta con un registro de los tiempos promedios de procesamiento $t_{pi}$ por operacion, ademas de los tiempos de envio de los Kanbans $t_{ki}$ y tiempos de envio de los lotes $t_{vi}$.
+
+\begin{center}
+\begin{tabular}{c|cccc}
+\toprule
+Operacion & Lote $(C)$ & $t_{pi}$ (seg) & $t_{ki}$ (seg) & $t_{vi}$ (seg)\\
+\midrule
+P1 & 200 & 85 & 45 & 200\\
+P2 & 250 & 78 & 67 & 300\\
+P3 & 300 & 50 & 92 & 150\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Por su parte, los registros historicos del control de calidad indican que en promedio un 15\% de las unidades son descartadas.
+
+\begin{enumerate}[label=\alph*)]
+  \item A partir de los datos anteriores, calcule el numero de Kanbans necesarios en el proceso productivo.
+\end{enumerate}
+
+Las investigaciones de la empresa han determinado que el proceso P3 es el que esta actualmente generando el 15\% del descarte de las tarjetas, las cuales no estan saliendo con los tamaños adecuados. Se realizo un muestreo del largo de las tarjetas de 5 lotes recibidos durante los ultimos 5 dias. Los resultados se muestran a continuacion:
+
+\begin{center}
+\begin{tabular}{c|ccccc}
+\toprule
+Dia & \multicolumn{5}{c}{Largo (milimetros)}\\
+\midrule
+1 & 70 & 56 & 49 & 67 & 61\\
+2 & 65 & 47 & 70 & 70 & 68\\
+3 & 70 & 49 & 42 & 68 & 54\\
+4 & 50 & 47 & 52 & 67 & 50\\
+5 & 48 & 65 & 51 & 50 & 65\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A partir de lo anterior:
+\begin{enumerate}[label=\alph*),resume]
+  \item Calcule los limites de control, eliminando los outliers. Realice los graficos correspondientes.
+  \item Si el dia 6 usted toma una muestra con los siguientes resultados: 63, 54, 43, 69 y 65. Que puede decir de la muestra? Esta el proceso bajo control?
+  \item El implementar el control reduce las fallas del sistema a solo un 5\%. Con esta informacion, cambia el numero de Kanbans? Argumente.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2015}
+Para cada proceso:
+\[
+  L_i=t_{pi}+t_{ki}+t_{vi}.
+\]
+Luego:
+\[
+  L_1=85+45+200=330,\qquad
+  L_2=78+67+300=445,\qquad
+  L_3=50+92+150=292.
+\]
+Como se descarta 15\%, el rendimiento es:
+\[
+  y=1-0.15=0.85.
+\]
+La demanda buena requerida es $D=200$ tarjetas/hora. La demanda bruta que debe circular antes del control de calidad es:
+\[
+  D^{\text{bruta}}=\frac{200}{0.85}.
+\]
+La formula usada por la pauta es:
+\[
+  N_i=\frac{D}{1-0.15}\cdot \frac{L_i}{C_i}.
+\]
+La pauta reporta:
+\[
+  N_1=389,\qquad N_2=419,\qquad N_3=230.
+\]
+
+Para control de calidad, con muestras de tamaño $n=5$ se usan constantes:
+\[
+  A_2=0.58,\qquad D_3=0,\qquad D_4=2.11.
+\]
+La pauta indica inicialmente:
+\[
+  LCS_R=D_4\bar R=68.3,\qquad
+  LCI_R=D_3\bar R=0,
+\]
+\[
+  LCS_{\bar X}=\bar{\bar X}+A_2\bar R=77.6,\qquad
+  LCI_{\bar X}=\bar{\bar X}-A_2\bar R=40.
+\]
+Al observar datos fuera de rango, se eliminan outliers. La pauta recalcula:
+\[
+  \bar{\bar X}_{\text{nuevo}}=58.8,\qquad
+  \bar R_{\text{nuevo}}=24.6.
+\]
+Entonces:
+\[
+  LCS_R=2.11(24.6)=51.9,\qquad LCI_R=0,
+\]
+\[
+  LCS_{\bar X}=58.8+0.58(24.6)=73.07,
+  \qquad
+  LCI_{\bar X}=58.8-0.58(24.6)=44.53.
+\]
+
+Para el dia 6:
+\[
+  \bar X_6=\frac{63+54+43+69+65}{5}=58.8,
+  \qquad
+  R_6=69-43=26.
+\]
+Como:
+\[
+  44.53\leq 58.8\leq 73.07,
+  \qquad
+  0\leq 26\leq 51.9,
+\]
+la muestra del dia 6 esta bajo control segun los limites recalculados.
+
+Si las fallas bajan a 5\%, el rendimiento pasa a:
+\[
+  y_{\text{nuevo}}=0.95.
+\]
+El nuevo numero de Kanbans cae proporcionalmente:
+\[
+  N_{i,\text{nuevo}}=N_{i,\text{viejo}}\frac{0.85}{0.95}.
+\]
+Por lo tanto, la pauta obtiene:
+\[
+  N_1=348,\qquad N_2=375,\qquad N_3=205.
+\]
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2018, JIT con fallas y control}
+Suponga el siguiente proceso que funciona mediante el uso de Just in Time y Kanbans. El sistema productivo produce un producto P1 y se produce a traves de 3 maquinas que funcionan en serie y sus capacidades se indican en unidades por minuto, las cuales no tienen variabilidad.
+
+\[
+  \text{Proveedor}
+  \xleftarrow{\text{Kanban}}
+  \text{M1: 100 uni/min}
+  \xleftarrow{\text{Kanban}}
+  \text{M2: 55 uni/min}
+  \xleftarrow{\text{Kanban}}
+  \text{M3: 120 uni/min}
+  \rightarrow
+  \text{Cliente}.
+\]
+
+\begin{enumerate}[label=\alph*)]
+  \item La empresa ha establecido que los lotes de produccion sean de 100 unidades y el tiempo que se demora un Kanban en arribar de una maquina a otra es de 2 minutos y el tiempo en que se demora el lote de moverse de una maquina a otra es de 6 minutos. El Kanban desde M1 al proveedor demora 3 minutos en llegar, el proveedor demora en producir el lote 15 minutos y 10 minutos en entregar el Kanban a la empresa. Si la demanda del cliente es de 22800 unidades al dia, con una variacion de 5\%, y se trabaja un turno de 8 hrs al dia, cual seria el numero optimo de Kanbans entre cada maquina y el proveedor?
+  \item M1 presenta fallas. El tiempo entre una falla y otra es de 100 hrs y cuando falla, la reparacion demora en promedio 25 minutos. Afecta esto el numero de Kanban y cual seria el numero optimo?
+  \item Se le informa a usted que M1 tambien produce un 20\% de unidades defectuosas que son descubiertas una vez que pasan el proceso de M3. Estas unidades deben ser desechadas. Con esta informacion, cual seria el numero optimo de Kanbans, tomando en cuenta el tiempo de falla de b)? Si puede colocar un control de calidad en el proceso, en que parte lo colocaria y cual seria su efecto en las unidades producidas y costo? Si elimina los defectos, cual seria su efecto en las unidades producidas y el costo?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{desarrollo de estudio 2018}
+La demanda por minuto con proteccion de 5\% es:
+\[
+  D=\frac{22800}{8\cdot 60}(1.05)=49.875\ \text{unidades/min}.
+\]
+Entre maquinas, el lead time de reposicion de un contenedor incluye el viaje del Kanban y el movimiento del lote:
+\[
+  L=2+6=8\ \text{min}.
+\]
+Con lote $C=100$:
+\[
+  N=\frac{DL}{C}=\frac{49.875(8)}{100}=3.99.
+\]
+Se redondea hacia arriba:
+\[
+  N=4\ \text{Kanbans entre M3-M2 y entre M2-M1}.
+\]
+Para proveedor-M1:
+\[
+  L_{\text{prov}}=3+15+10=28\ \text{min},
+\]
+\[
+  N_{\text{prov}}=\frac{49.875(28)}{100}=13.97\Rightarrow 14.
+\]
+
+Si M1 falla, su disponibilidad es:
+\[
+  A=\frac{MTTF}{MTTF+MTTR}
+  =
+  \frac{100\cdot 60}{100\cdot 60+25}
+  =0.99585.
+\]
+La capacidad efectiva de M1 es:
+\[
+  100(0.99585)=99.585\ \text{unidades/min}.
+\]
+Como la demanda protegida $49.875$ queda muy por debajo de la capacidad efectiva, las fallas no cambian el cuello de botella ni el numero de Kanbans por capacidad. Si se incorpora el efecto de fallas como aumento del lead time efectivo de M1:
+\[
+  L_{\text{efectivo}}\approx \frac{L}{A},
+\]
+el cambio es marginal:
+\[
+  \frac{8}{0.99585}=8.033,
+\]
+\[
+  N=\frac{49.875(8.033)}{100}=4.01\Rightarrow 5
+\]
+si se redondea estrictamente por exceso con esa correccion. La idea conceptual esperada es indicar que el efecto es muy pequeño porque la disponibilidad es casi 1.
+
+Si M1 genera 20\% de defectuosos que se detectan despues de M3, el rendimiento es:
+\[
+  y=0.8.
+\]
+La demanda bruta antes de M1 debe ser:
+\[
+  D^{\text{bruta}}=\frac{49.875}{0.8}=62.34375\ \text{unidades/min}.
+\]
+Entonces:
+\[
+  N_{\text{entre maquinas}}=\frac{62.34375(8)}{100}=4.99\Rightarrow 5,
+\]
+\[
+  N_{\text{prov}}=\frac{62.34375(28)}{100}=17.46\Rightarrow 18.
+\]
+El control de calidad debe ubicarse inmediatamente despues de M1, o antes de que las unidades defectuosas consuman capacidad de M2 y M3. Su efecto es evitar que unidades malas sigan avanzando, reduciendo costo de procesamiento desperdiciado y protegiendo capacidad aguas abajo. Si se eliminan los defectos, vuelve el rendimiento a $y=1$, baja la produccion bruta requerida y tambien bajan Kanbans, inventario en proceso y costo.
+\end{pautacompleta}
+
+\subsection{Lean y TPS conceptual}
+
+\begin{enunciado}{Examen 2019, verdadero/falso Lean}
+Seccion verdadero o falso. Indique si la siguiente afirmacion es verdadera o falsa. En caso de ser falsa, indique la razon:
+
+``El objetivo final del Just in Time y el Lean es que el sistema productivo tenga cero inventario.''
+\end{enunciado}
+
+\begin{pautacompleta}{pauta conceptual 2019}
+Falso. La pauta indica que JIT no busca tener literalmente 0 inventario, porque siempre es necesario tener algo de inventario en el sistema incluso en JIT o Lean.
+
+La respuesta completa debe distinguir:
+\begin{itemize}
+  \item Lean y JIT buscan eliminar desperdicios, no eliminar mecanicamente todo inventario.
+  \item Inventario excesivo oculta problemas de calidad, variabilidad, setup y coordinacion.
+  \item En presencia de variabilidad, tiempos de reposicion y restricciones fisicas, puede ser necesario mantener inventario de ciclo, seguridad o buffers estrategicos.
+\end{itemize}
+Por eso la frase correcta seria: el objetivo es reducir inventarios innecesarios y desperdicio, manteniendo solo el inventario que el sistema necesita para operar de forma estable.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2015, La Meta y cuello de botella}
+Responda cada una de las siguientes preguntas relacionadas con el libro ``La Meta''.
+
+El gerente de una fabrica le pide su ayuda con respecto a la gestion de sus procesos productivos. El proceso en cuestion corresponde a 3 etapas que funcionan como una linea de produccion serie donde se le realizan operaciones de transformacion al producto. El gerente se leyo un resumen del libro ``La Meta'' en donde se habla del cuello de botella y detecto que la tercera etapa del proceso es el cuello de botella. Como se debe asociar la entrada de material al cuello de botella, siempre se mantiene inventario disponible mediante un buffer antes de la primera etapa. Ademas, se trabaja 24 horas al dia mediante 3 turnos de 8 horas; sin embargo, en los cambios de turno se detiene la produccion. Finalmente, para evitar problemas de calidad, existe un control al final del proceso. Usted, que se leyo el libro completo y no el resumen, explique:
+
+\begin{enumerate}[label=\alph*)]
+  \item Como y por que se podria aumentar el throughput del proceso.
+  \item Si pudiera mover el control de calidad dentro del proceso, donde lo pondria?
+  \item La segunda etapa del proceso depende principalmente del trabajo de obreros, mientras que la tercera se encuentra casi totalmente automatizada. La variabilidad de la segunda etapa es del doble que la de la tercera. Que problemas puede causar este factor en la productividad de la planta? Refierase a ejemplos del libro para explicar mas claramente.
+\end{enumerate}
+
+Diagrama:
+\[
+  \text{Inventario}\rightarrow \text{Etapa 1}\rightarrow \text{Etapa 2}\rightarrow \text{Etapa 3}.
+\]
+\end{enunciado}
+
+\begin{pautacompleta}{pauta La Meta 2015}
+Para aumentar throughput se puede:
+\begin{itemize}
+  \item reducir tiempos muertos provocados por cambios de turno;
+  \item asegurar que el cuello de botella este siempre ocupado;
+  \item aumentar la capacidad del cuello de botella;
+  \item externalizar parte del trabajo que realiza el cuello de botella;
+  \item proteger el cuello con un buffer adecuado antes de la restriccion real.
+\end{itemize}
+La razon es que, segun la teoria de restricciones, el throughput del sistema completo queda limitado por el recurso cuello de botella. Una hora perdida en el cuello es una hora perdida para todo el sistema.
+
+El control de calidad debe moverse antes del cuello de botella. Si una unidad defectuosa pasa por el cuello y recien se detecta al final, consumio capacidad escasa irrecuperable. Controlar antes evita que el cuello trabaje sobre unidades que no aportaran throughput.
+
+La mayor variabilidad de la segunda etapa puede hacer que el cuello de botella no reciba materia prima a tiempo. Como el cuello trabaja a toda capacidad, no puede recuperar despues el tiempo perdido. El ejemplo del libro es la caminata de Alex con los scouts y los fosforos: la variabilidad y dependencia entre etapas hacen que los atrasos se acumulen y que el flujo real sea menor al promedio aparente.
+\end{pautacompleta}
+
+\subsection{Procesos con desecho y mix de productos}
+
+\begin{enunciado}{Examen 2024, proceso con desecho}
+Usted tiene el siguiente proceso que consta de 4 etapas, que produce el producto A y durante el proceso se genera desecho.
+
+\begin{itemize}
+  \item Proceso 1: $20\ \text{kg/min}$.
+  \item Desde Proceso 1, el 75\% va a Proceso 2, con capacidad $6\ \text{kg/min}$.
+  \item Desde Proceso 1, el 25\% va a Proceso 3, con capacidad $8\ \text{kg/min}$.
+  \item Desde Proceso 2 y Proceso 3, el flujo va a Proceso 4, con capacidad $12\ \text{kg/min}$.
+  \item En el producto final que sale de Proceso 4, P2 aporta 80\% y P3 aporta 20\%; de Proceso 4 sale producto y desecho.
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+  \item Si el proceso trabaja continuamente, no permite tener inventarios y no esta limitada por la demanda o la llegada de insumos, determine el cuello de botella y la capacidad de produccion del producto A.
+  \item Si usted puede alterar los porcentajes con los que se distribuye los productos de P1 que llegan a P2 y P3, que distribucion permitiria maximizar la produccion y minimizar las perdidas? Cual seria el nivel de produccion? Cual proceso seria el cuello de botella?
+  \item Para el proceso con los porcentajes iniciales de la parte a), el proceso funciona 8 hrs al dia y la demanda del producto A es de 2.000 kg por dia y tiene una utilidad de 9 \$/kg. Si la empresa puede producir tambien los productos B o C y usted sabe que la demanda del producto B es de 2.500 kg por dia, tiene tasa de produccion en el cuello de botella de 15 kg/min y tiene utilidad de 5 \$/kg; y la demanda del producto C es de 2.000 kg por dia, tiene tasa de produccion en el cuello de botella de 10 kg/min y tiene utilidad de 9 \$/kg. Que productos debe producir, en que cantidad y cual seria la utilidad?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2024}
+En la parte a), la pauta indica que se debe saturar el flujo y que el cuello de botella es el Proceso 2. Con los porcentajes iniciales, para no superar P2:
+\[
+  0.75x\leq 6\quad\Rightarrow\quad x\leq 8\ \text{kg/min}.
+\]
+Con ese ingreso total:
+\[
+  \text{hacia P2}=0.75(8)=6,
+  \qquad
+  \text{hacia P3}=0.25(8)=2.
+\]
+La pauta reporta que la capacidad del proceso para producto A es:
+\[
+  7.6\ \text{kg/min}.
+\]
+
+En la parte b), el siguiente cuello relevante seria Proceso 4. Para maximizar produccion y minimizar desperdicio, se busca usar P4 a 12 kg/min y fijar P2 al maximo:
+\[
+  \text{flujo P2}=6\ \text{kg/min}.
+\]
+El remanente hacia P3 debe completar:
+\[
+  12-6=6\ \text{kg/min}.
+\]
+La pauta usa la relacion:
+\[
+  \text{entrada a P3}=\frac{6}{0.8}=7.5.
+\]
+Entonces el ingreso total es:
+\[
+  6+7.5=13.5\ \text{kg/min}.
+\]
+El porcentaje a P3 es:
+\[
+  \frac{7.5}{13.5}=55.55\%.
+\]
+El porcentaje a P2 es:
+\[
+  44.45\%.
+\]
+La pauta escrita reporta $45.55\%$ a P2; la aritmetica complementaria de $55.55\%$ es $44.45\%$.
+
+En la parte c), el cuello de botella con porcentajes iniciales da para A una tasa de 7.6 kg/min. Se calcula beneficio por minuto de cuello:
+\[
+  A:\;9(7.6)=68.4\ \$/\text{min},
+\]
+\[
+  B:\;5(15)=75\ \$/\text{min},
+\]
+\[
+  C:\;9(10)=90\ \$/\text{min}.
+\]
+Se ordena:
+\[
+  C\succ B\succ A.
+\]
+Hay:
+\[
+  8\cdot 60=480\ \text{min/dia}.
+\]
+Primero se produce C hasta su demanda:
+\[
+  \frac{2000}{10}=200\ \text{min}.
+\]
+Quedan:
+\[
+  480-200=280\ \text{min}.
+\]
+Luego se produce B:
+\[
+  \frac{2500}{15}=166.7\ \text{min}.
+\]
+Quedan:
+\[
+  280-166.7=113.3\ \text{min}.
+\]
+Con ese remanente, A producido seria:
+\[
+  113.3(7.6)=861.3\ \text{kg}.
+\]
+\textbf{Nota de consistencia.} La pauta transcrita dice que quedan 33.3 minutos y se producen 253 kg de A, pero al restar $480-200-166.7$ quedan 113.3 minutos. La logica correcta es ordenar por utilidad por minuto de cuello y asignar capacidad hasta agotar demanda o tiempo disponible.
+
+La utilidad con la aritmetica corregida es:
+\[
+  U=2000(9)+2500(5)+861.3(9)=38251.7.
+\]
+\end{pautacompleta}
+
+\subsection{Capacidad de linea y mejora del cuello de botella}
+
+\begin{enunciado}{Examen 2016, autos de juguete}
+La empresa Jot Wilz fabrica autos de juguete de distintos tamaños y colores. Para ello utiliza dos insumos: aluminio para la carroceria y ruedas. Actualmente trabajan 8 horas al dia, 5 dias a la semana y cada parte del proceso lo realiza una maquina diferente.
+
+En primer lugar se vierte una unidad de aluminio en el molde de plantilla creado por los diseñadores, para darle forma a los autos y luego se llevan a una camara de enfriado. A continuacion se ensamblan las 4 ruedas en los ejes y se pinta el auto. Finalmente se empacan en cajas para ser distribuidos. Un 10\% de los autos son testeados antes de ser empaquetados.
+
+Todo el proceso funciona como una linea de produccion continua, donde cada una de las maquinas tiene una capacidad promedio de trabajo, indicada en la siguiente tabla:
+
+\begin{center}
+\begin{tabular}{l|cc}
+\toprule
+Proceso & Capacidad maquina (autos/hr) & Maquinas\\
+\midrule
+Molde & 55 & 6\\
+Enfriado & 79 & 5\\
+Ensamblaje & 65 & 4\\
+Pintura & 100 & 2\\
+Testeo & 48 & 1\\
+Empaque & 110 & 4\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+El precio de una unidad de aluminio es de \$500 y cada rueda tiene un precio de \$100. La empresa tiene un mismo proveedor para ambos insumos, que demora 2 dias habiles en entregar los pedidos requeridos. Cada orden tiene un costo de \$50.000 y el costo de mantener inventario a la semana es un 10\% del precio de cada insumo. Cada auto de juguete vendido genera una utilidad de \$350.
+
+Responda las siguientes preguntas:
+\begin{enumerate}[label=\alph*.]
+  \item Determine la capacidad maxima que la fabrica puede procesar al dia. Cual es el cuello de botella? Cual es la utilidad semanal de la empresa?
+  \item Los gerentes han decidido realizar una mejora en la cadena de produccion y le han pedido ayuda para determinar que procesos deberian aumentar su capacidad y en cuanto, cantidad de maquinas extra, para poder satisfacer una demanda diaria de 2.400 autos. Cuanto estarian dispuestos a pagar los gerentes por este cambio en el sistema?
+  \item Asumiendo que los pedidos llegan de manera instantanea, la demanda diaria de 2.400 autos permanece constante al igual que el costo por emision de la orden y el tiempo de entrega de un pedido, calcule las cantidades optimas a pedir de aluminio y ruedas. Cual es el punto de reorden de cada insumo?
+  \item Calcule el costo anual total de la fabrica Jot Wilz.
+  \item Si ahora el gerente le informa que el proveedor esta teniendo problemas y ya no puede entregar los pedidos completos, sino a una tasa de 4.000 unidades/dia para el aluminio y 12.000 ruedas/dia, calcule cuanto deberia pedir ahora de cada insumo y cuanto le cuesta este cambio en comparacion a la situacion anterior. Explique a que se debe este cambio en el costo total.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta capacidad 2016}
+La capacidad total por proceso es:
+\[
+\begin{array}{l|ccc}
+\text{Proceso} & \text{cap. maq.} & \text{maquinas} & \text{cap. total}\\
+\hline
+\text{Molde} &55&6&330\\
+\text{Enfriado} &79&5&395\\
+\text{Ensamblaje} &65&4&260\\
+\text{Pintura} &100&2&200\\
+\text{Testeo} &48&1&48/0.1=480\\
+\text{Empaque} &110&4&440
+\end{array}
+\]
+El testeo se ajusta porque solo se testea el 10\% de los autos. Si se pueden testear 48 autos/hr, eso equivale a una produccion total de:
+\[
+  \frac{48}{0.1}=480\ \text{autos/hr}.
+\]
+El cuello de botella es Pintura:
+\[
+  \min\{330,395,260,200,480,440\}=200\ \text{autos/hr}.
+\]
+La capacidad diaria es:
+\[
+  200(8)=1600\ \text{autos/dia}.
+\]
+La utilidad semanal es:
+\[
+  1600(350)(5)=\$2{,}800{,}000.
+\]
+
+Para llegar a 2400 autos/dia se requieren:
+\[
+  \frac{2400}{8}=300\ \text{autos/hr}.
+\]
+Si se agrega una maquina en Pintura:
+\[
+  \text{Pintura}=100(3)=300,
+\]
+pero Ensamblaje queda en 260 autos/hr, por lo que la linea solo llegaria a:
+\[
+  260(8)=2080\ \text{autos/dia}.
+\]
+Por eso tambien se agrega una maquina en Ensamblaje:
+\[
+  \text{Ensamblaje}=65(5)=325.
+\]
+Con Pintura en 300 y Ensamblaje en 325, la capacidad diaria queda:
+\[
+  300(8)=2400\ \text{autos/dia}.
+\]
+La disposicion maxima a pagar por dia por la mejora es el margen incremental:
+\[
+  350(2400-1600)=\$280{,}000.
+\]
+\textbf{Nota.} Los incisos c), d) y e) son de inventarios/EOQ y se desarrollan en la seccion de arrastre e inventarios; aqui se deja completa la parte de capacidad y cuello de botella.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2015, galletas de arandanos}
+Usted se encuentra a cargo del proceso de produccion de una gran empresa productora de galletas. Su producto estrella son las galletas de arandanos y para la produccion de estas galletas se requiere de la masa base y los arandanos. A continuacion se detalla el proceso:
+
+\begin{itemize}
+  \item Arandanos frescos $\rightarrow$ Secado $\rightarrow$ Molido $\rightarrow$ Mezclado $\rightarrow$ Cocido $\rightarrow$ Control Calidad.
+  \item Secado $\rightarrow$ Azucarado $\rightarrow$ Control Calidad $\rightarrow$ Mezclado.
+  \item Masa base $\rightarrow$ Amasado $\rightarrow$ Mezclado.
+\end{itemize}
+
+Los arandanos frescos llegan de los proveedores y son sometidos a un proceso de secado, con una capacidad de 300 kg/hr. Posteriormente el 80\% de los arandanos va a un proceso de molido, con una capacidad de 280 kg/hr, en donde se transforma en polvo de arandano. El restante 20\% de los arandanos secos sigue a un proceso de azucarado, con una capacidad de 65 kg/hr, en donde se les coloca una capa de azucar y posteriormente se controla la calidad y un 10\% de los arandanos azucarados debe ser desechado por no cumplir con el standard de calidad. Por otro lado, la masa base pasa a la maquina de amasado, con una capacidad de 600 kg/hr. Posteriormente la masa base pasa junto a los arandanos azucarados y el polvo de arandano a la mezcladora, que tiene una capacidad de 800 kg/hr; posteriormente la mezcla pasa al cocido que tiene una capacidad de 850 kg/hr para finalmente someterse a un control de calidad, en donde el 3\% no cumple el estandar y debe ser desechado.
+
+\begin{enumerate}[label=\alph*)]
+  \item Cual es la maxima capacidad productiva del proceso en terminos de kilogramos de galletas por hora?
+  \item Si el proceso funciona a 1 turno de 8 hrs al dia por 240 dias al año, que cantidad anual de arandanos frescos y masa base debe comprar?
+  \item Si usted puede duplicar la capacidad productiva de solo 2 maquinas en el proceso, que dos maquinas duplicaria? Cual seria la capacidad productiva nueva?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{desarrollo de capacidad con mermas}
+Sea $F$ el flujo de arandanos frescos que entra a secado. Por capacidad de secado:
+\[
+  F\leq 300.
+\]
+Despues de secado, el 80\% va a molido:
+\[
+  0.8F\leq 280
+  \quad\Rightarrow\quad
+  F\leq 350.
+\]
+El 20\% va a azucarado:
+\[
+  0.2F\leq 65
+  \quad\Rightarrow\quad
+  F\leq 325.
+\]
+Por la rama de arandanos, el limite es:
+\[
+  F\leq \min\{300,350,325\}=300\ \text{kg/hr}.
+\]
+Con $F=300$, salen de molido:
+\[
+  0.8(300)=240\ \text{kg/hr}.
+\]
+En azucarado entran:
+\[
+  0.2(300)=60\ \text{kg/hr}.
+\]
+Como se desecha 10\%:
+\[
+  0.9(60)=54\ \text{kg/hr}
+\]
+llegan al mezclado por la rama azucarada. El aporte total de arandanos al mezclado es:
+\[
+  240+54=294\ \text{kg/hr}.
+\]
+La masa base puede aportar hasta:
+\[
+  600\ \text{kg/hr}.
+\]
+Entonces el flujo hacia mezclado seria:
+\[
+  294+600=894\ \text{kg/hr},
+\]
+pero mezclado limita a:
+\[
+  800\ \text{kg/hr}.
+\]
+Cocido permite 850 kg/hr, por lo que no limita antes que mezclado. El control final desecha 3\%, entonces la capacidad buena final es:
+\[
+  0.97(800)=776\ \text{kg/hr}.
+\]
+Por lo tanto, la capacidad maxima de galletas buenas es:
+\[
+  776\ \text{kg/hr}.
+\]
+
+Para compras anuales, el proceso trabaja:
+\[
+  8(240)=1920\ \text{hr/año}.
+\]
+En el regimen anterior, secado opera a 300 kg/hr de arandanos frescos:
+\[
+  \text{arandanos frescos}=300(1920)=576000\ \text{kg/año}.
+\]
+Como mezclado limita a 800 kg/hr, y los arandanos aportan 294 kg/hr, la masa base usada para saturar mezclado es:
+\[
+  800-294=506\ \text{kg/hr}.
+\]
+Por tanto:
+\[
+  \text{masa base}=506(1920)=971520\ \text{kg/año}.
+\]
+
+Para duplicar dos maquinas, se identifica primero el cuello:
+\[
+  \text{mezclado}=800\ \text{kg/hr antes de control final}.
+\]
+Si se duplica mezclado a 1600, el siguiente limite queda en cocido:
+\[
+  850\ \text{kg/hr antes de control final}.
+\]
+Duplicar cocido a 1700 deja de limitar cocido. Luego debe revisarse la disponibilidad de insumos: arandanos maximos 300 kg/hr aportan 294 kg/hr a mezcla y masa base 600 kg/hr, total:
+\[
+  894\ \text{kg/hr}.
+\]
+Asi, despues de duplicar mezclado y cocido, el limite pasa a ser la oferta conjunta de arandanos procesados y masa base:
+\[
+  894\ \text{kg/hr antes de control final}.
+\]
+La capacidad buena final es:
+\[
+  0.97(894)=867.18\ \text{kg/hr}.
+\]
+Las dos maquinas a duplicar son Mezclado y Cocido, y la nueva capacidad es aproximadamente:
+\[
+  867.2\ \text{kg/hr de galletas buenas}.
+\]
+\end{pautacompleta}

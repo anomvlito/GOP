@@ -1,0 +1,142 @@
+\section{Sección 2: Localización y Bodegas (Break-Even \& Gravedad)}
+
+\begin{tcolorbox}[enhanced, breakable, colback=blue!5!white,colframe=blue!60!black,title=Parámetros del Modelo]
+\textbf{Variables Fundamentales:}\\
+$CF$: Costo Fijo (ej. costo de adquisición, arriendo o instalación).\\
+$CV$: Costo Variable unitario (ej. costo de operación por unidad procesada).\\
+$X$ o $Q$: Nivel de producción o demanda esperada.\\
+$CT$: Costo Total ($CT = CF + CV \cdot X$).
+\end{tcolorbox}
+
+\subsection{Algoritmo 1: Centro de Gravedad (aproximación de localización)}
+Encontrar la coordenada $(X^*, Y^*)$ que pondera la posición de cada origen o
+destino por el volumen que mueve. En el curso se usa como una aproximación
+rápida de localización; no debe confundirse con la solución exacta de cualquier
+función de distancia.
+
+\begin{enumerate}
+    \item Haz una tabla con columnas: Localidad, $X_i$, $Y_i$, Volumen $V_i$.
+    \item Calcula la coordenada $X^*$ ponderando los volúmenes:
+    $$ X^* = \frac{\sum (X_i \cdot V_i)}{\sum V_i} $$
+    \item Calcula la coordenada $Y^*$ de la misma forma:
+    $$ Y^* = \frac{\sum (Y_i \cdot V_i)}{\sum V_i} $$
+    \item \textbf{Cálculo de Costo Total (Evaluación de la ubicación):} Si te piden evaluar esta nueva ubicación, primero calcula la \textbf{Distancia Manhattan} $d_i$ hacia cada localidad $i$:
+    $$ d_i = |X_i - X^*| + |Y_i - Y^*| $$
+    Luego, suma el costo de transporte para todas las localidades:
+    $$ \text{Costo Total} = \sum_{i} (\text{Costo Unitario} \cdot V_i \cdot d_i) $$
+\end{enumerate}
+
+\begin{trampa}{Centro de Gravedad versus distancia Manhattan}
+La fórmula del Centro de Gravedad minimiza exactamente una suma de distancias
+\emph{cuadráticas} ponderadas bajo sus supuestos habituales. Si el enunciado
+define explícitamente costo proporcional a distancia Manhattan
+$|x-x_i|+|y-y_i|$, la solución exacta es una \textbf{mediana ponderada} por
+coordenada, no necesariamente el promedio ponderado. En una prueba, aplica el
+método que pida el enunciado: ``Centro de Gravedad'' implica la fórmula de
+$X^*,Y^*$; ``minimizar Manhattan'' implica comparar la función o usar la
+mediana ponderada. Si solo solicitan evaluar el costo de una coordenada dada,
+recién ahí calcula la distancia Manhattan de cada ruta.
+\end{trampa}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Cálculo Centro de Gravedad}
+\textbf{Enunciado:} Una empresa desea ubicar un nuevo centro de distribución para abastecer tres localidades:
+\begin{itemize}
+    \item L1: Coordenadas $(10, 20)$, Volumen demandado $V_1 = 200$
+    \item L2: Coordenadas $(30, 40)$, Volumen demandado $V_2 = 300$
+    \item L3: Coordenadas $(50, 10)$, Volumen demandado $V_3 = 500$
+\end{itemize}
+
+\textbf{Resolución:}
+\begin{enumerate}
+    \item Volumen total: $\sum V_i = 200 + 300 + 500 = 1000$.
+    \item Coordenada $X^*$:
+    $$ X^* = \frac{10(200) + 30(300) + 50(500)}{1000} = \frac{2000 + 9000 + 25000}{1000} = 36 $$
+    \item Coordenada $Y^*$:
+    $$ Y^* = \frac{20(200) + 40(300) + 10(500)}{1000} = \frac{4000 + 12000 + 5000}{1000} = 21 $$
+    \item \textbf{Costo Total de Transporte (Distancia Manhattan):} Asumimos que el costo de transporte es el mismo para todas las rutas, por ejemplo, un Costo Unitario $= \$2$ por unidad transportada por km. Al tener la misma ponderación de costo para todas las localidades, este valor constante ($2$) sale factorizado de la sumatoria. Primero calculamos las distancias:
+    \begin{align*}
+        d_1 &= |10 - 36| + |20 - 21| = 26 + 1 = 27 \\
+        d_2 &= |30 - 36| + |40 - 21| = 6 + 19 = 25 \\
+        d_3 &= |50 - 36| + |10 - 21| = 14 + 11 = 25
+    \end{align*}
+    $$ \text{CT} = \sum_{i} (\text{Costo}_i \cdot V_i \cdot d_i) = \sum_{i} (2 \cdot V_i \cdot d_i) = 2 \cdot [ (200 \cdot 27) + (300 \cdot 25) + (500 \cdot 25) ] $$
+    $$ \text{CT} = 2 \cdot (5400 + 7500 + 12500) = 2 \cdot 25400 = 50800 $$
+\end{enumerate}
+\textbf{Conclusión:} La coordenada óptima es $(36, 21)$ con un costo total evaluado de $\$50.800$.
+\end{ejercicio}
+\vspace{0.4cm}
+
+\subsection{Algoritmo 2: Punto de Equilibrio Lineal (Break-Even)}
+Tienes dos opciones de plantas o procesos. ¿Cuál conviene más según la cantidad $Q$?
+
+\begin{enumerate}
+    \item \textbf{Plantea la ecuación de Costo Total (CT) para cada opción:} 
+    $$ CT = CF + CV \cdot Q $$
+    ($CF$ = Costo Fijo, $CV$ = Costo Variable).
+    \item \textbf{Punto de Indiferencia:} Iguala $CT_A = CT_B$.
+    $$ CF_A + CV_A \cdot Q = CF_B + CV_B \cdot Q $$
+    \item Despeja $Q^*$. Este es el umbral.
+    \item \textbf{Decisión:} Si produces $Q < Q^*$, elige la de \textbf{menor Costo Fijo}. Si produces $Q > Q^*$, elige la de \textbf{menor Costo Variable}.
+\end{enumerate}
+
+\subsection{Algoritmo 3: Break-Even Dinámico (Demanda Creciente)}
+Si te dicen "la demanda crece con el tiempo, $Q(t) = m \cdot t$", y te preguntan en qué año ($T$) conviene pasarse a la Planta B.
+
+\begin{enumerate}
+    \item \textbf{Iguala las sumatorias o integrales de costo:}
+    En vez de igualar el $CT$ de un año, igualas el costo acumulado desde el año 0 hasta $T$.
+    \item \textbf{Planteamiento Continuo (Integral):}
+    $$ \int_{0}^{T} (CF_A + CV_A \cdot Q(t)) dt = \int_{0}^{T} (CF_B + CV_B \cdot Q(t)) dt $$
+    Reemplaza $Q(t) = m \cdot t$, integra ambas partes y despeja $T$.
+    \item \textit{Hack para saltarse la integral (solo si $CF$ y $CV$ son constantes):}
+    La demanda acumulada hasta $T$ es el área de un triángulo: $\text{Acumulado} = \frac{1}{2} m \cdot T^2$.
+    Iguala: $CF_A \cdot T + CV_A (\frac{1}{2} m T^2) = CF_B \cdot T + CV_B (\frac{1}{2} m T^2)$. Dividiendo todo por $T$ (ya que $T>0$), puedes despejar $T$ fácilmente.
+\end{enumerate}
+
+\begin{trampa}{Costo fijo de compra versus costo fijo periódico}
+Antes de integrar, identifica la unidad del costo fijo. Si $CF$ es una compra
+única en $t=0$, el costo acumulado es
+$CF + CV\int_0^T Q(t)\,dt$; no corresponde multiplicar $CF$ por cada año.
+Si el enunciado define $CF$ como costo de operación por período, entonces sí se
+integra $CF\,dt$. Cuando una pauta entregue una convención distinta, declárala
+explícitamente y úsala de forma consistente en ambas alternativas.
+\end{trampa}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Punto de Equilibrio Lineal (Examen 2024 - PI.b)}
+\textbf{Enunciado:} Usted evalúa dos localizaciones (L1 y L2).
+\begin{itemize}
+    \item L1: Compra = 10.000, Operación = 25 / unidad.
+    \item L2: Compra = 40.000, Operación = 10 / unidad.
+\end{itemize}
+
+\textbf{Pregunta (a):} ¿Qué nivel de producción lo deja indiferente entre L1 o L2?
+
+\textbf{Resolución según el Algoritmo 2 (Break-Even):}
+\begin{enumerate}
+    \item Planteamos Ecuación L1: $CT_1 = 10.000 + 25X$
+    \item Planteamos Ecuación L2: $CT_2 = 40.000 + 10X$
+    \item Igualamos (Punto de indiferencia): 
+    $10.000 + 25X = 40.000 + 10X$
+    \item Despejamos: $15X = 30.000 \rightarrow X = 2.000$ unidades.
+\end{enumerate}
+\textit{Nota del examen:} Para $X < 2000$ conviene L1 (menor costo fijo). Para $X > 2000$ conviene L2 (menor costo variable).
+\end{ejercicio}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Break-Even Dinámico}
+\textbf{Enunciado:} Una planta antigua tiene Costo Fijo = 0 y Costo Variable = \$10/u. Una planta nueva tiene Costo Fijo = \$20.000 y Costo Variable = \$5/u. La demanda acumulada es creciente con el tiempo según la función $Q_{acum}(T) = \frac{1}{2} (100) T^2$ (es decir, $m=100$). 
+¿En qué año $T$ conviene económicamente hacer el cambio a la planta nueva?
+
+\textbf{Resolución según el Algoritmo 3:}
+\begin{enumerate}
+    \item Costo Acumulado Planta Antigua: $CT_{Antigua} = 0 + 10 \cdot Q_{acum}(T) = 10 \cdot (50 T^2) = 500 T^2$
+    \item Costo Acumulado Planta Nueva: $CT_{Nueva} = 20.000 \cdot T + 5 \cdot Q_{acum}(T) = 20.000 T + 250 T^2$
+    \item Igualamos Costos Acumulados:
+    $$ 500 T^2 = 20.000 T + 250 T^2 $$
+    $$ 250 T^2 = 20.000 T $$
+    \item Como $T > 0$, dividimos por $T$:
+    $$ 250 T = 20.000 \quad \rightarrow \quad T = \frac{20.000}{250} = 80 \text{ años.} $$
+\end{enumerate}
+\end{ejercicio}

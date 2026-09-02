@@ -1,0 +1,478 @@
+\section{Coordinacion en la Cadena}
+
+\begin{materia}{modelo base de doble marginalizacion}
+Demanda inversa:
+\[
+  P(Q)=a-bQ.
+\]
+Costo unitario del proveedor $c_s$ y costo unitario propio del retailer $c_r$. Si la cadena esta integrada:
+\[
+  \Pi_{SC}(Q)=Q(P(Q)-c_s-c_r).
+\]
+La condicion de primer orden es:
+\[
+  a-2bQ^C-(c_s+c_r)=0.
+\]
+En cadena descentralizada con precio mayorista $w$, el retailer maximiza:
+\[
+  \Pi_R(Q)=Q(P(Q)-w-c_r).
+\]
+El proveedor maximiza:
+\[
+  \Pi_S(w)=Q(w-c_s).
+\]
+La descoordinacion aparece porque el retailer decide usando $w+c_r$ en vez de $c_s+c_r$.
+\end{materia}
+
+\begin{enunciado}{Examen 2017, demostracion corta}
+Demuestre que para una cadena de abastecimiento con un retailer que enfrenta una demanda $Q=a-bP$ y un productor que tiene un costo $c$ por unidad, el retailer vendera el doble de unidades en una cadena centralizada que en una descentralizada.
+\end{enunciado}
+
+\begin{pautacompleta}{desarrollo algebraico completo}
+Con demanda inversa $P=(a-Q)/b$ y costo $c$, la cadena integrada maximiza:
+\[
+  \Pi_C(Q)=Q\left(\frac{a-Q}{b}-c\right).
+\]
+La condicion de primer orden:
+\[
+  \frac{a-2Q}{b}-c=0
+  \Rightarrow
+  Q_C=\frac{a-bc}{2}.
+\]
+En descentralizada, el retailer compra a $w$:
+\[
+  Q_R(w)=\frac{a-bw}{2}.
+\]
+El proveedor maximiza:
+\[
+  \Pi_S(w)=(w-c)\frac{a-bw}{2}.
+\]
+Derivando:
+\[
+  \frac{a-bw}{2}-\frac{b(w-c)}{2}=0
+  \Rightarrow
+  w^\star=\frac{a+bc}{2b}.
+\]
+Luego:
+\[
+  Q_D=\frac{a-bw^\star}{2}
+  =\frac{a-bc}{4}.
+\]
+Por lo tanto:
+\[
+  Q_C=2Q_D.
+\]
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2020, Burger Mac}
+Usted es el representante de la nueva franquicia Burger Mac, la cual produce hamburguesas y recien se ha establecido en Chile. Usted esta tratando de determinar el ``mejor'' tipo de contrato con sus franquiciados, con el objetivo de alinear la cadena. Para ello, usted determina que la funcion de demanda mensual por hamburguesas que enfrenta cada local es:
+\[
+  P=80-2Q,
+\]
+siendo $P$ el precio de venta de la hamburguesa y $Q$ la cantidad vendida. Los costos asociados a la operacion de cada local ascienden a \$4 por cada hamburguesa que se vende. Si para usted el costo de insumos de cada hamburguesa asciende a \$8, determine:
+
+\begin{enumerate}[label=\alph*)]
+  \item Si desea coordinar la cadena y ofrece un contrato de arriendo, cual seria el precio minimo de arriendo y el precio maximo que le podria cobrar al franquiciado. Para el precio de arriendo minimo y maximo, determine cual seria la utilidad operacional del franquiciado, la suya y la de la cadena.
+  \item Si desea coordinar la cadena y ofrece un contrato en que el franquiciado le entregue un 50\% de sus ventas, determine a que precio y que cantidad de hamburguesas venderia el franquiciado, a que precio le venderia usted los insumos, y cual seria la utilidad del franquiciado, la suya y la de la cadena.
+  \item Si usted coordina la cadena puede negociar un contrato de arriendo de \$300 mensuales. Indique que contrato prefiere: arriendo de \$300 o 50\% de las ventas. Determine tambien que arriendo lo deja indiferente entre las dos opciones.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2020}
+Primero se calcula la cadena no coordinada para encontrar los limites inferiores de negociacion de cada parte. Desde
+\[
+  P=80-2Q
+\]
+se despeja la demanda directa:
+\[
+  Q=40-\frac{P}{2}.
+\]
+Si $w$ es el precio mayorista de los insumos cobrado por Burger Mac al franquiciado, el franquiciado maximiza:
+\[
+  \Pi_R(P)=(40-P/2)(P-4-w).
+\]
+Expandiendo:
+\[
+  \Pi_R(P)=40P-160-40w-\frac{P^2}{2}+2P+\frac{Pw}{2}.
+\]
+Derivando con respecto a $P$:
+\[
+  \frac{d\Pi_R}{dP}=40-P+2+\frac{w}{2}.
+\]
+Igualando a cero:
+\[
+  P=42+\frac{w}{2}.
+\]
+La utilidad de Burger Mac, como proveedor de insumos, es:
+\[
+  \Pi_S(w)=Q(w-8)=\left(40-\frac{42+w/2}{2}\right)(w-8).
+\]
+Simplificando:
+\[
+  \Pi_S(w)=\left(19-\frac{w}{4}\right)(w-8)
+  =19w-152-\frac{w^2}{4}+2w.
+\]
+Derivando con respecto a $w$:
+\[
+  \frac{d\Pi_S}{dw}=19-\frac{w}{2}+2.
+\]
+Igualando a cero:
+\[
+  w=42.
+\]
+Luego:
+\[
+  P=42+\frac{42}{2}=63,
+  \qquad
+  Q=40-\frac{63}{2}=8.5.
+\]
+Las utilidades no coordinadas son:
+\[
+  \Pi_R=8.5(63-4-42)=144.5,
+\]
+\[
+  \Pi_S=8.5(42-8)=289,
+\]
+\[
+  \Pi_{SC}=144.5+289=433.5.
+\]
+
+Para la cadena integrada se maximiza la utilidad conjunta:
+\[
+  \Pi_{SC}(P)=(40-P/2)(P-12).
+\]
+Expandiendo:
+\[
+  \Pi_{SC}(P)=40P-480-\frac{P^2}{2}+6P.
+\]
+Derivando:
+\[
+  \frac{d\Pi_{SC}}{dP}=40-P+6.
+\]
+Por lo tanto:
+\[
+  P=46,\qquad Q=17,\qquad \Pi_{SC}=578.
+\]
+Para coordinar con un contrato de arriendo, Burger Mac debe vender el insumo al costo:
+\[
+  w=8.
+\]
+Luego se cobra un arriendo fijo $F$ que reparte la utilidad total integrada de 578. La condicion de participacion de Burger Mac exige recibir al menos su utilidad no coordinada:
+\[
+  F\geq 289.
+\]
+La condicion de participacion del franquiciado exige que su utilidad sea al menos 144.5:
+\[
+  578-F\geq 144.5
+  \quad\Rightarrow\quad
+  F\leq 433.5.
+\]
+Por eso el arriendo coordinador debe satisfacer:
+\[
+  289\leq F\leq 433.5.
+\]
+Si $F=289$, Burger Mac recibe 289, el franquiciado recibe $578-289=289$, y la cadena recibe 578. Si $F=433.5$, Burger Mac recibe 433.5, el franquiciado recibe $578-433.5=144.5$, y la cadena recibe 578.
+
+Para el contrato donde el franquiciado entrega el 50\% de las ventas, la pauta usa la regla simplificada:
+\[
+  w=\alpha c=0.5\cdot 8=4.
+\]
+Con este valor, el franquiciado resuelve:
+\[
+  \Pi_R(P)=\left(40-\frac{P}{2}\right)(P-4-4).
+\]
+Expandiendo:
+\[
+  \Pi_R(P)=40P-320-\frac{P^2}{2}+4P.
+\]
+Derivando:
+\[
+  \frac{d\Pi_R}{dP}=40-P+4.
+\]
+Por lo tanto:
+\[
+  P=44,\qquad Q=40-\frac{44}{2}=18.
+\]
+Las ventas totales son:
+\[
+  PQ=44\cdot 18=792.
+\]
+Burger Mac recibe el 50\% de las ventas:
+\[
+  0.5\cdot 792=396,
+\]
+pero vende insumos bajo costo, perdiendo:
+\[
+  18(8-4)=72.
+\]
+Por lo tanto, su utilidad neta es:
+\[
+  \Pi_S=396-72=324.
+\]
+La utilidad del franquiciado, segun la pauta, es:
+\[
+  \Pi_R=792-396-18\cdot 8=252.
+\]
+La utilidad total de la cadena es:
+\[
+  \Pi_{SC}=576.
+\]
+Como 576 queda levemente bajo el optimo integrado 578, este contrato casi coordina bajo la convencion usada en la pauta, pero no alcanza exactamente el optimo integrado.
+
+Si Burger Mac puede negociar un arriendo de \$300, compara lo que recibe en cada contrato:
+\[
+  \text{arriendo}=300,
+  \qquad
+  \text{porcentaje de ventas}=324.
+\]
+Prefiere el contrato de porcentaje de ventas. El arriendo que lo deja indiferente es:
+\[
+  F=324.
+\]
+\end{pautacompleta}
+
+\begin{alerta}{contrato de reparto de ventas con costo del retailer}
+Si el retailer retiene fraccion $\alpha$ de ventas y paga costo propio $c_r$, su utilidad es:
+\[
+  \Pi_R(Q)=\alpha P(Q)Q-wQ-c_rQ.
+\]
+Para coordinar con la cadena integrada:
+\[
+  w=\alpha(c_s+c_r)-c_r.
+\]
+La regla simplificada $w=\alpha c_s$ solo es correcta si $c_r=0$ o si la pauta esta ignorando el costo propio del retailer. En ejercicios del curso a veces usan la version simplificada; en desarrollo riguroso conviene explicitar el supuesto.
+\end{alerta}
+
+\begin{enunciado}{Examen 2022, franquicias de hamburguesas}
+Usted se encuentra en el proceso de negociacion para transformarse en un franquiciado de una empresa dedicada al rubro de comida rapida y, en especifico, de hamburguesas. Realizando un estudio de mercado usted ha determinado que la demanda mensual por hamburguesas $Q$ esta dada por el precio al mercado de la hamburguesa $P$, mediante:
+\[
+  P=150-0.5Q.
+\]
+Usted tiene dos costos variables relevantes: personal e infraestructura. El costo variable por hamburguesa es de \$2 por concepto de personal y el costo de infraestructura es de \$3 por hamburguesa. Actualmente tiene dos ofertas de franquicias que quiere evaluar.
+
+\textbf{Opcion 1 ``BurgerDon'':} le ofrece un contrato en el cual debe pagar un monto fijo anual de \$12.000 y le ofrece venderle los insumos de cada hamburguesa a \$12 por hamburguesa.
+
+\textbf{Opcion 2 ``MacKing'':} le ofrece un contrato en el cual ellos le entregan toda la infraestructura y, por ende, ya no debe pagar este costo, pero le ofrece un contrato en el cual le pide el 50\% de sus ventas y le vende los insumos de cada hamburguesa a \$8 por unidad.
+
+\begin{enumerate}[label=\roman*.]
+  \item Con esta informacion, como franquiciado, determine el precio al que venderia la hamburguesa con cada contrato. Indique que contrato seleccionaria usted, Opcion 1 u Opcion 2, y por que. Muestre todos sus calculos.
+  \item Si usted determina que el costo de produccion de cada hamburguesa para BurgerDon y MacKing es de \$10 por hamburguesa, para el contrato seleccionado en i), determine si este contrato coordina o maximiza el valor para la cadena. Calcule la eficiencia de la cadena para el contrato. Determine que precio de venta de los insumos para la elaboracion de la hamburguesa y que monto fijo o porcentaje de ventas, dependiendo del contrato seleccionado, coordina o maximiza el valor de la cadena.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2022}
+Primero se despeja la demanda directa:
+\[
+  P=150-0.5Q
+  \quad\Rightarrow\quad
+  Q=300-2P.
+\]
+En la opcion 1, el franquiciado paga costos variables de personal e infraestructura por \$5 en total y compra insumos a \$12. La pauta trabaja con margen variable:
+\[
+  P-5-10=P-15,
+\]
+por lo que la utilidad mensual antes de descontar el fijo anual prorrateado se escribe como:
+\[
+  \Pi_1(P)=Q(P-15)=(300-2P)(P-15).
+\]
+Expandiendo:
+\[
+  \Pi_1(P)=300P-4500-2P^2+30P
+  =330P-2P^2-4500.
+\]
+Derivando:
+\[
+  \frac{d\Pi_1}{dP}=330-4P.
+\]
+Igualando a cero:
+\[
+  P_1^\star=82.5.
+\]
+La cantidad es:
+\[
+  Q_1^\star=300-2(82.5)=135.
+\]
+La utilidad mensual total antes del fijo anual es:
+\[
+  \Pi_1=135(82.5-15)=9112.5.
+\]
+Como el pago fijo anual de \$12.000 equivale a \$1.000 mensual, la utilidad final del franquiciado es:
+\[
+  \Pi_{R,1}=9112.5-1000=8112.5.
+\]
+
+En la opcion 2, MacKing entrega la infraestructura, por lo que el franquiciado no paga el costo variable de infraestructura. Retiene el 50\% de las ventas, paga \$2 por personal y compra insumos a \$8:
+\[
+  \Pi_2(P)=Q(0.5P-2-8)=(300-2P)(0.5P-10).
+\]
+Expandiendo:
+\[
+  \Pi_2(P)=150P-3000-P^2+20P
+  =170P-P^2-3000.
+\]
+Derivando:
+\[
+  \frac{d\Pi_2}{dP}=170-2P.
+\]
+Igualando a cero:
+\[
+  P_2^\star=85.
+\]
+La cantidad es:
+\[
+  Q_2^\star=300-2(85)=130.
+\]
+Las ventas totales son:
+\[
+  P_2Q_2=85\cdot 130=11050.
+\]
+El franquiciado se queda con el 50\%:
+\[
+  0.5\cdot 11050=5525.
+\]
+La pauta indica un costo de $10\cdot 130=1040$; aritmeticamente, $10\cdot 130=1300$. Usando la estructura de la utilidad planteada en la misma pauta, el costo relevante del franquiciado es:
+\[
+  (2+8)130=1300,
+\]
+y la utilidad es:
+\[
+  \Pi_{R,2}=5525-1300=4225.
+\]
+Por lo tanto, se prefiere la opcion 1 porque:
+\[
+  8112.5>4225.
+\]
+
+Para revisar coordinacion del contrato seleccionado, se calcula la cadena integrada con costo variable total:
+\[
+  c_{\text{cadena}}=2+3+10=15.
+\]
+Entonces:
+\[
+  \Pi_{SC}(P)=Q(P-15)=(300-2P)(P-15).
+\]
+Este es el mismo problema de maximizacion que enfrento el franquiciado bajo la opcion 1, salvo por el pago fijo, que solo transfiere utilidad entre partes. Por eso:
+\[
+  P_{SC}^\star=82.5,
+  \qquad
+  Q_{SC}^\star=135,
+  \qquad
+  \Pi_{SC}^\star=9112.5.
+\]
+La eficiencia del contrato 1 es:
+\[
+  \eta=\frac{\Pi_{SC}^{\text{contrato 1}}}{\Pi_{SC}^\star}
+  =\frac{9112.5}{9112.5}=1=100\%.
+\]
+La razon economica es que, en la opcion 1, el franquiciado internaliza el costo variable total de la cadena en su decision de precio. El monto fijo de \$12.000 anual no cambia el precio ni la cantidad, solamente reparte la utilidad. Por lo tanto, bajo los numeros de la pauta, el contrato seleccionado coordina la cadena.
+\end{pautacompleta}
+
+\begin{enunciado}{Examen 2023, cafeteria}
+Usted esta considerando convertirse en una franquicia de una cadena de cafeterias especializadas en cafe de alta calidad. La demanda mensual de cafe $Q$ se relaciona con el precio al mercado del cafe $P$ mediante:
+\[
+  P=8-0.2Q.
+\]
+Los costos variables relevantes incluyen el costo de los granos de cafe por taza y el costo del personal, considerando \$1.75 por taza en costos de personal. Actualmente tiene dos opciones de franquicias que esta evaluando:
+
+\textbf{Opcion 1 ``Caffe Zanetti'':} la franquicia ofrece un contrato con una tarifa fija mensual de \$15 y suministra los granos de cafe a \$1.50 por taza. Ademas, ofrece libertad para establecer sus precios de venta.
+
+\textbf{Opcion 2 ``StarWorlds'':} esta franquicia no cobra una tarifa fija anual, pero vende los granos de cafe a \$1.75 por taza. Sin embargo, le obliga a vender cada taza de cafe a un precio maximo de \$4.
+
+\begin{enumerate}[label=\alph*)]
+  \item Determine cual es el precio y cantidad que debe vender con la opcion 1. Determine cual es la utilidad para la cafeteria, la franquicia y la cadena completa.
+  \item Determine cual es el precio y cantidad que debe vender con la opcion 2. Determine cual es la utilidad para la cafeteria, la franquicia y la cadena completa.
+  \item Indique que opcion de franquicia elegiria y por que, considerando maximizar sus ganancias.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pautacompleta}{pauta paso a paso 2023}
+Primero se despeja la demanda directa:
+\[
+  P=8-0.2Q
+  \quad\Rightarrow\quad
+  Q=40-5P.
+\]
+
+En la opcion 1, la cafeteria paga \$1.50 por granos, \$1.75 por personal y una tarifa fija mensual de \$15. Su utilidad es:
+\[
+  \Pi_1(P)=Q(P-1.50-1.75)-15.
+\]
+Reemplazando $Q=40-5P$:
+\[
+  \Pi_1(P)=(40-5P)(P-3.25)-15.
+\]
+Expandiendo:
+\[
+  \Pi_1(P)=40P-130-5P^2+16.25P-15
+  =56.25P-5P^2-145.
+\]
+Derivando:
+\[
+  \frac{d\Pi_1}{dP}=56.25-10P.
+\]
+Igualando a cero:
+\[
+  P_1^\star=5.625.
+\]
+La cantidad es:
+\[
+  Q_1^\star=40-5(5.625)=11.875.
+\]
+La utilidad de la cafeteria es:
+\[
+  \Pi_{R,1}=11.875(5.625-3.25)-15=13.203125.
+\]
+La utilidad de la franquicia Zanetti, considerando que solo recibe la tarifa fija y el margen de granos no esta informado en el enunciado, se reporta en la pauta como el ingreso fijo:
+\[
+  \Pi_{S,1}=15.
+\]
+La utilidad de la cadena completa, bajo el supuesto de que el precio de granos es una transferencia interna, se calcula con costo real observado de personal mas insumo cobrado en el contrato:
+\[
+  \Pi_{SC,1}=13.203125+15=28.203125.
+\]
+
+En la opcion 2, no hay tarifa fija, la cafeteria paga \$1.75 por granos y \$1.75 por personal. Sin restriccion de precio, resolveria:
+\[
+  \Pi_2(P)=Q(P-1.75-1.75)=(40-5P)(P-3.5).
+\]
+Expandiendo:
+\[
+  \Pi_2(P)=40P-140-5P^2+17.5P
+  =57.5P-5P^2-140.
+\]
+Derivando:
+\[
+  \frac{d\Pi_2}{dP}=57.5-10P.
+\]
+El optimo privado sin restriccion seria:
+\[
+  P_2^\star=5.75.
+\]
+Pero el contrato impone precio maximo:
+\[
+  P\leq 4.
+\]
+Por lo tanto, el precio factible que maximiza la utilidad es:
+\[
+  P_2=4.
+\]
+La cantidad vendida es:
+\[
+  Q_2=40-5(4)=20.
+\]
+La utilidad de la cafeteria es:
+\[
+  \Pi_{R,2}=20(4-3.5)=10.
+\]
+Como no hay tarifa fija anual y no se informa el costo real de granos para StarWorlds, la utilidad de la franquicia no queda determinada con los datos del enunciado salvo por el margen sobre granos. Si se toma el precio de granos como transferencia sin costo informado, su ingreso por granos seria:
+\[
+  1.75\cdot 20=35.
+\]
+La pauta concluye comparando la utilidad del franquiciado:
+\[
+  \Pi_{R,1}=13.2>\Pi_{R,2}=10.
+\]
+Por lo tanto, si el criterio es maximizar la ganancia propia de la cafeteria, conviene elegir la opcion 1, Caffe Zanetti.
+
+\textbf{Nota de consistencia.} En la pauta manuscrita/digital aparece antes una resolucion por punto de equilibrio que no maximiza utilidad y contiene el reemplazo $P=8-0.22Q$. Para resolver como problema de decision economica, la parte relevante es la maximizacion anterior en funcion de $P$, que coincide con el cierre de la pauta: Zanetti da utilidad aproximada 13.2 y StarWorlds da utilidad 10.
+\end{pautacompleta}

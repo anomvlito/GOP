@@ -1,0 +1,233 @@
+\section{Sección 1: Control de Calidad Estadístico}
+
+\subsection{Fundamentos Teóricos: Constantes de Control ($A_2, D_3, D_4$)}
+En el control estadístico de procesos, estimar la desviación estándar ($\sigma$) directamente a partir de múltiples muestras grandes resulta ineficiente. Por consiguiente, la literatura estadística establece el uso de la \textbf{Tabla de Constantes para Gráficos de Control}.
+Estas constantes ($A_2, D_3, D_4$) son factores de conversión matemáticos derivados de la distribución normal. Al multiplicar el Rango Promedio ($\bar{R}$) por estos factores, se obtienen empíricamente los límites de control equivalentes a $3\sigma$.
+\begin{itemize}
+    \item \textbf{$A_2$}: Factor utilizado para determinar los límites de control del \textbf{Promedio} (Gráfico $\bar{X}$).
+    \item \textbf{$D_3$ y $D_4$}: Factores utilizados para determinar el límite inferior y superior, respectivamente, del \textbf{Rango} (Gráfico R).
+\end{itemize}
+
+A modo de referencia, la siguiente tabla resume los valores estándar utilizados en los problemas de evaluación:
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\textbf{Tamaño de Muestra ($n$)} & \textbf{$A_2$} & \textbf{$D_3$} & \textbf{$D_4$} \\
+\midrule
+5 & 0.577 & 0 & 2.114 \\
+10 & 0.308 & 0.223 & 1.777 \\
+20 & 0.180 & 0.415 & 1.585 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Consideración Crítica:} Las constantes deben seleccionarse estrictamente en función de $n$ (tamaño individual de cada muestra extraída), y no en función de $m$ (número total de grupos de muestras analizados).
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!60!black,title=Parámetros del Modelo]
+\textbf{Variables Fundamentales:}\\
+$m$: Número total de muestras extraídas para el estudio.\\
+$n$: Tamaño específico de cada muestra extraída.
+\end{tcolorbox}
+
+\subsection{Algoritmo 1: Construcción de Gráficos de Control $\bar{X}$-R}
+Procedimiento estructurado para la evaluación:
+
+\begin{enumerate}
+    \item \textbf{Calcular Promedios Base:}
+    \begin{itemize}
+        \item Saca el promedio de promedios: $\bar{\bar{X}} = \frac{\sum \bar{X}_i}{m}$
+        \item Saca el promedio de los rangos: $\bar{R} = \frac{\sum R_i}{m}$
+    \end{itemize}
+    \item \textbf{Leer Tabla de Constantes:} Busca la fila correspondiente a tu \textbf{$n$} (ej. si sacaron 5 tornillos por hora, $n=5$). Extrae $A_2, D_3, D_4$.
+    \item \textbf{Calcular Límites de Control:}
+    \begin{itemize}
+        \item \textbf{Carta $\bar{X}$:} $LCS = \bar{\bar{X}} + A_2 \bar{R}$ \hspace{1cm} $LCI = \bar{\bar{X}} - A_2 \bar{R}$
+        \item \textbf{Carta R:} $LCS = D_4 \bar{R}$ \hspace{1.3cm} $LCI = D_3 \bar{R}$
+    \end{itemize}
+    \item \textbf{Test de Fuera de Control:} Revisa si algún $\bar{X}_i$ o $R_i$ original se sale de sus respectivos límites.
+    \item \textbf{EL RECÁLCULO (Casi siempre lo piden):} Si la muestra 3 se salió de los límites y te dicen que fue por una "causa asignable", \textbf{DEBES ELIMINARLA}.
+    \begin{itemize}
+        \item Nuevo $\bar{\bar{X}} = \frac{(\text{Suma original de } \bar{X}) - \bar{X}_3}{m - 1}$
+        \item Nuevo $\bar{R} = \frac{(\text{Suma original de } R) - R_3}{m - 1}$ \\
+        \textit{(Aclaración: Como cada $R_i = \text{Máx}_i - \text{Mín}_i$, restar el $R_i$ de la muestra eliminada a la suma de rangos es matemáticamente idéntico a recalcular restando el Máx y Mín de esa muestra de las sumatorias originales).}
+        \item Repite el Paso 3 con los nuevos promedios. (Los límites se ajustarán y se harán más estrechos).
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Gráficos de Control $\bar{X}$-R (Examen 2024 - PII.b)}
+\textbf{Enunciado:} Usted controla un proceso de botellas de vidrio. Toma 25 grupos de muestra ($m=25$), cada una de tamaño 20 ($n=20$). Los resultados se detallan a continuación:
+
+\begin{center}
+\scriptsize
+\begin{tabular}{cccccc|cccccc}
+\toprule
+\textbf{Muestra} & \textbf{$\bar{X}_i$} & \textbf{Mín} & \textbf{Máx} & \textbf{$R_i$} & & \textbf{Muestra} & \textbf{$\bar{X}_i$} & \textbf{Mín} & \textbf{Máx} & \textbf{$R_i$} \\
+\midrule
+1 & 25.6 & 24.2 & 27.0 & 2.7 & & 14 & 25.4 & 24.5 & 26.3 & 1.8 \\
+2 & 25.7 & 24.1 & 27.2 & 3.1 & & 15 & 25.1 & 24.2 & 26.0 & 1.7 \\
+3 & 25.4 & 23.9 & 26.9 & 3.0 & & 16 & 27.5 & 26.2 & 28.8 & 2.6 \\
+4 & 25.2 & 23.6 & 26.8 & 3.3 & & 17 & 25.1 & 24.0 & 26.2 & 2.2 \\
+5 & 25.5 & 24.8 & 26.2 & 1.5 & & 18 & 25.3 & 24.6 & 26.1 & 1.5 \\
+6 & 25.3 & 24.4 & 26.2 & 1.9 & & 19 & 25.4 & 24.2 & 26.5 & 2.3 \\
+7 & 25.1 & 23.8 & 26.5 & 2.7 & & 20 & 25.2 & 23.8 & 26.6 & 2.9 \\
+8 & 25.2 & 23.9 & 26.5 & 2.6 & & 21 & 25.3 & 24.5 & 26.1 & 1.6 \\
+9 & 25.5 & 24.6 & 26.4 & 1.7 & & 22 & 27.6 & 26.3 & 28.9 & 2.6 \\
+10 & 25.2 & 24.1 & 26.3 & 2.2 & & 23 & 25.4 & 24.0 & 26.8 & 2.7 \\
+11 & 25.1 & 24.0 & 26.2 & 2.3 & & 24 & 25.3 & 24.6 & 26.1 & 1.5 \\
+12 & 25.2 & 23.7 & 26.7 & 3.0 & & 25 & 25.1 & 23.7 & 26.6 & 2.9 \\
+13 & 25.4 & 24.0 & 26.8 & 2.7 & & & & & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{Nota de desarrollo:} Los valores de Promedio corresponden analíticamente a $\bar{X}_i$ para cada muestra, mientras que el Rango ($R_i$) se obtiene explícitamente calculando $\text{Máx} - \text{Mín}$ en cada fila.
+
+Se entregan las sumas consolidadas: $\sum \bar{X}_i = 637.1$, $\sum \text{Mín} = 607.6$, $\sum \text{Máx} = 666.6$.
+
+Adicionalmente, el enunciado le adjunta la siguiente \textbf{Tabla de Constantes Estadísticas}:
+\begin{center}
+\scriptsize
+\begin{tabular}{cccc}
+\toprule
+\textbf{Tamaño de Muestra ($n$)} & \textbf{$A_2$} & \textbf{$D_3$} & \textbf{$D_4$} \\
+\midrule
+5 & 0.577 & 0 & 2.114 \\
+10 & 0.308 & 0.223 & 1.777 \\
+15 & 0.223 & 0.347 & 1.653 \\
+20 & 0.180 & 0.415 & 1.585 \\
+25 & 0.153 & 0.459 & 1.541 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Pregunta (a):} Determine los límites de control del grosor de la botella.
+
+\textbf{Resolución paso a paso según el Algoritmo:}
+\begin{enumerate}
+    \item \textbf{Promedios Base:} 
+    El Promedio General ($\bar{\bar{X}}$) es: $637.1 / 25 = 25.484$.
+    Para el Rango Promedio ($\bar{R}$), podemos sumar directamente los $R_i$ de la tabla, o utilizar las sumas consolidadas: $\sum \text{Máx} - \sum \text{Mín} = 666.6 - 607.6 = 59.0$. Luego, $\bar{R} = 59.0 / 25 = 2.36$.
+    \item \textbf{Tabla de Constantes:} Dado que el enunciado estipula explícitamente que cada grupo individual posee un tamaño de $n=20$, nos dirigimos a la Tabla de Constantes de la subsección anterior. Ubicando la fila correspondiente a $n=20$, extraemos directamente: $A_2 = 0.18$, $D_3 = 0.415$, $D_4 = 1.585$. (Observación: Es un error conceptual grave utilizar $m=25$ para buscar en dicha tabla).
+    \item \textbf{Límites (Gráfico $\bar{X}$):} 
+    $LCS = \bar{\bar{X}} + A_2 \cdot \bar{R} = 25.484 + (0.18 \cdot 2.36) = 25.9$.
+    $LCI = \bar{\bar{X}} - A_2 \cdot \bar{R} = 25.484 - (0.18 \cdot 2.36) = 25.06$.
+    \item \textbf{Límites (Gráfico R):}
+    $LCS = D_4 \cdot \bar{R} = 1.585 \cdot 2.36 = 3.74$.
+    $LCI = D_3 \cdot \bar{R} = 0.415 \cdot 2.36 = 0.98$.
+    \item \textbf{Recálculo y Control Final:}
+    Se debe inspeccionar la tabla buscando muestras con un promedio ($\bar{X}_i$) fuera del intervalo matemático aceptable $[25.06, 25.9]$.
+    Revisando la columna $\bar{X}_i$: La Muestra 16 ($27.5$) y la Muestra 22 ($27.6$) escapan de los límites definidos.
+    \textbf{Acción Correctiva:} Se deben suprimir estas dos observaciones atípicas. Consecuentemente, se restan sus promedios y rangos a las sumatorias originales, se reduce el tamaño del estudio a $m=23$, y se iteran nuevamente los cálculos de los límites:
+    \begin{itemize}
+        \item Nueva suma $\bar{X}_i$: $637.1 - 27.5 - 27.6 = 582.0$ \hspace{0.5cm} $\rightarrow$ \hspace{0.5cm} Nuevo $\bar{\bar{X}} = 582.0 / 23 = 25.304$
+        \item Nueva suma $R_i$: $59.0 - 2.6 - 2.6 = 53.8$ \hspace{0.9cm} $\rightarrow$ \hspace{0.5cm} Nuevo $\bar{R} = 53.8 / 23 = 2.339$
+        \item Constantes para $n=20$: Se mantienen inalterables ($A_2 = 0.18$, $D_3 = 0.415$, $D_4 = 1.585$).
+        \item \textbf{Nuevos Límites $\bar{X}$:} $LCS = 25.304 + (0.18 \cdot 2.339) = 25.725$ y $LCI = 25.304 - (0.18 \cdot 2.339) = 24.883$
+        \item \textbf{Nuevos Límites R:} $LCS = 1.585 \cdot 2.339 = 3.707$ y $LCI = 0.415 \cdot 2.339 = 0.971$
+    \end{itemize}
+    \textit{Conclusión:} Al inspeccionar nuevamente la tabla, todas las 23 muestras restantes poseen promedios dentro de $[24.883, 25.725]$ y rangos dentro de $[0.971, 3.707]$. El proceso ahora se considera estadísticamente bajo control.
+\end{enumerate}
+\end{ejercicio}
+
+\subsection{Algoritmo 2: Capacidad de Proceso ($C_p$ y $C_{pk}$)}
+Esto mide si tu máquina, aunque esté controlada, es capaz de cumplir lo que pide el cliente (Especificaciones $ES, EI$).
+
+\textbf{Constante de Capacidad ($d_2$):}
+Al igual que en los gráficos de control, la estimación de la variabilidad requiere una constante estadística tabulada. El examen proveerá la constante $d_2$ en función del tamaño de muestra $n$.
+\begin{center}
+\scriptsize
+\begin{tabular}{cc}
+\toprule
+\textbf{Tamaño de Muestra ($n$)} & \textbf{$d_2$} \\
+\midrule
+5 & 2.326 \\
+10 & 3.078 \\
+15 & 3.472 \\
+20 & 3.735 \\
+25 & 3.931 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+    \item Calcula la desviación estándar del proceso: $\hat{\sigma} = \frac{\bar{R}}{d_2}$ (buscando $d_2$ en la tabla con tamaño $n$).
+    \item Calcula el $C_p$ (Capacidad Potencial sin importar centrado):
+    $$ C_p = \frac{ES - EI}{6 \hat{\sigma}} $$
+    Si $C_p < 1$, tu máquina es físicamente incapaz de cumplir el ancho pedido, incluso si estuviera perfectamente centrada. \\
+    \textit{(Excepción de Examen: Si el problema tiene un solo límite, por ejemplo ``debe resistir al menos 90 grados y no hay máximo'', significa que el garaje está abierto por un lado y su ancho es infinito. Por ende, evaluar si tu auto ``cabe'' adentro ($C_p$) pierde sentido matemático y no se calcula. En este escenario, toda la evaluación de calidad recae de forma absoluta sobre el $C_{pk}$, quien se encargará de medir qué tan lejos estás de chocar con la única pared que sí existe).}
+    \item Calcula el $C_{pk}$ (Capacidad Real, castiga el desvío del centro):
+    $$ C_{pk} = \min \left( \frac{ES - \bar{\bar{X}}}{3\hat{\sigma}} , \frac{\bar{\bar{X}} - EI}{3\hat{\sigma}} \right) $$
+    \textit{(Nota Matemática: ¿Por qué el orden de la resta cambia? Porque las distancias deben ser positivas. Como $ES$ es el techo, restamos $ES - Promedio$. Como $EI$ es el piso, restamos $Promedio - EI$. Si alguna resta te da negativo, significa que el promedio de tu máquina está literalmente operando fuera de las especificaciones del cliente).}
+    \item \textbf{Diagnóstico Final (El umbral crítico es 1.0):}
+    \begin{itemize}
+        \item \textbf{Si $C_{pk} \ge 1$:} La máquina es capaz y está lo suficientemente centrada para no chocar con ninguna pared del garaje.
+        \item \textbf{Si $C_{pk} < 1$:} La máquina está produciendo chatarra o defectos (una parte de su curva se sale de los límites).
+        \item \textbf{Comparación Clave:} Si tu $C_p \ge 1$ pero tu $C_{pk} < 1$, significa que tu máquina tiene el potencial para cumplir, pero falló por estar \textbf{descentrada}. La solución no es comprar una máquina nueva, es simplemente \textit{calibrar} (mover $\bar{\bar{X}}$ al centro exacto entre $ES$ y $EI$).
+    \end{itemize}
+\end{enumerate}
+
+\begin{tcolorbox}[colback=yellow!5!white,colframe=yellow!75!black,title={Nota Teórica: La conexión con el $3\sigma$ y $6\sigma$}]
+En la industria, la ``huella natural'' de cualquier máquina bajo control abarca $6\hat{\sigma}$ de ancho (desde $-3\hat{\sigma}$ hasta $+3\hat{\sigma}$ respecto al centro, cubriendo el $99.73\%$ de su producción normal). Por eso la fórmula del $C_p$ divide la ventana de tolerancia del cliente ($ES - EI$) exactamente por $6\hat{\sigma}$.
+\begin{itemize}
+    \item \textbf{Proceso $3\sigma$ ($C_p = 1.0$):} La huella de la máquina ($6\hat{\sigma}$) entra \textit{justo} en el espacio del cliente. Apenas cumples.
+    \item \textbf{Proceso $6\sigma$ ($C_p = 2.0$):} Tu máquina es tan precisa que la tolerancia del cliente es el doble de ancha que tu huella. Entran $6\hat{\sigma}$ hacia cada lado ($12\hat{\sigma}$ en total). La tasa de falla es minúscula ($3.4$ defectos por millón).
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=purple!5!white,colframe=purple!75!black,title={Perspectiva Gerencial: ¿Es siempre necesario el $6\sigma$?}]
+Decidir si exigir tolerancias estrictas (un $ES$ y $EI$ muy cerrados) o si invertir millones en reducir la variabilidad natural ($\hat{\sigma}$) es una decisión puramente estratégica basada en el \textbf{Costo de la Calidad}:
+\begin{itemize}
+    \item \textbf{Estrategia de Tolerancia Cero (No se afloja):} Si fabricas marcapasos cardíacos o turbinas de avión, una falla significa la muerte de una persona y la quiebra por demandas millonarias. El costo de fallar es infinito. Aquí la estrategia obliga a invertir millones de dólares para lograr un $6\sigma$ ($C_p = 2.0$). La tolerancia es estricta y tu máquina debe ser microscópicamente precisa.
+    \item \textbf{Estrategia de Tolerancia Flexible (Se afloja estratégicamente):} Si fabricas cucharas de plástico baratas para cumpleaños, a nadie en el mundo le importa si una cuchara mide 2 milímetros más o menos. El costo de fallar es casi cero. Si intentas aplicar $6\sigma$ comprando maquinaria láser para fabricar cucharas, vas a quebrar por sobrecostos. En este caso, el gerente de operaciones estratégicamente ``afloja'' los límites $ES$ y $EI$ (hace la tolerancia más ancha) y acepta vivir con un $C_p$ más modesto.
+\end{itemize}
+\textit{Conclusión:} Un ingeniero decide aflojar los parámetros de calidad cuando el costo de arreglar y perfeccionar la máquina supera con creces el costo de que un cliente reciba un producto levemente imperfecto.
+\end{tcolorbox}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Capacidad con ES y EI completos (Basado en Exámenes)}
+\textbf{Enunciado:} Un torno CNC fabrica cilindros metálicos. El plano de ingeniería exige que el diámetro sea de $50 \pm 0.5$ mm para encajar en el motor. Una auditoría de calidad determinó que el proceso actualmente tiene un promedio de $\bar{\bar{X}} = 50.2$ mm y una variabilidad natural $\hat{\sigma} = 0.15$ mm.
+
+\textbf{Pregunta:} Calcule $C_p$ y $C_{pk}$. ¿La máquina es capaz de cumplir? De no serlo, ¿cuál es el problema de raíz?
+
+\textbf{Resolución paso a paso según el Algoritmo:}
+\begin{enumerate}
+    \item \textbf{Identificación de Especificaciones:} 
+    El valor ideal es $50$, con $\pm 0.5$. Por ende: 
+    Especificación Superior ($ES$) $= 50.5$ mm.
+    Especificación Inferior ($EI$) $= 49.5$ mm.
+    \item \textbf{Cálculo del $C_p$ (Potencial):}
+    $$ C_p = \frac{ES - EI}{6\hat{\sigma}} = \frac{50.5 - 49.5}{6(0.15)} = \frac{1.0}{0.90} \approx 1.11 $$
+    \textit{Análisis parcial:} Como $C_p = 1.11 > 1$, la máquina es físicamente capaz. Su huella total ($0.9$ mm) es más pequeña que la ventana del cliente ($1.0$ mm).
+    \item \textbf{Cálculo del $C_{pk}$ (Capacidad Real):} Evaluamos la distancia del promedio hacia ambas paredes.
+    \begin{align*}
+    C_{pk} &= \min\left\{\frac{50.5-50.2}{3(0.15)},
+    \frac{50.2-49.5}{3(0.15)}\right\}\\
+    &= \min\left\{\frac{0.30}{0.45},\frac{0.70}{0.45}\right\}
+    = \min\{0.66,1.55\}=0.66.
+    \end{align*}
+    \item \textbf{Diagnóstico Final:} 
+    Puesto que $C_{pk} = 0.66 < 1$, el proceso actualmente \textbf{está generando piezas defectuosas}. Al contrastarlo con el $C_p$ ($1.11$), nos damos cuenta de que el problema \textbf{no es la variabilidad natural de la máquina}, sino que está gravemente \textbf{descentrada} hacia el límite superior (su promedio de $50.2$ está peligrosamente cerca del techo de $50.5$). La solución operativa es calibrar el torno para bajar el promedio a $50.0$ mm exactos, sin necesidad de cambiar la máquina.
+\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Capacidad sin ES (Examen 2016 - Vasos Térmicos)}
+\textbf{Enunciado:} Usted es el titular de una empresa de café preparado. Ha determinado que los vasos térmicos deben tolerar un mínimo de $90^\circ\text{C}$ (Límite Inferior de Especificación, $EI$) para ser seguros. Se toman muestras de recepción de los proveedores en lotes, donde cada grupo de muestreo consta de 5 vasos ($n=5$). El Promedio General de temperatura tolerada extraído del estudio es de $95^\circ\text{C}$ ($\bar{\bar{X}}$) y el Rango Promedio es $\bar{R} = 4.652^\circ\text{C}$.
+
+\textbf{Pregunta:} Evalúe la capacidad del proceso del proveedor utilizando el índice de capacidad real ($C_{pk}$). ¿Es el proveedor capaz de cumplir con las exigencias?
+
+\textbf{Resolución paso a paso según el Algoritmo:}
+\begin{enumerate}
+    \item \textbf{Cálculo de la Desviación Estándar ($\hat{\sigma}$):} 
+    Al igual que en el algoritmo de gráficos, necesitamos transformar el rango en desviación estándar. Ingresamos a la tabla de constantes con el tamaño de muestra $n=5$ y extraemos $d_2 = 2.326$.
+    $$ \hat{\sigma} = \frac{\bar{R}}{d_2} = \frac{4.652}{2.326} = 2^\circ\text{C} $$
+    \item \textbf{Identificación de Especificaciones:} 
+    Promedio del proceso: $\bar{\bar{X}} = 95^\circ\text{C}$. Especificación Inferior: $EI = 90^\circ\text{C}$. 
+    Especificación Superior ($ES$): \textbf{No existe} un límite superior (en este contexto industrial, mientras más resista el vaso el calor, mejor para el cliente).
+    \item \textbf{Cálculo del $C_{pk}$ (Capacidad Real):} Dado que solo existe una especificación inferior, no podemos calcular $C_p$. El índice $C_{pk}$ se calcula evaluando únicamente la distancia del centro hacia el único límite existente:
+    $$ C_{pk} = \frac{\bar{\bar{X}} - EI}{3\hat{\sigma}} = \frac{95 - 90}{3(2)} = \frac{5}{6} \approx 0.833 $$
+    \item \textbf{Diagnóstico Final:} 
+    Puesto que $C_{pk} = 0.833 < 1$, se concluye matemáticamente que el proceso del proveedor \textbf{no es capaz} de asegurar consistentemente que todos los vasos resistirán al menos $90^\circ\text{C}$. Una fracción significativa de los vasos fallará por debajo de este estándar de seguridad (se derretirán), lo cual justifica las quejas de los clientes. Se debe exigir al proveedor centrar su proceso (aumentar $\bar{\bar{X}}$) o reducir drásticamente su variabilidad ($\bar{R}$).
+\end{enumerate}
+\end{ejercicio}

@@ -1,0 +1,185 @@
+                  Pontificia Universidad Católica de Chile
+                  Departamento Ingenierı́a Industrial y de Sistemas
+                  ICS3213 – Gestión de Operaciones
+                  Profesor Alejandro Mac Cawley - Rodrigo Carrasco (Sección 1, 2 y 3)
+                  Primer Semestre del 2026
+
+
+
+                                  Ayudantı́a 12
+                            Ayudante: Juan Pablo Garcı́a – jgarca@uc.cl
+
+
+
+
+Problema 1
+    Usted se encuentra a cargo del proceso de producción de una gran empresa productora de
+galletas. Su producto estrella son las galletas de arándanos y para la producción de estas galletas
+se requiere de la masa base y los arándanos. A continuación se detalla el proceso:
+
+
+                                              Control
+                               Azucarado
+                                              Calidad
+
+     Arándanos
+                   Secado
+      Frescos
+
+                                 Molido                     Mezclado      Cocido    Control Calidad
+
+
+
+     Masa Base                  Amasado
+
+
+
+
+    Los arándanos frescos llegan de los proveedores y son sometidos a un proceso de secado, con
+una capacidad de 300 kg/hr. Posteriormente el 80 % de los arándanos va a un proceso de molido,
+con una capacidad de 280 kg/hr, en donde se transforma en polvo de arándano. El restante 20 %
+de los arándanos secos sigue a un proceso de azucarado, con una capacidad de 65 kg/hr, en donde
+se les coloca una capa de azúcar y posteriormente se controla la calidad y un 10 % de los arándanos
+azucarados debe ser desechado por no cumplir con el standard de calidad. Por otro lado, la masa
+base pasa a la máquina de amasado, con una capacidad de 600 kg/hr. Posteriormente la masa
+base pasa junto a los arándanos azucarados y el polvo de arándano a la mezcladora, que tiene una
+capacidad de 800 kg/hr, posteriormente la mezcla pasa al cocido que tiene una capacidad de 850
+kg/hr para finalmente someterse a un control de calidad, en donde el 3 % no cumple el estándar
+y debe ser desechado.
+
+
+  a) ¿Cuál es la máxima capacidad productiva del proceso en términos de kilogramos de galletas
+     por hora?
+
+
+24-06-2026                           ICS3213 – Ayudantı́a 12                          Página 1 de 5
+  b) Si el proceso funciona a 1 turno de 8 hrs. al dı́a por 240 dı́as al año. ¿Qué cantidad anual
+     de arándanos frescos y masa base debe comprar?
+
+  c) Si usted puede duplicar la capacidad productiva de solo 2 máquinas en el proceso. ¿Qué dos
+     máquinas duplicarı́a? ¿Cuál serı́a la capacidad productiva nueva?
+
+
+La empresa tiene dificultades para estimar la cantidad de envases que debe solicitar a su proveedor
+para almacenar sus galletas. De acuerdo a la información registrada en los últimos 6 meses, se
+estima que la demanda promedio es de 50.000 unidades. Además, suponga que el costo de inventario
+es de $1,5 unidad/mes, el costo por unidad es de 60 pesos, el costo de la orden es de $90.000 y
+el proveedor se demora 1 semana en entregar el pedido. Considerando una varianza de 2.500 con
+un nivel de servicio de 95 % para no tener problemas con los minoristas. Calcule el pedido óptimo
+de envases para el próximo mes. Considere que tiene una polı́tica de periodo fijo de 1 mes y los
+pedidos llegan siempre antes de que comience el mes para el cual se requieren.
+
+
+  d) ¿Cuál es la cantidad óptima de pedido y las fechas en que debe ordenar?
+
+  e) Si ahora se considera una polı́tica de revisión continua. ¿Cuál serı́a la nueva cantidad óptima
+     de pedido y el punto de re orden?
+
+  f) El proveedor le ofrece firmar un contrato para asegurar la provisión de envases para los próxi-
+     mos 3 meses. Usted estima que las cantidades de envases para los próximos 3 meses serı́an
+     49.000, 53.000 y 47.000 respectivamente. ¿Cuál es la cantidad óptima de pedido mensuales
+     y en qué meses ordenarı́a? (Hint: Utilice método Wagner-Whitin)
+
+  g) Calcule el costo de inventario de los 3 sistemas. Si el proveedor le cobra un costo fijo por el
+     contrato ¿Cuánto seria lo máximo que estarı́a dispuesto a pagar?
+
+
+
+
+24-06-2026                          ICS3213 – Ayudantı́a 12                             Página 2 de 5
+Problema 2
+    Usted utiliza dos insumos en su proceso productivo U1 y U2 , los cuales los debe adquirir al
+mismo proveedor. U1 tiene un costo de $100 por unidad y U2 tiene un costo de $70 por unidad.
+La demanda diaria de U1 ha sido de 6 unidades con una desviación estándar de 1 unidad diaria y
+la de U2 ha sido de 4 unidades con una desviación estándar de 0,65 unidades diarias.
+    El costo anual de mantener inventarios es de un 20 % del valor del artı́culo y usted tiene
+capacidad infinita de guardar U1 y U2 . El proveedor le cobra una cantidad fija de $100 por cada
+despacho de U1 , U2 o ambas, independiente de la cantidad, y demora 10 dı́as en completar el
+pedido tanto de U1 como el de U2 . Usted trabaja los 365 dı́as del año y desea mantener un nivel
+de servicio de un 95 %.
+    Hint: Recuerde que es posible solicitar los dos productos (U1 y U2 ) en el mismo despacho.
+
+  a) Las cantidades óptimas a pedir, puntos de reorden, números de pedidos anuales, tiempo entre
+     pedidos y costos anuales de la polı́tica para U1 y U2 si se utiliza una polı́tica de revisión
+     continua.
+
+  b) Las cantidades óptimas a pedir, puntos de reorden, números de pedidos anuales, tiempo entre
+     pedidos y costos anuales de la polı́tica para U1 y U2 si se utiliza una polı́tica de periodo fijo.
+
+  c) ¿Por cuál polı́tica de inventario se decide?
+
+
+
+
+24-06-2026                          ICS3213 – Ayudantı́a 12                             Página 3 de 5
+Problema 3
+    Alfa es una empresa que se dedica al transporte de pasajeros entre Santiago y el aeropuerto de
+esa ciudad. Comenzó su actividad hace dos años y está formada por 4 amigos que han invertido en
+9 autos/taxi. Se han organizado para cubrir zonas en Santiago y hacen transportes al aeropuerto.
+La disponibilidad de los automóviles es variable durante el dı́a, al igual que los pedidos que reciben.
+Dado que sus zonas son especialmente las comerciales céntricas y de oficinas, durante el fin de
+semana no brindan servicios.
+
+En la tabla se muestran algunos datos relevados desde sus planillas de trabajo:
+
+                                    Demanda media     # Autos que
+     Bloque
+                Franja horaria       (# viajes) en  cubren el servicio CVa                   CVs
+     horario
+                                    Zona en franja en la franja horaria
+         1         8:00 a 14:00           35                 4          2                      5
+         2        14:01 a 16:00           27                 6          2                      5
+         3        16:01 a 23:00           85                 6          2                      7
+         4         23:00 a 8:00           45                 3          1                     1.5
+
+
+En la tabla se indica la variabilidad del tiempo de arribo de las solitudes de los clientes (CVa) y la
+variabilidad que presentan los viajes (CVs). En promedio cada taxi demora 20 minutos por cada
+viaje. Sakasegawa (1977) propone una aproximación al tiempo de espera para sistemas G/G/c
+dada por:
+                                                       √
+                                          CVa2 + CVs2 ρ( 2c+2)−1 1
+                                       
+                                  Wq ≈
+                                               2         c(1 − ρ) µ
+
+Aunque inicialmente todos atendı́an zonas bien demarcadas, con el correr del tiempo los clientes
+han empezado a cambiar los puntos de partida y salida. Eso les ha llevado a sea posible hacer
+viajes FUERA DE ZONA, donde las condiciones de tránsito, seguridad y accesos, son dispares.
+El salir FUERA DE ZONA lleva a un aumento en un 20 % de la demanda media. Estos viajes se
+distribuyen: un 15 % en la franja 1, 15 % en la franja 2, 50 % en la 3 y el 20 % en la 4. Los tiempos
+FUERA DE ZONA cambian por los factores mencionados, permitiendo que un auto FUERA DE
+ZONA pueda atender solo 1.5 viajes por hora.
+
+Los socios tienen como polı́tica que sus autos/taxis estén un 90 % utilizados, ya que eso permite
+dar un buen servicio y tener viajes. Actualmente están evaluando si el salir fuera de la zona es
+una adecuada polı́tica; pero no saben si tomar una medida definitiva sobre esto tendrá impactos
+negativos sobre su negocio.
+
+Por ende, le piden a usted que responda las siguientes preguntas:
+
+  a. ¿Cuál es la tasa de ocupacion de los taxis? Determine los tiempos promedios de espera para
+     el bloque más congestionado. ¿Se sigue la polı́tica de utilización de Alfa? ¿Deberı́a cambiar
+     la asignación de taxis por franja? ¿Por qué?
+
+  b. Si los socios deciden hacer viajes FUERA DE ZONA ¿Cuál es la tasa de ocupacion de los
+     taxis si no se cambia el número de autos en servicio? Suponga que los tiempos de espera para
+
+24-06-2026                           ICS3213 – Ayudantı́a 12                             Página 4 de 5
+     cada franja horaria deben mantenerse similares a los del punto a, en un rango de +/-30 %.
+     ¿Que flota de taxis asignarı́a para cada franja horaria? Recalcule los Wq y en caso de hacer
+     supuestos defı́nalos claramente.
+
+  c. Si los socios determinan que el costo de espera de cada cliente es de Cq [$/min] pesos
+     por minuto esperando. Por otro lado, determinan que cada unidad porcentual (1 %) de
+     disminución en su nivel de utilización tiene costo Cu [$/(unidad %)] y es posible aumentar el
+     número de taxis por bloque a un costo de Ck [$/taxi/bloque], lo que claramente aumentarı́a
+     el nivel de servicio. Plantee un modelo de programación matemática que permita: determinar
+     el número óptimo de taxis a tener por bloque horario, nivel de utilización optimo y también
+     determinar si debemos o no hacer viajes FUERA DE ZONA.
+
+
+
+
+24-06-2026                         ICS3213 – Ayudantı́a 12                           Página 5 de 5
+

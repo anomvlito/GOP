@@ -1,0 +1,98 @@
+\subsection{Solucion desarrollada}
+
+\begin{respuesta}{(a) Limites para promedio y recorrido}
+Calculamos media y recorrido de cada submuestra:
+\[
+\bar X=(0.45,\ 0.50,\ 0.60,\ 0.50),
+\qquad
+R=(0.30,\ 0.20,\ 0.20,\ 0.00).
+\]
+Por lo tanto:
+\[
+\bar{\bar X}=\frac{0.45+0.50+0.60+0.50}{4}=0.5125,
+\qquad
+\bar R=\frac{0.30+0.20+0.20+0}{4}=0.175.
+\]
+Reemplazando:
+\[
+LCS_{\bar X}=0.5125+0.729(0.175)=0.6401,
+\qquad
+LCI_{\bar X}=0.5125-0.729(0.175)=0.3849.
+\]
+Para la carta de recorridos:
+\[
+LCS_R=2.282(0.175)=0.3994,\qquad LCI_R=0(0.175)=0.
+\]
+Por lo tanto, los limites para el promedio son:
+\[
+\boxed{LCI_{\bar X}=0.3849},\qquad
+\boxed{LC_{\bar X}=0.5125},\qquad
+\boxed{LCS_{\bar X}=0.6401}.
+\]
+Los limites para la diferencia entre maximo y minimo, es decir, para el recorrido \(R\), son:
+\[
+\boxed{LCI_R=0},\qquad
+\boxed{LC_R=0.175},\qquad
+\boxed{LCS_R=0.3994}.
+\]
+\end{respuesta}
+
+\begin{respuesta}{(b) Diagnostico con la nueva muestra}
+La muestra nueva tiene:
+\[
+\bar X_5=\frac{0.4+0.7+0.5+0.9}{4}=0.625,
+\qquad
+R_5=0.9-0.4=0.5.
+\]
+El promedio esta dentro del intervalo \([0.3849,0.6401]\), pero el recorrido no:
+\[
+0.5>0.3994.
+\]
+Por lo tanto, el proceso no esta bajo control. La causa observable es exceso de dispersion dentro de la muestra, no un desplazamiento claro de la media.
+\end{respuesta}
+
+\begin{respuesta}{(c) Plan de muestreo para controlar insumos}
+Se usa un plan de muestreo simple \((n,c)\): se inspeccionan \(n\) unidades y se acepta el lote si aparecen como maximo \(c\) defectuosas. Los parametros del enunciado se interpretan asi:
+\[
+\begin{array}{c|c|c}
+\text{Parametro} & \text{Valor} & \text{Interpretacion} \\
+\hline
+AQL & 0.02 & \text{calidad aceptable: }2\%\text{ defectuoso} \\
+LPTD & 0.08 & \text{calidad rechazable: }8\%\text{ defectuoso} \\
+\alpha & 0.05 & \text{riesgo de rechazar un lote bueno} \\
+\beta & 0.10 & \text{riesgo de aceptar un lote malo}
+\end{array}
+\]
+
+Primero se calcula la razon que se busca en la tabla:
+\[
+\frac{LPTD}{AQL}
+=\frac{0.08}{0.02}
+=4.
+\]
+Se usa la tabla correspondiente a \(\alpha=0.05\) y \(\beta=0.10\). En esa tabla se busca el valor de \(\frac{LPTD}{AQL}\) cercano a \(4\):
+\[
+\begin{array}{c|c|c}
+c & LPTD/AQL & n\cdot AQL \\
+\hline
+3 & 4.89 & 1.366 \\
+4 & 4.057 & 1.97 \\
+5 & 3.549 & 2.613
+\end{array}
+\]
+Como \(4.057\) es el valor mas cercano a \(4\), se toma:
+\[
+c=4,
+\qquad
+n\cdot AQL=1.97.
+\]
+Despejando \(n\):
+\[
+n=\frac{1.97}{0.02}=98.5\approx 99.
+\]
+Por lo tanto, el plan de muestreo es:
+\[
+\boxed{n=99,\qquad c=4.}
+\]
+La regla final es: tomar una muestra de \(99\) unidades; si hay \(4\) defectuosas o menos, se acepta el lote; si hay \(5\) defectuosas o mas, se rechaza.
+\end{respuesta}

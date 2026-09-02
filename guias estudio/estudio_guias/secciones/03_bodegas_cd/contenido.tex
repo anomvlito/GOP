@@ -1,0 +1,92 @@
+\section{Bodegas y Centros de Distribucion}
+
+\subsection{Profundidad optima de pallets}
+
+\begin{ejercicio}{Guia 9, problema 1}
+Se disena una bodega de pallets a piso. Los pasillos miden $4.2$ m de ancho y los pallets miden $1.2$ m por $1.0$ m. La cara mas angosta queda hacia el pasillo. Los datos son:
+\[
+\begin{array}{c|ccc}
+\text{SKU} & q_i & z_i & T_i\\
+\hline
+A&32&1&5\\
+B&28&2&4\\
+C&14&3&6
+\end{array}
+\]
+donde $q_i$ son pallets pedidos, $z_i$ es altura de apilado en pallets y $T_i$ es ciclo de pedido en semanas. Se pide profundidad optima por SKU y una profundidad unica para todos.
+\end{ejercicio}
+
+\begin{materia}{profundidad dedicada}
+Para cada SKU $i\in I=\{A,B,C\}$:
+\[
+  d_i^\star=\sqrt{\frac{a q_i}{2 z_i}},
+\]
+donde:
+\begin{itemize}
+  \item $d_i^\star$ es la profundidad optima en numero de pallets.
+  \item $a$ es la razon entre ancho de pasillo y ancho efectivo del pallet usado en el frente.
+  \item $q_i$ es la cantidad de pallets recibida en una reposicion.
+  \item $z_i$ es la altura de apilado.
+\end{itemize}
+Como la guia indica que la cara mas angosta queda hacia el pasillo, usa:
+\[
+  a=\frac{4.2}{1.2}=3.5.
+\]
+\end{materia}
+
+\begin{solucion}{profundidad por SKU}
+\[
+d_A^\star=\sqrt{\frac{3.5(32)}{2(1)}}=7.48,
+\qquad
+d_B^\star=\sqrt{\frac{3.5(28)}{2(2)}}=4.95,
+\qquad
+d_C^\star=\sqrt{\frac{3.5(14)}{2(3)}}=2.86.
+\]
+Las profundidades son numeros de pallets. En la practica se redondea considerando restricciones fisicas y politica operativa; matematicamente estos son los optimos continuos.
+\end{solucion}
+
+\begin{materia}{profundidad unica}
+Si todos los SKU deben compartir una misma profundidad $d$, se pondera por la frecuencia relativa de reposicion. Cuando los ciclos son distintos, se toma un horizonte comun $H$ igual al minimo comun multiplo de los ciclos:
+\[
+  H=\operatorname{mcm}(5,4,6)=60.
+\]
+La cantidad de reposiciones de SKU $i$ dentro del horizonte es:
+\[
+  r_i=\frac{H}{T_i}.
+\]
+La guia usa:
+\[
+  d^\star=
+  \sqrt{
+  \frac{a}{2H}
+  \sum_{i\in I}r_i\frac{q_i}{z_i}
+  }.
+\]
+\end{materia}
+
+\begin{solucion}{profundidad comun}
+Las frecuencias relativas son:
+\[
+  r_A=\frac{60}{5}=12,\qquad
+  r_B=\frac{60}{4}=15,\qquad
+  r_C=\frac{60}{6}=10.
+\]
+Entonces:
+\[
+  d^\star=
+  \sqrt{
+  \frac{3.5}{2\cdot 60}
+  \left(
+  12\frac{32}{1}
+  +15\frac{28}{2}
+  +10\frac{14}{3}
+  \right)
+  }
+  =
+  4.3227.
+\]
+\end{solucion}
+
+\begin{alerta}{supuestos que pueden preguntar}
+La formula no considera restricciones fisicas de la bodega, usa un ancho unico de pasillo, trabaja con pallets completos y supone que las tasas relativas de venta se mantienen estables. Si te piden ventajas/desventajas de almacenamiento compartido, la idea central es espacio mejor utilizado a cambio de mayor complejidad operativa y necesidad de sistema de informacion.
+\end{alerta}

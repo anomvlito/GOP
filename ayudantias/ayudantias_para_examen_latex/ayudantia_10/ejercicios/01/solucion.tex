@@ -1,0 +1,75 @@
+\subsection{Solucion desarrollada}
+
+\begin{respuesta}{Asignacion por regla raiz}
+Primero convertimos cada demanda mensual a flujo volumetrico:
+\[
+f_A=\frac{4600}{25}(4.5)=828.00,\quad
+f_B=\frac{1150}{17}(4.0)=270.59,
+\]
+\[
+f_C=\frac{2100}{11}(3.0)=572.73,\quad
+f_D=\frac{2900}{20}(2.0)=290.00.
+\]
+
+Como el enunciado dice que todos los SKU deben ingresar al area, el dato \(\text{Pick/mes}\) no se usa para esta asignacion. Reemplazando en el peso raiz:
+\[
+\sqrt{f_A}=28.77,\quad
+\sqrt{f_B}=16.45,\quad
+\sqrt{f_C}=23.93,\quad
+\sqrt{f_D}=17.03.
+\]
+La suma de pesos es \(86.19\). Por lo tanto:
+\[
+v_A=1900\frac{28.77}{86.19}=634.36,
+\quad
+v_B=1900\frac{16.45}{86.19}=362.64,
+\]
+\[
+v_C=1900\frac{23.93}{86.19}=527.59,
+\quad
+v_D=1900\frac{17.03}{86.19}=375.42.
+\]
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+SKU & Flujo \(f_i\) & Espacio \(v_i\) & Ciclo individual \(v_i/f_i\) \\
+\midrule
+A & 828.00 & 634.36 & 0.766 meses \\
+B & 270.59 & 362.64 & 1.340 meses \\
+C & 572.73 & 527.59 & 0.921 meses \\
+D & 290.00 & 375.42 & 1.295 meses \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Si todos los SKU se reponen al mismo tiempo, la frecuencia comun no puede ser distinta por SKU. Despejando con el volumen total:
+\[
+T=\frac{1900}{828.00+270.59+572.73+290.00}=0.969\ \text{meses}.
+\]
+Esto equivale aproximadamente a \(29.1\) dias. La interpretacion operativa es que, bajo reposicion sincronizada, el area completa se vuelve a llenar cerca de una vez al mes.
+\end{respuesta}
+
+\begin{respuesta}{Extra: como distinguirlo con preguntas de examenes anteriores}
+En el Examen 2021 aparece una zona de picking rapido con \(V=20\ \text{m}^3\), datos de cajas/mes y \(m^3/\text{caja}\). La pauta calcula:
+\[
+f_A=40(2)=80,\qquad f_B=20(1.5)=30,\qquad f_C=45(1)=45.
+\]
+Luego usa:
+\[
+v_i^*=V\frac{\sqrt{f_i}}{\sum_j\sqrt{f_j}}.
+\]
+Eso confirma que, para asignacion de volumen entre SKU ya considerados en el area, el objeto matematico es el flujo volumetrico \(f_i\).
+
+En cambio, en el Examen 2016 aparece otra pregunta con \(\text{PICKS}\), demanda en pallets, minimo y maximo de posiciones. Ahi la decision es que SKU disponer en el area frontal, por lo que se calcula beneficio por unidad de espacio:
+\[
+Ben_{min,i}=\frac{s\,p_i-c_r\,d_i}{l_i}.
+\]
+La diferencia conceptual es:
+\[
+\text{asignar volumen dado que todos entran}\Rightarrow \sqrt{f_i},
+\]
+\[
+\text{elegir/priorizar SKU para area frontal}\Rightarrow p_i \text{ entra en el beneficio}.
+\]
+\end{respuesta}

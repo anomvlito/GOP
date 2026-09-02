@@ -1,0 +1,102 @@
+\begin{solucion}{Costo adicional del minorista}
+Definimos:
+\[
+\begin{array}{c|l}
+\toprule
+\text{Simbolo} & \text{Significado} \\
+\midrule
+q\in\mathbb{R}_+ & \text{cantidad vendida.}\\
+p(q)=a-bq & \text{precio final inducido por la demanda inversa.}\\
+w\in\mathbb{R}_+ & \text{precio mayorista.}\\
+c\in\mathbb{R}_+ & \text{costo unitario del proveedor.}\\
+k\in\mathbb{R}_+ & \text{costo operativo unitario del minorista.}\\
+\bottomrule
+\end{array}
+\]
+El costo \(k\) no lo recibe el proveedor; es un costo real adicional que reduce el margen unitario del minorista.
+
+Con costo operativo \(k\), la utilidad del minorista es:
+\[
+\Pi_r(q)=q(p-w-k)
+=q(a-bq-w-k).
+\]
+Derivando:
+\[
+\frac{d\Pi_r}{dq}=a-w-k-2bq=0,
+\]
+por lo que la respuesta del minorista es:
+\[
+q(w)=\frac{a-w-k}{2b}.
+\]
+
+El proveedor maximiza:
+\[
+\Pi_s(w)=(w-c)q(w)
+=(w-c)\frac{a-w-k}{2b}.
+\]
+Derivando:
+\[
+\frac{d\Pi_s}{dw}=0
+\quad\Rightarrow\quad
+w_D=\frac{a+c-k}{2}.
+\]
+Entonces:
+\[
+q_D=\frac{a-c-k}{4b},
+\qquad
+p_D=\frac{3a+c+k}{4}.
+\]
+Las utilidades son:
+\[
+\Pi_s^D=\frac{(a-c-k)^2}{8b},
+\qquad
+\Pi_r^D=\frac{(a-c-k)^2}{16b},
+\]
+\[
+\Pi_{SC}^D=\frac{3(a-c-k)^2}{16b}.
+\]
+
+En la cadena centralizada, el costo marginal total es \(c+k\):
+\[
+\Pi_{SC}(q)=q(p-c-k)=q(a-bq-c-k).
+\]
+Por lo tanto:
+\[
+q_C=\frac{a-c-k}{2b},
+\qquad
+p_C=\frac{a+c+k}{2},
+\]
+\[
+\Pi_{SC}^C=\frac{(a-c-k)^2}{4b}.
+\]
+
+Aplicando \(a=100\), \(b=1\), \(c=1\), \(k=5\):
+\[
+w_D=\frac{100+1-5}{2}=48,
+\]
+\[
+q_D=\frac{100-1-5}{4}=23.5,
+\qquad
+p_D=\frac{3(100)+1+5}{4}=76.5.
+\]
+Utilidades descentralizadas:
+\[
+\Pi_s^D=\frac{94^2}{8}=1104.5,
+\qquad
+\Pi_r^D=\frac{94^2}{16}=552.25,
+\]
+\[
+\Pi_{SC}^D=1656.75.
+\]
+Centralizado:
+\[
+q_C=\frac{94}{2}=47,
+\qquad
+p_C=\frac{100+1+5}{2}=53,
+\]
+\[
+\Pi_{SC}^C=\frac{94^2}{4}=2209.
+\]
+
+El costo del minorista reduce la cantidad eficiente y las utilidades, pero la conclusion no cambia: la cadena descentralizada sigue vendiendo menos que la centralizada.
+\end{solucion}

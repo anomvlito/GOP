@@ -1,0 +1,27 @@
+\section{Análisis Histórico y Pronóstico de Preguntas}
+
+Al revisar el historial de exámenes de años anteriores (2015-2025), se observa un patrón claro en la estructura de la **Etapa de Desarrollo**. A continuación, un pronóstico detallado de las dinámicas y ``trampas'' típicas de cada tipo de ejercicio.
+
+\subsection{1. El Ejercicio de Localización / Bodegas}
+Este ejercicio es casi 100\% seguro en el examen, ya que es el principal tema cuantitativo post-I2.
+\begin{itemize}
+    \item \textbf{Dinámica típica:} Te darán dos o tres ciudades (con sus coordenadas) y opciones para poner un Centro de Distribución. 
+    \item \textbf{Trampa 1 (Distancias):} Si la ciudad está en una grilla urbana, te pedirán usar distancia **Manhattan** ($|x_1-x_2| + |y_1-y_2|$). Si es entre ciudades, usar Euclidiana.
+    \item \textbf{Trampa 2 (Break-Even Dinámico):} A veces no piden solo el punto de quiebre actual, sino evaluar un proyecto a $N$ años con una demanda creciente $Q(t) = a + bt$. **Debes integrar** la función de costos totales $CT = \int_0^T (CF + CV \cdot Q(t)) dt$ y elegir la menor.
+\end{itemize}
+
+\subsection{2. El Ejercicio de Calidad (Gráficos de Control)}
+Es el segundo ejercicio altamente probable.
+\begin{itemize}
+    \item \textbf{Dinámica típica:} Una tabla con 20-30 muestras de un tamaño $n$ (ej. $n=20$). Te dan la suma de promedios, mínimos y máximos, o directamente la tabla.
+    \item \textbf{Trampa 1 (Cálculo del Rango):} Si te dan máximos y mínimos, el rango promedio $\bar{R}$ se saca de $\sum (\text{Max} - \text{Min}) / m$.
+    \item \textbf{Trampa 2 (Recálculo obligatorio):} Siempre habrá una o dos muestras que caen fuera de los límites $LCS_{\bar{X}}$ o $LCI_{\bar{X}}$. Si no las eliminas y no \textbf{recalculas} el $\bar{\bar{X}}$ y el $\bar{R}$ restando esos datos del total, tendrás todo el ejercicio malo.
+\end{itemize}
+
+\subsection{3. El Ejercicio de La Venganza de la I2}
+El 40\% antiguo siempre trae un ejercicio denso. Suele rotar entre tres opciones:
+\begin{itemize}
+    \item \textbf{Fórmula de Kingman (Variabilidad) y Disponibilidad:} Te comparan dos máquinas. Una rápida pero que falla feo (MTTR altísimo) y otra lenta pero estable. Debes calcular la Variabilidad Efectiva $C_e^2$ y el tiempo en cola $W_q$. La máquina con fallas graves siempre colapsa el sistema, aunque su $t_0$ sea bajo.
+    \item \textbf{Crashing de Proyectos (PERT/CPM):} Te darán una red de unas 8 actividades. Identificas la ruta crítica. Luego te piden acortar el proyecto 3 días al mínimo costo. **OJO:** Al acortar el día 1, puede aparecer una segunda ruta crítica paralela. Para el día 2, deberás acortar **ambas rutas a la vez**, sumando los costos marginales.
+    \item \textbf{MRP Mixto con Wagner-Whitin:} Un BOM de 3 niveles. Piden hacer el requerimiento neto de un componente, pero en vez de L4L, te piden aplicar Silver-Meal o la fórmula dinámica de Wagner-Whitin para ver si conviene agrupar pedidos.
+\end{itemize}

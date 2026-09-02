@@ -1,0 +1,61 @@
+\section{Ejemplos Resueltos Tipo Examen}
+
+A continuación, se presentan ejemplos extraídos de certámenes anteriores para que tengas la estructura de resolución en la Etapa de Desarrollo.
+
+\begin{ejercicio}{Ejemplo 1: Calidad y Límites de Control}
+Se toman 25 muestras ($m=25$) de $n=20$ botellas. Se sabe que:
+$\sum \bar{X} = 637.1$, $\sum \text{Min} = 607.6$, $\sum \text{Max} = 666.6$.
+
+\textbf{1. Calcular Límites Iniciales:}
+\begin{itemize}
+    \item $\bar{\bar{X}} = 637.1 / 25 = 25.484$
+    \item Rango Medio $\bar{R} = \frac{\sum (\text{Max} - \text{Min})}{25} = \frac{666.6 - 607.6}{25} = \frac{59}{25} = 2.36$
+    \item Factor $A_2$ (para $n=20$ en tabla) = $0.18$
+    \item $LCS_{\bar{X}} = 25.484 + 0.18(2.36) = 25.90$
+    \item $LCI_{\bar{X}} = 25.484 - 0.18(2.36) = 25.06$
+\end{itemize}
+
+\textbf{2. Recálculo tras sacar muestras malas:}
+Si en la tabla original vemos la muestra 16 con $\bar{X} = 27.5$ y la muestra 22 con $\bar{X} = 27.6$, ambas están sobre 25.90 (Fuera de control).
+Las eliminamos (quedan $m = 23$).
+Nuevo Promedio Global = $\frac{637.1 - 27.5 - 27.6}{23} = \frac{582.0}{23} = 25.304$.
+Recalculamos los límites con este $25.304$ (y ajustando el nuevo $\bar{R}$ si se pide).
+\end{ejercicio}
+
+\begin{ejercicio}{Ejemplo 2: Break-Even Integrado (Localización)}
+Opción L1: Compra \$10,000 ; Costo de Op: \$25/u
+Opción L2: Compra \$40,000 ; Costo de Op: \$10/u
+Demanda $Q(t) = 1000 + 250t$. Se evalúa a 10 años ($T=10$).
+
+\textbf{Solución:} Integrar la función de Costo Total en el tiempo.
+$$ CT_{L1} = \int_0^{10} [10000 + 25(1000 + 250t)] dt = \int_0^{10} (35000 + 6250t) dt $$
+$$ CT_{L1} = [35000t + 3125t^2]_0^{10} = 350,000 + 312,500 = \$662,500 $$
+
+$$ CT_{L2} = \int_0^{10} [40000 + 10(1000 + 250t)] dt = \int_0^{10} (50000 + 2500t) dt $$
+$$ CT_{L2} = [50000t + 1250t^2]_0^{10} = 500,000 + 125,000 = \$625,000 $$
+
+\textbf{Conclusión:} A pesar de que L2 cuesta el cuádruple de comprar, en el acumulado de 10 años con demanda creciente, ahorra \$37,500 en costos operativos y es la mejor opción.
+\end{ejercicio}
+
+\begin{ejercicio}{Ejemplo 3: Colas y Variabilidad por Fallas}
+Máquina A (lenta pero segura): $t_0 = 12$ min. MTTF = 57h, MTTR = 19h.
+Máquina B (rápida pero frágil): $t_0 = 10$ min. MTTF = 372h, MTTR = 124h.
+En ambas, $C_0^2 = 0.027$, $C_r^2 = 1$.
+
+\textbf{1. Disponibilidad ($A$):}
+$A_A = 57 / (57 + 19) = 0.75$.
+$A_B = 372 / (372 + 124) = 0.75$.
+Ambas tienen 75\% de disponibilidad. Aparentemente B es mejor por ser más rápida (10 min vs 12 min).
+
+\textbf{2. Efecto de las fallas en la variabilidad ($C_e^2$):}
+Transformar el MTTR a minutos para tener las mismas unidades que $t_0$:
+$MTTR_A = 19 \text{ h} = 1140$ min.
+$MTTR_B = 124 \text{ h} = 7440$ min.
+
+Fórmula: $C_e^2 = C_0^2 + (1+C_r^2)A(1-A)\frac{MTTR}{t_0}$
+El término $(1+1) \cdot 0.75 \cdot 0.25 = 0.375$.
+$C_{e,A}^2 = 0.027 + 0.375 \times \left( \frac{1140}{12} \right) = 0.027 + 0.375(95) = 35.65$
+$C_{e,B}^2 = 0.027 + 0.375 \times \left( \frac{7440}{10} \right) = 0.027 + 0.375(744) = 279.02$
+
+\textbf{Conclusión:} B tiene una variabilidad brutal (279 vs 35). Aunque es más rápida, cuando falla (tarda 124 horas en arreglarse), genera un taco inmenso de trabajo en cola. La máquina A es preferible en un sistema Lean (flujo parejo sin interrupciones severas).
+\end{ejercicio}

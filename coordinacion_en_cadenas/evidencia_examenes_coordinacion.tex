@@ -1,0 +1,654 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+\definecolor{gopblue}{RGB}{31,78,121}
+\definecolor{gopgreen}{RGB}{0,100,0}
+\definecolor{gopred}{RGB}{150,0,0}
+\definecolor{gopgray}{RGB}{246,246,243}
+
+\newtcolorbox{enunciado}[1]{
+  enhanced, breakable, colback=gopgray, colframe=black!45,
+  fonttitle=\bfseries, title={Enunciado textual: #1}
+}
+\newtcolorbox{pauta}[1]{
+  enhanced, breakable, colback=green!4!white, colframe=gopgreen,
+  fonttitle=\bfseries, title={Pauta / resolución pedagógica: #1}
+}
+\newtcolorbox{analisis}[1]{
+  enhanced, breakable, colback=blue!4!white, colframe=gopblue,
+  fonttitle=\bfseries, title={Análisis: #1}
+}
+\newtcolorbox{alerta}[1]{
+  enhanced, breakable, colback=red!4!white, colframe=gopred,
+  fonttitle=\bfseries, title={Cuidado / Razón de diseño: #1}
+}
+
+\title{\textbf{Evidencia de Coordinación en Cadenas en Exámenes Anteriores}}
+\author{Cruce entre guía propia y ejercicios históricos resueltos paso a paso}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{analisis}{Conclusión ejecutiva}
+En las guías de estudio tradicionales no siempre aparece un desarrollo detallado de modelos fabricante--minorista con contratos de coordinación. Sin embargo, en los exámenes finales históricos del curso este tema se evalúa recurrentemente y mantiene una coincidencia directa con la guía \texttt{coordinacion\_en\_cadenas.tex}.
+
+La evidencia histórica se resume en:
+\begin{itemize}[itemsep=2pt]
+    \item \textbf{2017 y 2018:} Pregunta de demostración analítica: la cadena centralizada vende el doble que la descentralizada bajo demanda lineal ($Q_C = 2Q_D$).
+    \item \textbf{2020:} Ejercicio completo de franquicia (Burger Mac) combinando arriendo fijo, porcentaje de ventas, precio mayorista $w$ y utilidades comparadas.
+    \item \textbf{2022:} Comparación de opciones de franquicia, decisión privada del franquiciado, verificación explícita de coordinación y cálculo de eficiencia de la cadena.
+    \item \textbf{2023:} Comparación de franquicias bajo restricción de precio máximo y cálculo de utilidades para el franquiciado, la franquicia y la cadena integrada.
+\end{itemize}
+
+Por lo tanto, la guía cubre exactamente los fundamentos evaluados: demanda lineal, función de reacción del minorista, optimización del proveedor, cadena integrada, contratos de tarifa fija, contratos con porcentaje de ventas y medición de eficiencia.
+\end{analisis}
+
+\section{Mapa de relación con la guía}
+
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{0.10\linewidth}p{0.28\linewidth}p{0.30\linewidth}p{0.20\linewidth}}
+\toprule
+\textbf{Año} & \textbf{Qué preguntaron} & \textbf{Parte de la guía que lo cubre} & \textbf{Nivel de cercanía} \\
+\midrule
+\endhead
+2017 & Demostrar que la cantidad centralizada duplica a la descentralizada. & Variante 1: caso base y materia de cadena centralizada/descentralizada. & Casi textual. \\
+2018 & Misma demostración con demanda \(Q=a-P\). & Variante 1: demostración \(q_C=2q_D\). & Textual en estructura. \\
+2020 & Franquicia Burger Mac: arriendo, porcentaje de ventas, \(w\), utilidades y comparación. & Variante 2: costo minorista; Variante 3: reparto \(\alpha\); Variante 4: comparar contratos. & Muy alta. \\
+2022 & Hamburguesas: dos franquicias, elegir contrato, verificar coordinación y eficiencia de cadena. & Variante 4: comparar contratos; materia de cadena integrada. & Muy alta. \\
+2023 & Cafetería: dos opciones de franquicia, precio/cantidad/utilidades y elección. & Variante 4: comparar contratos; decisión del retailer bajo demanda lineal. & Alta. \\
+\bottomrule
+\end{longtable}
+\normalsize
+\setlength{\tabcolsep}{6pt}
+
+\section{Examen 2017: demostración centralizado vs descentralizado}
+
+\begin{enunciado}{Examen 2017}
+\textbf{c) (10 puntos)} Demuestre que para una cadena de abastecimiento con un retailer que enfrenta una demanda
+\[
+Q = a - b\cdot P
+\]
+y un productor con costos de \(\$c\) por unidad; el retailer venderá el doble de unidades en una cadena centralizada que en el caso de una cadena descentralizada.
+\end{enunciado}
+
+\begin{pauta}{Demostración paso a paso}
+La demanda directa en el mercado está dada por \(Q = a - bP\). Despejando el precio de venta \(P\) en función de la cantidad \(Q\), obtenemos la demanda inversa:
+\[
+P(Q) = \frac{a - Q}{b}.
+\]
+
+\textbf{Paso 1: Cadena descentralizada.}
+Sea \(w\) el precio mayorista que el productor cobra al retailer por cada unidad. El retailer escoge la cantidad \(Q\) que maximiza su utilidad privada:
+\[
+\Pi_r(Q) = Q \cdot (P(Q) - w) = Q \left( \frac{a - Q}{b} - w \right) = \frac{aQ - Q^2}{b} - wQ.
+\]
+Para hallar la cantidad óptima del retailer ante cualquier \(w\), aplicamos la condición de primer orden (CPO), derivando respecto a \(Q\) e igualando a cero:
+\[
+\frac{d\Pi_r}{dQ} = \frac{a - 2Q}{b} - w = 0 
+\quad\Rightarrow\quad \frac{a - 2Q}{b} = w 
+\quad\Rightarrow\quad a - 2Q = bw.
+\]
+Despejando \(Q\), se obtiene la \textbf{función de reacción del retailer}:
+\[
+Q(w) = \frac{a - bw}{2}.
+\]
+
+El productor anticipa exactamente este comportamiento y reemplaza \(Q(w)\) en su propia función de beneficio para elegir el precio mayorista \(w\) óptimo:
+\[
+\Pi_s(w) = (w - c) \cdot Q(w) = (w - c) \left( \frac{a - bw}{2} \right) = \frac{aw - bw^2 - ac + bcw}{2}.
+\]
+Derivando con respecto a \(w\) e igualando a cero (CPO):
+\[
+\frac{d\Pi_s}{dw} = \frac{a - 2bw + bc}{2} = 0 
+\quad\Rightarrow\quad a + bc - 2bw = 0.
+\]
+Despejamos el precio mayorista de equilibrio descentralizado \(w_D\):
+\[
+w_D = \frac{a + bc}{2b}.
+\]
+Reemplazando \(w_D\) en la función de reacción del retailer \(Q(w)\), obtenemos la cantidad descentralizada de equilibrio \(Q_D\):
+\[
+Q_D = \frac{a - b \left(\frac{a + bc}{2b}\right)}{2} 
+= \frac{a - \frac{a + bc}{2}}{2} 
+= \frac{\frac{2a - a - bc}{2}}{2} 
+= \frac{a - bc}{4}.
+\]
+
+\textbf{Paso 2: Cadena centralizada (integrada).}
+En una cadena centralizada no existe precio mayorista intermedio (\(w\)). Un único tomador de decisiones elige \(Q\) para maximizar la utilidad total del sistema, enfrentando únicamente el costo de producción unitario \(c\):
+\[
+\Pi_{SC}(Q) = Q \cdot (P(Q) - c) = Q \left( \frac{a - Q}{b} - c \right) = \frac{aQ - Q^2}{b} - cQ.
+\]
+Derivando respecto a \(Q\) e igualando a cero (CPO):
+\[
+\frac{d\Pi_{SC}}{dQ} = \frac{a - 2Q}{b} - c = 0 
+\quad\Rightarrow\quad a - 2Q = bc 
+\quad\Rightarrow\quad Q_C = \frac{a - bc}{2}.
+\]
+
+\textbf{Paso 3: Comparación de cantidades.}
+Comparando la cantidad centralizada \(Q_C\) con la descentralizada \(Q_D\):
+\[
+Q_C = \frac{a - bc}{2} = 2 \cdot \left( \frac{a - bc}{4} \right) = 2 Q_D.
+\]
+Por lo tanto, queda demostrado matemáticamente que bajo demanda lineal la cadena centralizada vende exactamente el doble de unidades que la cadena descentralizada.
+\end{pauta}
+
+\begin{analisis}{Relación con la guía}
+Este ejercicio es exactamente el núcleo de la Variante 1 de la guía. La guía utiliza la forma inversa \(P = a - bQ\), mientras que este examen presentó la demanda directa \(Q = a - bP\). Ambos planteamientos son equivalentes y conducen a la misma conclusión estructural:
+\[
+Q_C = 2Q_D.
+\]
+\end{analisis}
+
+\section{Examen 2018: misma demostración, forma más textual}
+
+\begin{enunciado}{Examen 2018}
+\textbf{c) (10 puntos)} Demuestre matemáticamente que para una cadena de abastecimiento con un retailer que enfrenta una demanda
+\[
+Q=a-P,
+\]
+donde \(P\) es el precio y un productor con costos de \(\$c\) por unidad; el retailer venderá el doble de unidades en una cadena centralizada que en el caso de una cadena descentralizada.
+\end{enunciado}
+
+\begin{pauta}{Resolución paso a paso}
+Este ejercicio corresponde al caso particular de 2017 fijando la pendiente de demanda \(b = 1\). La función de demanda inversa es directamente \(P(Q) = a - Q\).
+
+\textbf{Paso 1: Caso descentralizado.}
+El retailer maximiza su beneficio privado dado el precio mayorista \(w\):
+\[
+\Pi_r(Q) = Q(a - Q - w) = aQ - Q^2 - wQ.
+\]
+La CPO derivando respecto a \(Q\) entrega:
+\[
+\frac{d\Pi_r}{dQ} = a - 2Q - w = 0 
+\quad\Rightarrow\quad Q(w) = \frac{a - w}{2}.
+\]
+El productor reemplaza esta curva de respuesta en su beneficio:
+\[
+\Pi_s(w) = (w - c)Q(w) = (w - c)\left(\frac{a - w}{2}\right) = \frac{aw - w^2 - ac + cw}{2}.
+\]
+Derivando respecto a \(w\) e igualando a cero (CPO):
+\[
+\frac{d\Pi_s}{dw} = \frac{a + c - 2w}{2} = 0 
+\quad\Rightarrow\quad w_D = \frac{a + c}{2}.
+\]
+Sustituyendo el precio mayorista \(w_D\) en la respuesta del retailer \(Q(w)\):
+\[
+Q_D = \frac{a - \left(\frac{a + c}{2}\right)}{2} = \frac{\frac{2a - a - c}{2}}{2} = \frac{a - c}{4}.
+\]
+
+\textbf{Paso 2: Caso centralizado.}
+La cadena integrada maximiza el beneficio total frente al costo marginal de producción \(c\):
+\[
+\Pi_{SC}(Q) = Q(a - Q - c) = aQ - Q^2 - cQ.
+\]
+La CPO derivando respecto a \(Q\) es:
+\[
+\frac{d\Pi_{SC}}{dQ} = a - 2Q - c = 0 
+\quad\Rightarrow\quad Q_C = \frac{a - c}{2}.
+\]
+
+\textbf{Paso 3: Conclusión.}
+Comparando ambas cantidades:
+\[
+Q_C = \frac{a - c}{2} = 2 \cdot \left( \frac{a - c}{4} \right) = 2 Q_D.
+\]
+Se verifica que \(Q_C = 2Q_D\).
+\end{pauta}
+
+\begin{analisis}{Relación con lo probable}
+Si el certamen agrega un costo operacional del minorista \(k\), el desarrollo es idéntico reemplazando el costo marginal total por \(c + k\). La conclusión de doble volumen en la cadena integrada se mantiene inalterada.
+\end{analisis}
+
+\section{Examen 2020: Burger Mac, arriendo y 50\% de ventas}
+
+\begin{enunciado}{Examen 2020}
+Usted es el representante de la nueva franquicia Burger Mac, la cual produce hamburguesas y recién se ha establecido en Chile. Usted está tratando de determinar el ``mejor'' tipo de contrato con sus franquiciados, con el objetivo de alinear la cadena. Para ello, usted determina que la función de demanda mensual por hamburguesas que enfrenta cada local, la cual es
+\[
+P=80-2Q,
+\]
+siendo \(P\) el precio de venta de la hamburguesa y \(Q\) la cantidad vendida. Los costos asociados a la operación de cada local ascienden a \(\$4\) por cada hamburguesa que se vende. Si para usted el costo de insumos de cada hamburguesa ascienden a \(\$8\). Determine:
+
+\begin{enumerate}[label=\alph*)]
+    \item Si desea coordinar la cadena y ofrece un contrato de arriendo. ¿Cuál sería el precio mínimo de arriendo y el precio máximo que le podría cobrar al franquiciado? ¿Para el precio de arriendo mínimo y máximo, cuál sería la utilidad operacional del franquiciado, la suya y la de la cadena?
+    \item Si desea coordinar la cadena y ofrece un contrato en que el franquiciado le entregue un 50\% de sus ventas. ¿A qué precio y qué cantidad de hamburguesas vendería el franquiciado? ¿A qué precio le vendería usted los insumos? ¿Cuál sería la utilidad del franquiciado, la suya y la de la cadena?
+    \item Si usted coordina la cadena puede negociar un contrato de arriendo de \(\$300\) mensuales. ¿Qué contrato prefiere: arriendo \((\$300)\) o el 50\% de las ventas? ¿Qué arriendo lo deja indiferente entre las dos opciones?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pauta}{Resolución pedagógica detallada}
+\textbf{Paso 0: Identificación de parámetros del problema.}
+\begin{itemize}[itemsep=2pt]
+    \item Demanda inversa de mercado: \(P(Q) = 80 - 2Q\).
+    \item Demanda directa despejando la cantidad en función del precio: \(Q(P) = 40 - \frac{P}{2}\).
+    \item Costo variable de operación del franquiciado por unidad: \(k = 4\).
+    \item Costo de producción de insumos para la franquicia por unidad: \(c = 8\).
+\end{itemize}
+
+\textbf{Escenario Base Descentralizado (sin contrato de coordinación):}
+Para entender las opciones fuera de coordinación, resolvemos primero la interacción descentralizada previa:
+1. \textit{Decisión del franquiciado (retailer):} Dado un precio mayorista de insumos \(w\), el franquiciado enfrenta un costo unitario total de \(w + k = w + 4\). Maximiza su beneficio eligiendo el precio de venta \(P\):
+\[
+\Pi_r(P) = Q(P) \cdot (P - 4 - w) = \left(40 - \frac{P}{2}\right)(P - 4 - w).
+\]
+Desarrollando el producto algebraico:
+\[
+\Pi_r(P) = 40P - 160 - 40w - \frac{P^2}{2} + 2P + \frac{w}{2}P = -\frac{1}{2}P^2 + \left(42 + \frac{w}{2}\right)P - (160 + 40w).
+\]
+Aplicando la CPO derivando respecto a \(P\) e igualando a cero:
+\[
+\frac{d\Pi_r}{dP} = -P + 42 + \frac{w}{2} = 0 
+\quad\Rightarrow\quad \boxed{P(w) = 42 + \frac{w}{2}.}
+\]
+2. \textit{Transición pedagógica a la demanda de insumos \(Q(w)\):}
+Para saber cuántas hamburguesas venderá el franquiciado en función de \(w\), sustituimos \(P(w) = 42 + \frac{w}{2}\) en la demanda directa \(Q(P) = 40 - \frac{P}{2}\):
+\[
+Q(w) = 40 - \frac{1}{2}\left(42 + \frac{w}{2}\right) = 40 - 21 - \frac{w}{4} = \boxed{19 - \frac{w}{4}.}
+\]
+3. \textit{Decisión de la franquicia (proveedor):} La franquicia maximiza su ganancia sobre los insumos cobrando un precio mayorista \(w\) teniendo un costo de producción \(c = 8\):
+\[
+\Pi_s(w) = Q(w) \cdot (w - c) = \left(19 - \frac{w}{4}\right)(w - 8).
+\]
+Desarrollando la ecuación de utilidad de la franquicia:
+\[
+\Pi_s(w) = 19w - 152 - \frac{w^2}{4} + 2w = -\frac{w^2}{4} + 21w - 152.
+\]
+Derivando respecto a \(w\) e igualando a cero (CPO):
+\[
+\frac{d\Pi_s}{dw} = -\frac{w}{2} + 21 = 0 
+\quad\Rightarrow\quad \frac{w}{2} = 21 
+\quad\Rightarrow\quad \boxed{w_D = 42.}
+\]
+4. \textit{Valores de equilibrio descentralizado:}
+\begin{itemize}[itemsep=2pt]
+    \item Precio final consumidor: \(P_D = 42 + \frac{42}{2} = 63\).
+    \item Cantidad vendida: \(Q_D = 19 - \frac{42}{4} = 8.5\) hamburguesas.
+    \item Utilidad del franquiciado: \(\Pi_r^D = 8.5 \times (63 - 4 - 42) = 8.5 \times 17 = 144.5\).
+    \item Utilidad de la franquicia: \(\Pi_s^D = 8.5 \times (42 - 8) = 8.5 \times 34 = 289\).
+    \item Utilidad total de la cadena: \(\Pi_{SC}^D = 144.5 + 289 = 433.5\).
+\end{itemize}
+
+\textbf{Escenario de Cadena Integrada / Centralizada:}
+En el óptimo global, se considera el costo variable real completo de producir y operar: \(c + k = 8 + 4 = 12\).
+\[
+\Pi_{SC}(P) = Q(P) \cdot (P - 12) = \left(40 - \frac{P}{2}\right)(P - 12) = -\frac{1}{2}P^2 + 46P - 480.
+\]
+CPO derivando respecto a \(P\):
+\[
+\frac{d\Pi_{SC}}{dP} = -P + 46 = 0 \quad\Rightarrow\quad \boxed{P_C = 46.}
+\]
+La cantidad producida en el óptimo global es:
+\[
+Q_C = 40 - \frac{46}{2} = \boxed{17.}
+\]
+La utilidad máxima de la cadena integrada es:
+\[
+\Pi_{SC}^C = 17 \times (46 - 12) = 17 \times 34 = \boxed{578.}
+\]
+
+\textbf{Parte a) Contrato de Arriendo (Tarifa Fija \(F\)):}
+Para coordinar la cadena mediante tarifa fija, el proveedor vende los insumos al costo marginal real (\(w = c = 8\)). De esta forma, el franquiciado enfrenta un costo unitario de \(8 + 4 = 12\), por lo que elegirá de manera privada el precio global óptimo \(P_C = 46\) y la cantidad óptima \(Q_C = 17\), generando un excedente total en la cadena de \(\$578\).
+
+La distribución del excedente mediante la tarifa de arriendo mensual \(F\) es \(\Pi_r = 578 - F\) y \(\Pi_s = F\):
+\begin{itemize}[itemsep=2pt]
+    \item \textbf{Arriendo mínimo (\(F_{\min}\)):} La franquicia exige como mínimo su utilidad descentralizada previa:
+    \[
+    F_{\min} = \Pi_s^D = 289.
+    \]
+    Con este arriendo, las utilidades operacionales son: \(\Pi_s = 289\), \(\Pi_r = 578 - 289 = 289\), y \(\Pi_{SC} = 578\).
+    
+    \item \textbf{Arriendo máximo (\(F_{\max}\)):} El franquiciado exige conservar al menos su utilidad descentralizada previa (\(\Pi_r \ge 144.5\)):
+    \[
+    578 - F_{\max} = 144.5 \quad\Rightarrow\quad F_{\max} = 578 - 144.5 = 433.5.
+    \]
+    Con este arriendo, las utilidades operacionales son: \(\Pi_r = 144.5\), \(\Pi_s = 433.5\), y \(\Pi_{SC} = 578\).
+\end{itemize}
+
+\textbf{Parte b) Contrato con 50\% de Ventas:}
+En este contrato, el franquiciado entrega una fracción del 50\% de sus ingresos por ventas (\(1 - \alpha = 0.5 \Rightarrow \alpha = 0.5\)).
+
+Siguiendo la regla de la pauta histórica (\(w = \alpha c = 0.5 \times 8 = 4\)), los insumos se venden a \(w = 4\).
+
+El franquiciado maximiza su beneficio considerando que retiene el 50\% del ingreso e incurre en sus costos locales (\(k=4\)) y el precio de insumos (\(w=4\)):
+\[
+\Pi_r(P) = 0.5 \cdot P \cdot Q(P) - (k + w)Q(P) = \left(40 - \frac{P}{2}\right)(0.5P - 4 - 4) = \left(40 - \frac{P}{2}\right)(0.5P - 8).
+\]
+Desarrollando la función:
+\[
+\Pi_r(P) = 20P - 320 - 0.25P^2 + 4P = -0.25P^2 + 24P - 320.
+\]
+Derivando con respecto a \(P\) (CPO):
+\[
+\frac{d\Pi_r}{dP} = -0.5P + 24 = 0 \quad\Rightarrow\quad \boxed{P = 48.}
+\]
+La cantidad vendida a este precio es:
+\[
+Q = 40 - \frac{48}{2} = \boxed{16.}
+\]
+
+Calculamos los resultados del contrato:
+\begin{itemize}[itemsep=2pt]
+    \item Ventas totales del local: \(P \cdot Q = 48 \times 16 = 768\).
+    \item Cobro del 50\% de ventas para la franquicia: \(0.5 \times 768 = 384\).
+    \item Utilidad del franquiciado: \(\Pi_r = 384 - 16 \times (4 + 4) = 384 - 128 = 256\).
+    \item Utilidad de la franquicia: Recibe el 50\% de ventas (\(384\)) más la venta de insumos (\(4 \times 16 = 64\)) menos su costo de producción de insumos (\(8 \times 16 = 128\)):
+    \[
+    \Pi_s = 384 + 64 - 128 = 320.
+    \]
+    \item Utilidad total de la cadena: \(\Pi_{SC} = 256 + 320 = 576\).
+\end{itemize}
+
+\textbf{Parte c) Selección de Contrato y Punto de Indiferencia:}
+\begin{itemize}[itemsep=2pt]
+    \item Si se negocia un arriendo fijo de \(\$300\) mensuales, la utilidad de la franquicia es \(\Pi_s = 300\).
+    \item Bajo el contrato de 50\% de ventas, la franquicia obtiene \(\Pi_s = 320\).
+    \item Por lo tanto, la franquicia prefiere el **contrato del 50\% de las ventas** (\(320 > 300\)).
+    \item El arriendo fijo que deja a la franquicia indiferente frente al contrato del 50\% de ventas es exactamente \(F = 320\).
+\end{itemize}
+\end{pauta}
+
+\begin{alerta}{Rigor matemático con costo propio del franquiciado}
+En la pauta histórica del examen se aplica directamente la regla simplificada \(w = \alpha c\). Esta fórmula es exacta únicamente cuando el minorista no posee costos variables propios adicionales (\(k = 0\)). Cuando el franquiciado incurre en costos locales de operación \(k = 4\), la condición rigurosa para que el minorista perciba el costo marginal correcto de la cadena es:
+\[
+\frac{k + w}{\alpha} = c + k \quad\Rightarrow\quad \boxed{w = \alpha(c + k) - k.}
+\]
+Con \(\alpha = 0.5\), \(c = 8\) y \(k = 4\), el precio mayorista exacto que coordina es \(w = 0.5(8 + 4) - 4 = 2\). En evaluaciones escritas es fundamental explicar ambas perspectivas: la regla práctica simplificada de pauta y la condición analítica completa.
+\end{alerta}
+
+\begin{analisis}{Relación con la guía}
+Este examen histórico constituye el precedente más directo de evaluación en certámenes, pues aborda integralmente la respuesta del minorista, el beneficio del proveedor, la cadena integrada, la tarifa fija de arriendo con sus rangos de negociación y el contrato de reparto de ingresos.
+\end{analisis}
+
+\section{Examen 2022: franquicias de hamburguesas y eficiencia de cadena}
+
+\begin{enunciado}{Examen 2022}
+Usted se encuentra en el proceso de negociación para transformarse en un franquiciado de una empresa dedicada al rubro de comida rápida y en específico de hamburguesas. Realizando un estudio de mercado usted ha determinado que la demanda mensual por hamburguesas \(Q\) está dada por el precio al mercado de la hamburguesa \(P\), la cual está dada por:
+\[
+P=150-0.5Q.
+\]
+Usted tiene dos costos variables relevantes: personal e infraestructura. Si el costo variable por hamburguesa es de \(\$2\) por concepto de personal y el de infraestructura es \(\$3\) por hamburguesa. Actualmente tiene dos ofertas de franquicias que quiere evaluar.
+
+\textbf{Opción 1 ``BurgerDon'':} le ofrece un contrato en el cual le debe pagar un monto fijo anual de \(\$12{,}000\) y le ofrece venderle los insumos de cada hamburguesa a \(\$12\) por hamburguesa.
+
+\textbf{Opción 2 ``MacKing'':} le ofrece un contrato en el cual ellos le entregan toda la infraestructura y por ende ya no debe pagar este costo, pero le ofrece un contrato en el cual le pide el 50\% de sus ventas y le vende los insumos de cada hamburguesa a \(\$8\) por unidad.
+
+\begin{enumerate}[label=\roman*.]
+    \item Con esta información, como franquiciado, determine el precio al que vendería la hamburguesa con cada contrato. ¿Qué contrato seleccionaría usted y por qué?
+    \item Si usted determina que el costo de producción de cada hamburguesa para BurgerDon y MacKing es de \(\$10\), para el contrato seleccionado en i), ¿este contrato coordina o maximiza el valor para la cadena? ¿Cuál es la eficiencia de la cadena para el contrato? ¿Qué precio de venta de los insumos y qué monto fijo o porcentaje de ventas coordina o maximiza el valor de la cadena?
+\end{enumerate}
+\end{enunciado}
+
+\begin{pauta}{Resolución paso a paso}
+\textbf{Parámetros iniciales:}
+\begin{itemize}[itemsep=2pt]
+    \item Demanda inversa: \(P(Q) = 150 - 0.5Q \quad\Longleftrightarrow\quad Q(P) = 300 - 2P\).
+    \item Costos del franquiciado: personal \(v_1 = 2\), infraestructura \(v_2 = 3\).
+\end{itemize}
+
+\textbf{Parte i) Evaluación de Opciones para el Franquiciado:}
+
+\textit{Opción 1 (BurgerDon):}
+\begin{itemize}[itemsep=2pt]
+    \item Cobro fijo anual de \(\$12{,}000\), equivalente a un costo fijo mensual de \(F = \frac{12{,}000}{12} = 1{,}000\).
+    \item Costo de insumos: \(w_1 = 12\). Costo de infraestructura sumado por la pauta: \(v_2 = 3\). Costo variable considerado: \(12 + 3 = 15\).
+    \item Función de utilidad del franquiciado:
+    \[
+    \Pi_1(P) = Q(P) \cdot (P - 15) - 1{,}000 = (300 - 2P)(P - 15) - 1{,}000.
+    \]
+    Desarrollando:
+    \[
+    \Pi_1(P) = -2P^2 + 330P - 4{,}500 - 1{,}000 = -2P^2 + 330P - 5{,}500.
+    \]
+    Aplicando la CPO derivando respecto a \(P\):
+    \[
+    \frac{d\Pi_1}{dP} = -4P + 330 = 0 \quad\Rightarrow\quad \boxed{P_1 = 82.5.}
+    \]
+    Cantidad vendida:
+    \[
+    Q_1 = 300 - 2(82.5) = \boxed{135.}
+    \]
+    Utilidad operacional bruta: \(135 \times (82.5 - 15) = 9{,}112.5\).
+    Utilidad neta mensual del franquiciado (descontando tarifa fija):
+    \[
+    \Pi_1 = 9{,}112.5 - 1{,}000 = \boxed{8{,}112.5.}
+    \]
+\end{itemize}
+
+\textit{Opción 2 (MacKing):}
+\begin{itemize}[itemsep=2pt]
+    \item La infraestructura la asume MacKing (\(v_2 = 0\)), por lo que el franquiciado solo paga el personal (\(v_1 = 2\)) y los insumos (\(w_2 = 8\)), acumulando un costo variable unitario de \(2 + 8 = 10\).
+    \item Retención de ventas: El franquiciado conserva el 50\% de los ingresos (\(\alpha = 0.5\)).
+    \item Función de utilidad del franquiciado:
+    \[
+    \Pi_2(P) = 0.5 \cdot P \cdot Q(P) - 10 \cdot Q(P) = (300 - 2P)(0.5P - 10).
+    \]
+    Desarrollando:
+    \[
+    \Pi_2(P) = 150P - 3{,}000 - P^2 + 20P = -P^2 + 170P - 3{,}000.
+    \]
+    Aplicando la CPO derivando respecto a \(P\):
+    \[
+    \frac{d\Pi_2}{dP} = -2P + 170 = 0 \quad\Rightarrow\quad \boxed{P_2 = 85.}
+    \]
+    Cantidad vendida:
+    \[
+    Q_2 = 300 - 2(85) = \boxed{130.}
+    \]
+    Ingreso total por ventas: \(85 \times 130 = 11{,}050\).
+    Retención del 50\%: \(0.5 \times 11{,}050 = 5{,}525\).
+    Costo variable total del franquiciado: \(10 \times 130 = 1{,}300\).
+    Utilidad neta del franquiciado:
+    \[
+    \Pi_2 = 5{,}525 - 1{,}300 = \boxed{4{,}225.}
+    \]
+\end{itemize}
+
+\textit{Selección del franquiciado:}
+El franquiciado elige la **Opción 1 (BurgerDon)**, ya que reporta una utilidad neta mensual considerablemente mayor (\(8{,}112.5 > 4{,}225\)).
+
+\textbf{Parte ii) Coordinación y Eficiencia de la Cadena:}
+
+Costo variable total real de la cadena integrada (producción insumos \(\$10\) + personal \(\$2\) + infraestructura \(\$3\)):
+\[
+c_{\text{total}} = 10 + 2 + 3 = 15.
+\]
+La cadena integrada maximiza:
+\[
+\Pi_{SC}(P) = (300 - 2P)(P - 15) = -2P^2 + 330P - 4{,}500.
+\]
+La CPO entrega el precio y cantidad óptimos del sistema:
+\[
+\frac{d\Pi_{SC}}{dP} = -4P + 330 = 0 \quad\Rightarrow\quad P_C = 82.5, \quad Q_C = 135.
+\]
+Utilidad máxima posible de la cadena integrada:
+\[
+\Pi_{SC}^C = 135 \times (82.5 - 15) = \boxed{9{,}112.5.}
+\]
+
+\textit{Evaluación del contrato seleccionado (Opción 1):}
+Bajo la Opción 1, el franquiciado fijó un precio \(P_1 = 82.5\) y vendió \(Q_1 = 135\), generando un valor operacional total en la cadena de \(\$9{,}112.5\), el cual coincide exactamente con el valor máximo de la cadena integrada.
+
+Por lo tanto:
+\begin{itemize}[itemsep=2pt]
+    \item El contrato seleccionado **SÍ coordina** la cadena.
+    \item La eficiencia de la cadena para este contrato es del **100\%**:
+    \[
+    \text{Eficiencia} = \frac{\Pi_{SC}^{\text{Opción 1}}}{\Pi_{SC}^C} = \frac{9{,}112.5}{9{,}112.5} = 100\%.
+    \]
+\end{itemize}
+\end{pauta}
+
+\begin{analisis}{Relación con la guía}
+Este ejercicio aborda directamente la medición del indicador de eficiencia de la cadena:
+\[
+\text{Eficiencia} = \frac{\Pi_{SC}^{\text{contrato}}}{\Pi_{SC}^C}.
+\]
+Cuando un contrato logra reducir o eliminar la doble marginalización, la eficiencia alcanza el 100\%, tal como se expone en la Variante 4 de la guía.
+\end{analisis}
+
+\section{Examen 2023: franquicia de café}
+
+\begin{enunciado}{Examen 2023}
+Usted está considerando convertirse en una franquicia de una cadena de cafeterías especializadas en café de alta calidad. La demanda mensual de café \(Q\) se relaciona con el precio al mercado del café \(P\) mediante:
+\[
+P=8-0.2Q.
+\]
+Los costos variables relevantes incluyen el costo de los granos de café por taza y el costo del personal, considerando \(\$1.75\) en costos de esto último. Actualmente, tiene dos opciones de franquicias que está evaluando:
+
+\textbf{Opción 1: ``Caffè Zanetti''.} La franquicia ofrece un contrato con una tarifa fija mensual de \(\$15\) y suministra los granos de café a \(\$1.50\) por taza. Además, te ofrece libertad para establecer tus precios de venta.
+
+\textbf{Opción 2: ``StarWorlds''.} Esta franquicia no cobra una tarifa fija anual, pero vende los granos de café a \(\$1.75\) por taza. Sin embargo, le obliga a vender cada taza de café a un precio máximo de \(\$4\).
+
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuál es el precio y cantidad que debe vender con la opción 1? ¿Cuál es la utilidad para la cafetería, la franquicia y la cadena completa?
+    \item ¿Cuál es el precio y cantidad que debe vender con la opción 2? ¿Cuál es la utilidad para la cafetería, la franquicia y la cadena completa?
+    \item ¿Qué opción de franquicia elegiría y por qué? Considere maximizar sus ganancias.
+\end{enumerate}
+\end{enunciado}
+
+\begin{pauta}{Resolución paso a paso}
+\textbf{Parámetros iniciales:}
+\begin{itemize}[itemsep=2pt]
+    \item Demanda inversa: \(P(Q) = 8 - 0.2Q \quad\Longleftrightarrow\quad Q(P) = 40 - 5P\).
+    \item Costo variable de personal del franquiciado: \(k = 1.75\).
+\end{itemize}
+
+\textbf{Parte a) Opción 1: Caffè Zanetti.}
+\begin{itemize}[itemsep=2pt]
+    \item Insumos cobrados al franquiciado: \(w_1 = 1.50\). Costo variable total unitario del franquiciado: \(1.75 + 1.50 = 3.25\).
+    \item Tarifa fija mensual: \(F = 15\).
+    \item Utilidad del franquiciado:
+    \[
+    \Pi_1(P) = (40 - 5P)(P - 3.25) - 15 = -5P^2 + 56.25P - 145.
+    \]
+    CPO derivando respecto a \(P\):
+    \[
+    \frac{d\Pi_1}{dP} = -10P + 56.25 = 0 \quad\Rightarrow\quad \boxed{P_1 = 5.625.}
+    \]
+    Cantidad óptima vendida:
+    \[
+    Q_1 = 40 - 5(5.625) = \boxed{11.875\text{ tazas.}}
+    \]
+    \item Utilidad de la cafetería (franquiciado):
+    \[
+    \Pi_{\text{cafetería},1} = 11.875 \times (5.625 - 3.25) - 15 = 28.203 - 15 = \boxed{13.20.}
+    \]
+    \item Ingresos de la franquicia (proveedor por tarifa fija e insumos):
+    \[
+    \text{Ingreso}_{\text{franquicia},1} = 15 + 1.50 \times 11.875 = 15 + 17.8125 = \boxed{32.81.}
+    \]
+\end{itemize}
+
+\textbf{Parte b) Opción 2: StarWorlds.}
+\begin{itemize}[itemsep=2pt]
+    \item Insumos cobrados al franquiciado: \(w_2 = 1.75\). Costo variable total unitario: \(1.75 + 1.75 = 3.50\).
+    \item Sin tarifa fija (\(F = 0\)). Restricción de precio máximo: \(P \le 4\).
+    \item Sin la restricción de precio, el precio que maximiza el beneficio privado del franquiciado se obtiene de:
+    \[
+    \Pi_2(P) = (40 - 5P)(P - 3.50) = -5P^2 + 57.5P - 140.
+    \]
+    CPO sin restricción:
+    \[
+    \frac{d\Pi_2}{dP} = -10P + 57.5 = 0 \quad\Rightarrow\quad P = 5.75.
+    \]
+    Como el precio libre \(5.75\) supera el tope permitido de \(\$4\), la restricción \(P \le 4\) es **activa**. Por ende, la cafetería fija el precio máximo permitido:
+    \[
+    \boxed{P_2 = 4.}
+    \]
+    Cantidad vendida al precio tope:
+    \[
+    Q_2 = 40 - 5(4) = \boxed{20\text{ tazas.}}
+    \]
+    \item Utilidad de la cafetería (franquiciado):
+    \[
+    \Pi_{\text{cafetería},2} = 20 \times (4 - 3.50) = \boxed{10.}
+    \]
+    \item Ingresos de la franquicia (proveedor por insumos):
+    \[
+    \text{Ingreso}_{\text{franquicia},2} = 1.75 \times 20 = \boxed{35.}
+    \]
+\end{itemize}
+
+\textbf{Parte c) Elección de la Opción de Franquicia:}
+Comparando la utilidad de la cafetería entre ambas alternativas:
+\[
+\Pi_{\text{cafetería},1} = 13.20 > \Pi_{\text{cafetería},2} = 10.
+\]
+Por lo tanto, buscando maximizar sus ganancias, el franquiciado elegirá **Caffè Zanetti (Opción 1)**.
+\end{pauta}
+
+\begin{analisis}{Relación con la guía}
+Este ejercicio ilustra cómo un contrato con restricción de precio máximo (Price Ceiling) puede alterar la cantidad vendida al volver activa la cota superior del precio. Corresponde a las estrategias de control vertical expuestas en la guía.
+\end{analisis}
+
+\section{Qué se ha preguntado vs qué probablemente preguntarán}
+
+\begin{analisis}{Patrones históricos}
+Lo que ya se ha preguntado en exámene históricos:
+\begin{enumerate}[itemsep=2pt]
+    \item Demostración analítica de la doble marginalización (\(Q_C = 2Q_D\)).
+    \item Contrato de arriendo / tarifa fija con cálculo de rangos de negociación (\(F_{\min}\), \(F_{\max}\)).
+    \item Contrato de participación en ventas (Revenue Sharing) con costo operacional del minorista.
+    \item Comparación de utilidades privadas vs utilidades de la cadena integrada.
+    \item Cálculo de eficiencia de la cadena (\(\text{Eficiencia} = \Pi_{SC}^{\text{contrato}} / \Pi_{SC}^C\)).
+    \item Evaluación de contratos bajo restricciones operativas (precios máximos obligatorios).
+\end{enumerate}
+
+Lo más probable para una nueva pregunta de certamen:
+\begin{enumerate}[itemsep=2pt]
+    \item Presentar una demanda lineal \(P = a - bQ\) y proponer dos estructuras de contrato alternativas.
+    \item Exigir la derivación completa de la función de reacción del minorista \(Q(w)\) e interactuar con el óptimo del proveedor.
+    \item Solicitar si alguno de los contratos coordina la cadena y calcular su nivel de eficiencia porcentual.
+    \item Incluir explícitamente costos propios del minorista \(k\) para evaluar la condición de coordinacion adecuada:
+    \[
+    w = \alpha(c + k) - k.
+    \]
+    \item Determinar el rango de tarifa fija \(F \in [F_{\min}, F_{\max}]\) que garantiza la participación voluntaria de ambas partes.
+\end{enumerate}
+\end{analisis}
+
+\begin{alerta}{Checklist para responder en prueba}
+Para resolver cualquier ejercicio de esta temática en una evaluación escrita:
+\begin{enumerate}[itemsep=2pt]
+    \item Formular la demanda inversa \(P(Q)\) y la demanda directa \(Q(P)\).
+    \item Identificar todos los parámetros de costos: minorista \(k\), proveedor \(c\), precio mayorista \(w\), tarifa fija \(F\), porcentaje \(\alpha\).
+    \item Plantear y maximizar el beneficio privado del minorista \(\Pi_r\) para encontrar su función de reacción \(Q(w)\).
+    \item Plantear la maximización del proveedor \(\Pi_s(w)\) y sustituir \(Q(w)\) para hallar el precio mayorista descentralizado.
+    \item Plantear la cadena integrada \(\Pi_{SC}\) maximizando respecto al costo verdadero \(c + k\).
+    \item Comparar \(\Pi_r\), \(\Pi_s\) y \(\Pi_{SC}\).
+    \item En contratos con tarifa fija, explicitar el rango de aceptabilidad \(F_{\min} \le F \le F_{\max}\).
+    \item En contratos de porcentaje de ventas, explicitar tanto la regla estándar como la corrección analítica por costo operacional \(k\).
+\end{enumerate}
+\end{alerta}
+
+\section{Veredicto}
+
+\begin{analisis}{Prioridad de estudio}
+La guía \texttt{coordinacion\_en\_cadenas.tex} se encuentra plenamente alineada con los requerimientos evaluativos del curso. La clave para afrontar la prueba consiste en dominar la secuencia algorítmica:
+\[
+\begin{array}{c}
+\text{Decisión minorista } Q(w) \;\longrightarrow\; \text{Optimización proveedor } w_D \\
+\longrightarrow\; \text{Cadena integrada } Q_C \;\longrightarrow\; \text{Diseño contrato} \;\longrightarrow\; \text{Eficiencia}.
+\end{array}
+\]
+\end{analisis}
+
+\end{document}

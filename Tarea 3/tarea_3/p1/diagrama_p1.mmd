@@ -1,0 +1,7 @@
+graph LR
+    Llegada[Llegada Camiones<br/>N 59.76, 7.81] --> Descarga[Descarga<br/>U 60.89, 89.54]
+    Descarga --> Seleccion[Selección<br/>Tri 11, 12, 13.5]
+    Seleccion -- 95% --> Embalaje[Embalaje<br/>Tri 10.5, 13, 14]
+    Seleccion -- 5% Rechazo --> Seleccion
+    Embalaje --> Calidad[Calidad<br/>Constante 14]
+    Calidad --> Salida[Salida Bins]

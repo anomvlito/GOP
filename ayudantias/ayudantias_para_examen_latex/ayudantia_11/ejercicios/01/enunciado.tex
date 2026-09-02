@@ -1,0 +1,35 @@
+\subsection{Enunciado}
+
+\begin{enunciado}{Tarjetas ABC}
+La demanda final es de \(200\) tarjetas/hora. El proceso tiene tres operaciones antes del control de calidad: \(P1\), \(P2\) y \(P3\).
+
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+Operacion & Lote \(C\) & \(t_p\) s & \(t_k\) s & \(t_v\) s \\
+\midrule
+P1 & 200 & 85 & 45 & 200 \\
+P2 & 250 & 78 & 67 & 300 \\
+P3 & 300 & 50 & 92 & 150 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Control de calidad descarta \(15\%\). Se pide calcular Kanbans. Luego se estudia P3 con cinco muestras de largos:
+
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+Dia & \multicolumn{5}{c}{Largo (mm)} \\
+\midrule
+1 & 70 & 56 & 49 & 67 & 61 \\
+2 & 65 & 47 & 70 & 70 & 68 \\
+3 & 70 & 49 & 42 & 68 & 54 \\
+4 & 50 & 47 & 52 & 67 & 50 \\
+5 & 48 & 65 & 51 & 50 & 65 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Se pide calcular limites eliminando outliers si corresponde, evaluar la muestra del dia 6 \((63,54,43,69,65)\), y determinar si cambia el numero de Kanbans cuando las fallas bajan a \(5\%\).
+\end{enunciado}

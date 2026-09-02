@@ -1,0 +1,90 @@
+\subsection{Solucion desarrollada}
+
+\begin{respuesta}{Situacion actual}
+La duracion de los bloques es \(6,2,7,9\) horas. Por lo tanto:
+\[
+\lambda=(5.83,\ 13.50,\ 12.14,\ 5.00)\ \text{viajes/hora}.
+\]
+Con \(\mu=3\):
+\[
+\rho_b=\frac{\lambda_b}{c_b\mu}.
+\]
+Los resultados son:
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+Bloque & \(\lambda\) & Taxis & \(\rho\) & \(W_q\) min \\
+\midrule
+1 & 5.83 & 4 & 0.486 & 29.66 \\
+2 & 13.50 & 6 & 0.750 & 87.86 \\
+3 & 12.14 & 6 & 0.675 & 92.26 \\
+4 & 5.00 & 3 & 0.556 & 8.32 \\
+\bottomrule
+\end{tabular}
+\end{center}
+El bloque con mayor espera es el 3; el de mayor utilizacion es el 2. La politica de no superar \(90\%\) se cumple en todos los bloques.
+\end{respuesta}
+
+\begin{respuesta}{Viajes fuera de zona}
+La demanda total base es:
+\[
+35+27+85+45=192.
+\]
+El aumento es:
+\[
+\Delta=0.2(192)=38.4.
+\]
+Las nuevas demandas son:
+\[
+D'=(40.76,\ 32.76,\ 104.20,\ 52.68).
+\]
+Dividiendo por la duracion de cada bloque:
+\[
+\lambda'=(6.79,\ 16.38,\ 14.89,\ 5.85).
+\]
+Si fuera de zona reduce la tasa a \(\mu=1.5\) viajes/hora por taxi y se mantiene la flota original:
+\[
+\rho'=(1.132,\ 1.820,\ 1.654,\ 1.301).
+\]
+Todos los bloques quedan inestables. Para mantener \(\rho\le 0.9\):
+\[
+c_b\ge \left\lceil\frac{\lambda'_b}{0.9(1.5)}\right\rceil.
+\]
+Asi:
+\[
+c=(6,\ 13,\ 12,\ 5).
+\]
+La decision de salir fuera de zona requiere mucha mas flota; no debe aceptarse sin comparar margen adicional contra costo de capacidad y espera.
+\end{respuesta}
+
+\begin{respuesta}{Modelo matematico}
+Variables:
+\[
+k_b\in\mathbb{Z}_+,\qquad z\in\{0,1\},\qquad \rho_b\ge 0,\qquad W_{q,b}\ge 0.
+\]
+La variable \(z=1\) indica aceptar viajes fuera de zona. La demanda por bloque es:
+\[
+\lambda_b(z)=\frac{D_b+z\Delta s_b}{H_b}.
+\]
+La utilizacion:
+\[
+\rho_b=\frac{\lambda_b(z)}{k_b\mu(z)}.
+\]
+Restricciones:
+\[
+\rho_b\le 0.9,\qquad k_b\in\mathbb{Z}_+,\qquad z\in\{0,1\}.
+\]
+Funcion objetivo:
+\[
+\min \sum_b C_q\lambda_b(z)W_{q,b}
++\sum_b C_u(0.9-\rho_b)
++\sum_b C_k k_b.
+\]
+La espera se aproxima imponiendo:
+\[
+W_{q,b}\ge
+\left(\frac{CV_{a,b}^2+CV_{s,b}^2}{2}\right)
+\frac{\rho_b^{\sqrt{2k_b+2}-1}}{k_b(1-\rho_b)\mu(z)}.
+\]
+El modelo decide simultaneamente si se aceptan viajes fuera de zona y cuantos taxis asignar a cada bloque.
+\end{respuesta}

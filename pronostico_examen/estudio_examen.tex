@@ -1,0 +1,255 @@
+\documentclass[11pt, a4paper]{article}
+
+% ── Codificación y Lenguaje ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla, es-noquoting]{babel}
+
+% ── Geometría ───────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=24pt]{geometry}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% ── Colores y Cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% ── Tablas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+% ── Listas ──────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Encabezado y Pie de Página ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── Secciones ───────────────────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Gráficos y Diagramas ────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{graphicx}
+
+% ── Columnas múltiples (formulario) ─────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Espaciado ───────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ── Paleta GOP ──────────────────────────────────────────────────────────────
+\definecolor{gopblue}{RGB}{31, 78, 121}
+\definecolor{gopcyan}{RGB}{70, 130, 180}
+\definecolor{gopgreen}{RGB}{0, 100, 0}
+\definecolor{gopgreenlight}{RGB}{230, 255, 230}
+\definecolor{goporange}{RGB}{200, 100, 0}
+\definecolor{goporangelight}{RGB}{255, 245, 210}
+\definecolor{gopred}{RGB}{160, 0, 0}
+\definecolor{gopredlight}{RGB}{255, 230, 230}
+\definecolor{gopgray}{RGB}{90, 90, 90}
+\definecolor{gopgraylight}{RGB}{245, 245, 240}
+\definecolor{gopbluedef}{RGB}{0, 70, 140}
+\definecolor{gopbluedeflight}{RGB}{220, 235, 255}
+
+% ── Hipervínculos y TOC ─────────────────────────────────────────────────────
+\usepackage[colorlinks=true, linkcolor=gopblue, urlcolor=gopblue]{hyperref}
+
+% ── Entornos tcolorbox ───────────────────────────────────────────────────────
+\newtcolorbox{definicion}[1]{
+  enhanced, breakable,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries\small, title={Definicion: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{formulas}[1]{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries\small, title={Formulas: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{tipprueba}[1]{
+  enhanced, breakable,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries\small, title={TIP PRUEBA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries\small, title={TRAMPA/ADVERTENCIA: #1}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{ejercicio}[1]{
+  enhanced, breakable,
+  colback=gopgraylight, colframe=gopgray,
+  fonttitle=\bfseries\small\color{black}, title={Ejercicio: #1},
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgray!40, colframe=gopgray, sharp corners},
+  sharp corners=south, top=4mm, before skip=6pt, after skip=6pt,
+}
+\newtcolorbox{resumentemario}{
+  enhanced,
+  colback=gopbluedeflight, colframe=gopbluedef,
+  fonttitle=\bfseries, title={Resumen del Temario}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopbluedef, colframe=gopbluedef, sharp corners},
+}
+\newtcolorbox{estructuraprueba}{
+  enhanced,
+  colback=goporangelight, colframe=goporange,
+  fonttitle=\bfseries, title={Estructura de la Prueba}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=goporange, colframe=goporange, sharp corners},
+}
+\newtcolorbox{memorizar}{
+  enhanced, breakable,
+  colback=gopredlight, colframe=gopred,
+  fonttitle=\bfseries, title={Conceptos Clave --- Memorizar esto}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopred, colframe=gopred, sharp corners},
+  sharp corners=south,
+}
+\newtcolorbox{paradesarrollo}{
+  enhanced, breakable,
+  colback=gopgreenlight, colframe=gopgreen,
+  fonttitle=\bfseries, title={Para la Etapa Desarrollo (Apuntes Libres Permitidos)}, coltitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=6pt},
+  boxed title style={colback=gopgreen, colframe=gopgreen, sharp corners},
+  sharp corners=south,
+}
+
+% ── Encabezado y pie ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{GOP ICS3213} --- Examen Final \texttt{2026}}
+\fancyhead[C]{}
+\fancyhead[R]{\small\nouppercase{\rightmark}}
+\fancyfoot[L]{\footnotesize Pronóstico y Preparación Examen}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Estilo de secciones ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\color{gopblue}\Large\bfseries}{\color{gopblue}\thesection.}{0.5em}{}
+  [\color{gopblue}\titlerule]
+\titleformat{\subsection}
+  {\color{gopblue}\normalsize\bfseries}{\color{gopblue}\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+  {\color{gopblue}\small\bfseries}{\color{gopblue}\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PORTADA
+% ════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{gopcyan} Pronóstico Examen Final\par}
+  \vspace{0.4cm}
+  {\LARGE\bfseries Gestión de Operaciones\par}
+  \vspace{0.3cm}
+  {\large ICS3213 --- PUC Chile --- \texttt{2026}\par}
+  \vspace{1.2cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{0.4cm}
+
+  {\normalsize \texttt{Lunes 6 de Julio de 2026, 8:20 hrs (presencial)}\par}
+  \vspace{0.2cm}
+  {\small Prof.\ Alejandro Mac Cawley --- Rodrigo Carrasco\par}
+  \vspace{0.2cm}
+  {\small Salas: Alcalde a Lacámara: K200 | Larrain a Zamorano: K201\par}
+  \vspace{0.4cm}
+  \rule{\textwidth}{0.4pt}
+  \vspace{1cm}
+
+  \begin{resumentemario}
+    \begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+      \item \textbf{40\% Materia I1 e I2:} MRP, PERT/CPM, Colas y Variabilidad.
+      \item \textbf{60\% Materia Nueva:}
+      \begin{itemize}[leftmargin=1.2em, itemsep=1pt]
+          \item Bodegas y Centros de Distribución
+          \item Calidad (Cartas de Control, Capacidad de Proceso)
+          \item Coordinación en la cadena (Efecto Látigo, Beer Game)
+          \item TPS, Just in Time y Lean Production
+          \item Casos: Toyota y Zara
+      \end{itemize}
+      \item \textbf{La Meta:} Capítulos 27 (inclusive) al final.
+    \end{itemize}
+  \end{resumentemario}
+
+  \vspace{0.35cm}
+  {\small\bfseries\color{gopblue}El potencial de estudiar con IA}\par
+  {\footnotesize La IA puede acelerar la exploración, entregar retroalimentación inmediata y
+  adaptar la práctica; el aprendizaje se consolida al resolver, contrastar y justificar.}\par
+  \vspace{0.1cm}
+  \includegraphics[width=0.50\textwidth]{figuras/potencial_ia.pdf}
+
+  \vspace{0.5cm}
+
+  \begin{estructuraprueba}
+    \begin{itemize}[leftmargin=1.2em, itemsep=3pt]
+      \item \textbf{Etapa Digital (60 min, SIN apuntes, en CANVAS):}
+        \begin{itemize}[leftmargin=1.2em, itemsep=1pt]
+          \item 10 preguntas selección múltiple (materia)
+          \item 10 preguntas V/F de La Meta (si es Falso, argumentar por qué)
+          \item 1 pregunta de desarrollo (Probablemente Casos Toyota/Zara)
+        \end{itemize}
+      \item \textbf{Descanso de 5 minutos}
+      \item \textbf{Etapa Desarrollo (60 min, APUNTES FÍSICOS permitidos):}
+        \begin{itemize}[leftmargin=1.2em, itemsep=1pt]
+          \item Ejercicios matemáticos y de análisis.
+          \item Típicamente 1 problema de Control de Calidad o Localización de Bodegas.
+          \item 1 problema de materia anterior (Colas, MRP o PERT).
+          \item Escanear y subir a Canvas al final.
+        \end{itemize}
+    \end{itemize}
+  \end{estructuraprueba}
+
+  \vfill
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+\input{secciones/01_analisis_temario.tex}
+
+\newpage
+\input{secciones/04_calidad.tex}
+\input{secciones/03_bodegas.tex}
+\input{secciones/02_materia_antigua.tex}
+\input{secciones/12_bloque_rotativo.tex}
+
+\newpage
+\input{secciones/06_tps_lean.tex}
+\input{secciones/07_casos.tex}
+\input{secciones/08_la_meta.tex}
+\input{secciones/05_coordinacion.tex}
+
+\newpage
+\input{secciones/09_formulario.tex}
+\newpage
+\input{secciones/10_analisis_historico}
+\newpage
+\input{secciones/11_ejemplos_resueltos}
+\newpage
+
+\end{document}

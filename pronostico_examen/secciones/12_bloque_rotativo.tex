@@ -1,0 +1,134 @@
+\section{Sección 4: Gestión de Proyectos, MRP y Modelamiento (MILP)}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!60!black,title=Parámetros del Modelo]
+\textbf{Variables y Notación:}\\
+PERT: $t_o$ (optimista), $t_m$ (probable), $t_p$ (pesimista).\\
+MRP (Silver-Meal): $K$ (Costo de emisión/setup), $h$ (Costo de mantener inventario).\\
+MILP: $X_{ij}$ (Variable continua de decisión), $Y_i$ (Variable binaria de activación).
+\end{tcolorbox}
+
+\subsection{Algoritmo 1: Ruta Crítica y Acortamiento (PERT/CPM)}
+Procedimiento para la evaluación de proyectos:
+
+\begin{enumerate}
+    \item \textbf{Red PERT y Holguras:} 
+    \begin{itemize}
+        \item Calcula $ES$ (inicio temprano), $EF=ES+TE$, $LF$ (término tardío) y $LS=LF-TE$.
+        \item $\text{Holgura}=LS-ES=LF-EF$. Si la holgura es cero, la actividad pertenece a la
+        \textbf{ruta crítica}.
+    \end{itemize}
+    \item \textbf{Cálculo de Varianzas:} 
+    $$ \text{Varianza de una Actividad} = \sigma^2 = \left( \frac{Pesimista - Optimista}{6} \right)^2 $$
+    \item \textbf{Probabilidad de Terminar (Z):}
+    \begin{itemize}
+        \item Varianza de la Ruta ($\sigma^2_{ruta}$) = \textbf{SUMA} de las varianzas de las actividades críticas. \textbf{OJO:} Se suman varianzas, ¡NUNCA se suman las desviaciones estándar!
+        \item Para un plazo contractual $T_c$:
+        $Z = \frac{T_c - \mu_{ruta}}{\sqrt{\sigma^2_{ruta}}}$ y
+        $P(T\le T_c)=\Phi(Z)$.
+    \end{itemize}
+    \item \textbf{Crashing (Acortamiento):} 
+    $$ \text{Costo Marginal} = \frac{Costo_{Acelerado} - Costo_{Normal}}{Tiempo_{Normal} - Tiempo_{Acelerado}} $$
+    Siempre acelera la actividad de la ruta crítica con menor costo marginal,
+    pero solo mientras tenga margen de reducción. Si aparecen dos rutas críticas,
+    debes reducir ambas simultáneamente (o escoger una actividad común) para
+    acortar el proyecto.
+\end{enumerate}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Crashing PERT/CPM (Examen 2023 - Parte 1, Pregunta 2)}
+\textbf{Enunciado:} Te dan actividades A, B, C, D, E, F con tiempos normales y de crashing.
+\textbf{Resolución Crashing (Paso a Paso):} 1) Identificas la ruta crítica (ej. A-C-E). 2) Divides la diferencia de costo normal/acelerado por los días ahorrados para cada una. 3) Si A cuesta \$100/día y C cuesta \$50/día, \textbf{aceleras C} primero. ¡Nunca aceleres actividades fuera de la ruta crítica porque gastas dinero y el proyecto no se acorta!
+\end{ejercicio}
+
+\begin{formulas}{Lectura rápida de una red PERT}
+En una pasada hacia adelante, una actividad con varios predecesores comienza
+cuando termina el último: $ES_j=\max_i EF_i$. En la pasada hacia atrás, su
+término tardío queda determinado por el sucesor más exigente:
+$LF_i=\min_j LS_j$. No sumes desviaciones estándar: bajo independencia,
+$\sigma_P^2=\sum_{i\in\text{ruta crítica}}\sigma_i^2$ y
+$\sigma_P=\sqrt{\sigma_P^2}$. Si el plazo está bajo la media, $Z<0$ y la
+probabilidad de cumplimiento es menor que $50\%$.
+\end{formulas}
+
+\subsection{Algoritmo 2: MRP y Loteo (Silver-Meal)}
+Tienes demandas semanales y un costo de pedir (setup $K$) y mantener ($h$).
+Primero explota el BOM y calcula los requerimientos brutos del componente a
+partir de los \emph{lanzamientos} planificados de sus padres; no uses
+directamente las recepciones del producto padre.
+
+\begin{enumerate}
+    \item \textbf{Regla del Costo Promedio (Silver-Meal):} Se van agregando demandas al lote de hoy, hasta que el Costo Promedio por Período empiece a AUMENTAR.
+    \item \textbf{Paso 1 (Lote para 1 semana):} Costo Total = $K$. Costo Promedio = $K / 1$.
+    \item \textbf{Paso 2 (Lote para 2 semanas):} Costo Total = $K + (Demanda_{sem2} \cdot h \cdot 1)$. Costo Prom = Total / 2.
+    \item \textbf{Paso 3 (Lote para 3 semanas):} Costo Total = Anterior $+ (Demanda_{sem3} \cdot h \cdot 2)$. Costo Prom = Total / 3.
+    \item \textbf{Corte:} Si el Costo Prom del Paso 3 $>$ Costo Prom del Paso 2, detente. El pedido será solo para las semanas 1 y 2. Inicia un nuevo pedido en la semana 3.
+    \item \textbf{MRP completo:} La recepción planificada se ubica en el período de necesidad y
+    el lanzamiento se desplaza hacia atrás según el lead time:
+    $PORelease_{t-L}=POR_t$. Antes de aplicar Silver-Meal descuenta inventario
+    disponible y recepciones programadas.
+\end{enumerate}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Algoritmo Silver-Meal (Examen 2022 / 2024)}
+\textbf{Enunciado Loteo:} Setup $K = \$50$. Costo inventario $h = \$2$/semana. Demanda: Sem1=10, Sem2=15, Sem3=5.
+\textbf{Resolución Silver-Meal:}
+- \textbf{Opción 1 (Pedir solo S1):} Costo Total = 50. Costo Prom = 50 / 1 = \textbf{50}.
+- \textbf{Opción 2 (Pedir S1 y S2):} Pido 25 hoy. Guardo 15 para la otra semana. Costo Total = $50 + (15 \times 2 \times 1) = 80$. Costo Prom = 80 / 2 = \textbf{40}.
+- \textbf{Opción 3 (Pedir S1, S2, S3):} Pido 30. Costo = $50 + 30 + (5 \times 2 \times 2) = 100$. Costo Prom = 100 / 3 = \textbf{33.3}.
+Sigo agregando mientras el Costo Promedio siga bajando.
+\end{ejercicio}
+
+\begin{formulas}{Wagner--Whitin: óptimo global}
+Cuando el enunciado pida el óptimo exacto, Silver--Meal es solo una heurística.
+Con $f(t)$ igual al costo mínimo acumulado hasta el período $t$:
+\[
+f(t)=\min_{1\le j\le t}\left\{f(j-1)+K+
+H\sum_{r=j}^{t}(r-j)D_r\right\},\qquad f(0)=0.
+\]
+La alternativa $j$ representa emitir en $j$ una orden que cubre las demandas
+$j,\ldots,t$. La política óptima se recupera siguiendo hacia atrás las
+alternativas que alcanzan el mínimo.
+\end{formulas}
+
+\subsection{Algoritmo 3: Modelamiento MILP (Diagnóstico y Formulación)}
+Si te piden escribir la función objetivo (F.O.) y las restricciones.
+\begin{enumerate}
+    \item \textbf{Variables de Decisión:} $X_{ij}$ (Cantidad producida/enviada), $Y_i$ (Binaria 1 si abro planta, 0 si no).
+    \item \textbf{Función Objetivo (Minimizar Costos):} Suma del (Costo Unitario $\cdot X_{ij}$) + (Costo Fijo $\cdot Y_i$).
+    \item \textbf{Restricción de Demanda:} Todo lo que entra al cliente debe ser $\ge$ Demanda.
+    \item \textbf{Restricción Lógica (Capacidad) - ¡La más importante!:}
+    $$ \sum X_{ij} \le M \cdot Y_i $$
+    (Si $Y_i=0$, obliga a que $X=0$. Si $Y_i=1$, permite operar hasta $M$).
+\end{enumerate}
+
+\begin{formulas}{Plantilla completa de localización capacitada}
+Para plantas $i\in I$ y clientes $j\in J$, define $x_{ij}\ge0$ como el flujo
+enviado y $y_i\in\{0,1\}$ como la apertura de la planta. Con demanda
+$D_j$, capacidad $U_i$, costo fijo $F_i$ y costo unitario $c_{ij}$:
+\[
+\begin{aligned}
+\min\quad &\sum_{i\in I}F_i y_i+\sum_{i\in I}\sum_{j\in J}c_{ij}x_{ij}\\
+\text{s.a.}\quad &\sum_{i\in I}x_{ij}\ge D_j &&\forall j\in J,\\
+&\sum_{j\in J}x_{ij}\le U_i y_i &&\forall i\in I,\\
+&x_{ij}\ge0,\quad y_i\in\{0,1\}.
+\end{aligned}
+\]
+Si hay inventario por período, agrega el balance
+$I_{t}=I_{t-1}+P_t-D_t$; si hay activación consecutiva, usa una binaria
+$z_t\ge y_t-y_{t-1}$ y cobra el costo fijo sobre $z_t$, no sobre todos los
+períodos operados.
+\end{formulas}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Modelamiento MILP (Examen 2021 / 2023 - Parte 2)}
+\textbf{Enunciado MILP:} Tienes 3 plantas posibles para abastecer 5 ciudades. Abrir una planta cuesta $F_i$. El transporte cuesta $C_{ij}$. Plantea el modelo de minimización.
+\textbf{Resolución (Variables Clave):}
+Escribe esto en tu cuaderno:
+Binaria $Y_i = 1$ si abro la planta $i$ y continua $X_{ij}$ igual a la
+cantidad enviada de la planta $i$ a la ciudad $j$. La función objetivo es
+\[
+\min Z=\sum_iF_iY_i+\sum_i\sum_j C_{ij}X_{ij},
+\]
+acompañada por demanda, capacidad y dominio de las variables. Sin estas
+restricciones, la expresión anterior no es todavía un modelo MILP completo.
+\end{ejercicio}

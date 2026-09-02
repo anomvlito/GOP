@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+
+\geometry{letterpaper, margin=1.85cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlist[itemize]{leftmargin=1.35em,itemsep=0.25em}
+\setlist[enumerate]{leftmargin=1.45em,itemsep=0.25em}
+
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, urlcolor=blue!50!black}
+
+\tcbset{
+  colback=white,
+  colframe=black!60,
+  boxrule=0.45pt,
+  arc=1.2mm,
+  left=1.5mm,
+  right=1.5mm,
+  top=1mm,
+  bottom=1mm,
+  breakable
+}
+
+\newtcolorbox{pregunta}[1]{title=\textbf{Pregunta anterior: #1}, colback=green!3, colframe=green!45!black}
+\newtcolorbox{enunciado}[1]{title=\textbf{Enunciado completo: #1}, colback=green!3, colframe=green!45!black}
+\newtcolorbox{materia}[1]{title=\textbf{Materia que activa: #1}, colback=blue!3, colframe=blue!50!black}
+\newtcolorbox{pauta}[1]{title=\textbf{Pauta / receta: #1}, colback=gray!5, colframe=black!60}
+\newtcolorbox{pautacompleta}[1]{title=\textbf{Pauta completa paso a paso: #1}, colback=gray!5, colframe=black!60}
+\newtcolorbox{alerta}[1]{title=\textbf{Ojo de examen: #1}, colback=red!3, colframe=red!55!black}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Prob}{\mathbb{P}}
+
+\title{\textbf{Preguntas de Examenes Anteriores por Materia}}
+\author{Gestion de Operaciones}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Mapa General}
+
+El objetivo de este compilado es revisar preguntas pasadas por eje tematico, no por año. Para cada bloque se conserva el tipo de enunciado, la materia que se debe reconocer y una pauta convertida en receta de resolucion. Los ejes siguen el temario del examen: bodegas y centros de distribucion, calidad, coordinacion en la cadena, TPS/JIT/Lean, casos Toyota/Zara y arrastre de I1/I2.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{p{0.18\linewidth}X p{0.20\linewidth}}
+\toprule
+Eje & Preguntas anteriores mas utiles & Prioridad \\
+\midrule
+Calidad & 2015 tarjetas JIT + control, 2016 vasos/proveedores, 2020 pan, 2021 $\bar X/R$, 2024 botellas & Muy alta \\
+Bodegas/CD & 2016 picking frontal y volumen optimo, 2021 tamaño de bodega y picking rapido, 2022 profundidad de pallets, 2023 tamaño de CD & Muy alta \\
+Coordinacion & 2017 demostracion $Q_C=2Q_D$, 2020 Burger Mac, 2022 franquicias, 2023 cafeteria & Muy alta \\
+TPS/JIT/Lean & 2015 La Meta + CB, 2015/2018/2019 JIT/Lean, 2018 Six Sigma/TQM, 2024 proceso con desecho & Alta \\
+Variabilidad/colas & 2018 autopista G/G/c, 2019 VUT proceso, 2020 CB con variabilidad, 2021 M/M/1, 2023 G/G/1 CD, 2024 fallas & Alta \\
+Arrastre I1/I2 & Pronosticos, EOQ, WW, PERT, MRP y optimizacion & Media-alta \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{alerta}{uso durante el examen}
+Si aparece una pregunta parecida, no busques el año: busca el eje. La misma matematica aparece con nombres distintos: cafeterias, hamburguesas, bodegas, botellas o tarjetas.
+\end{alerta}
+
+\input{temas/calidad}
+\input{temas/bodegas_cd}
+\input{temas/coordinacion}
+\input{temas/tps_jit_lean}
+\input{temas/casos_la_meta}
+\input{temas/variabilidad_colas}
+\input{temas/arrastre_i1_i2}
+
+\end{document}

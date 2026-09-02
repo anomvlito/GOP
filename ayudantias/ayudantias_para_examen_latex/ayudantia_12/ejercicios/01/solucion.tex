@@ -1,0 +1,81 @@
+\subsection{Solucion desarrollada}
+
+\begin{respuesta}{Capacidad del proceso}
+Sea \(F\) el flujo de arandanos frescos y \(M\) el flujo de masa base. Las restricciones son:
+\[
+F\le 300,\qquad 0.8F\le 280,\qquad 0.2F\le 65,\qquad M\le 600.
+\]
+La mezcla recibe:
+\[
+M+0.98F\le 800,
+\qquad
+M+0.98F\le 850.
+\]
+Como la masa base puede llegar a \(600\) kg/h, usamos \(M=600\). La mezcladora queda activa:
+\[
+600+0.98F=800
+\Rightarrow F=204.08\ \text{kg/h}.
+\]
+La salida final despues del control de calidad es:
+\[
+0.97(800)=776\ \text{kg/h de galletas}.
+\]
+En un ano:
+\[
+\text{arandanos frescos}=204.08(8)(240)=391836.73\ \text{kg/ano},
+\]
+\[
+\text{masa base}=600(8)(240)=1152000\ \text{kg/ano}.
+\]
+
+Si se duplican dos maquinas, conviene duplicar mezclado y cocido. Con eso:
+\[
+F=300,\qquad M=600,\qquad M+0.98F=894.
+\]
+La capacidad final queda:
+\[
+0.97(894)=867.18\ \text{kg/h}.
+\]
+\end{respuesta}
+
+\begin{respuesta}{Envases: periodo fijo y revision continua}
+Tomamos \(z=1.645\), \(\sigma=\sqrt{2500}=50\), \(D=50000\) unidades/mes y \(L=0.25\) meses.
+
+Para revision periodica mensual:
+\[
+S_T=50000(1+0.25)+1.645(50)\sqrt{1.25}=62591.96.
+\]
+La politica es ordenar mensualmente hasta una posicion de inventario de \(62592\) envases, de modo que el pedido llegue antes del mes cubierto.
+
+Para revision continua:
+\[
+Q^*=\sqrt{\frac{2(50000)(90000)}{1.5}}=77459.67,
+\]
+\[
+ROP=50000(0.25)+1.645(50)\sqrt{0.25}=12541.13.
+\]
+Se ordenan aproximadamente \(77460\) envases cada vez que la posicion baja a \(12541\).
+\end{respuesta}
+
+\begin{respuesta}{Wagner-Whitin}
+Demandas:
+\[
+D_1=49000,\qquad D_2=53000,\qquad D_3=47000.
+\]
+Con \(S=90000\) y \(h=1.5\):
+\[
+C(1,1)=90000,\quad C(1,2)=90000+1.5(53000)=169500,
+\]
+\[
+C(1,3)=90000+1.5(53000)+2(1.5)(47000)=310500.
+\]
+La programacion dinamica entrega:
+\[
+F_1=90000,\qquad F_2=169500,\qquad F_3=250500.
+\]
+La decision optima es:
+\[
+Q_1=49000+53000=102000,\qquad Q_2=0,\qquad Q_3=47000.
+\]
+Es decir, ordenar en el mes 1 para cubrir meses 1 y 2, y volver a ordenar en el mes 3.
+\end{respuesta}

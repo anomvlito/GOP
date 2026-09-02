@@ -1,0 +1,234 @@
+Pontificia Universidad Católica de Chile
+Departamento de Ingeniería Industrial y de Sistemas
+ICS3212 Gestión de Operaciones - 1er semestre 2026
+
+Enunciado Tarea 3: Variabilidad, Centros de
+Distribución y Calidad
+Instrucciones Generales
+La realización de la tarea debe ser en grupos de no más de 6 alumnos. Cada grupo deberá designar
+un jefe, quien debe solicitar el set de datos en este link: https://forms.cloud.microsoft/r/aHMem6z4yQ
+para recibir el set de datos correspondiente a su tarea.
+La fecha de entrega de la Tarea vence impostergablemente el 22 de junio a las 23:59. Se habilitará un
+foro en Canvas para que tengan dudas sobre algún aspecto de la Tarea. Recuerden que el canal oficial
+para hacer consultas es el foro; no se responderán preguntas si no es por este medio. Por otra parte, se
+habilitará un buzón de entrega en Canvas, en donde deberán subir lo siguiente:
+• Un informe en formato PDF con todos los resultados debidamente fundamentados. En la portada
+del informe se deben indicar el número de grupo, la sección y los integrantes.
+• Adjuntar cualquier código utilizado, debidamente comentado y ordenado.
+Los aspectos formales, de redacción y de ortografía formarán parte de la evaluación del trabajo. Los
+errores formales pueden significar hasta 1 punto menos en la nota final de la entrega.
+IMPORTANTE: Dispondrá hasta el 12 de junio para solicitar los datos, posterior a esta fecha no se
+entregarán datos. Los datos serán entregados en un plazo máximo de 48 hrs (hábiles) una vez contestada
+la encuesta.
+
+1
+
+1
+
+Variabilidad (40 puntos)
+
+Usted está a cargo de la recepción y control de calidad de la fruta AndesFresh SpA exportadora chilena
+de fruta fresca ubicada en la Región de O’Higgins. El proceso comienza con la llegada de los camiones
+a la planta con la fruta, que deben ser descargados. Los tiempos de llegada y descarga se señalan en la
+base de datos. Set de Datos - Variabilidad. Existe una capacidad limitada de espera de camiones (la
+fruta pierde calidad), por lo que la espera de camiones supera Um camiones en espera de ser descargados;
+la fruta pierde calidad y se le cobra a la exportadora una multa de Pm . La cantidad total de pallets de
+fruta que transporta cada camión es de Dp bins.
+AndesFresh SpA, exportadora, se preocupa por la calidad de la fruta exportada, por lo que los bins
+descargados luego pasan por un proceso de selección, con capacidad de i bins/hora (Distribución Triangular), y después por un proceso de embalaje, con capacidad de c bins/hora (Distribución Triangular);
+finalmente, pasan por una estación de calidad, con capacidad de α bins/hora. Lamentablemente, existe
+un n% de los bins que no quedan bien seleccionados y son reingresados a la estación de selección.
+Preguntas
+1. (3 ptos) Haga un diagrama del proceso desde la llegada de los camiones hasta la salida de los
+bins, indique sus respectivas capacidades.
+2. (7 ptos) Determine la distribución de llegada de los camiones y de descarga utilizando pruebas
+estadísticas y justifique su selección. Hint: debe realizar la validación de datos.
+Ahora, usted debe elaborar un modelo de simulación de un día para este proceso y responder las
+siguientes preguntas.
+3. (5 ptos) Obtenga el nivel de utilización del sistema, el tiempo promedio en cola, el tiempo de
+ciclo y la cantidad promedio de trabajos en cola.
+4. (5 ptos) Identifique el cuello de botella del proceso, indique su capacidad junto con la del sistema,
+argumente. Hint: Debe graficar el uso dentro del sistema.
+5. (5 ptos) ¿Cuánto dinero en multas se le aplica en un día por la pérdida de calidad de la fruta?
+Comente al menos dos medidas tomaría para minimizar estos costos.
+6. (5 ptos) ¿Dónde colocaría el control de calidad en el proceso? Comente los impactos que generaría
+este cambio.
+7. (5 ptos) ¿Si usted tiene la posibilidad de disminuir la variabilidad del proceso de selección o del
+embalaje, pero no ambos, en un 10%? ¿Qué proceso disminuiría su variabilidad y por qué? ¿Cómo
+llega a esta decisión?
+8. (5 ptos) ¿Qué cambios se pueden observar en un mes de funcionamiento?
+
+2
+
+2
+
+Centro de distribución y diseño de bodega (50 puntos)
+
+AndesFresh SpA es una exportadora chilena de fruta fresca ubicada en la Región de O’Higgins. Con
+el aumento de la demanda de exportación, la empresa debe habilitar un nuevo centro de Distribución
+refrigerada donde se consolida la fruta en pallets antes del despacho al puerto.
+La operación maneja cuatro SKU, que se diferencian por su demanda, fragilidad y altura máxima de
+apilamiento permitida:
+Table 1: SKU considerados en la operación
+SKU
+A
+B
+C
+D
+
+Producto
+
+Característica
+
+Cerezas premium exportación Frágiles, apilamiento bajo
+Arándanos
+Apilamiento medio
+Uva de mesa
+Apilamiento medio-alto
+Ciruelas
+Robustas, apilamiento alto
+
+La empresa maneja una cantidad anual de pallets y evalúa dos cámaras refrigeradas: una ubicada en la
+zona norte y otra en la zona poniente. Cada cámara posee una capacidad comercial, un costo mensual
+de arriendo por posición y un tiempo promedio de operación por pallet. Este tiempo puede diferir entre
+ambas cámaras debido a diferencias de layout, distancia interna y condiciones operativas.
+Los operadores trabajan 8 horas diarias, 250 días al año, con un sueldo mensual de $800.000. Una vez
+seleccionada la cámara, la empresa debe estimar el espacio físico necesario para almacenar los pallets,
+considerando las dimensiones de los pallets, la altura útil de la cámara y la altura máxima de apilamiento
+permitida para cada producto.
+Además, el centro debe definir una política de asignación de espacio para los SKU, una profundidad
+de almacenamiento adecuada y una asignación de posiciones en la zona de pickeo frontal. Para ello,
+deberán considerarse el flujo de cada SKU, el espacio disponible para reabastecimiento, el ancho del
+pasillo compartido, la separación mínima entre productos y el beneficio de ubicar productos en la zona
+frontal.
+Utilice exclusivamente los parámetros disponibles en la hoja Parte B de su set de datos. En dicha hoja
+se entregan los datos de demanda, capacidad de cámaras, costos, tiempos de operación, dimensiones
+de pallets, altura útil, apilamiento máximo por SKU, posiciones disponibles para reabastecimiento,
+posiciones de pickeo frontal, ancho de pasillo, separación mínima y beneficios asociados al pickeo frontal.
+
+Preguntas
+1. (2 ptos) Calcule cuántas veces rota anualmente cada alternativa de cámara refrigerada. Realice
+el cálculo para ambas alternativas e interprete brevemente qué significa que una cámara tenga una
+mayor rotación anual.
+2. (3 ptos) Estime la cantidad mínima de operadores necesarios en cada cámara para cumplir con la
+demanda anual de pallets. Considere el tiempo promedio de operación por pallet correspondiente
+a cada alternativa y redondee la dotación al entero superior cuando corresponda.
+3. (3 ptos) Determine el costo total mensual de cada alternativa, considerando el arriendo mensual
+de la cámara y las remuneraciones de los operadores requeridos. Indique cuál cámara arrendaría
+según el criterio económico y justifique brevemente su respuesta.
+4. (2 ptos) Para la cámara seleccionada en la pregunta anterior, determine su tasa de servicio.
+Exprese el resultado en pallets gestionables por hora y por día, considerando la dotación calculada.
+3
+
+5. (5 ptos) Para cada SKU, determine el máximo nivel factible de apilamiento, considerando tanto la
+altura útil de la cámara como la restricción de apilamiento máximo del producto. Luego estime la
+superficie mínima requerida para almacenar todos los pallets, sin considerar pasillos ni separación
+entre productos, y calcule la capacidad volumétrica asociada a dicho requerimiento físico.
+6. (10 ptos) Según el flujo de cada SKU, optimice el espacio dedicado a cada producto y determine su
+frecuencia de reabastecimiento. Luego compare esta política con dos alternativas: una asignación
+igualitaria de espacio entre los cuatro SKU y una política que busque mantener una frecuencia
+común de reabastecimiento.
+Para cada política, calcule las frecuencias de reabastecimiento por SKU y la frecuencia total del
+sistema. Finalmente, indique cuál política es más eficiente y qué ventaja operativa podrían tener
+las políticas menos eficientes.
+7. (6 ptos) Determine la profundidad óptima de almacenamiento para cada uno de los cuatro SKU,
+considerando su demanda, el apilamiento factible y el ancho del pasillo compartido. Para este
+análisis, evalúe las profundidades candidatas entregadas en el set de datos.
+Luego determine una profundidad única óptima común para todos los SKU y comente la diferencia
+entre utilizar profundidades individuales y una profundidad común.
+8. (7 ptos) Diseñe gráficamente la cámara seleccionada utilizando la profundidad única óptima
+común. El diseño debe respetar el apilamiento de cada producto, la demanda de pallets, la
+separación mínima entre productos y al menos un pasillo de uso compartido.
+Calcule las dimensiones generales del diseño propuesto, la superficie total requerida y la capacidad
+total de almacenamiento resultante.
+9. (6 ptos) Calcule la eficiencia de uso del espacio mediante dos indicadores: el primero considerando
+solo el espacio perdido por la disposición y el apilamiento de los pallets, y el segundo incorporando
+además el espacio utilizado por pasillos y separación entre productos.
+Comente los principales trade-offs entre ambas medidas y explique por qué una bodega puede
+parecer eficiente al excluir pasillos, pero perder eficiencia cuando se considera la operación real.
+10. (3 ptos) Para cada SKU, calcule el beneficio mínimo, adicional y máximo de ubicarlo en la zona
+de pickeo frontal en lugar de mantenerlo solamente en reserva. Considere para este análisis la
+profundidad óptima individual previamente calculada.
+11. 3 ptos) El centro cuenta con un número limitado de posiciones en la zona de pickeo frontal.
+Elabore una tabla con el orden de prioridad de asignación según el beneficio obtenido por cada
+SKU. Luego determine la asignación que maximiza el beneficio total, respetando el límite de
+posiciones disponibles.
+
+4
+
+3
+
+Control de calidad y capacidad de procesos (30 puntos)
+
+Vertiente Andina SpA es una embotelladora chilena de agua mineral ubicada en la Región del Maule.
+Su línea de llenado abastece a supermercados y clientes mayoristas, por lo que debe asegurar que el
+volumen de cada botella sea consistente, que el proceso se mantenga estable en el tiempo y que los
+insumos recibidos desde proveedores externos cumplan con los estándares acordados.
+La empresa trabaja con botellas que poseen un volumen objetivo de llenado y una tolerancia máxima
+permitida respecto de dicho valor. Por lo tanto, una botella se considera conforme si su volumen se
+encuentra dentro de los límites de especificación definidos para el proceso.
+Además, para el sellado de las botellas, Vertiente Andina recibe lotes de tapas plásticas desde un
+proveedor externo. Antes de aceptar cada lote, la empresa inspecciona una muestra de tapas y aplica
+un criterio de aceptación basado en la cantidad máxima de unidades defectuosas permitidas.
+Para monitorear la línea de llenado, durante varios días se registraron mediciones del volumen de las
+botellas. Estas mediciones se encuentran agrupadas en subgrupos, lo que permite construir cartas de
+control para evaluar tanto el nivel promedio como la variabilidad del proceso.
+Finalmente, la empresa evalúa el impacto económico de despachar un lote a un cliente mayorista bajo
+las condiciones actuales del proceso. Para ello, se debe considerar el costo fijo de despacho y una multa
+asociada a las botellas que resulten fuera de especificación.
+Utilice exclusivamente los parámetros disponibles en la hoja Parte C de su set de datos. En dicha
+hoja se entregan los datos del plan de muestreo, los niveles de calidad acordados con el proveedor, las
+mediciones de volumen de llenado, las constantes necesarias para construir las cartas de control, los
+límites de especificación del proceso, los parámetros de mejora y los costos asociados al despacho.
+
+Preguntas
+1. (5 ptos) Vertiente Andina recibe lotes de tapas plásticas desde un proveedor externo. Antes de
+aceptar cada lote, la empresa inspecciona una muestra de tapas y acepta el lote si la cantidad de
+unidades defectuosas no supera el criterio de aceptación establecido.
+Considerando el nivel de calidad aceptable acordado con el proveedor y el nivel de calidad límite
+tolerable para la empresa, determine el riesgo del proveedor y el riesgo de Vertiente Andina asociados al plan de muestreo.
+Luego, manteniendo fijo el tamaño de muestra, analice qué ocurre con ambos riesgos si la empresa
+flexibiliza el criterio de aceptación permitiendo una y dos unidades defectuosas adicionales.
+Comente qué alternativa conviene al proveedor, cuál conviene a Vertiente Andina y qué trade-off
+existe entre ambas posiciones.
+2. (7 ptos) Para monitorear la estabilidad de la línea de llenado, la empresa registró mediciones del
+volumen de las botellas durante varios días. Las mediciones se encuentran agrupadas en subgrupos
+de igual tamaño.
+Construya las cartas de control que correspondan para vigilar tanto el nivel promedio del proceso
+como su variabilidad. En cada carta, incluya la línea central y los límites de control respectivos.
+A partir de los gráficos obtenidos, indique si el proceso de llenado se encuentra bajo control
+estadístico. Justifique su respuesta señalando si existen puntos fuera de los límites de control o
+patrones que sugieran un comportamiento inestable del proceso.
+3. (8 ptos) Cada botella debe cumplir con el volumen objetivo definido por la empresa, admitiéndose
+una tolerancia máxima respecto de ese valor. A partir de la media actual del proceso, su desviación
+5
+
+estándar y los límites de especificación entregados en el set de datos, evalúe si el proceso de llenado
+posee un nivel adecuado de capacidad.
+Para su análisis, utilice los índices de capacidad que correspondan y considere que el proceso se
+considera adecuado cuando el índice relevante es mayor o igual a 1.
+Comente si el principal problema del proceso corresponde a exceso de variabilidad, descentrado
+respecto del objetivo o ambos.
+En caso de que el proceso no alcance la capacidad requerida, proponga acciones concretas bajo la
+metodología Six Sigma DMAIC para que el proceso pueda cumplir con la especificación. Justifique
+brevemente cada etapa propuesta.
+4. (5 ptos) Gracias a una mejora en la calibración de las boquillas, la línea logra centrar el llenado
+en el volumen objetivo y reducir su variabilidad. Con las nuevas condiciones entregadas en el set
+de datos, determine hasta qué nivel sigma el proceso pasaría a considerarse capaz.
+Grafique la distribución del proceso mejorado junto con los límites de especificación para los niveles
+sigma evaluados.
+Comente el efecto que tienen, por separado, centrar el proceso en el volumen objetivo y reducir su
+variabilidad. Explique por qué ambas acciones pueden mejorar la capacidad del proceso, pero no
+necesariamente de la misma manera.
+5. (5 ptos) La empresa se compromete a despachar un lote a un cliente mayorista bajo las condiciones
+actuales del proceso. El despacho tiene un costo fijo y, además, Vertiente Andina acepta pagar
+una multa por cada botella que resulte fuera de especificación.
+Considerando el desempeño actual del proceso de llenado, estime la probabilidad de que una botella
+resulte fuera de especificación. Luego, calcule el número esperado de botellas no conformes en el
+lote y el costo total esperado del despacho.
+Finalmente, comente qué tan conveniente resulta despachar bajo estas condiciones, considerando
+la capacidad actual del proceso, el nivel esperado de defectos y el costo económico asociado.
+
+6
+
+

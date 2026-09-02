@@ -1,0 +1,104 @@
+\subsection{Materia necesaria}
+
+\begin{definicion}{Asignacion de espacio en picking rapido}
+Cuando todos los SKU deben entrar a una zona de picking rapido que se repone desde reserva, la decision relevante es cuanto volumen reservar para cada SKU. El costo variable que se minimiza es el costo de reabastecimiento: si un SKU consume mucho volumen mensual y recibe poco espacio, habra que reponerlo muchas veces.
+\end{definicion}
+
+\begin{formulas}{Regla raiz}
+Sea \(\mathcal{I}\) el conjunto de SKU que deben entrar al area de picking rapido. En este problema:
+\[
+\mathcal{I}=\{A,B,C,D\}.
+\]
+El indice \(i\in\mathcal{I}\) representa el SKU especifico al cual le estamos calculando espacio. El indice \(j\in\mathcal{I}\) es un indice auxiliar de suma: recorre todos los SKU para construir el total contra el cual se normaliza la asignacion.
+
+Para cada SKU \(i\in\mathcal{I}\):
+\[
+f_i=\frac{\text{unidades/mes}_i}{\text{unidades/caja}_i}\cdot \text{m}^3/\text{caja}_i,
+\qquad
+v_i=V\frac{\sqrt{f_i}}{\sum_{j\in\mathcal{I}} \sqrt{f_j}}.
+\]
+Aqui \(f_i\) es el flujo volumetrico mensual del SKU \(i\), \(v_i\) es el volumen asignado al SKU \(i\) y \(V\) es el volumen total disponible.
+
+El denominador suma sobre \(j\), no sobre \(i\), para separar dos roles matematicos: \(i\) identifica el SKU que recibe espacio, mientras \(j\) recorre todos los SKU y calcula el peso total del sistema. Asi, la fraccion
+\[
+\frac{\sqrt{f_i}}{\sum_{j\in\mathcal{I}}\sqrt{f_j}}
+\]
+es la proporcion del volumen total que corresponde al SKU \(i\). Esto garantiza que:
+\[
+\sum_{i\in\mathcal{I}} v_i
+=
+V\sum_{i\in\mathcal{I}}
+\frac{\sqrt{f_i}}{\sum_{j\in\mathcal{I}}\sqrt{f_j}}
+=V.
+\]
+La frecuencia individual de reposicion es:
+\[
+T_i=\frac{v_i}{f_i}.
+\]
+Si todos se reponen simultaneamente con un ciclo comun:
+\[
+T=\frac{V}{\sum_{i\in\mathcal{I}} f_i}.
+\]
+\end{formulas}
+
+\begin{trampa}{Pick/mes es distractor en esta pregunta}
+El dato \(p_i=\text{Pick/mes}_i\) no entra en la asignacion optima de volumen cuando el enunciado dice que \textbf{todos los SKU deben ingresar} al area. En ese caso ya no se decide si conviene o no poner el SKU en pick rapido; solo se reparte espacio para minimizar reabastecimientos. Por eso la regla correcta es \(\sqrt{f_i}\), no \(\sqrt{p_i f_i}\).
+\end{trampa}
+
+\begin{definicion}{De donde sale la regla}
+Si el SKU \(i\) consume \(f_i\) metros cubicos por mes y recibe \(v_i\) metros cubicos en el area rapida, entonces el numero aproximado de reposiciones mensuales es:
+\[
+r_i=\frac{f_i}{v_i}.
+\]
+Con costo de reposicion comun \(c_r\), el problema es:
+\[
+\min_{\{v_i\}_{i\in\mathcal{I}}}\ c_r\sum_{i\in\mathcal{I}}\frac{f_i}{v_i}
+\qquad
+\text{s.a.}\qquad
+\sum_{i\in\mathcal{I}}v_i=V,\quad v_i>0.
+\]
+La condicion de primer orden de Lagrange es:
+\[
+-c_r\frac{f_i}{v_i^2}+\lambda=0
+\quad\Rightarrow\quad
+v_i=\sqrt{\frac{c_r f_i}{\lambda}}\propto \sqrt{f_i}.
+\]
+Al normalizar para cumplir \(\sum_i v_i=V\), queda:
+\[
+v_i^*=V\frac{\sqrt{f_i}}{\sum_{j\in\mathcal{I}}\sqrt{f_j}}.
+\]
+\end{definicion}
+
+\begin{formulas}{Cuando si se usan los picks}
+Los picks \(p_i\) aparecen cuando la pregunta es \textbf{seleccionar que SKU conviene poner} en el area frontal o pick rapido. En ese caso se compara el ahorro por pick contra el costo de reabastecer:
+\[
+Ben_{min,i}=\frac{s\,p_i-c_r\,d_i}{l_i}.
+\]
+Tambien puede aparecer el beneficio marginal de llevar el SKU desde una cantidad minima hasta el maximo:
+\[
+Ben_{adic,i}=\frac{s\,D_i+c_r\,d_i}{u_i-l_i}.
+\]
+Esta es la logica de preguntas como Examen 2016: se entregan \(\text{PICKS}\), demanda en pallets, minimo \(l_i\), maximo \(u_i\), ahorro por pick \(s\) y costo de reposicion \(c_r\). Ahi los picks importan porque la decision es \textbf{elegir y priorizar SKU}, no solo repartir volumen entre SKU ya seleccionados.
+\end{formulas}
+
+\begin{trampa}{Diferenciacion para examen}
+Si el enunciado dice ``todos los SKU deben ingresar'' o ``dispone de volumen y debe asignarlo'', piensa en:
+\[
+v_i^*=V\frac{\sqrt{f_i}}{\sum_j\sqrt{f_j}}.
+\]
+Si el enunciado pregunta ``que SKU dispondria'', ``area frontal'', ``minimo/maximo'', ``beneficio por unidad de espacio'', entonces usa picks:
+\[
+s\,p_i-c_r\,d_i.
+\]
+\end{trampa}
+
+\begin{algoritmo}{Como resolver slotting de examen}
+\begin{enumerate}
+    \item Transformar demanda mensual a flujo volumetrico \(f_i\).
+    \item Confirmar si todos los SKU entran. Si entran todos, ignorar \(p_i\) para la asignacion de volumen.
+    \item Calcular el peso operacional \(\sqrt{f_i}\).
+    \item Repartir el volumen total con la regla raiz.
+    \item Dividir espacio por flujo para obtener cada ciclo de reposicion.
+    \item Si el enunciado exige reposicion simultanea, usar el ciclo comun \(V/\sum f_i\).
+\end{enumerate}
+\end{algoritmo}

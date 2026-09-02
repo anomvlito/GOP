@@ -1,0 +1,234 @@
+\section{Coordinación y Efecto Látigo (Canvas)}
+
+\begin{tcolorbox}[colback=cyan!5!white,colframe=cyan!75!black,title=Mapa Mental Rápido (Cópialo)]
+\textbf{Efecto Látigo (Bullwhip):} Variación amplificada aguas arriba. Un pequeño cambio en el cliente final genera un caos de pedidos en la fábrica.\\
+\textbf{La Solución Maestra:} Compartir el POS (Point of Sale) para que todos vean la demanda real, no los pedidos distorsionados del eslabón anterior.
+\end{tcolorbox}
+
+\subsection{Ejercicio Clave de Clase: Doble Marginalización}
+
+\begin{definicion}{Qué está midiendo este ejercicio}
+Este ejercicio compara una cadena \textbf{descentralizada} contra una cadena \textbf{centralizada}. En la cadena descentralizada, el proveedor y el minorista maximizan sus propias utilidades por separado. En la cadena centralizada, se maximiza la utilidad total de la cadena completa.
+
+La pérdida de eficiencia aparece porque ambos agentes agregan margen: primero el proveedor sube el precio mayorista \(w\), y luego el minorista sube el precio final \(p\). A esto se le llama \textbf{doble marginalización}.
+\end{definicion}
+
+\begin{formulas}{Plantilla del modelo fabricante--minorista}
+Demanda inversa:
+\[
+p=a-bq.
+\]
+Costo unitario del proveedor:
+\[
+c.
+\]
+
+En la cadena descentralizada, el proveedor elige \(w\) y el minorista elige \(q\). Dado \(w\), el minorista maximiza:
+\[
+\Pi_r(q)=q(p-w)=q(a-bq-w).
+\]
+Derivando:
+\[
+\frac{d\Pi_r}{dq}=a-w-2bq=0
+\quad\Rightarrow\quad
+q(w)=\frac{a-w}{2b}.
+\]
+El proveedor anticipa esta respuesta y maximiza:
+\[
+\Pi_s(w)=(w-c)q(w)
+=(w-c)\frac{a-w}{2b}.
+\]
+Derivando:
+\[
+\frac{d\Pi_s}{dw}=0
+\quad\Rightarrow\quad
+w^*=\frac{a+c}{2}.
+\]
+Por lo tanto:
+\[
+q_D=\frac{a-c}{4b},
+\qquad
+p_D=\frac{3a+c}{4}.
+\]
+Las utilidades descentralizadas son:
+\[
+\Pi_s^D=\frac{(a-c)^2}{8b},
+\qquad
+\Pi_r^D=\frac{(a-c)^2}{16b},
+\qquad
+\Pi_{SC}^D=\frac{3(a-c)^2}{16b}.
+\]
+
+En la cadena centralizada, se maximiza la utilidad total:
+\[
+\Pi_{SC}(q)=q(p-c)=q(a-bq-c).
+\]
+Derivando:
+\[
+\frac{d\Pi_{SC}}{dq}=a-c-2bq=0
+\quad\Rightarrow\quad
+q_C=\frac{a-c}{2b}.
+\]
+Luego:
+\[
+p_C=\frac{a+c}{2},
+\qquad
+\Pi_{SC}^C=\frac{(a-c)^2}{4b}.
+\]
+\end{formulas}
+
+\begin{ejercicio}{Caso de clase: \(Q=100-P\), \(c=1\)}
+El enunciado de clase usa:
+\[
+Q=100-P
+\quad\Leftrightarrow\quad
+p=100-q,
+\qquad
+a=100,\quad b=1,\quad c=1.
+\]
+
+\textbf{Cadena descentralizada:}
+\[
+w_D=\frac{100+1}{2}=50.5,
+\]
+\[
+q_D=\frac{100-1}{4}=24.75,
+\qquad
+p_D=\frac{3(100)+1}{4}=75.25.
+\]
+Utilidades:
+\[
+\Pi_s^D=(50.5-1)(24.75)=1225.125,
+\]
+\[
+\Pi_r^D=(75.25-50.5)(24.75)=612.5625,
+\]
+\[
+\Pi_{SC}^D=1837.6875.
+\]
+
+\textbf{Cadena centralizada:}
+\[
+q_C=\frac{100-1}{2}=49.5,
+\qquad
+p_C=\frac{100+1}{2}=50.5,
+\]
+\[
+\Pi_{SC}^C=(50.5-1)(49.5)=2450.25.
+\]
+
+Comparación:
+\[
+q_C=49.5>24.75=q_D,
+\qquad
+p_C=50.5<75.25=p_D,
+\]
+\[
+\Pi_{SC}^C=2450.25>1837.69=\Pi_{SC}^D.
+\]
+La cadena descentralizada vende menos, cobra más caro y genera menor utilidad total.
+\end{ejercicio}
+
+\begin{tipprueba}{Cómo contestarlo rápido}
+Si aparece este ejercicio, no partas inventando. Usa esta secuencia:
+\[
+\text{minorista: } q(w)
+\quad\rightarrow\quad
+\text{proveedor: } w^*
+\quad\rightarrow\quad
+\text{descentralizado}
+\]
+\[
+\quad\rightarrow\quad
+\text{centralizado}
+\quad\rightarrow\quad
+\text{comparar}.
+\]
+La frase final debe decir: ``La falta de coordinación produce doble marginalización; por eso la cadena descentralizada vende menos que el óptimo integrado''.
+\end{tipprueba}
+
+\begin{formulas}{Contrato de compartir utilidades}
+Una forma de coordinar es un contrato de compartir ingresos/utilidades. Si el minorista conserva una fracción \(\alpha\) de los ingresos y paga \(w\) por unidad, su utilidad es:
+\[
+\Pi_r(q)=\alpha R(q)-wq.
+\]
+Para que el minorista elija la cantidad centralizada, debe cumplirse:
+\[
+R'(q)=c.
+\]
+Pero el minorista elige según:
+\[
+\alpha R'(q)-w=0
+\quad\Rightarrow\quad
+R'(q)=\frac{w}{\alpha}.
+\]
+Entonces el contrato coordina si:
+\[
+\frac{w}{\alpha}=c
+\quad\Rightarrow\quad
+w=\alpha c.
+\]
+Con \(w=\alpha c\), el minorista recibe:
+\[
+\Pi_r=\alpha \Pi_{SC}^C,
+\]
+y el proveedor recibe:
+\[
+\Pi_s=(1-\alpha)\Pi_{SC}^C.
+\]
+En el ejemplo:
+\[
+\Pi_{SC}^C=2450.25.
+\]
+Para que ambos queden mejor que en el caso descentralizado:
+\[
+\alpha(2450.25)>612.56
+\quad\Rightarrow\quad
+\alpha>0.25,
+\]
+\[
+(1-\alpha)(2450.25)>1225.13
+\quad\Rightarrow\quad
+\alpha<0.50.
+\]
+Por lo tanto, cualquier:
+\[
+\boxed{0.25<\alpha<0.50}
+\]
+mejora a ambos agentes respecto de la cadena descentralizada.
+\end{formulas}
+
+\begin{ejercicio}{Interpretación de clase: Blockbuster, Netflix y reparto de ingresos}
+El caso Blockbuster/Netflix es la aplicación práctica del contrato anterior. Si Blockbuster debía comprar películas a alto costo fijo por unidad, pedía pocas copias. Eso generaba quiebres de stock: clientes querían arrendar un estreno, no lo encontraban y se perdía venta para toda la cadena.
+
+La coordinación consistió en bajar el costo unitario de las copias hacia el costo marginal y compensar a los estudios con una fracción de los ingresos por arriendo. Así el minorista tenía incentivos a pedir más unidades, acercando la cantidad al óptimo centralizado.
+
+En streaming ocurre algo parecido: cuando Netflix paga por visualizaciones o reparte ingresos con estudios, coordina parcialmente la cadena. Cuando produce contenido propio, integra verticalmente y reduce la doble marginalización.
+\end{ejercicio}
+
+\begin{tipprueba}{Frase para caso}
+``El contrato de reparto de ingresos reduce la doble marginalización porque baja el costo marginal percibido por el retailer y le permite elegir una cantidad más cercana al óptimo integrado. La ganancia total aumenta y luego se reparte con \(\alpha\)''.
+\end{tipprueba}
+
+\subsection{Heurísticas V/F y Trampas Clásicas}
+
+\begin{itemize}[itemsep=1ex]
+    \item \textbf{Causas Fundamentales (Memorízalas):}
+    \begin{enumerate}
+        \item \textit{Pronóstico secuencial:} Basar tu producción en lo que te pide tu cliente intermediario en vez del usuario final.
+        \item \textit{Order Batching (Loteo):} Acumular pedidos para llenar un camión (distorsiona el ritmo natural).
+        \item \textit{Fluctuación de precios (Promociones):} Induce el \textit{Forward Buying} (el cliente compra mucho hoy porque está barato, no porque lo necesite).
+        \item \textit{Juegos de escasez:} El cliente infla sus pedidos porque sabe que el proveedor va a racionar el producto.
+    \end{enumerate}
+    
+    \item \textbf{El Juego de la Cerveza (Beer Game):}
+    \begin{itemize}
+        \item \textit{``El caos del juego se produce porque la demanda final es muy volátil.''} $\rightarrow$ \textbf{FALSO.} En el juego, la demanda es estable. El caos se produce por la \textbf{estructura del sistema} (falta de comunicación y los retrasos físicos/lead times).
+    \end{itemize}
+    
+    \item \textbf{Industria 4.0 vs 5.0:}
+    \begin{itemize}
+        \item 4.0 = Digitalización pura, IoT, Big Data, hiper-optimización.
+        \item 5.0 = Centrada en lo humano, sostenibilidad, \textbf{resiliencia} y \textit{cobots} (humanos + robots).
+    \end{itemize}
+\end{itemize}

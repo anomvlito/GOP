@@ -1,0 +1,41 @@
+\subsection{Materia necesaria}
+
+\begin{definicion}{Capacidad con merma y mezcla}
+En procesos con bifurcaciones, cada flujo debe seguir su rendimiento. Si \(F\) kg/h entran a secado y luego \(80\%\) va a molido y \(20\%\) a azucarado con \(10\%\) de descarte, el flujo efectivo que llega a mezcla es:
+\[
+0.8F+0.2F(0.9)=0.98F.
+\]
+\end{definicion}
+
+\begin{formulas}{Revision periodica y continua}
+Revision periodica con periodo \(T\) y lead time \(L\):
+\[
+S_T=d(T+L)+z\sigma\sqrt{T+L}.
+\]
+Revision continua:
+\[
+Q^*=\sqrt{\frac{2DS}{h}},
+\qquad
+ROP=dL+z\sigma\sqrt L.
+\]
+\end{formulas}
+
+\begin{formulas}{Wagner-Whitin}
+Si se ordena en \(i\) para cubrir hasta \(j\):
+\[
+C(i,j)=S+h\sum_{k=i}^{j}(k-i)D_k.
+\]
+La recurrencia es:
+\[
+F(j)=\min_{1\le i\le j}\{F(i-1)+C(i,j)\}.
+\]
+\end{formulas}
+
+\begin{algoritmo}{Capacidad e inventarios}
+\begin{enumerate}
+    \item Definir variables de flujo antes de calcular capacidades.
+    \item Escribir restricciones de cada maquina con el flujo que realmente procesa.
+    \item Identificar cuello de botella por maximizacion, no por inspeccion visual.
+    \item En inventarios, fijar unidad temporal unica antes de usar formulas.
+\end{enumerate}
+\end{algoritmo}

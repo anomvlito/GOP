@@ -1,0 +1,29 @@
+\subsection{Materia necesaria}
+
+\begin{definicion}{Carta de control para observaciones individuales}
+Cuando se tiene una secuencia de mediciones individuales y se asume normalidad, los limites de control se construyen alrededor de la media muestral usando un valor critico \(z\) asociado al nivel de confianza.
+\end{definicion}
+
+\begin{formulas}{Media, varianza y limites}
+\[
+\bar x=\frac{\sum_i x_i}{n},\qquad
+\sigma=\sqrt{\frac{\sum_i x_i^2}{n}-\bar x^2}.
+\]
+\[
+LCI=\bar x-z\sigma,\qquad LCS=\bar x+z\sigma.
+\]
+Para \(96\%\) de confianza se usa \(z\approx 2.055\).
+\end{formulas}
+
+\begin{algoritmo}{Control con datos individuales}
+\begin{enumerate}
+    \item Calcular \(\bar x\) y \(\sigma\).
+    \item Construir \(LCI\) y \(LCS\).
+    \item Marcar toda muestra fuera del intervalo.
+    \item Si se eliminan causas asignables, recalcular limites sin esas muestras.
+\end{enumerate}
+\end{algoritmo}
+
+\begin{trampa}{Agregados inconsistentes}
+En este PDF la tabla transcrita y el agregado impreso \(\sum x_i^2\) no coinciden. En examen, si el enunciado entrega agregados oficiales, se privilegian esos agregados para reproducir la pauta.
+\end{trampa}

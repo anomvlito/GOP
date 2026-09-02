@@ -1,0 +1,100 @@
+\tarjetaabierta{Localización - C. de Gravedad}{Mat. Nueva}{%
+¿Cuál es el objetivo principal del modelo de Centro de Gravedad para ubicar una nueva instalación?
+}{%
+Encontrar la coordenada $(X,Y)$ que minimice los costos de transporte, ponderando las distancias hacia cada mercado según su respectivo \textbf{volumen demandado}.
+}
+\tarjetaabierta{Localización - Break-Even}{Mat. Nueva}{%
+Al evaluar dos plantas usando el análisis del Punto de Equilibrio Lineal (Break-Even), ¿qué opción se debe elegir si la demanda es MENOR al punto de indiferencia $Q^*$?
+}{%
+Se debe elegir la planta que tenga el \textbf{menor Costo Fijo} ($CF$), ya que al producir poco volumen, la inversión inicial pesa más.
+}
+\tarjetavf{Calidad - Gráficos}{Mat. Nueva}{%
+Si un punto cae fuera de los límites de control (LSC o LIC), ¿significa automáticamente que el proceso es incapaz ($Cp < 1$) frente a los requerimientos del cliente?
+}{%
+\textbf{FALSO.} Salirse de control indica causas asignables (estadísticamente inestable), pero no significa necesariamente que incumpla las tolerancias del cliente.
+}
+\tarjetavf{Calidad - Gráficos}{Mat. Nueva}{%
+Si en un estudio de muestras la muestra 3 se sale de los límites por una causa asignable, no se debe recalcular el promedio.
+}{%
+\textbf{FALSO.} Se \textbf{DEBE} eliminar esa muestra, recalcular promedios y redefinir los límites (que se volverán más estrechos).
+}
+\tarjetavf{Calidad - Capacidad}{Mat. Nueva}{%
+Es matemáticamente posible que una máquina tenga un índice de capacidad potencial $Cp < 1$, pero un índice real $Cpk \ge 1$.
+}{%
+\textbf{FALSO.} El $Cpk$ jamás puede ser mayor que el $Cp$. Si el proceso completo no cabe en las tolerancias ($Cp < 1$), el $Cpk$ será también menor a 1 siempre.
+}
+\tarjetavf{Calidad - Capacidad}{Mat. Nueva}{%
+Si $Cp \ge 1$ pero $Cpk < 1$, significa que la máquina es inútil y debe reemplazarse por una más precisa.
+}{%
+\textbf{FALSO.} Si $Cp \ge 1$, la máquina tiene una variabilidad lo suficientemente pequeña para cumplir. Que $Cpk < 1$ solo indica que está \textbf{descentrada}. Solo hay que calibrarla.
+}
+\tarjetaabierta{TPS y Lean}{Mat. Nueva}{%
+¿Cuáles son los 7 Mudas del TPS y cuál de ellos es considerado el peor de todos?
+}{%
+El peor es la \textbf{Sobreproducción}. Los demás son: Inventario, Movimiento, Transporte, Esperas, Sobre-procesamiento y Defectos.
+}
+\tarjetavf{TPS y Lean}{Mat. Nueva}{%
+Jidoka consiste en acelerar la línea de producción y realizar una exhaustiva inspección de calidad al final del proceso.
+}{%
+\textbf{FALSO.} Jidoka es \textit{calidad en la fuente}; si ocurre un error, el trabajador o máquina debe detener la línea inmediatamente mediante un Andon.
+}
+\tarjetaabierta{TPS y Lean}{Mat. Nueva}{%
+¿Qué es el \textit{Takt Time} y cuál es su fórmula básica?
+}{%
+Es el \textit{latido} de la planta; el ritmo al que se debe producir para empatar con la demanda del cliente, evitando sobreproducción.\\ \textbf{Fórmula:} (Tiempo Neto Disponible) / (Demanda del Cliente).
+}
+\tarjetaabierta{TPS y Lean}{Mat. Nueva}{%
+¿Cuál es la diferencia fundamental entre un sistema Push (empujar) y un sistema Pull (jalar)?
+}{%
+\textbf{Push} produce basado en pronósticos ciegos. \textbf{Pull} reacciona a la demanda real, autorizando la producción solo con tarjetas Kanban o similar.
+}
+\tarjetaabierta{Casos - Zara}{Mat. Nueva}{%
+¿Por qué Zara produce prendas de moda (trendy) in-house en Europa, pero artículos básicos en Asia?
+}{%
+La moda rápida requiere \textbf{agilidad y rapidez} (in-house Europa). Los artículos básicos no cambian, por lo que requieren priorizar \textbf{bajos costos} (tercerización Asia).
+}
+\tarjetaabierta{Casos - Toyota}{Mat. Nueva}{%
+En el caso Toyota, ¿cuál es el propósito fundamental de empoderar a los operarios con el \textit{Cordón Andon}?
+}{%
+Permitir que cualquier trabajador detenga toda la línea de producción si detecta un defecto (\textbf{Jidoka}). Es más barato parar y solucionar la raíz de inmediato, que producir lotes enteros defectuosos.
+}
+\tarjetaabierta{Casos - Zara}{Mat. Nueva}{%
+A diferencia del modelo tradicional, ¿cómo mitiga Zara el riesgo de equivocarse con los diseños de moda que no se venden?
+}{%
+Al tener ciclos de producción muy cortos y lotes pequeños (\textit{Fast Fashion}), los errores cuestan muy poco. Si un diseño fracasa, no se reabastece y el impacto de stock obsoleto es mínimo.
+}
+\tarjetavf{Efecto Látigo}{Mat. Nueva}{%
+En el Juego de la Cerveza (Beer Game), el caos de pedidos exagerados se produce porque la demanda de los clientes finales es muy volátil e inestable.
+}{%
+\textbf{FALSO.} La demanda final es estable. El caos ocurre por la estructura del sistema (retrasos, order batching y falta de visibilidad del POS).
+}
+\tarjetaabierta{Efecto Látigo}{Mat. Nueva}{%
+Mencione al menos 3 causas fundamentales que provocan el Efecto Látigo (Bullwhip Effect).
+}{%
+1. Pronóstico secuencial (no ver el POS real).\\ 2. Loteo de pedidos (Order Batching).\\ 3. Fluctuaciones de precios (Promociones).\\ 4. Juegos de escasez.
+}
+\tarjetaabierta{Cadena de Suministro}{Mat. Nueva}{%
+¿Qué es el \textit{Risk Pooling} (Agrupación de Riesgos) en logística?
+}{%
+Es la centralización de inventarios (física o virtual). Al sumar distintas demandas variables, las desviaciones se compensan, reduciendo la variabilidad total y bajando el stock de seguridad requerido.
+}
+\tarjetaabierta{Cadena de Suministro}{Mat. Nueva}{%
+¿A qué se le llama \textit{Posposición} (Postponement) y cuál es su beneficio?
+}{%
+Es retrasar la diferenciación del producto (ej: ensamblaje final, teñido) hasta el último momento posible, cuando ya se conoce la demanda real. Ayuda a reducir excesos y faltantes.
+}
+\tarjetavf{La Meta (Goldratt)}{Mat. Nueva}{%
+Reducir el tamaño del lote de transferencia implica automáticamente un aumento en el Lead Time debido a los tiempos de traslado.
+}{%
+\textbf{FALSO.} Reducir el lote de transferencia (pasar piezas en tandas más pequeñas a la siguiente máquina) disminuye fuertemente el WIP y ACORTA el Lead Time.
+}
+\tarjetavf{La Meta (Goldratt)}{Mat. Nueva}{%
+Mejorar la eficiencia y optimizar un recurso que NO es cuello de botella aumenta el Throughput (velocidad de ventas) de la planta.
+}{%
+\textbf{FALSO.} Optimizar un no-cuello-de-botella es una ilusión. Solo genera más inventario (WIP) atascado frente al verdadero cuello de botella.
+}
+\tarjetaabierta{La Meta (Goldratt)}{Mat. Nueva}{%
+Mencione en orden los 5 Pasos de la Teoría de Restricciones (TOC).
+}{%
+1. \textbf{Identificar} el cuello de botella. 2. \textbf{Explotar} (sacarle el máximo). 3. \textbf{Subordinar} todo a él. 4. \textbf{Elevar} (darle más capacidad). 5. \textbf{Volver al paso 1}.
+}

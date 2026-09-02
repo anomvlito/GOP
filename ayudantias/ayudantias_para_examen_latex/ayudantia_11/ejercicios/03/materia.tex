@@ -1,0 +1,32 @@
+\subsection{Materia necesaria}
+
+\begin{definicion}{Pooling de inventario}
+Centralizar mercados reduce el stock de seguridad porque las desviaciones se agregan como varianzas, no como desviaciones lineales:
+\[
+\sigma_C=\sqrt{\sum_m \sigma_m^2}.
+\]
+El beneficio de pooling debe compararse contra cambios de transporte y operacion.
+\end{definicion}
+
+\begin{formulas}{Politica EOQ con punto de reorden}
+\[
+Q^*=\sqrt{\frac{2SD}{h}},
+\qquad
+SS=z\sigma_L,
+\qquad
+ROP=\mu_L+SS.
+\]
+El costo anual aproximado es:
+\[
+C=\frac{SD}{Q}+\frac{hQ}{2}+hSS+c_TD.
+\]
+\end{formulas}
+
+\begin{algoritmo}{Comparar descentralizado y centralizado}
+\begin{enumerate}
+    \item Calcular EOQ, stock de seguridad y ROP para cada mercado separado.
+    \item Sumar costos descentralizados.
+    \item Agregar demanda y varianza para la alternativa centralizada.
+    \item Comparar costo total, no solo inventario.
+\end{enumerate}
+\end{algoritmo}

@@ -1,0 +1,131 @@
+\section{Variabilidad, Colas y Fallas}
+
+\subsection{Cola M/M/1}
+
+\begin{ejercicio}{Guia 8, problema 1}
+Llegan $10$ automoviles por hora a un cajero de un solo servidor. El tiempo promedio de servicio es $4$ minutos. Llegadas y servicios son exponenciales.
+\end{ejercicio}
+
+\begin{materia}{M/M/1}
+Sea:
+\begin{itemize}
+  \item $\lambda$ la tasa media de llegadas.
+  \item $\mu$ la tasa media de servicio.
+  \item $\rho=\lambda/\mu$ la utilizacion del servidor.
+\end{itemize}
+Para una cola M/M/1 estable se requiere $\rho<1$. Las formulas basicas son:
+\[
+  P_0=1-\rho,\qquad
+  L_q=\frac{\rho^2}{1-\rho},\qquad
+  L=\frac{\rho}{1-\rho},\qquad
+  W=\frac{L}{\lambda}.
+\]
+\end{materia}
+
+\begin{solucion}{cajero automatico}
+El servicio promedio es $4$ min/cliente, por lo que:
+\[
+  \mu=\frac{60}{4}=15\;\text{clientes/hora},\qquad
+  \lambda=10\;\text{clientes/hora}.
+\]
+Entonces:
+\[
+  \rho=\frac{10}{15}=\frac23.
+\]
+La probabilidad de estar ocioso es:
+\[
+  P_0=1-\rho=\frac13.
+\]
+El numero promedio en cola:
+\[
+  L_q=\frac{(2/3)^2}{1-2/3}=\frac43\;\text{autos}.
+\]
+El numero promedio en el sistema:
+\[
+  L=\frac{2/3}{1-2/3}=2\;\text{autos}.
+\]
+Por Little:
+\[
+  W=\frac{L}{\lambda}=\frac{2}{10}=0.2\;\text{horas}=12\;\text{minutos}.
+\]
+El throughput efectivo es $\lambda=10$ clientes/hora, porque en regimen estable todo lo que llega termina siendo atendido.
+\end{solucion}
+
+\subsection{Variabilidad agregada en un lote}
+
+\begin{ejercicio}{Guia 8, problema 3a--3b}
+Una maquina produce unidades con tiempo medio $t=2$ min/unidad y desviacion estandar $\sigma=1.5$ min/unidad. Se pide coeficiente de variacion y variabilidad para producir $60$ unidades independientes.
+\end{ejercicio}
+
+\begin{materia}{coeficiente de variacion}
+El coeficiente de variacion de una variable de tiempo $T$ es:
+\[
+  CV=\frac{\sigma_T}{\E[T]}.
+\]
+Si $T_1,\ldots,T_n$ son tiempos independientes con igual varianza $\sigma^2$, el tiempo total del lote es:
+\[
+  S_n=\sum_{j=1}^{n}T_j,
+\]
+\[
+  \E[S_n]=nt,\qquad
+  \Var(S_n)=n\sigma^2,\qquad
+  CV(S_n)=\frac{\sqrt{n}\sigma}{nt}.
+\]
+\end{materia}
+
+\begin{solucion}{lote de 60 unidades}
+Para una unidad:
+\[
+  CV=\frac{1.5}{2}=0.75.
+\]
+Para $n=60$ unidades:
+\[
+  \E[S_{60}]=60(2)=120\;\text{min},
+\]
+\[
+  \Var(S_{60})=60(1.5)^2=135,
+  \qquad
+  \sigma_{S_{60}}=\sqrt{135}=11.62\;\text{min}.
+\]
+Por lo tanto:
+\[
+  CV(S_{60})=\frac{11.62}{120}=0.0968.
+\]
+El CV baja porque al sumar muchas unidades independientes la variabilidad relativa se promedia.
+\end{solucion}
+
+\subsection{Disponibilidad con fallas}
+
+\begin{ejercicio}{Guia 8, problema 3c}
+La maquina puede fallar. El tiempo medio entre fallas es $MTTF=60$ horas y el tiempo medio de reparacion es $MTTR=2$ horas.
+\end{ejercicio}
+
+\begin{materia}{disponibilidad}
+La disponibilidad de una maquina reparable es:
+\[
+  A=\frac{MTTF}{MTTF+MTTR}.
+\]
+Si un proceso requiere tiempo nominal $T_0$ cuando la maquina esta disponible, una aproximacion de tiempo efectivo medio es:
+\[
+  T_e=\frac{T_0}{A}.
+\]
+\end{materia}
+
+\begin{solucion}{tiempo efectivo}
+\[
+  A=\frac{60}{60+2}=0.9677.
+\]
+El tiempo nominal para $60$ unidades era:
+\[
+  T_0=120\;\text{min}.
+\]
+Luego:
+\[
+  T_e=\frac{120}{0.9677}\approx 124\;\text{min}.
+\]
+La interpretacion es que las fallas agregan tiempo improductivo esperado; aunque la disponibilidad sea alta, el tiempo medio del lote aumenta.
+\end{solucion}
+
+\begin{alerta}{error tipico de la guia OCR}
+En el problema M/M/1, el throughput no es $\frac{2}{5}\cdot 15$; debe ser $\frac{2}{3}\cdot 15=10$. En el problema de lote, la varianza correcta es $60(1.5)^2=135$, no $125$.
+\end{alerta}

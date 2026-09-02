@@ -1,0 +1,52 @@
+\section{Análisis Estratégico y Diagnóstico Probabilístico del Examen}
+
+El examen final de Gestión de Operaciones tiene un formato que premia la \textbf{velocidad conceptual} en la primera hora y la \textbf{precisión de cálculo} en la segunda hora. Para 2026, usamos un modelo de \textbf{prioridad de estudio} que pondera más fuertemente los exámenes recientes (2020: 10\%, 2021: 15\%, 2022: 20\%, 2023: 25\%, 2024: 30\%). Estas cifras son heurísticas: orientan el estudio, pero no garantizan la aparición de una pregunta.
+
+\subsection{Sistema de Diagnóstico Probabilístico (Granular)}
+
+La siguiente tabla fragmenta los temas macro en micro-temas específicos evaluados históricamente, mostrando su aparición real y la probabilidad ponderada proyectada para el examen de 2026.
+
+\vspace{0.3cm}
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l c c c c c c r}
+\toprule
+\textbf{Micro-Tema Específico} & \textbf{2020} & \textbf{2021} & \textbf{2022} & \textbf{2023} & \textbf{2024} & \textbf{Ocurrencia} & \textbf{Prob. 2026} \\
+\midrule
+\multicolumn{8}{l}{\textit{\textbf{Bloque 1: Materia de alta prioridad según temario e historial}}} \\
+Calidad: Gráficos $\bar{X}$-R y Capacidad & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & 5/5 & \textbf{100.0 \%} \\
+Localización: CG y Break-Even & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & 5/5 & \textbf{100.0 \%} \\
+Colas: Variabilidad, Kingman, VUT & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & 5/5 & \textbf{100.0 \%} \\
+\midrule
+\multicolumn{8}{l}{\textit{\textbf{Bloque 2: Materia Rotativa de Desarrollo}}} \\
+Inv: MRP, Loteo, Silver-Meal & -- & -- & \checkmark & \checkmark & \checkmark & 3/5 & \textbf{75.0 \%} \\
+Opt: Modelamiento MILP & -- & \checkmark & \checkmark & \checkmark & -- & 3/5 & \textbf{60.0 \%} \\
+Proy: PERT/CPM y Crashing & -- & \checkmark & -- & \checkmark & -- & 2/5 & \textbf{40.0 \%} \\
+\midrule
+\multicolumn{8}{l}{\textit{\textbf{Bloque 3: Etapa Digital (Teoría y Casos)*}}} \\
+TPS, Kanban, Mudas, Jidoka & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & 5/5 & \textbf{100.0 \%} \\
+Casos: Zara, Toyota, La Meta & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & 5/5 & \textbf{100.0 \%} \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{0.15cm}
+\footnotesize{* Modelo de peso exponencial: $W_{2020}=0.1, W_{2021}=0.15, W_{2022}=0.2, W_{2023}=0.25, W_{2024}=0.3$. La Etapa Digital sí está explícita en el temario; la tabla no predice la pregunta exacta ni su ponderación interna.}
+\end{table}
+\vspace{0.3cm}
+
+\begin{tipprueba}{Táctica para la Etapa Digital (CANVAS)}
+\begin{enumerate}
+    \item \textbf{La Meta (V/F) - 100\% Seguro:} Las preguntas FALSAS requieren argumentación. Sé directo y usa vocabulario del libro (ej. \textit{``Falso, porque reducir lotes disminuye el Lead Time y reduce el WIP''}). Capítulos 27 al final.
+    \item \textbf{Casos y TPS - 100\% Seguro:} Lee rápido pero atento a los distractores. Por ejemplo, confundir \textit{Jidoka} con \textit{Heijunka}. Si preguntan por Zara (90\% prob), menciona: (1) Postponement, (2) Integración Vertical, (3) Escasez artificial.
+\end{enumerate}
+\end{tipprueba}
+
+\begin{tipprueba}{Táctica para la Etapa de Desarrollo}
+\begin{enumerate}
+    \item \textbf{Calidad (prioridad alta):} Anota datos de promedios y recorridos. \textbf{OJO:} Al sacar muestras atípicas, \textbf{debes recalcular la media y desviación estándar} con las muestras restantes para ver si ahora el proceso está bajo control.
+    \item \textbf{Localización (prioridad alta):} Te pueden dar coordenadas o costos. Si piden el punto de indiferencia entre plantas, iguala los Costos Totales. Si la demanda crece en el tiempo ($Q(t)$), integra los costos a lo largo de $T$ años, cuidando si el costo fijo es único o periódico.
+    \item \textbf{El Bloque Rotativo (40\% Variante):} Como indica la tabla, hay una lucha muy cerrada entre PERT (55\%), MRP/Loteo (55\%) y Variabilidad (45\%). No puedes descuidar ninguno, pero históricamente cuando sale Variabilidad, suele venir acompañado de un Modelamiento MILP simple.
+\end{enumerate}
+\end{tipprueba}

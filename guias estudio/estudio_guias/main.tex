@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+
+\geometry{letterpaper, margin=2.0cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlist[itemize]{leftmargin=1.4em,itemsep=0.25em}
+\setlist[enumerate]{leftmargin=1.6em,itemsep=0.25em}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  urlcolor=blue!55!black
+}
+
+\tcbset{
+  colback=white,
+  colframe=black!55,
+  boxrule=0.45pt,
+  arc=1.5mm,
+  left=1.6mm,
+  right=1.6mm,
+  top=1.1mm,
+  bottom=1.1mm
+}
+
+\newtcolorbox{materia}[1]{title=\textbf{Materia necesaria: #1}, colback=blue!3, colframe=blue!50!black}
+\newtcolorbox{ejercicio}[1]{title=\textbf{Ejercicio clave: #1}, colback=green!3, colframe=green!45!black}
+\newtcolorbox{solucion}[1]{title=\textbf{Solucion: #1}, colback=gray!4, colframe=black!55}
+\newtcolorbox{alerta}[1]{title=\textbf{Ojo: #1}, colback=red!3, colframe=red!55!black}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Pp}{\mathbb{P}}
+
+\title{\textbf{Resumen de Ejercicios Clave de Guias de Estudio}}
+\author{Gestion de Operaciones}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\input{secciones/00_mapa/contenido}
+\input{secciones/01_calidad/contenido}
+\input{secciones/02_kanban_jit/contenido}
+\input{secciones/03_bodegas_cd/contenido}
+\input{secciones/04_variabilidad_colas/contenido}
+\input{secciones/05_checklist/contenido}
+
+\end{document}

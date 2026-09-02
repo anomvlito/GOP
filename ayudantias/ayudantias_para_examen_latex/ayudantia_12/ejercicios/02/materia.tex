@@ -1,0 +1,28 @@
+\subsection{Materia necesaria}
+
+\begin{definicion}{Revision continua versus periodo fijo}
+En revision continua cada producto puede tener su propio \(Q^*\) y ROP. En periodo fijo conjunto, se aprovecha un despacho comun; por eso se busca un ciclo \(T\) compartido.
+\end{definicion}
+
+\begin{formulas}{Revision continua}
+\[
+Q_i^*=\sqrt{\frac{2SD_i}{h_i}},
+\qquad
+ROP_i=d_iL+z\sigma_i\sqrt L,
+\qquad
+N_i=\frac{D_i}{Q_i}.
+\]
+\end{formulas}
+
+\begin{formulas}{Periodo fijo conjunto}
+Si \(S\) se paga una vez por despacho conjunto:
+\[
+T^*=\sqrt{\frac{2S(365)}{\sum_i h_i d_i}}.
+\]
+Luego:
+\[
+Q_i=d_iT^*,
+\qquad
+R_i=d_i(T^*+L)+z\sigma_i\sqrt{T^*+L}.
+\]
+\end{formulas}

@@ -1,0 +1,94 @@
+\section{Sección 3: Variabilidad y Teoría de Colas (Fórmula VUT / Kingman)}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!60!black,title=Parámetros Fundamentales]
+\textbf{Variables del Sistema:}\\
+$p$: Tiempo promedio de procesamiento (Process time).\\
+$a$: Tiempo promedio entre llegadas (Arrival time).\\
+$\sigma$: Desviación estándar del proceso o llegada.\\
+$CV$: Coeficiente de variabilidad ($\sigma / \text{media}$).\\
+$u$: Utilización del sistema ($u = p / a$).
+\end{tcolorbox}
+
+\subsection{Algoritmo 1: Cálculo de Variabilidad y Disponibilidad}
+Procedimiento estándar para evaluación de equipos:
+
+\begin{enumerate}
+    \item \textbf{Tasas vs Tiempos:}
+    \begin{itemize}
+        \item $a = \text{Tiempo medio entre llegadas}$.
+        \item $p = \text{Tiempo medio de procesamiento/servicio}$.
+    \end{itemize}
+    \item \textbf{Coeficientes de Variación (CV):} Es la desviación estándar dividida por el promedio. Mide la volatilidad.
+    \begin{itemize}
+        \item $CV_a = \frac{\sigma_a}{a}$
+        \item $CV_p = \frac{\sigma_p}{p}$
+        \item \textit{Ojo:} Si te dicen "Distribución Exponencial", mágicamente $CV = 1$. Si te dicen "Tiempo Constante/Fijo", mágicamente $CV = 0$.
+    \end{itemize}
+    \item \textbf{Servidores ($m$):} ¿Cuántas cajas o máquinas atienden en paralelo?
+    \item \textbf{Utilización ($\rho$):} $\rho = \frac{p}{a \cdot m}$. Si $\rho > 1$, el sistema colapsa (inestable).
+\end{enumerate}
+
+\subsection{Algoritmo 2: La Ecuación de Kingman (Fórmula VUT)}
+Calcula el Tiempo de Espera en la Cola ($T_q$). Copia y aplica:
+
+$$ T_q = \left( \frac{CV_a^2 + CV_p^2}{2} \right) \cdot \left( \frac{\rho^{\sqrt{2(m+1)} - 1}}{m(1-\rho)} \right) \cdot p $$
+
+\textbf{Anatomía de VUT (Cómo analizarlo):}
+\begin{itemize}
+    \item $\mathbf{V}$ (Variabilidad): El primer paréntesis. Si reduces las desviaciones estándar, $T_q$ baja directamente.
+    \item $\mathbf{U}$ (Utilización): El segundo paréntesis. Es el penalizador. A medida que $\rho \rightarrow 1$, el denominador $(1-\rho) \rightarrow 0$, disparando el tiempo al infinito.
+    \item $\mathbf{T}$ (Tiempo): El tercer componente ($p$). Es el factor de escala.
+\end{itemize}
+
+\subsection{Algoritmo 3: Ley de Little (Propagación al Sistema Completo)}
+Una vez que tienes el $T_q$ de Kingman, puedes sacar todo lo demás al instante.
+
+\begin{enumerate}
+    \item \textbf{Tiempo Total en el Sistema ($T$):} Lo que esperó + lo que tardó en ser atendido.
+    $$ T = T_q + p $$
+    \item \textbf{Inventario en la Cola ($I_q$):} Personas esperando. Multiplica el tiempo por la tasa de llegada ($\lambda = 1/a$).
+    $$ I_q = \frac{T_q}{a} $$
+    \item \textbf{Inventario Total en el Sistema ($I$):} Personas esperando + personas siendo atendidas.
+    $$ I = \frac{T}{a} $$
+\end{enumerate}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Kingman (VUT) y Ley de Little}
+\textbf{Enunciado:} Un cajero de banco atiende a un ritmo promedio de $p = 6$ minutos por cliente, con una desviación estándar $\sigma_p = 3$ minutos. Los clientes llegan con un tiempo medio entre llegadas de $a = 7.5$ minutos por cliente, siguiendo una distribución exponencial (es decir, $\sigma_a = 7.5$ min). Sólo hay un cajero ($m=1$).
+
+\textbf{Resolución:}
+\begin{enumerate}
+    \item \textbf{Cálculo de CV y Utilización:}
+    $$ CV_p = \frac{3}{6} = 0.5 \quad ; \quad CV_a = \frac{7.5}{7.5} = 1.0 \text{ (por ser exponencial)} $$
+    $$ \rho = \frac{p}{a \cdot m} = \frac{6}{7.5 \cdot 1} = 0.8 \text{ (Utilización del 80\%)} $$
+    \item \textbf{Tiempo de Espera en Cola ($T_q$) usando Kingman VUT:}
+    $$ T_q = \left( \frac{1^2 + 0.5^2}{2} \right) \cdot \left( \frac{0.8^{\sqrt{4}-1}}{1(1-0.8)} \right) \cdot 6 $$
+    $$ T_q = \left( \frac{1.25}{2} \right) \cdot \left( \frac{0.8^1}{0.2} \right) \cdot 6 = 0.625 \cdot 4 \cdot 6 = 15 \text{ minutos.} $$
+    El cliente pasa en promedio 15 minutos solo esperando.
+    \item \textbf{Ley de Little ($T$ e $I_q$):}
+    \begin{itemize}
+        \item Tiempo total en el sistema: $T = T_q + p = 15 + 6 = 21$ minutos.
+        \item Inventario en la cola (personas esperando): $I_q = \frac{T_q}{a} = \frac{15}{7.5} = 2$ personas.
+    \end{itemize}
+\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.4cm}
+\begin{ejercicio}{Cálculo de Variabilidad (Examen 2024)}
+\textbf{Enunciado:} Mides una máquina perfiladora. Promedio de proceso = 12 minutos. Desviación estándar = 2 minutos.
+Te ofrecen una máquina nueva: Promedio = 10 minutos. Desviación = 100 segundos.
+
+\textbf{Pregunta (a y b):} Calcule el coeficiente de variabilidad ($CV$) de ambas máquinas.
+
+\textbf{Resolución según el Algoritmo 1:}
+\begin{enumerate}
+    \item \textbf{Máquina Antigua:}
+    Promedio ($p$) = 12 min. Desv = 2 min.
+    $CV = \sigma / p = 2 / 12 = 0.167$
+    \item \textbf{Máquina Nueva:}
+    Cuidado con la trampa de unidades. Desv = 100 seg = 1.67 minutos.
+    $CV = 1.67 / 10 = 0.167$
+    \item \textit{Conclusión:} Ambas tienen exactamente la misma variabilidad intrínseca.
+\end{enumerate}
+*(Luego el problema te hace calcular la Disponibilidad $A = \frac{MTTF}{MTTF + MTTR}$, que también da 0.75 para ambas).*
+\end{ejercicio}

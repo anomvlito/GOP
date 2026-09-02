@@ -1,0 +1,84 @@
+\section{Kanban, JIT y Defectos}
+
+\begin{ejercicio}{Guia 10, pregunta 2a y 2d}
+La empresa ABC produce tarjetas telefonicas con demanda de $200$ tarjetas por hora. El proceso tiene tres operaciones:
+\[
+\begin{array}{c|cccc}
+\text{Operacion} & C_i & t_{p,i} & t_{k,i} & t_{v,i}\\
+\hline
+P1&200&85&45&200\\
+P2&250&78&67&300\\
+P3&300&50&92&150
+\end{array}
+\]
+donde los tiempos estan en segundos y $C_i$ es el tamano del contenedor/lote. El proceso descarta inicialmente $15\%$ de las unidades. Luego se pregunta que pasa si el descarte baja a $5\%$.
+\end{ejercicio}
+
+\begin{materia}{numero de kanbans}
+Para cada operacion $i\in\{1,2,3\}$:
+\[
+  L_i=t_{p,i}+t_{k,i}+t_{v,i},
+\]
+donde $L_i$ es el tiempo total de reposicion asociado a la operacion $i$.
+
+Sea:
+\begin{itemize}
+  \item $D$ la demanda de unidades buenas por unidad de tiempo.
+  \item $y$ el rendimiento del proceso, es decir, la fraccion de unidades producidas que no se descarta.
+  \item $C_i$ el numero de unidades por contenedor de la operacion $i$.
+  \item $N_i$ el numero de kanbans requeridos en la operacion $i$.
+\end{itemize}
+Si la demanda $D$ esta expresada como demanda de unidades buenas, la produccion bruta requerida es $D/y$. Por eso:
+\[
+  N_i=\frac{D L_i}{y C_i}.
+\]
+La idea economica es directa: si baja el rendimiento, se necesitan mas unidades en circulacion para sostener la misma salida buena.
+\end{materia}
+
+\begin{solucion}{calculo base}
+Los tiempos de reposicion son:
+\[
+  L_1=85+45+200=330,\qquad
+  L_2=78+67+300=445,\qquad
+  L_3=50+92+150=292.
+\]
+Con descarte de $15\%$, el rendimiento es:
+\[
+  y=1-0.15=0.85.
+\]
+La guia reporta los siguientes kanbans:
+\[
+  N_1=389,\qquad N_2=419,\qquad N_3=230.
+\]
+Lo importante para examen es la estructura:
+\[
+  N_i \propto \frac{L_i}{yC_i}.
+\]
+Si $L_i$ sube, se necesitan mas kanbans. Si $C_i$ sube, cada kanban mueve mas unidades y se necesitan menos. Si el rendimiento $y$ sube, se necesitan menos kanbans.
+\end{solucion}
+
+\begin{solucion}{si el descarte baja a $5\%$}
+Ahora:
+\[
+  y_{\text{nuevo}}=1-0.05=0.95.
+\]
+Como todo lo demas queda constante:
+\[
+  N_{i,\text{nuevo}}
+  =
+  N_{i,\text{viejo}}\frac{0.85}{0.95}.
+\]
+Reemplazando los valores de la pauta:
+\[
+\begin{aligned}
+N_{1,\text{nuevo}}&=389\frac{0.85}{0.95}\approx 348,\\
+N_{2,\text{nuevo}}&=419\frac{0.85}{0.95}\approx 375,\\
+N_{3,\text{nuevo}}&=230\frac{0.85}{0.95}\approx 206.
+\end{aligned}
+\]
+La conclusion no es solo numerica: mejorar calidad reduce inventario en proceso, reduce tarjetas kanban necesarias y hace mas liviano el sistema JIT.
+\end{solucion}
+
+\begin{alerta}{unidades}
+La formula exige unidades consistentes. Si $D$ esta en unidades/hora, entonces $L_i$ debe estar en horas. Si $L_i$ esta en segundos, convierte $D$ a unidades/segundo o $L_i$ a horas. En la guia OCR los resultados estan dados directamente; para examen, cuida esta conversion porque es donde se pierden puntos faciles.
+\end{alerta}

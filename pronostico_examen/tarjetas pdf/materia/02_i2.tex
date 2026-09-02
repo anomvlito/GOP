@@ -1,0 +1,35 @@
+\tarjetavf{Colas y Variabilidad}{I2}{%
+En un sistema de colas (VUT), si la utilización ($\rho$) supera el 100\% ($\rho > 1$), el tiempo de espera en la cola se vuelve cero.
+}{%
+\textbf{FALSO.} Si la utilización supera 1, el denominador $(1-\rho)$ se hace negativo en la teoría límite, lo que significa que el sistema \textbf{colapsa} y la fila crece hacia el infinito.
+}
+
+\tarjetaabierta{Colas y Variabilidad}{I2}{%
+Según la ecuación de Kingman (VUT), ¿qué ocurre matemáticamente con el tiempo de espera si los tiempos de proceso pasan a ser exactamente constantes (robóticos)?
+}{%
+Si los tiempos son constantes, la Desviación Estándar es $0$, por ende el Coeficiente de Variación ($CV$) se vuelve \textbf{cero}. Esto anula el componente "V" (Variabilidad), reduciendo el tiempo de espera drásticamente.
+}
+
+\tarjetaabierta{Ley de Little}{I2}{%
+Si conoces el Tiempo de Espera en la Cola ($T_q$) de un sistema, ¿cómo calculas cuánta gente en promedio hay esperando en la fila (Inventario en cola $I_q$)?
+}{%
+Usando la Ley de Little: Se multiplica la Tasa de Llegada ($\lambda$ o $1/a$) por el tiempo esperado. \\ $I_q = \lambda \cdot T_q$
+}
+
+\tarjetavf{Colas y Loteo}{I2}{%
+Reducir el tamaño de lote a la mitad SIEMPRE reduce el tiempo de espera en el sistema, sin importar los tiempos de Setup (preparación).
+}{%
+\textbf{FALSO.} Si el tiempo de Setup es muy alto, lotes muy pequeños requerirán demasiados setups, disparando la utilización ($\rho$) por sobre 1 y haciendo colapsar el tiempo en cola.
+}
+
+\tarjetaabierta{Pronósticos}{I2}{%
+¿Qué ocurre con un modelo de Alisamiento Exponencial Simple si aumentamos el factor $\alpha$ (alfa) acercándolo a 1?
+}{%
+El pronóstico se vuelve \textbf{muy reactivo y \textit{nervioso}} ante los datos recientes. Es excelente si hay un cambio rápido de tendencia, pero terrible si la demanda tiene mucho \textit{ruido} o aleatoriedad.
+}
+
+\tarjetavf{Pronósticos - Errores}{I2}{%
+El indicador MAD (Desviación Absoluta Media) nos permite saber rápidamente si nuestro modelo está sesgado (sobrestimando sistemáticamente).
+}{%
+\textbf{FALSO.} El MAD solo mide la \textit{magnitud} del error (por el uso del valor absoluto). Para detectar el \textbf{sesgo} (si me equivoco siempre hacia el mismo lado) se usa el Tracking Signal (TS).
+}

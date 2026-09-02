@@ -1,0 +1,282 @@
+
+
+=================== PAGE 1 ===================
+
+A 
+Nombre:_..~__..-' • 
+mail UC: '15011§~():;.t/ Sección: :J. -
+Pontificia Universidad Católica de Chile 
+Escuela de Ingeniería 
+Departamento de Ingeniería Industrial y de Sistemas 
+Instrucciones: 
+Interrogación 2 
+Enunciados 
+ICS 3213 Gestión de Operaciones 
+1 er semestre 2026 
+• Responder en letra legible, en lápiz pasta o bolígrafo y poner nombre a todas las hojas. 
+• No debe des corchetear la prueba y responda en el espacio asignado. 
+• Esta sección de la prueba tiene 60 puntos, dura 60 minutos. 
+• Se leerá la prueba al comienzo de clases y después se permitirán preguntas en voz alta. Posteriormente en 
+la mitad de la prueba se volverá a permitir preguntas en voz alta. No se permitirán preguntas fuera de estos 
+intervalos. Si su duda persiste indique el supuesto y continúe. 
+• 
+AJ final de la prueba los alumnos deberán subir su prueba a CANVAS. Dispondrán de 15 minutos para 
+escanear pruebas hoja por hoja y subirlas. Al final de subir la prueba deberán dejarla en el mismo puesto. 
+Si por alguna razón hay un problema al subir la prueba, avisen al profesor/ayudante y dejen su prueba. 
+• Este curso adscribe el Código de Honor establecido por la Escuela de Ingeniería el que es vinculante. Todo 
+trabajo evaluado en este curso debe ser propio. En caso de que exista colaboración permitida con otros 
+estudiantes, el trabajo deberá referenciar y atribuir correctamente dicha contribución a quien corresponda. 
+Como estudiante es 
+su deber conocer la versión en 
+línea del 
+Código de 
+Honor 
+(http://ing.puc.cl/codigodehonor ). 
+¡Muy Buena Suerte! 
+Página 1 de 9 
+
+
+=================== PAGE 2 ===================
+
+Ñ 0tnbre: 
+cmail UC: _________ _ Sección: --
+}) ~TE DESARROLLO· R 
+d 
+Ust d 
+I 
+I' 
+d 
+• espon 8 todas las siguientes preiuntH de ejercicio. 
+S e es e ana ;•a e operaciones de "AgriDronc S.A.", LIIIA empresa ensarnbladora de drones para monitoreo agrícola. 
+e le ha encarga O conectar la planificaci<'m de mcdinno pinzo ele la familia de drones con las órdenes de compra de corto 
+plazo para un componente crítico importado: el Módulo de C{unara Multiespectral (MCM). 
+La demanda agregada proyectada para la fomilia de drones para el último trimestre del afio es la siguiente: 
+• 
+Octubre: 800 unidades 
+• 
+Noviembre: 1.200 unidades 
+• 
+Diciembre: 1.600 unidades 
+Datos de Planificación Agregada: 
+• 
+Estrategia a seguir: "Nivelación" (Fuerza de trabajo constante). 
+• 
+Productividad de cada trabajador: 1 O drones terminados por semana. 
+• 
+Costo de mantener inventario: $50 dólares por dron al mes (se cobra sobre el inventario final de cada mes). 
+• 
+Inventario inicial a fines de septiembre: O unidades. 
+• 
+No se penniten faltantes (backorders) al final del trimestre. 
+Datos de Planificación MRP: 
+El modelo estrella de la compafifa representa exactamente el 50% de la producción total agregada. Para la planificación 
+semanal, se asume que la producción de este modelo estrella se distribuye uniformemente durante las 4 semanas de 
+cada mes en el Programa Maestro de Producción (MPS). 
+Para ensamblar cada dron estrella se requiere exactamente l unidad del componente Módulo de Cámara Multiespectral 
+(MCM). El registro de inventarios para el MCM indica lo siguiente al iniciar octubre: 
+• 
+Inventario Inicial: 50 unidades. 
+• 
+Tiempo de Espera (Lead Time): 2 semanas. 
+• 
+Recepciones Programadas: 200 unidades que llegarán al inicio de la Semana l. 
+• 
+Política de Tamaño de Lote: Lote a Lote (L4L). 
+1. 
+(6 ptos) Determine el plan agregado mensual de producción requerida bajo la estrategia de Nivelación. Determine 
+ta cantidad de personal y calcule el costo total de mantención de inventario para el trimestre (octubre-diciembre). 
+Muestre sus cálculos. 
+11. 
+(9 ptos) Tomando los resultados de su plan agregado (calculado anteriormente) para el mes de octubre, desarrolle 
+la tabla MRP de las semanas I a 4 de dicho mes para el componente MCM. Indique claramente en qué semanas 
+deben emitirse las expediciones de Pedidos Planeados. 
+111. 
+(5 ptos) El Gerente de Finanzas está alarmado por la cantidad de órdenes de compra independientes que se están 
+emitiendo bajo la política Lote a Lote (L4L) y le exige cambiar a una política de Cantidad Económica de Pedido 
+(EOQ) utilizando la demanda total del trimestre para calcular un tamaño fijo de lote. Basándose en la teoría de 
+gestión de inventarios y MRP, fundamente cuál es el principal problema matemático o ineficiencia al usar el modelo 
+EOQ clásico en un sistema MRP, y qué algoritmo de lotificación alternativo le recomendaría utilizar en su lugar. 
+No determine los lotes, sólo ex ti ue los fundamentos ue lo llevan a su decisión. 
+o 
+1 
+2 
+? 
+80() tioo 
+/1/)0 
+j0 
+Página 2 de 9 
+
+
+=================== PAGE 3 ===================
+
+( 
+Nombre: --------
+ernail UC: 
+Sección: 
+l. 
+11. 
+111. 
+IV. 
+----------
+--
+Pl (lO puntos) u.na empresa llamada Redd SpA de distribución y comercio electrónico está evaluando la ejecución de 
+un pro~ecto para ~mplementar un nuevo sistema de gestión logística. El objetivo del proyecto es mejorar la trazabilidad 
+de pedidos, reducir errores de despacho y aumentar la velocidad de respuesta hacia los clientes. 
+El proyecto se desarrollará por etapas, considerando las actividades técnicas, operativas y de capacitación inte~na. Dado 
+qu~ 1.ª emp~sa debe comprometer una fecha de entrega con la gerencia comercial y con sus principales clientes, se 
+sohc1ta ~hzar un análisis preliminar del proyecto. 
+. 
+La rel~ción ~e dependencias entre las actividades y los tiempos estimados de duración, medidos en semanas, se presentan 
+a contmuac1ón 
+Tiempo 
+Desv. 
+Actividad 
+Predecesor 
+Medio 
+Estándar 
+A 
+. 
+3 
+0.667 
+B 
+A 
+5 
+0.667 
+c 
+A 
+4 
+1.000 
+D 
+B 
+6 
+< (.m) 
+-
+E 
+B,C 
+5 
+0.667 
+F 
+c 
+7 
+1.000 
+G 
+D,E 
+4 
+[0.661/ 
+H 
+F,G 
+3 
+(o.333) 
+Se pide: 
+. . . 
+(8 ptos) Dibuje el diagrama PERT asociado al proyecto, respetando las relaciones de precedencia md1cadas, 
+detenninando la Ruta Crítica, E[T] y Var[T]. 
+(5 ptos) Detennine la probabilidad de que el proyecto sea completado en 23 semanas y construya un intervalo de 
+confianza al 95% (Con dos colas) para la duración del proyecto. 
+(4 ptos) La gerencia comercial de Redd SpA evalúa comprometer una fecha de entrega de 23 semanas para la 
+implementación del nuevo sistema de gestión logística. Para incentivar el cumplimiento anticipado, se establece un 
+bono de $1.5 millones si el proyecto tennina en o antes del tiempo medio. Sin embargo, si el pr~ectg,Jennina después 
+de las 23 semanas, la empresa deberá pagar una penalización fija de $4 millones. ¿ A~w f 
+(3 ptos) Si ahora el bono es ahora de $1.5 millones por cada semana de adelanto respecto a la fecha del tiempo medio 
+y la penalización es de$ 4 millones por cada semana de atraso después de las 23 semanas. ¿ Cómo cambia su respuesta 
+anterior? ¿Plantee la condición matemática que debe cumplirse para aceptar el contrato? No la desarrolle. · 
+Nota: Recordar que la función de densidad de la nonnal es: </J(t) = ~e -t
+2
+/2 
+v2rr 
+/ 
+l3 
+f 
+
+
+=================== PAGE 4 ===================
+
+r 
+Nombre: -----
+email UC: 
+Sección: 
+---
+-
+~' 2-~- 21 ::le:..- 1, 71 ?':1--
+,, ~2-
+µ ~ 
+,~_.....,... ~ 
+,e____ 2~ 
+~ 
+~ 
+...Lz.... 'f7 te-=. I 1 '?J 1) = (}{ po tt ,9 
+k~ ~ 
+6itM1.A ~ ~ 
+9?/. .• 
+l-z.1-1¡;6( ,,~2.-) ¡ 21+-1t96-(1,~JJ 
+[/8¡ Ol-i Z 3 / 9 l-12] 
+VE~ ~-PfTé. ><) - ~ 
+.-p. ft>~) 
+vr= ,,~;Y{- º,9o'19 
+-
+tt,.-n. r1-&¡JfJ'<.9) 
+'1 · (), o ;J 71 
+V!3" == l I :J513 5 M -
+o, ?~0 '1 Al1 
+VE"'" 0197-b/f,, 
+Página 5 de 9 
+
+
+=================== PAGE 5 ===================
+
+Nombre: -------
+cmail UC: ---------- Sección: 
+PJ (20 puntos) Usted está , . d 
+. 
+llegan 8 la otic, 
+20 
+ª cargo e una oficma del Registro Civil y debe velar por el servicio que se entrega. Actualmente 
+de variación d mla 
+~brsonas por hora a hacer sus trámites y este tiempo distribuye de forma general, con un coeficiente 
+. e os arn os de 0.5. 
+Usted analiza el tiempo d 
+'ó 
+. 
+. 
+. . 
+tamb'é d f; 
+e atenci n Y encuentra que, en promedio, las atenciones demoran 2.4 minutos y distribuyen 
+C 
+1 n _e om,a general, con un coeficiente de variación del servicio de 1.5. 
+on esta mfom,aci6n usted debe responder: 
+a) (6 ptos) ¿Cuál es el nivel de utilización de la oficina? ¿cuánto espera la gente para hacer el trámite? ¿Cuál debería 
+ser el tamaño (número de asientos) promedio de la sala de espera? 
+b) ~7 ptos) Usted desea que los clientes no esperen más de 6 minutos para hacer el trámite y para ello piensa 
+implementar un sistema de agenda digital y hacer agendamienlos en bloques de I hora. ¿Cuántos clientes puede 
+agendar por hora? 
+e) (7 P_tos) Para la situación inicial, usted debe decidir qué mejora hacer en el servicio. Usted tiene las siguientes dos 
+opciones de mejora: 
+i. 
+Realizar capacitación al personal y reducir el coeficiente de variación del servicio a I a un costo total de 
+$4000. 
+tt. 
+Digitalizar algunos servicios, lo que conllevaría a disminuir la tasa de llegada de personas a 15 personas 
+por hora con un costo total de $6000 
+Si por cada minuto que reduce en la cola se genera un beneficio de $1000. ¿Cuál de las dos opciones prefiere? 
+Muestre sus cálculos. 
+--
+i 
+6( 
+/ 
+- -z, '1 
+-)~~~kz---
+-- 2S o/ 
+L=~=:!' 
+I -o, B 
+0, t) li/ ~ ,¿_~~/A.¡ 
+¡ 
+r 
+O I l.--
+rJ_ -:: / Z ~ 
+¿, A, .,J7 "'-Í:-
+d,.., if, .,e.,, ...,L ~~ 
+I ~ ~ 
+~~~-
+L=-)\·W=-zo.q2-='1 
+Página 6 de 9 
+7 

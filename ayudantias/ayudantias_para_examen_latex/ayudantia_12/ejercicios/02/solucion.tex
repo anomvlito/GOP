@@ -1,0 +1,59 @@
+\subsection{Solucion desarrollada}
+
+\begin{respuesta}{Revision continua independiente}
+Con \(z=1.645\), \(L=10\) dias:
+\[
+D_1=6(365)=2190,\qquad D_2=4(365)=1460.
+\]
+Los costos de mantener son:
+\[
+h_1=0.2(100)=20,\qquad h_2=0.2(70)=14.
+\]
+Para \(U1\):
+\[
+Q_1^*=\sqrt{\frac{2(100)(2190)}{20}}=147.99,
+\]
+\[
+ROP_1=6(10)+1.645(1)\sqrt{10}=65.20,
+\]
+\[
+N_1=\frac{2190}{147.99}=14.80,\qquad T_1=\frac{365}{14.80}=24.66\ \text{dias}.
+\]
+Para \(U2\):
+\[
+Q_2^*=\sqrt{\frac{2(100)(1460)}{14}}=144.42,
+\]
+\[
+ROP_2=4(10)+1.645(0.65)\sqrt{10}=43.38,
+\]
+\[
+N_2=\frac{1460}{144.42}=10.11,\qquad T_2=\frac{365}{10.11}=36.11\ \text{dias}.
+\]
+El costo anual aproximado independiente es:
+\[
+C_1=2959.73,\qquad C_2=2021.88,\qquad C=4981.61.
+\]
+\end{respuesta}
+
+\begin{respuesta}{Periodo fijo conjunto}
+Como el proveedor cobra \(100\) por despacho de uno o ambos, conviene evaluar un ciclo conjunto:
+\[
+T^*=\sqrt{\frac{2(100)(365)}{20(6)+14(4)}}=20.37\ \text{dias}.
+\]
+Las cantidades por pedido son:
+\[
+Q_1=6(20.37)=122.20,\qquad Q_2=4(20.37)=81.46.
+\]
+El nivel objetivo de inventario, cubriendo periodo mas lead time, es:
+\[
+R_1=6(20.37+10)+1.645(1)\sqrt{20.37+10}=191.26,
+\]
+\[
+R_2=4(20.37+10)+1.645(0.65)\sqrt{20.37+10}=127.36.
+\]
+El costo anual conjunto aproximado es:
+\[
+C=3584.41.
+\]
+Por lo tanto, se elige periodo fijo conjunto, porque usa un solo costo fijo para abastecer ambos productos.
+\end{respuesta}

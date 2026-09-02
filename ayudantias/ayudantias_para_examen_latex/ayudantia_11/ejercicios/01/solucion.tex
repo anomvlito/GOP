@@ -1,0 +1,67 @@
+\subsection{Solucion desarrollada}
+
+\begin{respuesta}{Kanbans iniciales}
+La demanda buena es \(200\) tarjetas/hora. Como se descarta \(15\%\), la linea debe procesar:
+\[
+d=\frac{200}{0.85}=235.29\ \text{tarjetas/hora}
+=\frac{235.29}{3600}=0.06536\ \text{tarjetas/seg}.
+\]
+Reemplazando en cada operacion:
+\[
+K_{P1}=\left\lceil\frac{0.06536(85+45+200)}{200}\right\rceil
+=\lceil 0.108\rceil=1,
+\]
+\[
+K_{P2}=\left\lceil\frac{0.06536(78+67+300)}{250}\right\rceil
+=\lceil 0.116\rceil=1,
+\]
+\[
+K_{P3}=\left\lceil\frac{0.06536(50+92+150)}{300}\right\rceil
+=\lceil 0.064\rceil=1.
+\]
+Por lo tanto, se requiere un Kanban en cada etapa.
+\end{respuesta}
+
+\begin{respuesta}{Control de calidad de P3}
+Las medias y recorridos son:
+\[
+\bar X=(60.6,\ 64.0,\ 56.6,\ 53.2,\ 55.8),
+\qquad
+R=(21,\ 23,\ 28,\ 20,\ 17).
+\]
+Luego:
+\[
+\bar{\bar X}=58.04,\qquad \bar R=21.8.
+\]
+Con \(A_2=0.577\), \(D_3=0\), \(D_4=2.114\):
+\[
+LCI_{\bar X}=58.04-0.577(21.8)=45.46,
+\qquad
+LCS_{\bar X}=58.04+0.577(21.8)=70.62,
+\]
+\[
+LCI_R=0,\qquad LCS_R=2.114(21.8)=46.09.
+\]
+Todos los promedios y recorridos originales caen dentro de los limites; no hay outliers estadisticos bajo el criterio \(\bar X\)-R.
+
+Para el dia 6:
+\[
+\bar X_6=\frac{63+54+43+69+65}{5}=58.8,\qquad R_6=69-43=26.
+\]
+Como \(58.8\in[45.46,70.62]\) y \(26\in[0,46.09]\), la nueva muestra esta bajo control.
+\end{respuesta}
+
+\begin{respuesta}{Efecto de reducir fallas}
+Si el descarte baja a \(5\%\), el flujo requerido es:
+\[
+d=\frac{200}{0.95}=210.53\ \text{tarjetas/hora}
+=0.05848\ \text{tarjetas/seg}.
+\]
+Los Kanbans calculados vuelven a ser menores que 1:
+\[
+K_{P1}=\lceil 0.096\rceil=1,\quad
+K_{P2}=\lceil 0.104\rceil=1,\quad
+K_{P3}=\lceil 0.057\rceil=1.
+\]
+El numero entero de Kanbans no cambia, pero la mejora reduce desperdicio, carga de proceso y riesgo operacional.
+\end{respuesta}

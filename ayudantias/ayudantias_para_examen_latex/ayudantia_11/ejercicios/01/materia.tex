@@ -1,0 +1,36 @@
+\subsection{Materia necesaria}
+
+\begin{definicion}{Kanban con scrap}
+El numero de Kanbans se calcula con la demanda que debe circular por la etapa, no siempre con la demanda final buena. Si al final se descarta una fraccion \(s\), entonces para entregar \(d_g\) unidades buenas se debe iniciar:
+\[
+d=\frac{d_g}{1-s}.
+\]
+\end{definicion}
+
+\begin{formulas}{Kanban}
+\[
+K_i=\left\lceil \frac{d(t_{p_i}+t_{k_i}+t_{v_i})}{C_i}\right\rceil.
+\]
+La demanda \(d\) debe estar en las mismas unidades temporales que los tiempos. Si los tiempos estan en segundos, \(d\) debe estar en unidades/segundo.
+\end{formulas}
+
+\begin{formulas}{Carta \(\bar X\)-R para \(n=5\)}
+\[
+A_2=0.577,\qquad D_3=0,\qquad D_4=2.114.
+\]
+\[
+LCS_{\bar X}=\bar{\bar X}+A_2\bar R,\quad
+LCI_{\bar X}=\bar{\bar X}-A_2\bar R,
+\qquad
+LCS_R=D_4\bar R,\quad LCI_R=D_3\bar R.
+\]
+\end{formulas}
+
+\begin{algoritmo}{Lectura rapida}
+\begin{enumerate}
+    \item Ajustar demanda por scrap antes de calcular Kanbans.
+    \item Para calidad, calcular medias y recorridos por dia.
+    \item Construir limites con \(n=5\), no con el numero de dias.
+    \item Evaluar la muestra nueva contra ambos graficos: promedio y recorrido.
+\end{enumerate}
+\end{algoritmo}
